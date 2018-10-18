@@ -1,0 +1,13 @@
+/* pages/exam/examList.wxss */
+.availableExamItem {
+  margin-bottom: 30rpx;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+}
+.sessionDate {
+  color: #586069;
+  font-size: 28rpx;
+}
+.historyList, .availableExamWrapper {
+  margin-top: 0;
+}

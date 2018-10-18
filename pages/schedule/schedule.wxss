@@ -1,0 +1,38 @@
+/* pages/schedule/schedule.wxss */
+
+.title text{
+  padding: 1rem 0 1rem 1.4rem;
+  color: #FDBC40;
+}
+.sharingListContainer {
+  padding: 1rem;
+}
+.sharingList {
+  display: flex;
+  align-items:center;
+  margin-top:-1px;
+}
+.timeLineIconWrap {
+  width: 30px;
+  height: 74px;
+}
+.timeNodeIcon {
+  width: 100%;
+  height: 100%;
+}
+.photo {
+  margin: 0 1rem 0 0.5rem;
+}
+.photo image {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+.department {
+  font-size: 0.875rem;
+  color: #586069;
+}
+.page {
+  background: #FFF;
+}

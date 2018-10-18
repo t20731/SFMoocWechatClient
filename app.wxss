@@ -1,0 +1,72 @@
+/**app.wxss**/
+@import 'weui.wxss';
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+} 
+
+@font-face {
+  font-family: 'iconfont';  /* project id 777814 */
+  src: url('//at.alicdn.com/t/font_777814_c4bgxg1m6xl.eot');
+  src: url('//at.alicdn.com/t/font_777814_c4bgxg1m6xl.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_777814_c4bgxg1m6xl.woff') format('woff'),
+  url('//at.alicdn.com/t/font_777814_c4bgxg1m6xl.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_777814_c4bgxg1m6xl.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-chakan:before { content: "\e600"; }
+
+.icon-choujiang1:before { content: "\e601"; }
+
+.icon-qiandao:before { content: "\e6b3"; }
+
+.icon-wendati:before { content: "\e67d"; }
+
+page {
+  background-color: #f6f7f8;
+}
+
+.t2Page {
+  padding: 0.5rem;
+}
+
+.uniformBtn {
+  background: #414A90;
+  width: 95%;
+  color: #FFF;
+}
+.whiteBtn {
+  background:#FFF;
+  color: #414A90;
+  border:1px solid;
+}
+
+.fixedBottomBtn {
+  position: fixed;
+  bottom: 18rpx;
+}
+.imgWrapper image{
+  max-width: 100%;
+}
+
+.questionsWrapper {
+  margin-bottom: 114rpx;
+}
+
+.containerBorder {
+  border-bottom:1px solid #D7D7D7;
+  border-top:1px solid #D7D7D7;
+}

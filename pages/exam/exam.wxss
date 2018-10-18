@@ -1,0 +1,32 @@
+/* pages/exam/exam.wxss */
+
+.radio-group{
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.option {
+  color:#586069;
+}
+
+.questionContainer >view:first-child {
+  background: #FFF;
+}
+.questionContainer >view {
+  padding: 0.5rem;
+}
+.questionContainer >radio-group {
+  padding: 18rpx;
+}
+radio .wx-radio-input.wx-radio-input-checked{
+  background: #414A90!important; 
+  border: 1px solid #414A90 !important;
+}
+
+.submitExamrBtn {
+  left: 2.5%;
+}
+
+.correctOptionStyle {
+  background: #F9DC5C;
+}

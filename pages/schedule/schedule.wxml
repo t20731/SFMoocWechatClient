@@ -1,0 +1,21 @@
+<view class="page">
+  <view class="title">
+    <text>当前赛季分享顺序</text>
+  </view>
+  <view class="sharingListContainer">
+    <view class='sharingList' wx:for="{{sessionList}}" wx:key="name" wx:for-item="item">
+      <view class="timeLineIconWrap" >
+        <image wx:if="{{item.status === 1}}" class="timeNodeIcon" src="../../images/passnode.png"></image>
+        <image wx:elif="{{item.status === 2}}" class="timeNodeIcon" src="../../images/currentNode.png"></image>
+        <image wx:else class="timeNodeIcon" src="../../images/waitingNode.png"></image>
+      </view>
+      <view class="photo">
+        <image src="{{item.avatarUrl || '../../images/defaultAvatar.png'}}"></image>
+      </view>
+      <view class='personalInfo'>
+        <view>{{item.nickname}}</view>
+        <view class="department">{{item.department}}</view>
+      </view>
+    </view>
+  </view>
+</view>

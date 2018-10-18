@@ -1,0 +1,72 @@
+/* pages/lottery/lottery.wxss */
+.launchLotterySection {
+  margin-top: 2rem;
+}
+.errorInputMsg {
+  color: red;
+  font-size: 0.8rem;  
+}
+.submitNumberBtn {
+  background: #414A90;
+  width: 95%;
+  color: #FFF;
+}
+.launchBtn {
+  background:#FFF;
+  width: 95%;
+  color: #414A90;
+  border:1px solid;
+}
+.inputSection {
+  background:#FFF;
+  margin-bottom:1rem;
+  padding:0.25rem;
+  border-top: 1px solid #D6D9DC;
+  border-bottom: 1px solid #D6D9DC;
+}
+.luckNumberMsg {
+  height: 2.5rem;
+  background: #FFF;
+  border-top: 1px solid #D6D9DC;
+  border-bottom: 1px solid #D6D9DC;
+  margin:0.5rem 0;
+  text-align:center;
+  line-height:2.5rem;
+}
+.luckNumberMsg>text {
+  color: #FDBC40;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.myLuckyMsg {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  height: 5rem;
+  position: relative;
+}
+.myLuckyMsg image {
+  height: 100%;
+  width: 100%;
+}
+.myLuckyMsg >view {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.25rem;
+}
+.luckyListInfo {
+  margin-top: 1rem;
+  background: #FFF;
+  border-top: 1px solid #D6D9DC;
+  border-bottom: 1px solid #D6D9DC;
+}
+.luckyListInfo>text{
+  text-align: center;
+  display: block;
+}
+.luckyListItemImg {
+  width: 64rpx;
+  height: 64rpx;
+  margin-right: 0.5rem;
+}

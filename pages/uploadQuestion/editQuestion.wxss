@@ -1,0 +1,29 @@
+/* pages/uploadQuestion/editQuestion.wxss */
+.editQuestionForm, .editQuestionForm view{
+  padding: 0.5rem;
+}
+.titleInput, .optionInput {
+  display: inline-block;
+  border-bottom: 1px solid #D7D7D7;
+  width: 80%;
+  margin-left: 0.25rem;
+  margin-top: 0.5rem;
+}
+.addOptionTitle {
+  display: block;
+}
+.saveQuestionBtn {
+  margin-top: 1rem;
+}
+.addQuesIcon image, .deleteIcon{
+  height: 1.5rem;
+  width: 1.5rem;
+}
+.deleteIcon {
+  margin-left:0.5rem;
+}
+
+/* .picker {
+  border-bottom:1px solid #D7D7D7;
+  border-top:1px solid #D7D7D7;
+} */

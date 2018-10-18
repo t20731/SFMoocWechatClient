@@ -1,0 +1,24 @@
+<!--pages/uploadQuestion/editQuestion.wxml-->
+<view class='page'>
+<form class="editQuestionForm" bindsubmit="submitQuestion">
+  <label for="title">题目:</label>
+  <input class="titleInput" name="title" placeholder="点我输入题目" value="{{title}}"></input>
+  <view>
+    <text class="addOptionTitle">添加答案选项(2-4个)</text>
+    <view wx:for="{{options}}" wx:key="index" >
+      <label name="item.label" for="">{{item.label}}:</label>
+      <input class="optionInput" name="{{item.label}}" data-index="{{index}}" placeholder="点我输入选项" value="{{item.value}}" bindblur="onOptionChange"></input>
+      <image wx:if="{{index >=2 }}" class="deleteIcon" src="../../images/rounded_delete.png" data-index="{{index}}" bindtap="handleDeleteOptionClick"></image>
+    </view>
+    <view class="imgWrapper addQuesIcon">
+      <image src="../../images/add_outline.png" bindtap="handleAddQuesClick"></image>
+    </view>
+    <picker value="{{correctOption.index}}" range="{{optionValues}}" bindchange="onCorrectOptionChange">
+      <view class="containerBorder">
+        选取正确答案: {{optionValues[correctOption.index]}}
+      </view>
+    </picker>
+  </view>
+  <button class="uniformBtn saveQuestionBtn" form-type="submit">保存</button>
+</form>
+</view>

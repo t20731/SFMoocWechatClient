@@ -1,0 +1,34 @@
+/* pages/uploadQuestion/uploadQuestion.wxss */
+.questionHeader {
+  display: flex;
+}
+.questionTitle {
+  flex: 1;
+}
+.option {
+  color:#586069;
+}
+.editQuesIcon {
+  height: 1.8rem;
+  width: 1.8rem;
+  margin-right: 0.8rem;
+}
+.deleteQuesIcon {
+  height: 1.8rem;
+  width: 1.8rem;
+}
+.questionContainer >view:first-child {
+  background: #FFF;
+}
+.questionContainer >view {
+  padding: 0.5rem;
+}
+.publishQuesBtn, .addQuesBtn {
+  width: 42%;
+} 
+.publishQuesBtn {
+  left: 4%;
+}
+.addQuesBtn {
+  right: 4%; 
+}

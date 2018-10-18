@@ -1,0 +1,19 @@
+<!--index.wxml-->
+<view class="page">
+  <view class="page__bd">
+    <navigator url="rankingdetail?userId={{myRanking.userId}}" wx:if="{{!normalUser}}" class="weui-cell myRanking">
+        <view class="firstCol">{{myRanking.rank}}</view>
+        <image src="{{myRanking.avatarUrl}}" class="userinfo-avatar"></image>
+        <view class="weui-cell__bd">{{myRanking.nickname}}</view>
+        <view class="weui-cell__ft">{{myRanking.points}}</view>
+    </navigator>
+    <view class="weui-cells weui-cells_after-title">
+      <navigator url="rankingdetail?userId={{item.userId}}" class="weui-cell" wx:for="{{rankingList}}" wx:key="userId">
+        <view class="firstCol">{{item.rank}}</view>
+        <image src="{{item.avatarUrl}}" class="userinfo-avatar"></image>
+        <view class="weui-cell__bd">{{item.nickname}}</view>
+        <view class="weui-cell__ft">{{item.points}}</view>
+      </navigator>
+    </view>
+  </view>
+</view>

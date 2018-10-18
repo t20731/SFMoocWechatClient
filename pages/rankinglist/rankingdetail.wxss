@@ -1,0 +1,5 @@
+/* pages/rankinglist/rankingdetail.wxss */
+.weui-cell__ft {
+  color: #FDBC40;
+  font-size: 1.0rem;
+}

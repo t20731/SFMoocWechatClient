@@ -1,0 +1,25 @@
+<!--pages/exam/examList.wxml-->
+<view class="page">
+  <view wx:if="{{availableExam.length}}">
+    <text class="weui-cells__title">最新发布试卷</text>
+    <view class="weui-cells availableExamWrapper">
+      <view class="availableExamItem weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__bd" data-sessionid="{{availableExam[0].id}}" bindtap="goToExamDetailPage">
+        {{availableExam[0].title}} 
+        <text class="sessionDate">{{availableExam[0].date}}</text>
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </view> 
+    </view>
+  </view>
+  <text class="weui-cells__title">往期考题回顾</text>
+  <view class="weui-cells historyList">
+    <view class="examItem weui-cell weui-cell_access" hover-class="weui-cell_active" wx:for="{{examList}}" wx:key="id">
+      <view class="weui-cell__bd" data-sessionid="{{item.id}}" bindtap="goToExamDetailPage">
+      {{item.title}} 
+      <text class="sessionDate">{{item.date}}</text>
+      </view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view> 
+  </view>
+</view>

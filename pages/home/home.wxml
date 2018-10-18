@@ -1,0 +1,66 @@
+<!--home.wxml-->
+<view class="page">
+  <view class="userinfo">
+    <button class="loginButton" type="primary" plain="true" wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+      登录
+    </button>
+    <block wx:else>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <image src="../../images/checkin.png" class="navIcon"></image>
+      </view>
+       <view wx:if="{{!isSessionOwner}}" class="weui-cell__bd" bindtap="checkIn">签到</view>
+      <view wx:else class="weui-cell__bd" bindtap="generateCode">生成签到口令</view>
+    </view> 
+    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <image src="../../images/editing.png" class="navIcon"></image>
+      </view>
+      <view class="weui-cell__bd" bindtap="startExam">考试中心</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view>
+    <view url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <image src="../../images/gift.png" class="navIcon"></image>
+      </view>
+      <view class="weui-cell__bd" bindtap="handleLotteryClick">抽奖</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view>
+    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <image src="../../images/me_question.png" class="navIcon"></image>
+      </view>
+      <view class="weui-cell__bd" bindtap="addQuestion">添加考题</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view>
+    <navigator url="../schedule/schedule" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <image src="../../images/calendar.png" class="navIcon"></image>  
+      </view>
+      <view class="weui-cell__bd">查看分享安排</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <image src="../../images/logout.png" class="navIcon"></image>
+      </view>
+      <view class="weui-cell__bd" bindtap="logout">退出登录</view>
+    </view>
+  </view>
+  <modal id="codeInputModal" hidden="{{isCheckinModalHidden}}" title="请输入签到口令" confirm-text="提交" cancel-text="取消" 
+  bindconfirm="submitCheckinCode" bindcancel="cancelCheckin"> 
+    <input bindinput="onCodeInput" type='text' placeholder="点我输入口令" value="{{checkinCode}}" />
+  </modal>
+  <modal id="generateCodeModal" hidden="{{isGenerateCodeModal}}" title="签到口令" cancel-text="取消" confirm-text="确定" 
+  bindconfirm="saveChenkinCode" bindcancel="cancelGenerateCode"> 
+  <view>
+    <text>{{checkinCode}}</text>
+    <button type="primary" size="mini" bindtap="changeCheckinCode">换一换</button>
+  </view> 
+  </modal>  
+</view>
