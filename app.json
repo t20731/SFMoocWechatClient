@@ -26,19 +26,19 @@
     "list": [
       {
         "pagePath": "pages/rankinglist/rankinglist",
-        "text": "排行榜",
+        "text": "Ranking",
         "iconPath": "images/upstage.png",
         "selectedIconPath": "images/upstage_fill.png"
       },
       {
         "pagePath": "pages/notice/notice",
-        "text": "公告",
+        "text": "Explore",
         "iconPath": "images/notification.png",
         "selectedIconPath": "images/notification_fill.png"
       },
       {
         "pagePath": "pages/home/home",
-        "text": "个人中心",
+        "text": "Home",
         "iconPath": "images/people.png",
         "selectedIconPath": "images/people_fill.png"
       }

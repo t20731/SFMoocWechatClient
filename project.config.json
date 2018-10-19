@@ -12,8 +12,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.0.4",
-	"appid": "wxb0f25ab0f0fe1a2f",
-	"projectname": "T2Client",
+	"appid": "wxdb6534b9d348f82b",
+	"projectname": "SFMoocClient",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
