@@ -1,24 +1,39 @@
 /* pages/notice/notice.wxss */
+.page {
+  background: #FFF;
+}
 .exploreHeader {
   padding: 10rpx;
   text-align: center;
-  background: #FFF;
 }
-.exploreHeader input{
+.exploreHeader input {
   border-radius:35rpx;
   border:1px solid #CCC;
   width:90%;
   margin:0 auto;
 }
-.tab-item {
+.categoryTabBar {
+  height: 80rpx;
+  width: 100%; 
+  box-sizing: border-box;
+  overflow: hidden;
+  line-height: 80rpx;
+  font-size: 16px; 
+  white-space: nowrap;
+  position: fixed;
+  top: 70rpx; 
+  left: 0; 
+  z-index: 99;
+}
+.tabItem {
   margin:0 36rpx;
   display: inline-block;
 }
-.tab-item.active{
+.tabItem.active{
   color: #0076cb;
   position: relative;
 }
-.tab-item.active:after{ 
+.tabItem.active:after{ 
   content: "";
   display: block;
   height: 8rpx;
@@ -28,5 +43,8 @@
   bottom: 0;
   left: 15rpx;
   border-radius: 16rpx;
+}
+.tabContent {
+  margin-top: 80rpx;
 }
 

@@ -1,5 +1,6 @@
 // pages/notice/notice.js
 import Util from '../../utils/util';
+import * as CONST from '../../utils/const';
 const app = getApp()
 
 Page({
@@ -8,7 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    currentTab: 0
+    tabItems: CONST.EXPLORE_TOPIC_CATEGORY,
+    currentTab: 0,
+    scrollLeft: 0
   },
 
   /**
@@ -39,8 +42,20 @@ Page({
     })
   },
 
-  swichNav: function () {
-    
+  swichNav: function (evt) {
+    let cur = evt.target.dataset.current;
+    if (this.data.currentTab === cur) { 
+      return false; 
+    } else {
+      this.setData({
+        currentTab: cur
+      })
+    }
+  },
+  switchTab: function (evt) {
+    this.setData({
+      currentTab: evt.detail.current
+    });
   },
 
   /**
