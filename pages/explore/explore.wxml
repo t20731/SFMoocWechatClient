@@ -1,0 +1,17 @@
+<!--pages/notice/notice.wxml-->
+<view class="page">
+  <view class="exploreHeader">
+    <input placeholder='搜索'></input>
+    <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
+       <view class="tab-item {{currentTab==0?'active':''}}"  data-current="0" bindtap="swichNav">Front-end</view>
+        <view class="tab-item {{currentTab==0?'active':''}}"  data-current="0" bindtap="swichNav">Back-end</view>
+        <view class="tab-item {{currentTab==0?'active':''}}"  data-current="0" bindtap="swichNav">Testing</view>
+    </scroll-view>
+    <swiper class="tabContent" current="{{currentTab}}" duration="300" bindchange="switchTab">
+      <swiper-item>Front-end content</swiper-item>
+      <swiper-item>Back-end content</swiper-item>
+      <swiper-item>Testing content</swiper-item>
+    </swiper>
+  </view>
+  
+</view>

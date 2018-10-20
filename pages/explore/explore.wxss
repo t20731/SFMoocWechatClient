@@ -1,0 +1,32 @@
+/* pages/notice/notice.wxss */
+.exploreHeader {
+  padding: 10rpx;
+  text-align: center;
+  background: #FFF;
+}
+.exploreHeader input{
+  border-radius:35rpx;
+  border:1px solid #CCC;
+  width:90%;
+  margin:0 auto;
+}
+.tab-item {
+  margin:0 36rpx;
+  display: inline-block;
+}
+.tab-item.active{
+  color: #0076cb;
+  position: relative;
+}
+.tab-item.active:after{ 
+  content: "";
+  display: block;
+  height: 8rpx;
+  width: 52rpx;
+  background: #0076cb;
+  position: absolute; 
+  bottom: 0;
+  left: 15rpx;
+  border-radius: 16rpx;
+}
+

@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/home/home",
-    "pages/notice/notice",
+    "pages/explore/explore",
     "pages/rankinglist/rankinglist",
     "pages/rankinglist/rankingdetail",
     "pages/schedule/schedule",
@@ -9,8 +9,7 @@
     "pages/uploadQuestion/uploadQuestion",
     "pages/uploadQuestion/editQuestion",
     "pages/exam/exam",
-    "pages/exam/examList",
-    "pages/notice/editNotice"
+    "pages/exam/examList"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -31,7 +30,7 @@
         "selectedIconPath": "images/upstage_fill.png"
       },
       {
-        "pagePath": "pages/notice/notice",
+        "pagePath": "pages/explore/explore",
         "text": "Explore",
         "iconPath": "images/attention.png",
         "selectedIconPath": "images/attention_fill.png"
