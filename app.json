@@ -14,13 +14,13 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#79BFCF",
+    "navigationBarBackgroundColor": "#FFF",
     "navigationBarTitleText": "T2",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "color": "#858585",
-    "selectedColor": "#414A90",
+    "selectedColor": "#0076cb",
     "borderStyle": "white",
     "backgroundColor": "#ffffff",
     "list": [
@@ -33,8 +33,8 @@
       {
         "pagePath": "pages/notice/notice",
         "text": "Explore",
-        "iconPath": "images/notification.png",
-        "selectedIconPath": "images/notification_fill.png"
+        "iconPath": "images/attention.png",
+        "selectedIconPath": "images/attention_fill.png"
       },
       {
         "pagePath": "pages/home/home",
