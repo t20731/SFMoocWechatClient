@@ -11,29 +11,29 @@ Page({
   data: {
     tabItems: CONST.EXPLORE_TOPIC_CATEGORY,
     currentTab: 0,
-    scrollLeft: 0
+    scrollLeft: 0,
+    directions: [],
+    sessions: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    init();
   },
 
   init: function(){
     let that = this;
     wx.request({
-      url: app.globalData.host + '/announcement/list',
+      url: app.globalData.host + '/session/all',
       method: 'GET',
       success: function (res) {
         if (res.data.msg === 'ok') {
-          let notice = res.data.retObj[0];
-          if (notice) {
-            notice.lastModifiedDate = notice.lastModifiedDate.split(' ')[0];
-            that.setData({
-              notice: notice
-            });
-          }
+          that.setData({
+            directions: res.data.retObj.directions,
+            sessions: res.data.retObj.sessions
+          });
         }
       },
       fail: function (error) {
