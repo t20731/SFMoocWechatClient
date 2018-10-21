@@ -1,0 +1,26 @@
+<!--pages/explore/eventDetail.wxml-->
+<view class="page">
+<view class="event-detail-title">{{eventDetail.topic}}</view>
+<view class="flex-wrp">
+    <view class="flex-item">
+    <view class="event-detail-author">Author</view>
+      <image class="event-detail-avatar" mode="scaleToFill" src="{{eventDetail.user.avatarUrl}}"></image>
+      <view class="event-detail-nickname">{{eventDetail.user.nickname}}</view>
+    </view>
+    <view class="flex-item event-detail-duration">
+      <text>When: </text>
+      <text>{{eventDetail.startDate}} - {{eventDetail.endDate}}</text>
+      <text>(1h)</text>
+    </view>
+    <view class="flex-item event-detail-location">
+    <!-- Use icon instead later -->
+    <text>Location: </text>{{eventDetail.location}}
+    </view>
+    <view class="flex-item event-detail-desc">
+    {{eventDetail.description}}
+    </view>
+    <view class="flex-item">
+    <button bindtap='onRegister' type="primary" disabled="{{disabled}}" loading="{{loading}}">{{registerBtnVal}}</button>
+    </view>
+  </view>
+</view>

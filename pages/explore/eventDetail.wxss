@@ -1,0 +1,52 @@
+.page {
+  padding: 10rpx 20rpx;
+}
+
+.flex-item:not(:first-child) {
+  margin-top: 10rpx
+}
+.event-detail-title {
+  text-align: center;
+  font-weight: 700;
+}
+
+.event-detail-author {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.event-detail-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 5px;
+}
+
+.event-detail-nickname {
+  margin-top: -10px;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.event-detail-duration {
+  font-size: 13px;
+}
+
+.event-detail-location {
+  font-size: 13px;
+}
+
+.event-detail-duration text:first-child,
+.event-detail-location text:first-child {
+  font-weight: bold;
+}
+
+
+
+.event-detail-desc {
+  font-size: 14px;
+}
+
+/* .event-detail-register {
+  color: #fff;
+  background: #0076cb;
+} */
