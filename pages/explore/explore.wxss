@@ -46,5 +46,50 @@
 }
 .tabContent {
   margin-top: 80rpx;
+  padding: 0 15rpx;
 }
-
+.eventItem {
+  display: flex;
+  height: 200rpx;
+}
+.eventItem .leftContent >image {
+  width: 200rpx;
+  height: 133rpx;
+}
+.leftContent {
+  margin: 0 auto;
+}
+.leftContent, .rightContent {
+  display: inline-block;
+}
+.rightContent {
+  margin-left: 8rpx;
+  padding-left: 6rpx;
+  flex: 1;
+}
+.rightContent .title text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  color: #333;
+  line-height: 1.25rem;
+}
+.speaker, .location {
+  font-size: 24rpx;
+  margin-top: 6rpx;
+}
+.location {
+  color: #71777D;
+}
+.count {
+ float: right;
+}
+.count image {
+  margin-right: 4rpx;
+  width: 24rpx;
+  height: 24rpx;
+}

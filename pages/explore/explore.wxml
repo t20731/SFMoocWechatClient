@@ -10,8 +10,48 @@
     </view>
     </scroll-view>
     <swiper class="tabContent" current="{{currentTab}}" duration="300" bindchange="switchTab">
-      <swiper-item>Front-end content</swiper-item>
-      <swiper-item>Back-end content</swiper-item>
+      <swiper-item class="">
+       <view class="eventItem">
+        <view class='leftContent'>
+          <image src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg">
+          </image>
+        </view>
+        <view class="rightContent">
+          <view class="title">
+          <text> Spring Cloud Spring Cloud</text>
+          </view>
+          <view class="speaker">Mango</view>
+          <view class="location">
+          pvg03
+           <view class="count">
+            <image src="../../images/mini_people.png"></image>
+            <text>15</text>
+           </view>
+          </view>
+        </view>
+       </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="eventItem">
+        <view class='leftContent'>
+          <image src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg">
+          </image>
+        </view>
+        <view class="rightContent">
+          <view class="title">
+          <text> Spring Cloud Spring Cloud Spring Cloud Spring Cloud Spring Cloud</text>
+          </view>
+          <view class="speaker">Lance</view>
+          <view class="location">
+          pvg03
+           <view class="count">
+            <image src="../../images/mini_people.png"></image>
+            <text>15</text>
+           </view>
+          </view>
+        </view>
+       </view>
+      </swiper-item>
       <swiper-item>Testing content</swiper-item>
       <swiper-item>Testing1 content</swiper-item>
     </swiper>
