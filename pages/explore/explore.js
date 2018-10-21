@@ -27,7 +27,11 @@ Page({
     let that = this;
     wx.request({
       url: app.globalData.host + '/session/all',
-      method: 'GET',
+      method: 'POST',
+      data: {
+        pageNum: 1,
+        pageSize: 10
+      },
       success: function (res) {
         if (res.data.msg === 'ok') {
           that.setData({
