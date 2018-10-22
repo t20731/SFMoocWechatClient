@@ -1,5 +1,6 @@
 // pages/notice/notice.js
 import Util from '../../utils/util';
+import WXRequest from '../../utils/wxRequest';
 import * as CONST from '../../utils/const';
 const app = getApp()
 
@@ -25,43 +26,33 @@ Page({
   },
 
   init: function(){
-    let that = this;
-    wx.request({
-      url: app.globalData.host + '/session/all',
-      method: 'POST',
-      data: {
-        pageNum: 1,
-        pageSize: 10
-      },
-      success: function (res) {
-        if (res.data.msg === 'ok') {
-          console.log(res.data);
-          let mockRecord = {
-            id: 10,
-            location: 'PVG03 D5.1',
-            topic: 'Vue + VUX + Koa2 long long long long long long long long long name',
-            owner: {
-              nickName: 'smallsun'
-            }
+    WXRequest.request.post('/session/all', {
+      pageNum: 1,
+      pageSize: 10
+    }).then(res => {
+      if (res.data.msg === 'ok') {
+        console.log(res.data);
+        let mockRecord = {
+          id: 10,
+          location: 'PVG03 D5.1',
+          topic: 'Vue + VUX + Koa2 long long long long long long long long long name',
+          owner: {
+            nickName: 'smallsun'
           }
-          res.data.retObj.sessions.push(mockRecord);
-          res.data.retObj.sessions.push(mockRecord);
-          res.data.retObj.sessions.push(mockRecord);
-          res.data.retObj.sessions.push(mockRecord);
-          res.data.retObj.sessions.push(mockRecord);
-          res.data.retObj.sessions.push(mockRecord);
-          res.data.retObj.sessions.push(mockRecord);
-          that.setData({
-            directions: res.data.retObj.directions,
-            sessions: res.data.retObj.sessions,
-            swiperHeight: res.data.retObj.sessions.length * 200 + 'rpx'
-          });
         }
-      },
-      fail: function (error) {
-        console.log(error);
+        res.data.retObj.sessions.push(mockRecord);
+        res.data.retObj.sessions.push(mockRecord);
+        res.data.retObj.sessions.push(mockRecord);
+        res.data.retObj.sessions.push(mockRecord);
+        this.setData({
+          directions: res.data.retObj.directions,
+          sessions: res.data.retObj.sessions,
+          swiperHeight: res.data.retObj.sessions.length * 200 + 'rpx'
+        });
       }
-    })
+    }).catch(e => {
+        console.log(e)
+    });
   },
 
   swichNav: function (evt) {
@@ -69,14 +60,33 @@ Page({
     if (this.data.currentTab === cur) { 
       return false; 
     } else {
-      this.setData({
-        currentTab: cur
-      })
+      this.loadNewTabItemData(cur);
     }
   },
   switchTab: function (evt) {
+    let cur = evt.detail.current;
+    this.loadNewTabItemData(cur);    
+  },
+
+  loadNewTabItemData: function (currentTab) {
     this.setData({
-      currentTab: evt.detail.current
+      currentTab: currentTab
+    });
+    WXRequest.request.post('/session/list', {
+      "pageNum": 1,
+      "pageSize": 10,
+      "directionId": currentTab,
+      "orderField": "total_members"
+    }).then(res => {
+      if (res.data.msg === 'ok') {
+        console.log(res.data);
+        this.setData({
+          sessions: res.data.retObj,
+          swiperHeight: res.data.retObj.length * 200 + 'rpx'
+        });
+      }
+    }).catch(e => {
+      console.log(e)
     });
   },
 

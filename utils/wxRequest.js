@@ -36,8 +36,8 @@ class Request {
 }
 
 const request = new Request({
-  baseURL: 'http://test',
+  baseURL: 'https://sfmooc-api.techtuesday.club',
   withBaseURL: true
 })
 
-module.exports = request
+export default { request }
