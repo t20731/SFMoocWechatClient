@@ -9,8 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabItems: CONST.EXPLORE_TOPIC_CATEGORY,
-    currentTab: 0,
+    // tabItems: CONST.EXPLORE_TOPIC_CATEGORY,
+    swiperHeight: '500rpx',
+    currentTab: 2,
     scrollLeft: 0,
     directions: [],
     sessions: []
@@ -20,7 +21,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    init();
+    this.init();
   },
 
   init: function(){
@@ -34,9 +35,26 @@ Page({
       },
       success: function (res) {
         if (res.data.msg === 'ok') {
+          console.log(res.data);
+          let mockRecord = {
+            id: 10,
+            location: 'PVG03 D5.1',
+            topic: 'Vue + VUX + Koa2 long long long long long long long long long name',
+            owner: {
+              nickName: 'smallsun'
+            }
+          }
+          res.data.retObj.sessions.push(mockRecord);
+          res.data.retObj.sessions.push(mockRecord);
+          res.data.retObj.sessions.push(mockRecord);
+          res.data.retObj.sessions.push(mockRecord);
+          res.data.retObj.sessions.push(mockRecord);
+          res.data.retObj.sessions.push(mockRecord);
+          res.data.retObj.sessions.push(mockRecord);
           that.setData({
             directions: res.data.retObj.directions,
-            sessions: res.data.retObj.sessions
+            sessions: res.data.retObj.sessions,
+            swiperHeight: res.data.retObj.sessions.length * 200 + 'rpx'
           });
         }
       },
@@ -73,7 +91,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-     this.init();
+    //  this.init();
+    let that = this
+    // wx.getSystemInfo({
+    //   success: function (res) {
+    //     debugger;
+    //     that.setData({
+    //       clientHeight: res.windowHeight
+    //     });
+    //   }
+    // });
   },
 
   /**

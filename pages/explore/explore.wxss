@@ -5,6 +5,12 @@
 .exploreHeader {
   padding: 10rpx;
   text-align: center;
+  position:fixed;
+  z-index:99;
+  top:0;
+  left:0;
+  width:100%;
+  background:#FFF;
 }
 .exploreHeader input {
   border-radius:35rpx;
@@ -20,10 +26,10 @@
   line-height: 80rpx;
   font-size: 16px; 
   white-space: nowrap;
-  position: fixed;
+  /* position: fixed;
   top: 70rpx; 
   left: 0; 
-  z-index: 99;
+  z-index: 99; */
 }
 .tabItem {
   margin:0 36rpx;
@@ -45,7 +51,7 @@
   border-radius: 16rpx;
 }
 .tabContent {
-  margin-top: 80rpx;
+  margin-top: 160rpx;
   padding: 0 15rpx;
 }
 .eventItem {
