@@ -49,13 +49,9 @@ Page({
     }).then(res => {
       if (res.data.msg === 'ok') {
         console.log(res.data);
-        var eventDetail = res.data.retObj;
-        this.setData({
-          eventDetail: eventDetail
-        });
         wx.showToast({ title: 'Successfully' });
-        me.setData({
-          loading: !me.data.loading,
+        this.setData({
+          loading: false,
           registerBtnVal: 'Registered'
         })
       } else {
