@@ -23,7 +23,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getSearchHistory();
   },
   /*输入框输入后触发，用于联想搜索和切换取消确认*/
   handleInputChange: function (e) {
@@ -57,12 +57,12 @@ Page({
   },
   searchEvents: function () {
     let newHistoryData = this.data.historyData.concat(this.data.searchValue);
-    this.setSearchHistoryData(newHistoryData);
+    this.setSearchHistory(newHistoryData);
   },
   clearSearchHistory: function () {
-    this.setSearchHistoryData([]);
+    this.setSearchHistory([]);
   },
-  setSearchHistoryData: function (newData) {
+  setSearchHistory: function (newData) {
     let that = this;
     wx.setStorage({
       key: "historydata",
@@ -70,6 +70,17 @@ Page({
       success: function (res) {
         that.setData({
           historyData: newData
+        })
+      }
+    })
+  },
+  getSearchHistory: function () {
+    let that = this;
+    wx.getStorage({
+      key: "historydata",
+      success: function (res) {
+        that.setData({
+          historyData: res.data
         })
       }
     })
