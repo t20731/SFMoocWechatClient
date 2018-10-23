@@ -2,7 +2,7 @@
 <view class="page">
   <view class="exploreHeader">
     <view class="searchInput">
-      <input placeholder='Java SAPUI5 HANA'></input>
+      <input placeholder='Java SAPUI5 HANA' bindfocus="goToSearchPage"></input>
     </view>
     <scroll-view scroll-x="true" class="categoryTabBar" scroll-left="{{scrollLeft}}">
       <view wx:for="{{directions}}" wx:key="id" class="tabItem {{currentTab==item.id?'active':''}}"  data-current="{{item.id}}" bindtap="swichNav" >

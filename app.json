@@ -10,7 +10,8 @@
     "pages/uploadQuestion/uploadQuestion",
     "pages/uploadQuestion/editQuestion",
     "pages/exam/exam",
-    "pages/exam/examList"
+    "pages/exam/examList",
+    "pages/explore/search"
   ],
   "window": {
     "backgroundTextStyle": "light",

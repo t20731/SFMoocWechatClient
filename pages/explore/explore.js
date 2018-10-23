@@ -81,6 +81,12 @@ Page({
     });
   },
 
+  goToSearchPage: function (evt) {
+    wx.navigateTo({
+      url: 'search'
+    })
+  },
+ 
   goDetail: function (e) {
     var id = e.currentTarget.id;
     wx.navigateTo({
