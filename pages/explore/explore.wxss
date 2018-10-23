@@ -12,6 +12,9 @@
   width:100%;
   background:#FFF;
 }
+.exploreHeader .searchInput {
+  height: 60rpx;
+}
 .exploreHeader input {
   border-radius:35rpx;
   border:1px solid #CCC;
@@ -98,4 +101,9 @@
   margin-right: 4rpx;
   width: 24rpx;
   height: 24rpx;
+}
+.noDataMsg {
+  text-align: center;
+  color: #71777D;
+  margin-top: 45%;
 }

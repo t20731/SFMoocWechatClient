@@ -11,11 +11,11 @@ Page({
    */
   data: {
     // tabItems: CONST.EXPLORE_TOPIC_CATEGORY,
-    swiperHeight: '500rpx',
     currentTab: 2,
     scrollLeft: 0,
     directions: [],
-    sessions: []
+    sessions: [],
+    showNoData: 'false'
   },
 
   /**
@@ -32,22 +32,10 @@ Page({
     }).then(res => {
       if (res.data.msg === 'ok') {
         console.log(res.data);
-        let mockRecord = {
-          id: 10,
-          location: 'PVG03 D5.1',
-          topic: 'Vue + VUX + Koa2 long long long long long long long long long name',
-          owner: {
-            nickName: 'smallsun'
-          }
-        }
-        res.data.retObj.sessions.push(mockRecord);
-        res.data.retObj.sessions.push(mockRecord);
-        res.data.retObj.sessions.push(mockRecord);
-        res.data.retObj.sessions.push(mockRecord);
         this.setData({
           directions: res.data.retObj.directions,
           sessions: res.data.retObj.sessions,
-          swiperHeight: res.data.retObj.sessions.length * 200 + 'rpx'
+          swiperHeight: res.data.retObj.sessions.length * 200
         });
       }
     }).catch(e => {
@@ -80,9 +68,12 @@ Page({
     }).then(res => {
       if (res.data.msg === 'ok') {
         console.log(res.data);
+        let itemsHeight = res.data.retObj.length * 200;
+        let swiperHeight = itemsHeight > this.data.listVisibleHeight  ? itemsHeight : this.data.listVisibleHeight;
         this.setData({
           sessions: res.data.retObj,
-          swiperHeight: res.data.retObj.length * 200 + 'rpx'
+          swiperHeight: swiperHeight,
+          showNoData: res.data.retObj.length === 0
         });
       }
     }).catch(e => {
@@ -103,14 +94,16 @@ Page({
   onShow: function () {
     //  this.init();
     let that = this
-    // wx.getSystemInfo({
-    //   success: function (res) {
-    //     debugger;
-    //     that.setData({
-    //       clientHeight: res.windowHeight
-    //     });
-    //   }
-    // });
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log('----systeminfo----');
+        console.log(res);
+        that.setData({
+          listVisibleHeight: res.windowHeight * (750 / res.windowWidth) - 160
+        });
+        console.log(res.windowHeight * (750 / res.windowWidth) - 160);
+      }
+    });
   },
 
   /**

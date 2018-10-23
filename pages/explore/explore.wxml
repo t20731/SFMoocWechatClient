@@ -1,7 +1,9 @@
 <!--pages/explore/explore.wxml-->
 <view class="page">
   <view class="exploreHeader">
-    <input placeholder='搜索'></input>
+    <view class="searchInput">
+      <input placeholder='Java SAPUI5 HANA'></input>
+    </view>
     <scroll-view scroll-x="true" class="categoryTabBar" scroll-left="{{scrollLeft}}">
       <view wx:for="{{directions}}" wx:key="id" class="tabItem {{currentTab==item.id?'active':''}}"  data-current="{{item.id}}" bindtap="swichNav" >
         {{item.name}}
@@ -9,27 +11,28 @@
     </scroll-view>
   </view>
   <view class="exploreContent">
-    <swiper style="height: {{swiperHeight}}" class="tabContent" current="{{currentTab}}" duration="300" bindchange="switchTab">
+    <swiper style="height: {{swiperHeight}}rpx" class="tabContent" current="{{currentTab}}" duration="300" bindchange="switchTab">
       <swiper-item class="" wx:for="{{directions}}" wx:key="id">
-       <view class="eventItem" wx:for="{{sessions}}" wx:key="id">
-        <view class='leftContent'>
-          <image src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg">
-          </image>
-        </view>
-        <view class="rightContent">
-          <view class="title">
-          <text>{{item.topic}}</text>
+        <view class="eventItem" wx:for="{{sessions}}" wx:key="id">
+          <view class='leftContent'>
+            <image src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg">
+            </image>
           </view>
-          <view class="speaker">{{item.owner.nickName}}</view>
-          <view class="location">
-           {{item.location}}
-           <view class="count">
-            <image src="../../images/mini_people.png"></image>
-            <text>15</text>
-           </view>
+          <view class="rightContent">
+            <view class="title">
+            <text>{{item.topic}}</text>
+            </view>
+            <view class="speaker">{{item.owner.nickName}}</view>
+            <view class="location">
+            {{item.location}}
+            <view class="count">
+              <image src="../../images/mini_people.png"></image>
+              <text>15</text>
+            </view>
+            </view>
           </view>
         </view>
-       </view>
+        <view class="noDataMsg" wx:if="{{showNoData}}"> No event yet! </view>
       </swiper-item>
     </swiper>
   </view>
