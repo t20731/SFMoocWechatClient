@@ -41,13 +41,39 @@ Page({
       loading: !this.data.loading,
     });
 
-    var me = this;
-    setTimeout(function() {
-      wx.showToast({title: 'Successfully'});
-      me.setData({
-        loading: !me.data.loading,
-        registerBtnVal: 'Registered'
-      })
-    }, 2000);
+    var userInfo = wx.getStorageSync('userInfo');
+    var userId = userInfo.id;
+    WXRequest.request.post('/session/register/', {
+      userId: userId,
+      sessionId: this.data.eventDetail.id
+    }).then(res => {
+      if (res.data.msg === 'ok') {
+        console.log(res.data);
+        var eventDetail = res.data.retObj;
+        this.setData({
+          eventDetail: eventDetail
+        });
+        wx.showToast({ title: 'Successfully' });
+        me.setData({
+          loading: !me.data.loading,
+          registerBtnVal: 'Registered'
+        })
+      } else {
+        this.setData({
+          disabled: false
+        });
+        this.showError('Register failed. Please try again');
+      }
+    }).catch(e => {
+      this.showError('Please try again');
+      console.log(e);
+    });
+    this.setData({
+      loading: !this.data.loading,
+    });
+  },
+
+  showError: function(title) {
+    wx.showToast({ title: title, icon: 'none' });
   }
 });
