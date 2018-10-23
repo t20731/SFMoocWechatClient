@@ -24,7 +24,7 @@
             </view>
             <view class="speaker">{{item.owner.nickName}}</view>
             <view class="location">
-            {{item.location}}
+            {{item.location.name}}
             <view class="count">
               <image src="../../images/mini_people.png"></image>
               <text>15</text>
