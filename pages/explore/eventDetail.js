@@ -1,10 +1,12 @@
+import WXRequest from '../../utils/wxRequest';
+
 Page({
   data: { // 参与页面渲染的数据
     disabled: false,
     loading: false,
     registerBtnVal: 'Register',
     eventDetail: {
-      user: {
+      owner: {
         id: '001',
         nickname: 'Mickey White',
         avatarUrl: 'https://developers.weixin.qq.com/miniprogram/dev/image/cat/0.jpg?t=18101919'
@@ -17,8 +19,18 @@ Page({
     }
   },
 
-  onLoad: function () {
-    // 页面渲染后 执行
+  onLoad: function (e) {
+    WXRequest.request.get('/session/' + e.id).then(res => {
+      if (res.data.msg === 'ok') {
+        console.log(res.data);
+        var eventDetail = res.data.retObj;
+        this.setData({
+          eventDetail: eventDetail
+        });
+      }
+    }).catch(e => {
+      console.log(e);
+    });
   },
 
   onRegister: function(event) {

@@ -18,7 +18,7 @@
             <image src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg">
             </image>
           </view>
-          <view class="rightContent">
+          <view id="{{item.id}}" class="rightContent" bindtap='goDetail'>
             <view class="title">
             <text>{{item.topic}}</text>
             </view>

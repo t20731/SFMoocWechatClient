@@ -2,6 +2,7 @@
   "pages": [
     "pages/home/home",
     "pages/explore/explore",
+    "pages/explore/eventDetail",
     "pages/rankinglist/rankinglist",
     "pages/rankinglist/rankingdetail",
     "pages/schedule/schedule",

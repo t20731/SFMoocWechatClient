@@ -81,6 +81,13 @@ Page({
     });
   },
 
+  goDetail: function (e) {
+    var id = e.currentTarget.id;
+    wx.navigateTo({
+      url: 'eventDetail?id=' + id,
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
