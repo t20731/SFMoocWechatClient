@@ -83,8 +83,14 @@ Page({
 
   goToSearchPage: function (evt) {
     wx.navigateTo({
-      url: 'search'
+      url: 'search/search'
     })
+  },
+
+  goToFilterPage: function () {
+   wx.navigateTo({
+     url: 'filter/filter',
+   })
   },
  
   goDetail: function (e) {

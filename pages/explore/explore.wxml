@@ -4,11 +4,16 @@
     <view class="searchInput">
       <input placeholder='Java SAPUI5 HANA' bindfocus="goToSearchPage"></input>
     </view>
-    <scroll-view scroll-x="true" class="categoryTabBar" scroll-left="{{scrollLeft}}">
-      <view wx:for="{{directions}}" wx:key="id" class="tabItem {{currentTab==item.id?'active':''}}"  data-current="{{item.id}}" bindtap="swichNav" >
-        {{item.name}}
+    <view class="tabbarWrapper">
+      <scroll-view scroll-x="true" class="categoryTabBar" scroll-left="{{scrollLeft}}">
+        <view wx:for="{{directions}}" wx:key="id" class="tabItem {{currentTab==item.id?'active':''}}"  data-current="{{item.id}}" bindtap="swichNav" >
+          {{item.name}}
+        </view>
+      </scroll-view>
+      <view class="filterIcon" bindtap="goToFilterPage">
+        <image src="../../images/filter.png"></image>
       </view>
-    </scroll-view>
+    </view>
   </view>
   <view class="exploreContent">
     <swiper style="height: {{swiperHeight}}rpx" class="tabContent" current="{{currentTab}}" duration="300" bindchange="switchTab">
@@ -36,5 +41,4 @@
       </swiper-item>
     </swiper>
   </view>
-  
 </view>

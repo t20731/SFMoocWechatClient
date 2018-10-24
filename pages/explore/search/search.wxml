@@ -1,0 +1,50 @@
+<!--pages/explore/search.wxml-->
+<view class="page">
+  <view class="inputSearch">
+    <!--<form bindsubmit="formSubmit" bindreset="formReset">-->
+    <input placeholder="Search event" confirm-type="search" bindinput="handleInputChange" value="{{searchValue}}" />
+    <view class="close" hidden="{{isCloseHidden}}" bindtap="resetInputValue">X</view>
+    <button formType="submit" class="searchSubmit" hidden="{{searchSubmitHidden}}" bindtap="searchEvents">Search</button>
+    <button formType="reset" class="searchReset" hidden="{{searchResetHidden}}" bindtap="cancelSearch">Cancel</button>
+    <!--</form>-->
+  </view>
+  <view class="searchKeywords" hidden="{{searchKeywordsHidden}}">
+    <!--hot search-->
+    <view class="hotsearch message">
+      <view class="title">Hot Searches</view>
+      <view class="operation" bindtap="changeHotSearchKeys">Switch</view>
+      <text class="list" wx:for="{{switchFlag ? hotSearchKeys1 : hotSearchKeys2}}" bindtap="onHotKeywordPress" data-selected-keyword="{{item}}">{{item}}</text>
+    </view>
+
+    <!--search history-->
+    <view class="history message" hidden="{{historyDataHidden}}">
+      <view class="title">Search History</view>
+      <view class="operation" bindtap="clearSearchHistory">Clear</view>
+      <text class="list" bindtap="onHotKeywordPress" data-selected-keyword="{{item}}" wx:for="{{historyData}}">{{item}}</text>
+    </view>
+  </view>
+
+  <!--search result-->
+  <view class="searchResult" hidden="{{!searchKeywordsHidden}}">
+    <view class="searchResultCount">There are {{searchResultCount}} events related</view>
+    <view id="{{item.id}}" bindtap='goDetail' class="eventItem" wx:for="{{searchResult}}" wx:key="id">
+        <view class='leftContent'>
+          <image src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg">
+          </image>
+        </view>
+        <view class="rightContent">
+          <view class="title">
+          <text>{{item.topic}}</text>
+          </view>
+          <view class="speaker">{{item.owner.nickName}}</view>
+          <view class="location">
+          {{item.location.name}}
+          <view class="count">
+            <image src="../../../images/mini_people.png"></image>
+            <text>15</text>
+          </view>
+          </view>
+        </view>
+      </view>
+  </view>
+</view>
