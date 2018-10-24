@@ -32,13 +32,10 @@
   padding-left: 15px;
   font-size: 14px;
   margin-left: 5%;
-  /*这里有问题需要在调节*/
 }
 
 .inputSearch button {
-  width: 55px;
-  height: 30px;
-  font-size: 12px;
+  font-size: 24rpx;
 }
 
 .message {
