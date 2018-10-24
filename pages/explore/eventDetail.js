@@ -1,4 +1,5 @@
 import WXRequest from '../../utils/wxRequest';
+import Util from '../../utils/util';
 
 Page({
   data: { // 参与页面渲染的数据
@@ -20,7 +21,7 @@ Page({
   },
 
   onLoad: function (e) {
-    var userId = this.getUserId();
+    let userId = Util.getUserId();
 
     this._checkGuest(userId);
 
@@ -30,8 +31,8 @@ Page({
     }).then(res => {
       if (res.data.msg === 'ok') {
         console.log(res.data);
-        var retObj = res.data.retObj;
-        var eventDetail = retObj.session;
+        let retObj = res.data.retObj;
+        let eventDetail = retObj.session;
         this.setData({
           eventDetail: eventDetail
         });
@@ -69,14 +70,14 @@ Page({
       loading: !this.data.loading,
     });
 
-    var userId = this.getUserId();
+    let userId = Util.getUserId();
     WXRequest.post('/session/register/', {
       userId: userId,
       sessionId: this.data.eventDetail.id
     }).then(res => {
       if (res.data.msg === 'ok') {
         console.log(res.data);
-        wx.showToast({ title: 'Successfully' });
+        Util.showToast('Successfully');
         this.setData({
           loading: false,
           registerBtnVal: 'Registered'
@@ -96,13 +97,7 @@ Page({
     });
   },
 
-  getUserId: function () {
-    var userInfo = wx.getStorageSync('userInfo');
-    var userId = userInfo && userInfo.id || null;
-    return userId;
-  },
-
   showError: function(title) {
-    wx.showToast({ title: title, icon: 'none' });
+    Util.showToast(title, 'none');
   }
 });

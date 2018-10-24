@@ -88,7 +88,7 @@ Page({
   },
  
   goDetail: function (e) {
-    var id = e.currentTarget.id;
+    let id = e.currentTarget.id;
     wx.navigateTo({
       url: 'eventDetail?id=' + id,
     })
