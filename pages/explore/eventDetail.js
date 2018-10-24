@@ -15,21 +15,49 @@ Page({
       description: 'Bacon ipsum dolor amet shankle buffalo salami biltong, meatloaf pork strip steak meatball ham sausage chicken leberkas. Corned beef capicola picanha pork loin fatback hamburger. Leberkas short ribs pork chuck. Beef boudin turkey capicola, shankle ham hock frankfurter leberkas spare ribs shoulder ground round flank ham sirloin.',
       startDate: '2018-10-21 15:00',
       endDate: '2018-10-21 16:00',
-      location: 'PVG 03 1C'
+      location: {id: null, name: 'PVG 03 1C'}
     }
   },
 
   onLoad: function (e) {
-    WXRequest.request.get('/session/' + e.id).then(res => {
+    var userId = this.getUserId();
+
+    this._checkGuest(userId);
+
+    WXRequest.request.post('/session/detail',{
+      sessionId: e.id,
+      userId: userId
+    }).then(res => {
       if (res.data.msg === 'ok') {
         console.log(res.data);
-        var eventDetail = res.data.retObj;
+        var retObj = res.data.retObj;
+        var eventDetail = retObj.session;
         this.setData({
           eventDetail: eventDetail
         });
+        if (userId && retObj.userRegistered) {
+          this._markRegistered();
+        }
       }
     }).catch(e => {
       console.log(e);
+    });
+  },
+
+  _checkGuest: function (userId) {
+    if (userId === null) {
+      // guest cannot register
+      this.setData({
+        registerBtnVal: 'Login to Register',
+        disabled: true
+      });
+    }
+  },
+
+  _markRegistered: function () {
+    this.setData({
+      disabled: true,
+      registerBtnVal: 'Registered'
     });
   },
 
@@ -41,8 +69,7 @@ Page({
       loading: !this.data.loading,
     });
 
-    var userInfo = wx.getStorageSync('userInfo');
-    var userId = userInfo.id;
+    var userId = this.getUserId();
     WXRequest.request.post('/session/register/', {
       userId: userId,
       sessionId: this.data.eventDetail.id
@@ -67,6 +94,12 @@ Page({
     this.setData({
       loading: !this.data.loading,
     });
+  },
+
+  getUserId: function () {
+    var userInfo = wx.getStorageSync('userInfo');
+    var userId = userInfo && userInfo.id || null;
+    return userId;
   },
 
   showError: function(title) {

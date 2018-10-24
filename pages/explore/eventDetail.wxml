@@ -13,7 +13,7 @@
     </view>
     <view class="flex-item event-detail-location">
     <!-- Use icon instead later -->
-    <text>Location: </text>{{eventDetail.location}}
+    <text>Location: </text>{{eventDetail.location.name}}
     </view>
     <view class="flex-item event-detail-location">
     <text>Difficulty: </text>{{eventDetail.difficulty}}
