@@ -26,7 +26,7 @@ Page({
   },
 
   init: function(){
-    WXRequest.request.post('/session/all', {
+    WXRequest.post('/session/all', {
       pageNum: 1,
       pageSize: 10
     }).then(res => {
@@ -60,7 +60,7 @@ Page({
     this.setData({
       currentTab: currentTab
     });
-    WXRequest.request.post('/session/list', {
+    WXRequest.post('/session/list', {
       "pageNum": 1,
       "pageSize": 10,
       "directionId": currentTab,

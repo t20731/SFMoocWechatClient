@@ -40,4 +40,4 @@ const request = new Request({
   withBaseURL: true
 })
 
-export default { request }
+export default request

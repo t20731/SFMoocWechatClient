@@ -24,7 +24,7 @@ Page({
 
     this._checkGuest(userId);
 
-    WXRequest.request.post('/session/detail',{
+    WXRequest.post('/session/detail',{
       sessionId: e.id,
       userId: userId
     }).then(res => {
@@ -70,7 +70,7 @@ Page({
     });
 
     var userId = this.getUserId();
-    WXRequest.request.post('/session/register/', {
+    WXRequest.post('/session/register/', {
       userId: userId,
       sessionId: this.data.eventDetail.id
     }).then(res => {

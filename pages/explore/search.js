@@ -1,4 +1,7 @@
 // pages/explore/search.js
+import WXRequest from '../../utils/wxRequest';
+import Util from '../../utils/util';
+
 Page({
 
   /**
@@ -14,8 +17,8 @@ Page({
     hotSearchKeys2: ['React', 'VUE', 'Product', 'Mysql', 'UI design'],
     historyData: [],
     historyDataHidden: false,
-    searchResult: false,
     inputSearch: "",
+    searchKeywordsHidden: false,
     searchResult: []
   },
 
@@ -41,7 +44,8 @@ Page({
       searchResetHidden: false,
       isClose: true,
       inputSearch: "",
-      searchResult: false
+      searchKeywordsHidden: false,
+      searchResult: []
     })
   },
   cancelSearch: function () {
@@ -58,6 +62,25 @@ Page({
   searchEvents: function () {
     let newHistoryData = this.data.historyData.concat(this.data.searchValue);
     this.setSearchHistory(newHistoryData);
+    WXRequest.post('/session/list', {
+      pageNum: 1,
+      pageSize: 10,
+      keyWord: "Java"
+    }).then(res => {
+      if (res.data.msg === 'ok') {
+        this.setData({ 
+          searchKeywordsHidden: true,
+          searchResultCount: res.data.retObj.length
+        });
+        if (res.data.retObj.length > 0) {
+          this.setData({
+            searchResult: res.data.retObj
+          });
+        }
+      }
+    }).catch(e => {
+      console.log(e);
+    });
   },
   clearSearchHistory: function () {
     this.setSearchHistory([]);
