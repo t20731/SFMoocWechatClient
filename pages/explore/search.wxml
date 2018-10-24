@@ -2,7 +2,7 @@
 <view class="page">
   <view class="inputSearch">
     <!--<form bindsubmit="formSubmit" bindreset="formReset">-->
-    <input placeholder="Search event" confirm-type="search" bindinput="handleInputChange" value="{{inputSearch}}" />
+    <input placeholder="Search event" confirm-type="search" bindinput="handleInputChange" value="{{searchValue}}" />
     <view class="close" hidden="{{isCloseHidden}}" bindtap="resetInputValue">X</view>
     <button formType="submit" class="searchSubmit" hidden="{{searchSubmitHidden}}" bindtap="searchEvents">搜索</button>
     <button formType="reset" class="searchReset" hidden="{{searchResetHidden}}" bindtap="cancelSearch">取消</button>
@@ -13,14 +13,14 @@
     <view class="hotsearch message">
       <view class="title">热门搜索</view>
       <view class="operation" bindtap="changeHotSearchKeys">换一批</view>
-      <text class="list" wx:for="{{switchFlag ? hotSearchKeys1 : hotSearchKeys2}}">{{item}}</text>
+      <text class="list" wx:for="{{switchFlag ? hotSearchKeys1 : hotSearchKeys2}}" bindtap="onHotKeywordPress" data-selected-keyword="{{item}}">{{item}}</text>
     </view>
 
     <!--search history-->
     <view class="history message" hidden="{{historyDataHidden}}">
       <view class="title">历史搜索</view>
       <view class="operation" bindtap="clearSearchHistory">清除</view>
-      <text class="list" bindtap="" wx:for="{{historyData}}">{{item}}</text>
+      <text class="list" bindtap="onHotKeywordPress" data-selected-keyword="{{item}}" wx:for="{{historyData}}">{{item}}</text>
     </view>
   </view>
 

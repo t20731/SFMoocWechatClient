@@ -17,7 +17,7 @@ const showToast = function (msg, icon, time) {
   wx.showToast({
     title: msg,
     icon: icon,
-    duration: time
+    duration: time || 1500
   })
 };
 

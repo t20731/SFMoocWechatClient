@@ -17,7 +17,6 @@ Page({
     hotSearchKeys2: ['React', 'VUE', 'Product', 'Mysql', 'UI design'],
     historyData: [],
     historyDataHidden: false,
-    inputSearch: "",
     searchKeywordsHidden: false,
     searchResult: []
   },
@@ -30,11 +29,15 @@ Page({
   },
   /*输入框输入后触发，用于联想搜索和切换取消确认*/
   handleInputChange: function (e) {
+    console.log('---bindinput triggered---');
+    this.updateSearchbarStatus(e.detail.value);
+  },
+  updateSearchbarStatus: function (searchValue) {
     this.setData({
       searchSubmitHidden: false,
       searchResetHidden: true,
       isCloseHidden: false,
-      searchValue: e.detail.value
+      searchValue: searchValue
     })
   },
   
@@ -42,8 +45,8 @@ Page({
     this.setData({
       searchSubmitHidden: true,
       searchResetHidden: false,
-      isClose: true,
-      inputSearch: "",
+      isCloseHidden: true,
+      searchValue: "",
       searchKeywordsHidden: false,
       searchResult: []
     })
@@ -65,7 +68,7 @@ Page({
     WXRequest.post('/session/list', {
       pageNum: 1,
       pageSize: 10,
-      keyWord: "Java"
+      keyWord: this.data.searchValue
     }).then(res => {
       if (res.data.msg === 'ok') {
         this.setData({ 
@@ -76,11 +79,19 @@ Page({
           this.setData({
             searchResult: res.data.retObj
           });
+        } else {
+          this.setData({
+            searchResult: []
+          });
         }
       }
     }).catch(e => {
       console.log(e);
     });
+  },
+  onHotKeywordPress: function (evt) {
+    let keyword = evt.target.dataset.selectedKeyword;
+    this.updateSearchbarStatus(keyword);
   },
   clearSearchHistory: function () {
     this.setSearchHistory([]);
