@@ -6,7 +6,7 @@
   padding: 10rpx;
   text-align: center;
   position:fixed;
-  z-index:99;
+  z-index: 6;
   top:0;
   left:0;
   width:100%;
@@ -39,6 +39,7 @@
   line-height: 80rpx;
   font-size: 16px; 
   white-space: nowrap; */
+
   /* position: fixed;
   top: 70rpx; 
   left: 0; 
@@ -82,4 +83,20 @@
   text-align: center;
   color: #71777D;
   margin-top: 45%;
+}
+
+.popup-container {
+  width: 60vw;
+	height: 80vh;
+  margin-top: -23vh;
+	background: #fff;
+}
+
+.popup-container button{
+  width: 120rpx;
+  color: #FFF;
+  background: #0076cb;
+  font-size: 28rpx;
+  float: right;
+  margin: 10rpx 10rpx 0 0;
 }

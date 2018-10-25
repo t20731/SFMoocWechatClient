@@ -3,6 +3,7 @@
     "pages/home/home",
     "pages/explore/explore",
     "pages/explore/eventDetail",
+    "pages/explore/search/search",
     "pages/session/newEvent",
     "pages/rankinglist/rankinglist",
     "pages/rankinglist/rankingdetail",
@@ -11,9 +12,7 @@
     "pages/uploadQuestion/uploadQuestion",
     "pages/uploadQuestion/editQuestion",
     "pages/exam/exam",
-    "pages/exam/examList",
-    "pages/explore/search/search",
-    "pages/explore/filter/filter"
+    "pages/exam/examList"
   ],
   "window": {
     "backgroundTextStyle": "light",

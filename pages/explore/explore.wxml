@@ -41,4 +41,18 @@
       </swiper-item>
     </swiper>
   </view>
+
+  <i-drawer mode="right" visible="{{showFilterPopup}}" mask-closable="{{false}}">
+    <view class="popup-container">
+        <view class="tagContainer">
+          <view class="title">Level</view>
+          <text class="label" wx:for="{{difficultyLevels}}">{{item.label}}</text>
+        </view>
+        <view class="tagContainer">
+          <view class="title">Order By</view>
+          <text class="label" wx:for="{{orderByFields}}">{{item.label}}</text>
+        </view>
+        <button bindtap="comfirmFilter">确定</button>
+    </view>
+</i-drawer>
 </view>

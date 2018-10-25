@@ -13,9 +13,12 @@ Page({
     // tabItems: CONST.EXPLORE_TOPIC_CATEGORY,
     currentTab: 2,
     scrollLeft: 0,
+    showFilterPopup: false,
     directions: [],
     sessions: [],
-    showNoData: 'false'
+    showNoData: 'false',
+    difficultyLevels: CONST.DIFFICULTY_LEVELS,
+    orderByFields: CONST.ORDER_BY
   },
 
   /**
@@ -88,9 +91,9 @@ Page({
   },
 
   goToFilterPage: function () {
-   wx.navigateTo({
-     url: 'filter/filter',
-   })
+    this.setData({
+      showFilterPopup: true
+    });
   },
  
   goDetail: function (e) {
@@ -98,6 +101,12 @@ Page({
     wx.navigateTo({
       url: 'eventDetail?id=' + id,
     })
+  },
+
+  comfirmFilter: function () {
+    this.setData({
+      showFilterPopup: false
+    });
   },
 
   /**

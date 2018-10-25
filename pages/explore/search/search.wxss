@@ -11,7 +11,6 @@
   align-items: center;
   position: relative;
 }
-
 .close {
   position: absolute;
   right: 85px;
@@ -23,7 +22,6 @@
   border-radius: 50%;
   background: grey;
 }
-
 .inputSearch input {
   width: 70%;
   height: 30px;
@@ -33,39 +31,25 @@
   font-size: 14px;
   margin-left: 5%;
 }
-
 .inputSearch button {
   font-size: 24rpx;
 }
-
-.message {
+.tagContainer {
   position: relative;
   margin-top: 15px;
 }
-
-.message .operation {
+.tagContainer .operation {
   position: absolute;
   right: 10px;
   top: 0;
   font-size: 12px;
   color: #0076cb;
 }
-
 .title {
   font-size: 16px;
   font-weight: 600;
   padding: 5px 10px;
 }
-
-.message .list {
-  display: inline-block;
-  font-size: 12px;
-  background: #e8e8ed;
-  border-radius: 5px;
-  padding: 5px 8px;
-  margin: 10px 0 0 10px;
-}
-
 .searchSubmit {
   background: #0076cb;
   color: #fff;
@@ -80,7 +64,6 @@
   padding: 0 15rpx;
   background: #FFF;
 }
-
 .result {
   height: 50px;
   line-height: 50px;
