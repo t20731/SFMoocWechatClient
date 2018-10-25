@@ -100,3 +100,8 @@
   float: right;
   margin: 10rpx 10rpx 0 0;
 }
+
+.selectedTag {
+  background-color: #0076cb !important;
+  color: #FFF;
+}

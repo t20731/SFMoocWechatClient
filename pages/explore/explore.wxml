@@ -46,11 +46,11 @@
     <view class="popup-container">
         <view class="tagContainer">
           <view class="title">Level</view>
-          <text class="label" wx:for="{{difficultyLevels}}">{{item.label}}</text>
+          <text data-tagValue="{{item.level}}" data-type="level" class="label {{selectedLevel==item.level?'selectedTag' : ''}}" wx:for="{{difficultyLevels}}" bindtap="onTagChange">{{item.label}}</text>
         </view>
         <view class="tagContainer">
           <view class="title">Order By</view>
-          <text class="label" wx:for="{{orderByFields}}">{{item.label}}</text>
+          <text class="label {{selectedOrder==item.field?'selectedTag' : ''}}" data-tagValue="{{item.field}}" data-type="order" wx:for="{{orderByFields}}" bindtap="onTagChange">{{item.label}}</text>
         </view>
         <button bindtap="comfirmFilter">确定</button>
     </view>

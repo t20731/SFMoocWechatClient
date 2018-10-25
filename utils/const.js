@@ -9,12 +9,12 @@ export const EXPLORE_TOPIC_CATEGORY = [
 ]
 
 export const DIFFICULTY_LEVELS = [
-  { label: 'Easy', level: '0'},
-  { label: 'Medium', level: '1'},
-  { label: 'Hard', level: '2'}
+  { label: 'Easy', level: 0},
+  { label: 'Medium', level: 1},
+  { label: 'Hard', level: 2}
 ]
 
 export const ORDER_BY = [
-  { label: 'Hot', field: 'number' },
+  { label: 'Hot', field: 'total_members' },
   { label: 'Date', field: 'lastModifiedDate' }
 ]

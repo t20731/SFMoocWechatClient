@@ -18,7 +18,9 @@ Page({
     sessions: [],
     showNoData: 'false',
     difficultyLevels: CONST.DIFFICULTY_LEVELS,
-    orderByFields: CONST.ORDER_BY
+    orderByFields: CONST.ORDER_BY,
+    selectedLevel: -1,
+    selectedOrder: ''
   },
 
   /**
@@ -71,8 +73,7 @@ Page({
     }).then(res => {
       if (res.data.msg === 'ok') {
         console.log(res.data);
-        let itemsHeight = res.data.retObj.length * 200;
-        let swiperHeight = itemsHeight > this.data.listVisibleHeight  ? itemsHeight : this.data.listVisibleHeight;
+        let swiperHeight = this.getCoumptedSwiperHeight(res.data.retObj.length);
         this.setData({
           sessions: res.data.retObj,
           swiperHeight: swiperHeight,
@@ -83,7 +84,11 @@ Page({
       console.log(e)
     });
   },
-
+  getCoumptedSwiperHeight: function (count) {
+    let itemsHeight = count * 200;
+    let swiperHeight = itemsHeight > this.data.listVisibleHeight  ? itemsHeight : this.data.listVisibleHeight;
+    return swiperHeight;
+  },
   goToSearchPage: function (evt) {
     wx.navigateTo({
       url: 'search/search'
@@ -103,9 +108,44 @@ Page({
     })
   },
 
+  onTagChange: function (evt) {
+    let filterType = evt.target.dataset.type;
+    let newValue = evt.target.dataset.tagvalue;
+    let dataPropertyName;
+    if (filterType === 'level') {
+      dataPropertyName = 'selectedLevel';
+    } else {
+      dataPropertyName = 'selectedOrder';
+    }
+    if (newValue !== this.data[dataPropertyName]) {
+      this.setData({
+        [dataPropertyName]: newValue
+      });
+    }
+  },
+
   comfirmFilter: function () {
     this.setData({
       showFilterPopup: false
+    });
+    WXRequest.post('/session/list', {
+      "pageNum": 1,
+      "pageSize": 10,
+      "directionId": this.data.currentTab,
+      "difficulty": this.data.selectedLevel,
+      "orderField": this.data.selectedOrder
+    }).then(res => {
+      console.log(res);
+      if (res.data.msg === 'ok') {
+        let swiperHeight = this.getCoumptedSwiperHeight(res.data.retObj.length);
+        this.setData({
+          sessions: res.data.retObj,
+          swiperHeight: swiperHeight,
+          showNoData: res.data.retObj.length === 0
+        });
+      }
+    }).catch(err => {
+      console.log(err);
     });
   },
 
