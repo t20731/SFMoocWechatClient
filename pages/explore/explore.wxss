@@ -93,12 +93,12 @@
 }
 
 .popup-container button{
-  width: 120rpx;
+  width: 160rpx;
   color: #FFF;
   background: #0076cb;
   font-size: 28rpx;
   float: right;
-  margin: 10rpx 10rpx 0 0;
+  margin: 40rpx 10rpx 0 0;
 }
 
 .selectedTag {

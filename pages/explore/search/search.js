@@ -1,4 +1,4 @@
-// pages/explore/search.js
+// pages/explore/search/search.js
 import WXRequest from '../../../utils/wxRequest';
 import Util from '../../../utils/util';
 

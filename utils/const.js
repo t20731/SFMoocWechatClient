@@ -13,8 +13,7 @@ export const DIFFICULTY_LEVELS = [
   { label: 'Medium', level: 1},
   { label: 'Hard', level: 2}
 ]
-
 export const ORDER_BY = [
   { label: 'Hot', field: 'total_members' },
-  { label: 'Date', field: 'lastModifiedDate' }
+  { label: 'Created time', field: 'created_date' }
 ]

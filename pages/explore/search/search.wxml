@@ -1,4 +1,4 @@
-<!--pages/explore/search.wxml-->
+<!--pages/explore/search/search.wxml-->
 <view class="page">
   <view class="inputSearch">
     <!--<form bindsubmit="formSubmit" bindreset="formReset">-->

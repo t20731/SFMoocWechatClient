@@ -29,10 +29,10 @@
             </view>
             <view class="speaker">{{item.owner.nickName}}</view>
             <view class="location">
-            {{item.location.name}}
+            {{item.startDate}} | {{item.location.name}}
             <view class="count">
               <image src="../../images/mini_people.png"></image>
-              <text>15</text>
+              <text>{{item.enrollments}}</text>
             </view>
             </view>
           </view>
@@ -42,7 +42,7 @@
     </swiper>
   </view>
 
-  <i-drawer mode="right" visible="{{showFilterPopup}}" mask-closable="{{false}}">
+  <i-drawer mode="right" visible="{{showFilterPopup}}" bind:close="closeFilterPopup">
     <view class="popup-container">
         <view class="tagContainer">
           <view class="title">Level</view>
@@ -52,7 +52,7 @@
           <view class="title">Order By</view>
           <text class="label {{selectedOrder==item.field?'selectedTag' : ''}}" data-tagValue="{{item.field}}" data-type="order" wx:for="{{orderByFields}}" bindtap="onTagChange">{{item.label}}</text>
         </view>
-        <button bindtap="comfirmFilter">确定</button>
+        <button bindtap="comfirmFilter">Confirm</button>
     </view>
 </i-drawer>
 </view>
