@@ -20,7 +20,7 @@ Page({
     difficultyLevels: CONST.DIFFICULTY_LEVELS,
     orderByFields: CONST.ORDER_BY,
     selectedLevel: -1,
-    selectedOrder: ''
+    selectedOrder: null
   },
 
   /**
@@ -128,6 +128,9 @@ Page({
     this.setData({
       showFilterPopup: false
     });
+    if (this.data.selectedLevel < 0 && !this.data.selectedOrder) {
+      return;
+    }
     WXRequest.post('/session/list', {
       "pageNum": 1,
       "pageSize": 10,
@@ -141,7 +144,9 @@ Page({
         this.setData({
           sessions: res.data.retObj,
           swiperHeight: swiperHeight,
-          showNoData: res.data.retObj.length === 0
+          showNoData: res.data.retObj.length === 0,
+          selectedLevel: -1,
+          selectedOrder: ''
         });
       }
     }).catch(err => {
@@ -150,7 +155,9 @@ Page({
   },
   closeFilterPopup: function () {
     this.setData({
-      showFilterPopup: false
+      showFilterPopup: false,
+      selectedLevel: -1,
+      selectedOrder: ''
     });
   },
 
