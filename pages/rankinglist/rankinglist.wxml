@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="page">
   <view class="page__bd">
-    <navigator url="rankingdetail?userId={{myRanking.userId}}" wx:if="{{!normalUser}}" class="weui-cell myRanking">
+    <navigator url="rankingdetail?userId={{myRanking.userId}}" class="weui-cell myRanking">
         <view class="firstCol">{{myRanking.rank}}</view>
         <image src="{{myRanking.avatarUrl}}" class="userinfo-avatar"></image>
         <view class="weui-cell__bd">{{myRanking.nickname}}</view>
