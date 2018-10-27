@@ -2,11 +2,9 @@
 import Util from 'utils/util';
 App({
   globalData: {
-     //host: 'http://localhost:8090',
-     //wshost:'ws://localhost:8090',
+    // host: 'http://localhost:8090',
+    // wshost:'ws://localhost:8090',
      host: 'https://sfmooc-api.techtuesday.club',
-     wshost: 'wss://sfmooc-api.techtuesday.club',
-     isSessionOwner: false,
      openId:''
   },
   data: {

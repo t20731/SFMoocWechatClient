@@ -1,7 +1,9 @@
 // pages/home/home.js
 import Util from '../../utils/util';
 import WCache from '../../utils/wcache';
+import WXRequest from '../../utils/wxRequest';
 const app = getApp();
+var sliderWidth = 96;
 
 Page({
 
@@ -14,7 +16,11 @@ Page({
     isSessionOwner: false,
     isCheckinModalHidden: true,
     isGenerateCodeModal: true,
-    checkinCode: ''
+    checkinCode: '',
+    tabs: ["Sharing", "Learning"],
+    activeIndex: 0,
+    sliderOffset: 0,
+    sliderLeft: 0
   },
 
   /**
@@ -27,7 +33,6 @@ Page({
       app.openIdCallback = openId => {
         console.log('home::openIdCallback:' + openId)
         if (openId) {
-          that.setSessionOwner(openId)
         }
       }
     }
@@ -38,6 +43,22 @@ Page({
         hasUserInfo: true
       })
     }
+    var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
+          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+        });
+      }
+    });
+  },
+
+  tabClick: function (e) {
+    this.setData({
+      sliderOffset: e.currentTarget.offsetLeft,
+      activeIndex: e.currentTarget.id
+    });
   },
 
   getUserInfo: function (e) {
@@ -67,32 +88,13 @@ Page({
             hasUserInfo: true
           })
           wx.setStorageSync('userInfo', user);
-          that.setUserStatus(user);        
+          that.setUserStatus(user);   
         },
         fail: function (e) {
             Util.showToast('登录失败', 'none', 1500);
         }
       })
     }
-  },
-
-  setUserStatus: function (user) {
-    var that = this;
-    wx.request({
-      url: app.globalData.host + '/user/' + app.globalData.openId,
-      method: 'GET',
-      success: function (res) {
-        console.log(res.data);
-        if (res.data.msg === "ok") {
-          var ret = res.data.retObj;
-          if(user.status !== ret.status){
-            user.status = ret.status;
-            console.log('set user status as ' + user.status);
-            wx.setStorageSync('userInfo', user);
-          }
-        }
-      }
-    });
   },
 
   generateCode: function (event) {
@@ -295,32 +297,6 @@ Page({
     }
   },
 
-  setSessionOwner: function (openid) {
-    var currentDate = Util.getCurrentDate();
-    console.log('currentDate:' + currentDate);
-    var that = this;
-    wx.request({
-      url: app.globalData.host + '/session/' + currentDate,
-      method: 'GET',
-      success: function (res) {
-        console.log(res.data);
-        if (res.data.msg == "ok") {
-          var sessionOwner = res.data.retObj.owner;
-          if (openid == sessionOwner) {
-            app.globalData.isSessionOwner = true
-          } else {
-            app.globalData.isSessionOwner = false;
-          }
-        } else {
-          app.globalData.isSessionOwner = false;
-        }
-        that.setData({
-          isSessionOwner: app.globalData.isSessionOwner
-        })
-      }
-    })
-  },
-
   logout: function () {
     var userInfo = wx.getStorageSync('userInfo');
     if (!userInfo) {
@@ -353,12 +329,9 @@ Page({
    */
   onShow: function () {
     this.setData({ checkinCode: '' });
-    console.log('home::onShow::isSessionOwner:' + app.globalData.isSessionOwner)
     if(app.globalData.openId){
-      this.setSessionOwner(app.globalData.openId);
       var userInfo = wx.getStorageSync('userInfo');
       if (userInfo) {
-        this.setUserStatus(userInfo);
       }
     }
   },
