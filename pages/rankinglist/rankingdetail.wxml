@@ -25,7 +25,7 @@
                   <view class="weui-cells weui-cells_in-small-appmsg">
                     <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" wx:if="{{item.checkin > 0}}">
                       <view class="weui-cell__bd weui-cell_primary">
-                        <view>Check In</view>
+                        <view>CheckIn</view>
                       </view>
                       <view class="weui-cell__ft">+{{item.checkin}}</view>
                     </view>

@@ -48,7 +48,6 @@
 .weui-tab__content{
     padding-top: 10px;
     background:#f6f7f8;
-    /* text-align: center; */
     border: none;
 }
 
