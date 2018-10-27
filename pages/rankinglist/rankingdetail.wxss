@@ -3,3 +3,55 @@
   color: #FDBC40;
   font-size: 1.0rem;
 }
+
+.userinfo{
+  position: relative;
+  width: 100%;
+  height: 300rpx;
+  background: #FFF;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* .userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 30rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #000000;
+}
+
+.page__bd{
+  background: #FFF;
+}
+
+.weui-navbar {
+  border-top: 1rpx solid #ccc;
+  border-bottom: none;
+}
+
+.weui-tab__panel{
+  border: none;
+}
+
+.weui-tab__content{
+    padding-top: 10px;
+    background:#f6f7f8;
+    /* text-align: center; */
+    border: none;
+}
+
+.weui-navbar__slider {
+  width: 6em;
+}
