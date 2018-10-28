@@ -22,6 +22,25 @@
       <view class="weui-tab__panel">
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
           <!-- Learning -->
+          <view id="{{item.id}}" bindtap='goLearnSession' class="eventItem" wx:for="{{learnSessions}}" wx:key="id">
+            <view class='leftContent'>
+              <image src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg">
+              </image>
+            </view>
+            <view class="rightContent">
+              <view class="title">
+              <text>{{item.topic}}</text>
+              </view>
+              <view class="speaker">{{item.owner.nickName}}</view>
+              <view class="location">
+              {{item.startDate}} | {{item.location.name}}
+              <view class="count">
+                <image src="../../images/mini_people.png"></image>
+                <text>{{item.enrollments}}</text>
+              </view>
+              </view>
+            </view>
+          </view>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
           <!-- Sharing -->
@@ -44,7 +63,7 @@
               </view>
             </view>
           </view>
-            <view bindtap="onCreateSession" class="session-create-btn"></view>
+          <view bindtap="onCreateSession" class="session-create-btn"></view>
         </view>
       </view>
     </view>
