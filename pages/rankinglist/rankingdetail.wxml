@@ -25,11 +25,11 @@
         Team: Platform Rule Engine
         </view>
         <view class="weui-tab__content capabilitySubTab" hidden="{{activeIndex != 2}}">   
-          <view class="skillItem" wx:for="{{skills}}" wx:key="index">
+          <view class="skillItem" wx:for="{{skillPoints}}" wx:key="index">
             <view class="skillTag">
-              <text>{{item}} . {{6}}</text>
+              <text>{{item.name}} . {{item.points}}</text>
             </view>
-            <i-icon type="add" size="28" color="#0076cb" custom="sfAdd" />
+            <i-icon type="add" size="28" color="#0076cb" custom="sfAdd" data-skillIndex="{{index}}" bindtap="addSkillPoints"/>
           </view>
         </view>
       </view>

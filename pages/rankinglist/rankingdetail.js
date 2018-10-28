@@ -4,6 +4,36 @@ import wxCharts from '../../utils/wxcharts.js';
 const app = getApp();
 let sliderWidth = 96;
 let radarChart = null;
+let skillPoints = [
+  {
+    name: 'Java',
+    points: 19
+  },
+  {
+    name: 'Database',
+    points: 10
+  },
+  {
+    name: 'Javascript',
+    points: 16
+  },
+  {
+    name: 'Testing',
+    points: 12
+  },
+  {
+    name: 'Database',
+    points: 10
+  },
+  {
+    name: 'Linux',
+    points: 8
+  },
+  {
+    name: 'UI Design',
+    points: 6
+  }
+]
 
 Page({
 
@@ -15,7 +45,8 @@ Page({
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
-    skills: ['Java', 'DB', 'Javascript', 'Testing', 'Linux', 'UI design'] 
+    skills: ['Java', 'DB', 'Javascript', 'Testing', 'Linux', 'UI design'],
+    skillPoints: skillPoints
   },
 
   onLoad: function (options) {
@@ -51,6 +82,13 @@ Page({
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
+    });
+  },
+  addSkillPoints: function (evt) {
+    let index = evt.target.dataset.skillindex;
+    this.data.skillPoints[index].points += 1;
+    this.setData({
+      skillPoints: this.data.skillPoints
     });
   },
   touchHandler: function (e) {

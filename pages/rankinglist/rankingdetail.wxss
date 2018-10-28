@@ -63,7 +63,7 @@
 }
 .skillItem {
   display: flex;
-  height: 80rpx;
+  height: 100rpx;
 }
 .skillItem .skillTag {
   flex: 1;
