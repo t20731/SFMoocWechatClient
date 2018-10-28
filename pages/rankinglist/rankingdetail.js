@@ -1,6 +1,9 @@
 import Util from '../../utils/util';
+import wxCharts from '../../utils/wxcharts.js';
+
 const app = getApp();
-var sliderWidth = 96;
+let sliderWidth = 96;
+let radarChart = null;
 
 Page({
 
@@ -8,7 +11,7 @@ Page({
     initial: 0,
     userInfo: {},
     details: [],
-    tabs: ["Data", "Level"],
+    tabs: ['Capability', 'Introdution', 'Recognition'],
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0
@@ -16,8 +19,8 @@ Page({
 
   onLoad: function (options) {
     console.log('userId: ' + options.userId);
-    var userId = options.userId;
-    var that = this;
+    let userId = options.userId;
+    let that = this;
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
@@ -49,4 +52,33 @@ Page({
       activeIndex: e.currentTarget.id
     });
   },
+  touchHandler: function (e) {
+    console.log(radarChart.getCurrentDataIndex(e));
+  },
+  onReady: function (e) {
+    let windowWidth = 320;
+    try {
+      let res = wx.getSystemInfoSync();
+      windowWidth = res.windowWidth;
+    } catch (e) {
+      console.error('getSystemInfoSync failed!');
+    }
+
+    radarChart = new wxCharts({
+      canvasId: 'radarCanvas',
+      type: 'radar',
+      categories: ['Java', 'DB', 'Javascript', 'Testing', 'Linux', 'UI design'],
+      series: [{
+        name: 'Total-70',
+        data: [150, 110, 225, 165, 87, 122]
+      }],
+      width: windowWidth,
+      height: 300,
+      extra: {
+        radar: {
+          max: 300
+        }
+      }
+    });
+  }
 })

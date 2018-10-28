@@ -54,3 +54,10 @@
 .weui-navbar__slider {
   width: 6em;
 }
+.radarContaniner {
+  background: #FFF;
+}
+.radarCanvas {
+  width: 400px;
+  height: 300px;
+}

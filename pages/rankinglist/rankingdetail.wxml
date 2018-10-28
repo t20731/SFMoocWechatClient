@@ -17,37 +17,12 @@
       </view>
       <view class="weui-tab__panel">
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-          <view class="weui-panel weui-panel_access" wx:for="{{details}}" wx:key="date">
-            <view class="weui-panel">
-              <view class="weui-panel__hd">{{item.date}}</view>
-              <view class="weui-panel__bd">
-                <view class="weui-media-box weui-media-box_small-appmsg">
-                  <view class="weui-cells weui-cells_in-small-appmsg">
-                    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" wx:if="{{item.checkin > 0}}">
-                      <view class="weui-cell__bd weui-cell_primary">
-                        <view>CheckIn</view>
-                      </view>
-                      <view class="weui-cell__ft">+{{item.checkin}}</view>
-                    </view>
-                    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" wx:if="{{item.host > 0}}">
-                      <view class="weui-cell__bd weui-cell_primary">
-                        <view>Sharing</view>
-                      </view>
-                      <view class="weui-cell__ft">+{{item.host}}</view>
-                    </view>
-                    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" wx:if="{{item.exam > 0}}">
-                      <view class="weui-cell__bd weui-cell_primary">
-                        <view>Exam</view>
-                      </view>
-                      <view class="weui-cell__ft">+{{item.exam}}</view>
-                    </view>
-                  </view>
-                </view>
-              </view>
+          <view class="radarContaniner">
+            <canvas canvas-id="radarCanvas" class="radarCanvas" bindtouchstart="touchHandler"></canvas>
             </view>
-          </view>
         </view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">选项二的内容</view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">选二的内容</view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 2}}">estimate</view>
       </view>
     </view>
   </view>

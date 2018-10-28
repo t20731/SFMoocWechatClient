@@ -134,3 +134,10 @@ page {
   padding: 10rpx 16rpx;
   margin: 20rpx 0 0 20rpx;
 }
+
+.weui-navbar__item.weui-bar__item_on {
+  color: #0076cb;
+}
+.weui-navbar__slider {
+  background-color: #0076cb;
+}
