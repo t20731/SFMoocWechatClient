@@ -1,6 +1,7 @@
 import WXRequest from '../../utils/wxRequest';
 import Util from '../../utils/util';
 
+const ENROLL_NUMBER = 1;
 Page({
   data: { // 参与页面渲染的数据
     isOwner: false,
@@ -11,18 +12,7 @@ Page({
     startBtnDisabled: false,
     quizBtnVal: 'Quiz Management',
     quizBtnDisabled: false,
-    eventDetail: {
-      owner: {
-        id: '001',
-        nickname: 'Mickey White',
-        avatarUrl: 'https://developers.weixin.qq.com/miniprogram/dev/image/cat/0.jpg?t=18101919'
-      },
-      topic: 'Event Detail',
-      description: 'Bacon ipsum dolor amet shankle buffalo salami biltong, meatloaf pork strip steak meatball ham sausage chicken leberkas. Corned beef capicola picanha pork loin fatback hamburger. Leberkas short ribs pork chuck. Beef boudin turkey capicola, shankle ham hock frankfurter leberkas spare ribs shoulder ground round flank ham sirloin.',
-      startDate: '2018-10-21 15:00',
-      endDate: '2018-10-21 16:00',
-      location: {id: null, name: 'PVG 03 1C'}
-    }
+    eventDetail: null
   },
 
   onLoad: function (e) {
@@ -40,7 +30,6 @@ Page({
         let eventDetail = retObj.session;
 
         let isOwner = this._isOwner(eventDetail.owner.id);
-
         this.setData({
           isOwner: isOwner,
           eventDetail: eventDetail
@@ -48,18 +37,26 @@ Page({
         if (userId && retObj.userRegistered) {
           this._markRegistered();
         }
+        let checkInCode = eventDetail.checkInCode;
+        if (checkInCode) {
+          this._markStarted(checkInCode);
+        }
       }
     }).catch(e => {
       console.log(e);
     });
   },
   
-  _isOwner (ownerId) {
+  _isOwner(ownerId) {
     let userId = Util.getUserId();
     if (ownerId === userId) {
       return true;
     }
     return false;
+  },
+
+  _canStart(enrollments) {
+    return enrollments >= ENROLL_NUMBER;
   },
 
   _checkGuest: function (userId) {
@@ -111,6 +108,34 @@ Page({
     });
     this.setData({
       loading: !this.data.loading,
+    });
+  },
+
+  onStartSession(event) {
+    let userId = Util.getUserId();
+    let canStart = this._canStart(this.data.eventDetail.enrollments);
+    if (canStart) {
+      WXRequest.post('/session/start', {
+        sessionId: this.data.eventDetail.id,
+        userId: userId
+      }).then(res => {
+        if (res.data.msg === 'ok') {
+          console.log(res.data);
+          let checkInCode = res.data.retObj.CheckInCode;
+          this._markStarted(checkInCode);
+        }
+      }).catch(e => {
+        console.log(e);
+      });
+    } else {
+      Util.showToast("Enrollments has not reached to the threshold.", 'none', 3000);
+    }
+  },
+
+  _markStarted(checkInCode) {
+    this.setData({
+      startBtnVal: `Started (${checkInCode})`,
+      startBtnDisabled: true,
     });
   },
 

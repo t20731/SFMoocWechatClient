@@ -5,7 +5,7 @@
     <view class="flex-item">
     <view class="event-detail-author">Presenter</view>
       <image class="event-detail-avatar" mode="scaleToFill" src="{{eventDetail.owner.avatarUrl}}"></image>
-      <view class="event-detail-nickname">{{eventDetail.owner.nickname}}</view>
+      <view class="event-detail-nickname">{{eventDetail.owner.nickName}}</view>
     </view>
     <view class="flex-item event-detail-duration">
       <text>When: </text>
