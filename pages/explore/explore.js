@@ -104,7 +104,7 @@ Page({
   goDetail: function (e) {
     let id = e.currentTarget.id;
     wx.navigateTo({
-      url: 'eventDetail?id=' + id,
+      url: '../session/eventDetail?id=' + id,
     })
   },
 

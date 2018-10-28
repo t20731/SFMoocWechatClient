@@ -64,7 +64,9 @@ Page({
     });
 
     let userId = Util.getUserId();
-    this._loadOwnedSessions(userId);
+    if (this.data.ownedSessions.length <= 0) {
+      this._loadOwnedSessions(userId);
+    }
   },
 
   _loadOwnedSessions(userId) {
@@ -82,6 +84,13 @@ Page({
     }).catch(e => {
       console.log(e);
     });
+  },
+
+  goOwnedSession(event) {
+    let id = event.currentTarget.id;
+    wx.navigateTo({
+      url: '../session/eventDetail?id=' + id,
+    })
   },
 
   getUserInfo: function (e) {

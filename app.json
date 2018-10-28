@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/explore/explore",
-    "pages/explore/eventDetail",
     "pages/explore/search/search",
     "pages/home/home",
+    "pages/session/eventDetail",
     "pages/session/newEvent",
     "pages/rankinglist/rankinglist",
     "pages/rankinglist/rankingdetail",

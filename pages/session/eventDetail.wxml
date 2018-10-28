@@ -24,8 +24,19 @@
     <view class="flex-item event-detail-desc">
     {{eventDetail.description}}
     </view>
-    <view class="flex-item">
-    <button bindtap='onRegister' type="primary" disabled="{{disabled}}" loading="{{loading}}">{{registerBtnVal}}</button>
-    </view>
+    
+    <block wx:if="{{isOwner}}">
+      <view class="flex-item" wx:if="{{isOwner}}">
+        <button bindtap='onStartSession' class="session-start-btn" type="primary" disabled="{{startBtnDisabled}}" loading="{{loading}}">{{startBtnVal}}</button>
+      </view>
+      <view class="flex-item" wx:if="{{isOwner}}">
+        <button bindtap='onManageQuiz' class="session-quiz-btn" type="primary" disabled="{{quizBtnDisabled}}" loading="{{loading}}">{{quizBtnVal}}</button>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="flex-item">
+        <button bindtap='onRegister' type="primary" disabled="{{disabled}}" loading="{{loading}}">{{registerBtnVal}}</button>
+        </view>
+    </block>
   </view>
 </view>

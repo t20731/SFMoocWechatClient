@@ -25,7 +25,7 @@
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
           <!-- Sharing -->
-          <view id="{{item.id}}" bindtap='goDetail' class="eventItem" wx:for="{{ownedSessions}}" wx:key="id">
+          <view id="{{item.id}}" bindtap='goOwnedSession' class="eventItem" wx:for="{{ownedSessions}}" wx:key="id">
             <view class='leftContent'>
               <image src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg">
               </image>

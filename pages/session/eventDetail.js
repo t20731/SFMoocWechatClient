@@ -3,9 +3,14 @@ import Util from '../../utils/util';
 
 Page({
   data: { // 参与页面渲染的数据
+    isOwner: false,
     disabled: false,
     loading: false,
     registerBtnVal: 'Register',
+    startBtnVal: 'Start Session',
+    startBtnDisabled: false,
+    quizBtnVal: 'Quiz Management',
+    quizBtnDisabled: false,
     eventDetail: {
       owner: {
         id: '001',
@@ -33,7 +38,11 @@ Page({
         console.log(res.data);
         let retObj = res.data.retObj;
         let eventDetail = retObj.session;
+
+        let isOwner = this._isOwner(eventDetail.owner.id);
+
         this.setData({
+          isOwner: isOwner,
           eventDetail: eventDetail
         });
         if (userId && retObj.userRegistered) {
@@ -43,6 +52,14 @@ Page({
     }).catch(e => {
       console.log(e);
     });
+  },
+  
+  _isOwner (ownerId) {
+    let userId = Util.getUserId();
+    if (ownerId === userId) {
+      return true;
+    }
+    return false;
   },
 
   _checkGuest: function (userId) {
