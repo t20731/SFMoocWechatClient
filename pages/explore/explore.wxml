@@ -1,4 +1,6 @@
 <!--pages/explore/explore.wxml-->
+<wxs src="../../utils/formatter.wxs" module="formatter">
+</wxs>
 <view class="page">
   <view class="exploreHeader">
     <view class="searchInput">
@@ -29,7 +31,7 @@
             </view>
             <view class="speaker">{{item.owner.nickName}}</view>
             <view class="location">
-            {{item.startDate}} | {{item.location.name}}
+            {{formatter.getDate(item.createdDate)}} | {{item.location.name}}
             <view class="count">
               <image src="../../images/mini_people.png"></image>
               <text>{{item.enrollments}}</text>
