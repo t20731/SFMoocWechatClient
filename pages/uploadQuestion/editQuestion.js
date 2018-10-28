@@ -21,7 +21,8 @@ Page({
     optionValues: ['A', 'B'],
     correctOption: {
       index: 0
-    }
+    },
+    sessionId: 0
   },
 
   /**
@@ -29,6 +30,10 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
+    that.setData({
+      sessionId: options.sessionId
+    });
+    console.log('sessionId: ' + this.data.sessionId);
     let quesInfoStr = options.quesInfoStr;
     if (quesInfoStr) {
       let questionObj = JSON.parse(quesInfoStr);
@@ -49,6 +54,7 @@ Page({
 
       this.setData({
         id: questionObj.id,
+        sessionId: questionObj.sessionId,
         title: questionObj.content,
         options: options,
         optionValues: this.data.optionValues
@@ -120,6 +126,7 @@ Page({
         url: app.globalData.host + '/question/edit',
         method: 'post',
         data: { 
+          sessionId: this.data.sessionId,
           id: this.data.id,
           owner: app.globalData.openId,
           content: evt.detail.value.title,

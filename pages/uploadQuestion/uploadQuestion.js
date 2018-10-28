@@ -8,21 +8,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    sessionId: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('uploadQuestion:onLoad:openid:' + app.globalData.openId)
+    console.log('uploadQuestion:onLoad:openid:' + app.globalData.openId);
+    this.setData({
+      sessionId: options.sessionId
+    });
     this.loadQuestions();
   },
 
   loadQuestions: function(){
     let that = this;
     wx.request({
-      url: app.globalData.host + '/question/load/' + app.globalData.openId,
+      url: app.globalData.host + '/question/load/' + that.data.sessionId,
       method: 'GET',
       success: function (res) {
         if (res.data.msg === 'ok') {
@@ -33,11 +36,12 @@ Page({
   },
 
   addQuestion: function () {
+    var that = this;
     if (this.data.questions.length >=3) {
       Util.showToast('最多只能添加3道题呢', 'none', 2000);
     } else {
       wx.navigateTo({
-        url: 'editQuestion',
+        url: 'editQuestion?sessionId=' + that.data.sessionId,
       })
     }
   },
@@ -66,7 +70,7 @@ Page({
     let that = this;
     let quesId = this.data.questions[quesIndex].id;
     wx.request({
-      url: app.globalData.host + '/question/delete/' + app.globalData.openId + '/' + quesId,
+      url: app.globalData.host + '/question/delete/' + quesId,
       method: 'DELETE',
       success: function (res) {
         if (res.data.msg === 'ok') {
@@ -85,32 +89,26 @@ Page({
   
   publishQuestions: function () {
     var that = this;
-    if (app.globalData.isSessionOwner) {
-      if (this.data.questions.length != 3) {
-        Util.showToast('凑够3道题才能发布哦', 'none', 2000);
-      } else {
-        wx.request({
-          url: app.globalData.host + '/question/publish/' + app.globalData.openId,
-          method: 'GET',
-          success: function (res) {
-            if (res.data.msg === 'ok') {
-              Util.showToast('发布成功', 'success', 2000);
-              that.loadQuestions();
-            } else if (res.data.msg === 'not_authorized') {
-              Util.showToast('当前主讲人才能发布哦', 'none', 2000);
-            } else if (res.data.msg === 'not_today') {
-              Util.showToast('周二才能发布哦', 'none', 2000);
-            } else if (res.data.msg === 'published') {
-              Util.showToast('已发布，请勿重复发布', 'none', 2000);
-            }
-          },
-          fail: function (error) {
-            console.log(error);
-          }
-        })
-      }
+    if (this.data.questions.length != 3) {
+      Util.showToast('凑够3道题才能发布哦', 'none', 2000);
     } else {
-      Util.showToast('当前主讲人才能发布哦', 'none', 2000);
+      wx.request({
+        url: app.globalData.host + '/question/publish/' + that.data.sessionId,
+        method: 'GET',
+        success: function (res) {
+          if (res.data.msg === 'ok') {
+            Util.showToast('发布成功', 'success', 2000);
+            that.loadQuestions();
+          } else if (res.data.msg === 'not_authorized') {
+            Util.showToast('当前主讲人才能发布哦', 'none', 2000);
+          } else if (res.data.msg === 'published') {
+            Util.showToast('已发布，请勿重复发布', 'none', 2000);
+          }
+        },
+        fail: function (error) {
+          console.log(error);
+        }
+      })
     }
   },
 
