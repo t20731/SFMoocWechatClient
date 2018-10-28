@@ -59,6 +59,9 @@
   margin:0 36rpx;
   display: inline-block;
 }
+.tabItem:first-child {
+  margin-left: 10rpx;
+}
 .tabItem.active{
   color: #0076cb;
   position: relative;

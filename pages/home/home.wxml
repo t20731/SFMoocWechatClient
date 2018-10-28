@@ -20,8 +20,31 @@
         <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
       </view>
       <view class="weui-tab__panel">
-        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">选项一的内容 </view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">选项二的内容</view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+          <!-- Learning -->
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+          <!-- Sharing -->
+          <view id="{{item.id}}" bindtap='goDetail' class="eventItem" wx:for="{{ownedSessions}}" wx:key="id">
+            <view class='leftContent'>
+              <image src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg">
+              </image>
+            </view>
+            <view class="rightContent">
+              <view class="title">
+              <text>{{item.topic}}</text>
+              </view>
+              <view class="speaker">{{item.owner.nickName}}</view>
+              <view class="location">
+              {{item.startDate}} | {{item.location.name}}
+              <view class="count">
+                <image src="../../images/mini_people.png"></image>
+                <text>{{item.enrollments}}</text>
+              </view>
+              </view>
+            </view>
+          </view>
+        </view>
       </view>
     </view>
   </view>

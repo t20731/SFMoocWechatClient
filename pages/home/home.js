@@ -17,10 +17,11 @@ Page({
     isCheckinModalHidden: true,
     isGenerateCodeModal: true,
     checkinCode: '',
-    tabs: ["Sharing", "Learning"],
+    tabs: ["Learning", "Sharing"],
     activeIndex: 0,
     sliderOffset: 0,
-    sliderLeft: 0
+    sliderLeft: 0,
+    ownedSessions: []
   },
 
   /**
@@ -52,12 +53,34 @@ Page({
         });
       }
     });
+
+    // this._loadOwnedSessions(userInfo.id);
   },
 
   tabClick: function (e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
+    });
+
+    let userId = Util.getUserId();
+    this._loadOwnedSessions(userId);
+  },
+
+  _loadOwnedSessions(userId) {
+    WXRequest.post('/session/list', {
+      pageNum: 1,
+      pageSize: 10,
+      ownerId: userId
+    }).then(res => {
+      if (res.data.msg === 'ok') {
+        console.log(res.data);
+        this.setData({
+          ownedSessions: res.data.retObj
+        });
+      }
+    }).catch(e => {
+      console.log(e);
     });
   },
 
