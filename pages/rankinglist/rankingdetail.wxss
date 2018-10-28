@@ -54,10 +54,23 @@
 .weui-navbar__slider {
   width: 6em;
 }
-.radarContaniner {
-  background: #FFF;
-}
 .radarCanvas {
   width: 400px;
   height: 300px;
+}
+.capabilitySubTab{
+  padding: 20rpx;
+}
+.skillItem {
+  display: flex;
+  height: 80rpx;
+}
+.skillItem .skillTag {
+  flex: 1;
+}
+.skillItem text {
+  font-size: 28rpx;
+  background: #e8e8ed;
+  border-radius: 28rpx;
+  padding: 10rpx 16rpx;
 }

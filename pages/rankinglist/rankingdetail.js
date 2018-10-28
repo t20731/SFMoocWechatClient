@@ -14,7 +14,8 @@ Page({
     tabs: ['Capability', 'Introdution', 'Recognition'],
     activeIndex: 0,
     sliderOffset: 0,
-    sliderLeft: 0
+    sliderLeft: 0,
+    skills: ['Java', 'DB', 'Javascript', 'Testing', 'Linux', 'UI design'] 
   },
 
   onLoad: function (options) {
@@ -67,7 +68,7 @@ Page({
     radarChart = new wxCharts({
       canvasId: 'radarCanvas',
       type: 'radar',
-      categories: ['Java', 'DB', 'Javascript', 'Testing', 'Linux', 'UI design'],
+      categories: this.data.skills,
       series: [{
         name: 'Total-70',
         data: [150, 110, 225, 165, 87, 122]

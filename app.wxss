@@ -141,3 +141,6 @@ page {
 .weui-navbar__slider {
   background-color: #0076cb;
 }
+.weui-tab__content {
+  background: #FFF !important;
+}

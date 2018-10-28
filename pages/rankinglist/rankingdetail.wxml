@@ -21,8 +21,17 @@
             <canvas canvas-id="radarCanvas" class="radarCanvas" bindtouchstart="touchHandler"></canvas>
             </view>
         </view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">选二的内容</view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 2}}">estimate</view>
+        <view class="weui-tab__content capabilitySubTab" hidden="{{activeIndex != 1}}">
+        Team: Platform Rule Engine
+        </view>
+        <view class="weui-tab__content capabilitySubTab" hidden="{{activeIndex != 2}}">   
+          <view class="skillItem" wx:for="{{skills}}" wx:key="index">
+            <view class="skillTag">
+              <text>{{item}} . {{6}}</text>
+            </view>
+            <i-icon type="add" size="28" color="#0076cb" custom="sfAdd" />
+          </view>
+        </view>
       </view>
     </view>
   </view>
