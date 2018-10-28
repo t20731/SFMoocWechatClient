@@ -1,4 +1,5 @@
 import WXRequest from '../../utils/wxRequest';
+import WCache from '../../utils/wcache';
 import Util from '../../utils/util';
 
 const ENROLL_NUMBER = 1;
@@ -13,7 +14,13 @@ Page({
     quizBtnVal: 'Quiz Management',
     quizBtnDisabled: false,
     eventDetail: null,
-    sessionId: 0
+    sessionId: 0,
+    checkInBtnVal: 'Check In',
+    checkInDisabled: false,
+    checkInCode: '',
+    isCheckInModalHidden: true,
+    startQuizBtnVal: 'Quiz',
+    startQuizBtnDisabled: false
   },
 
   onLoad: function (e) {
@@ -22,6 +29,7 @@ Page({
       sessionId: e.id
     });
     this._checkGuest(userId);
+    this._isCheckedIn();
     WXRequest.post('/session/detail',{
       sessionId: e.id,
       userId: userId
@@ -117,6 +125,55 @@ Page({
     this.setData({
       loading: !this.data.loading,
     });
+  },
+
+  _isCheckedIn() {
+    let isCheckedIn = WCache.get('checkedIn');
+    if (isCheckedIn) {
+      this._markCheckedIn();
+    }
+  },
+
+  _markCheckedIn() {
+    this.setData({
+      checkInDisabled: true,
+      checkInBtnVal: 'Checked In'
+    });
+  },
+
+  onCheckIn() {
+    this.setData({
+      isCheckInModalHidden: false
+    });
+  },
+
+  onCheckInCodeInput(event) {
+    this.setData({
+      checkInCode: event.detail.value
+    });
+  },
+
+  submitCheckInCode() {
+    this.setData({ isCheckInModalHidden: true });
+    let userId = Util.getUserId();
+    let checkInCode = this.data.checkInCode;
+    WXRequest.post('/checkin/submit', {
+      sessionId: this.data.eventDetail.id,
+      userId: userId,
+      code: checkInCode
+    }).then(res => {
+      if (res.data.msg === 'ok') {
+        Util.showToast('签到成功', 'success', 2000);
+        WCache.put('checkedIn', true, 24 * 60 * 60);
+        this._markCheckedIn();
+      }
+    }).catch(e => {
+      console.log(e);
+    });
+  },    
+
+  cancelCheckIn() {
+    this.setData({ isCheckInModalHidden: true });
   },
 
   onStartSession(event) {

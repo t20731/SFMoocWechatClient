@@ -27,16 +27,25 @@
     
     <block wx:if="{{isOwner}}">
       <view class="flex-item" wx:if="{{isOwner}}">
-        <button bindtap='onStartSession' class="session-start-btn" type="primary" disabled="{{startBtnDisabled}}" loading="{{loading}}">{{startBtnVal}}</button>
+        <button bindtap='onStartSession' class="session-start-btn" type="primary" disabled="{{startBtnDisabled}}">{{startBtnVal}}</button>
       </view>
       <view class="flex-item" wx:if="{{isOwner}}">
-        <button bindtap='onManageQuiz' class="session-quiz-btn" type="primary" disabled="{{quizBtnDisabled}}" loading="{{loading}}">{{quizBtnVal}}</button>
+        <button bindtap='onManageQuiz' class="session-quiz-btn" type="primary" disabled="{{quizBtnDisabled}}">{{quizBtnVal}}</button>
       </view>
     </block>
     <block wx:else>
       <view class="flex-item">
+        <modal id="checkInModal" hidden="{{isCheckInModalHidden}}" title="Please type check in code" confirm-text="Submit" cancel-text="Cancel" bindconfirm="submitCheckInCode" bindcancel="cancelCheckIn">
+          <input name="checkInCode" bindinput="onCheckInCodeInput" class="weui-input" placeholder="Check in Code" />
+        </modal>
+        <button bindtap='onCheckIn' type="primary" disabled="{{checkInDisabled}}">{{checkInBtnVal}}</button>
+      </view>
+      <view class="flex-item">
+        <button bindtap='onStartQuiz' type="primary" disabled="{{startQuizBtnDisabled}}">{{startQuizBtnVal}}</button>
+      </view>
+      <view class="flex-item">
         <button bindtap='onRegister' type="primary" disabled="{{disabled}}" loading="{{loading}}">{{registerBtnVal}}</button>
-        </view>
+      </view>
     </block>
   </view>
 </view>
