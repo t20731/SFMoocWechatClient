@@ -12,14 +12,16 @@ Page({
     startBtnDisabled: false,
     quizBtnVal: 'Quiz Management',
     quizBtnDisabled: false,
-    eventDetail: null
+    eventDetail: null,
+    sessionId: 0
   },
 
   onLoad: function (e) {
     let userId = Util.getUserId();
-
+    this.setData({
+      sessionId: e.id
+    });
     this._checkGuest(userId);
-
     WXRequest.post('/session/detail',{
       sessionId: e.id,
       userId: userId
@@ -74,6 +76,12 @@ Page({
       disabled: true,
       registerBtnVal: 'Registered'
     });
+  },
+
+  onManageQuiz: function(){
+    wx.navigateTo({
+      url: '../uploadQuestion/uploadQuestion?sessionId=' + this.data.sessionId,
+    })
   },
 
   onRegister: function(event) {

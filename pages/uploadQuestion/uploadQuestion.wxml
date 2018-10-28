@@ -16,6 +16,6 @@
       </view>
     </view>
   </view>
-  <button class='fixedBottomBtn whiteBtn publishQuesBtn' bindtap="publishQuestions">发布考题</button>
-  <button class="uniformBtn fixedBottomBtn addQuesBtn" bindtap="addQuestion">添加考题</button>
+  <button class='fixedBottomBtn whiteBtn publishQuesBtn' bindtap="publishQuestions">Publish</button>
+  <button class="uniformBtn fixedBottomBtn addQuesBtn" bindtap="addQuestion">Add</button>
 </view>

@@ -33,7 +33,6 @@ Page({
     that.setData({
       sessionId: options.sessionId
     });
-    console.log('sessionId: ' + this.data.sessionId);
     let quesInfoStr = options.quesInfoStr;
     if (quesInfoStr) {
       let questionObj = JSON.parse(quesInfoStr);
@@ -65,7 +64,7 @@ Page({
   handleAddQuesClick: function () {
     let optionsLength = this.data.options.length;
     if (optionsLength >= 4){
-      Util.showToast('不支持添加更多选项', 'none', 2000);
+      Util.showToast('Not supported', 'none', 2000);
       return;
     }
     let newItem = {};
@@ -122,32 +121,29 @@ Page({
           isAnswer: option.label === correctOptionLabel ? 1 : 0
         }
       });
+      var that = this;
       wx.request({
         url: app.globalData.host + '/question/edit',
         method: 'post',
         data: { 
-          sessionId: this.data.sessionId,
-          id: this.data.id,
+          sessionId: that.data.sessionId,
+          id: that.data.id,
           owner: app.globalData.openId,
           content: evt.detail.value.title,
           options: options
         },
         success: function (res) {
           if (res.data.msg === 'ok') {
-            Util.showToast('保存成功', 'success', 1000);
-            setTimeout(function() {
-              wx.redirectTo({
-                url: 'uploadQuestion'
-              })
-            }, 1000);
+            Util.showToast('Success', 'success', 1000);
           } else if (res.data.msg === 'exceed_threshold'){
-            Util.showToast('本赛季出题数已达上限', 'none', 1000);
-            setTimeout(function () {
-              wx.redirectTo({
-                url: 'uploadQuestion'
-              })
-            }, 1000);
+            Util.showToast('Maximum 3 questions', 'none', 1000);
           }
+          console.log('sessionId: ' + that.data.sessionId);
+          setTimeout(function () {
+            wx.redirectTo({
+              url: 'uploadQuestion?sessionId=' + that.data.sessionId,
+            })
+          }, 1000);
         },
         fail: function (error) {
           console.log(error);
@@ -160,13 +156,13 @@ Page({
     let isValid = true;
     if (!questionCont.title.trim()) {
       isValid = false;
-      Util.showToast('题目不能为空', 'none', 2000);
+      Util.showToast('Title should not be empty', 'none', 2000);
       return isValid;
     }
     for (let i=0; i<this.data.options.length; i++) {
       if (!this.data.options[i].value.trim()) {
         isValid = false;
-        Util.showToast('选项内容不能为空', 'none', 2000);
+        Util.showToast('Content shoud not be empty', 'none', 2000);
         break;
       }
     }
