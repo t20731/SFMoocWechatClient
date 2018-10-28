@@ -21,6 +21,7 @@ Page({
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
+    learnSessions: [],
     ownedSessions: []
   },
 
@@ -53,6 +54,9 @@ Page({
         });
       }
     });
+
+    let userId = Util.getUserId();
+    this._loadLearnSessions(userId);
   },
 
   tabClick: function (e) {
@@ -67,16 +71,24 @@ Page({
     }
   },
 
+  _loadLearnSessions(userId) {
+    this._loadSessions('userId', userId, 'learnSessions');
+  },
+
   _loadOwnedSessions(userId) {
+    this._loadSessions('ownerId', userId, 'ownedSessions');
+  },
+
+  _loadSessions(role, userId, name) {
     WXRequest.post('/session/list', {
       pageNum: 1,
       pageSize: 50,
-      ownerId: userId
+      [role]: userId
     }).then(res => {
       if (res.data.msg === 'ok') {
         console.log(res.data);
         this.setData({
-          ownedSessions: res.data.retObj
+          [name]: res.data.retObj
         });
       }
     }).catch(e => {
@@ -85,6 +97,13 @@ Page({
   },
 
   goOwnedSession(event) {
+    let id = event.currentTarget.id;
+    wx.navigateTo({
+      url: '../session/eventDetail?id=' + id
+    })
+  },
+
+  goLearnSession(event) {
     let id = event.currentTarget.id;
     wx.navigateTo({
       url: '../session/eventDetail?id=' + id
