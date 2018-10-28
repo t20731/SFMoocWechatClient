@@ -147,7 +147,9 @@ Page({
 
     WXRequest.post('/session/edit', eventDetail).then(res => {
       if (res.data.msg === 'ok') {
-        Util.showToast('Create successfully');
+        wx.navigateBack({
+          delta: 1
+        });
       }
     }).catch(e => {
       console.log(e);

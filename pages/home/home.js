@@ -53,8 +53,6 @@ Page({
         });
       }
     });
-
-    // this._loadOwnedSessions(userInfo.id);
   },
 
   tabClick: function (e) {
@@ -72,7 +70,7 @@ Page({
   _loadOwnedSessions(userId) {
     WXRequest.post('/session/list', {
       pageNum: 1,
-      pageSize: 10,
+      pageSize: 50,
       ownerId: userId
     }).then(res => {
       if (res.data.msg === 'ok') {
@@ -89,8 +87,14 @@ Page({
   goOwnedSession(event) {
     let id = event.currentTarget.id;
     wx.navigateTo({
-      url: '../session/eventDetail?id=' + id,
+      url: '../session/eventDetail?id=' + id
     })
+  },
+
+  onCreateSession() {
+    wx.navigateTo({
+      url: '../session/newEvent'
+    });
   },
 
   getUserInfo: function (e) {
@@ -360,12 +364,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({ checkinCode: '' });
-    if(app.globalData.openId){
-      var userInfo = wx.getStorageSync('userInfo');
-      if (userInfo) {
-      }
-    }
+    let userId = Util.getUserId();
+    this._loadOwnedSessions(userId);
   },
 
   /**

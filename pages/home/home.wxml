@@ -44,6 +44,7 @@
               </view>
             </view>
           </view>
+            <view bindtap="onCreateSession" class="session-create-btn"></view>
         </view>
       </view>
     </view>
