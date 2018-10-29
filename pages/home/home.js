@@ -70,10 +70,12 @@ Page({
   },
 
   _loadLearnSessions() {
+    console.log('_loadLearnSessions');
     this._loadSessions('userId', 'learnSessions');
   },
 
   _loadOwnedSessions() {
+    console.log('_loadOwnedSessions');
     this._loadSessions('ownerId', 'ownedSessions');
   },
 
@@ -401,7 +403,7 @@ Page({
    */
   onPullDownRefresh: function () {
     const activeIndex = this.data.activeIndex;
-    if (activeIndex === 0) {
+    if (activeIndex == 0) {
       this._loadLearnSessions();
     } else {
       this._loadOwnedSessions();
