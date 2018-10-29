@@ -44,6 +44,10 @@
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
           <!-- Sharing -->
+          <view wx:if="{{ownedSessionsIsPullDownLoading}}" class="weui-loadmore">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">Loading</view>
+          </view>
           <view id="{{item.id}}" bindtap='goOwnedSession' class="eventItem" wx:for="{{ownedSessions}}" wx:key="id">
             <view class='leftContent'>
               <image src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg">
@@ -62,6 +66,13 @@
               </view>
               </view>
             </view>
+          </view>
+          <view wx:if="{{ownedSessionsIsLoading}}" class="weui-loadmore">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">Loading</view>
+          </view>
+          <view wx:if="{{ownedSessionsIsNoData}}" class="weui-loadmore weui-loadmore_line">
+              <view class="weui-loadmore__tips weui-loadmore__tips_in-line">No More Data</view>
           </view>
           <view bindtap="onCreateSession" class="session-create-btn"></view>
         </view>

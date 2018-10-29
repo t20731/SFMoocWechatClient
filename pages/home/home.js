@@ -4,7 +4,7 @@ import WCache from '../../utils/wcache';
 import WXRequest from '../../utils/wxRequest';
 const app = getApp();
 var sliderWidth = 96;
-
+const PAGE_SIZE = 5;
 Page({
 
   /**
@@ -21,6 +21,10 @@ Page({
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
+    ownedSessionsIsPullDownLoading: false,
+    ownedSessionsIsLoading: false,
+    ownedSessionsIsNoData: false,
+    pageNum: 1,
     learnSessions: [],
     ownedSessions: []
   },
@@ -80,20 +84,46 @@ Page({
   },
 
   _loadSessions(role, name) {
+    this._setLoading(name, true);
+
     let userId = Util.getUserId();
+    let pageNum = this.data.pageNum;
     WXRequest.post('/session/list', {
-      pageNum: 1,
-      pageSize: 50,
+      pageNum: pageNum,
+      pageSize: PAGE_SIZE,
       [role]: userId
     }).then(res => {
       if (res.data.msg === 'ok') {
         console.log(res.data);
-        this.setData({
-          [name]: res.data.retObj
-        });
+        this._setLoading(name, false);
+        
+        if (pageNum === 1) {
+          this.setData({
+            [name]: res.data.retObj,
+            ownedSessionsIsPullDownLoading: false
+          });
+        } else {
+          let increment = res.data.retObj;
+          if (increment.length > 0) {
+            this.setData({
+              [name]: [...this.data[name], ...res.data.retObj]
+            });
+          } else {
+            this.setData({
+              [name + 'IsNoData']: true
+            });
+          }
+          
+        }
       }
     }).catch(e => {
       console.log(e);
+    });
+  },
+
+  _setLoading(name, showLoading) {
+    this.setData({
+      [name + 'IsLoading']: showLoading
     });
   },
 
@@ -402,10 +432,17 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    this.setData({
+      pageNum: 1
+    });
     const activeIndex = this.data.activeIndex;
     if (activeIndex == 0) {
       this._loadLearnSessions();
     } else {
+      this.setData({
+        ownedSessionsIsPullDownLoading: true,
+        ownedSessionsIsNoData: false
+      });
       this._loadOwnedSessions();
     }
     // console.log('home::onPullDownRefresh::isSessionOwner:' + app.globalData.isSessionOwner)
@@ -418,7 +455,16 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    let pageNum = this.data.pageNum + 1;
+    this.setData({
+      pageNum: pageNum
+    });
+    const activeIndex = this.data.activeIndex;
+    if (activeIndex == 0) {
+      this._loadLearnSessions();
+    } else {
+      this._loadOwnedSessions();
+    }
   },
 
   /**
