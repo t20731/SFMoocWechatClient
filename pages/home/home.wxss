@@ -1,6 +1,8 @@
 /* pages/home/home.wxss */
 .userinfo{
-  position: relative;
+  position: fixed;
+  top: 0;
+  z-index: 1;
   width: 100%;
   height: 300rpx;
   background: #FFF;
@@ -46,10 +48,15 @@
   text-align: center;
 }
 .page__bd{
+  margin-top:300rpx;
   background: #FFF;
 }
 
 .weui-navbar {
+  position: fixed;
+  z-index: 1;
+  top: 300rpx;
+  background: #FFF;
   border-top: 1rpx solid #ccc;
   border-bottom: none;
 }
