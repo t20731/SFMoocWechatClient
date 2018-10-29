@@ -55,8 +55,7 @@ Page({
       }
     });
 
-    let userId = Util.getUserId();
-    this._loadLearnSessions(userId);
+    this._loadLearnSessions();
   },
 
   tabClick: function (e) {
@@ -65,21 +64,21 @@ Page({
       activeIndex: e.currentTarget.id
     });
 
-    let userId = Util.getUserId();
     if (this.data.ownedSessions.length <= 0) {
-      this._loadOwnedSessions(userId);
+      this._loadOwnedSessions();
     }
   },
 
-  _loadLearnSessions(userId) {
-    this._loadSessions('userId', userId, 'learnSessions');
+  _loadLearnSessions() {
+    this._loadSessions('userId', 'learnSessions');
   },
 
-  _loadOwnedSessions(userId) {
-    this._loadSessions('ownerId', userId, 'ownedSessions');
+  _loadOwnedSessions() {
+    this._loadSessions('ownerId', 'ownedSessions');
   },
 
-  _loadSessions(role, userId, name) {
+  _loadSessions(role, name) {
+    let userId = Util.getUserId();
     WXRequest.post('/session/list', {
       pageNum: 1,
       pageSize: 50,
@@ -142,8 +141,7 @@ Page({
             userInfo: user,
             hasUserInfo: true
           })
-          wx.setStorageSync('userInfo', user);
-          that.setUserStatus(user);   
+          wx.setStorageSync('userInfo', user);   
         },
         fail: function (e) {
             Util.showToast('登录失败', 'none', 1500);
@@ -383,8 +381,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let userId = Util.getUserId();
-    this._loadOwnedSessions(userId);
+    
   },
 
   /**
@@ -403,10 +400,16 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    console.log('home::onPullDownRefresh::isSessionOwner:' + app.globalData.isSessionOwner)
-    if (app.globalData.openId) {
-      this.setSessionOwner(app.globalData.openId)
+    const activeIndex = this.data.activeIndex;
+    if (activeIndex === 0) {
+      this._loadLearnSessions();
+    } else {
+      this._loadOwnedSessions();
     }
+    // console.log('home::onPullDownRefresh::isSessionOwner:' + app.globalData.isSessionOwner)
+    // if (app.globalData.openId) {
+    //   this.setSessionOwner(app.globalData.openId)
+    // }
   },
 
   /**
