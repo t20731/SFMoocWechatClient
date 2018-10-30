@@ -35,7 +35,9 @@
 .page__bd{
   background: #FFF;
 }
-
+.capabilityTabs {
+  min-height: calc(100vh - 300rpx);
+}
 .weui-navbar {
   border-top: 1rpx solid #ccc;
   border-bottom: none;
@@ -60,6 +62,10 @@
 }
 .capabilitySubTab{
   padding: 20rpx;
+}
+.introduction {
+  display: flex;
+  flex-direction: column;
 }
 .skillItem {
   display: flex;

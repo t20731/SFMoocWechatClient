@@ -5,7 +5,7 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
-  <view class="page__bd">
+  <view class="page__bd capabilityTabs">
     <view class="weui-tab">
       <view class="weui-navbar">
         <block wx:for="{{tabs}}" wx:key="*this">
@@ -21,8 +21,13 @@
             <canvas canvas-id="radarCanvas" class="radarCanvas" bindtouchstart="touchHandler"></canvas>
             </view>
         </view>
-        <view class="weui-tab__content capabilitySubTab" hidden="{{activeIndex != 1}}">
-        Team: Platform Rule Engine
+        <view class="weui-tab__content capabilitySubTab introduction" hidden="{{activeIndex != 1}}">
+          <text>Signature: Later Equals Never</text>
+          <text>Team: Platform Rule Engine</text>
+          <text>Seat: PVG03 D3.15</text>
+          
+          <text>My Blog: juejin/xxx</text>
+          <text>My Github: github/xiaohan</text>
         </view>
         <view class="weui-tab__content capabilitySubTab" hidden="{{activeIndex != 2}}">   
           <view class="skillItem" wx:for="{{skillPoints}}" wx:key="index">
