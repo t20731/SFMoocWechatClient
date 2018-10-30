@@ -1,4 +1,5 @@
 // pages/uploadQuestion/uploadQuestion.js
+import WCache from '../../utils/wcache';
 import Util from '../../utils/util';
 
 const app = getApp();
@@ -8,7 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    sessionId: 0
+    sessionId: 0,
+    isQuestionPublished: false
   },
 
   /**
@@ -18,6 +20,10 @@ Page({
     console.log('uploadQuestion:onLoad:openid:' + app.globalData.openId);
     this.setData({
       sessionId: options.sessionId
+    });
+    let isQuestionPublished = WCache.get(options.sessionId + '_isQuestionPublished') || false;
+    this.setData({ 
+      isQuestionPublished: isQuestionPublished 
     });
     this.loadQuestions(options.sessionId);
   },
@@ -100,17 +106,20 @@ Page({
         success: function (res) {
           if (res.data.msg === 'ok') {
             Util.showToast('Success', 'success', 2000);
-           //that.loadQuestions();
+            that.setData({
+              isQuestionPublished: true
+            });
+            WCache.put(that.data.sessionId + '_isQuestionPublished', true, 60 * 60 * 12);
           } else if (res.data.msg === 'not_authorized') {
             Util.showToast('Not Authorized', 'none', 2000);
           } else if (res.data.msg === 'published') {
             Util.showToast('Published', 'none', 2000);
           }
-          setTimeout(function () {
-            wx.redirectTo({
-              url: '../session/eventDetail?id=' + that.data.sessionId,
-            })
-          }, 2000);
+          // setTimeout(function () {
+          //   wx.navigateBack({
+          //     delta: 1
+          //   })
+          // }, 2000);
         },
         fail: function (error) {
           console.log(error);
@@ -130,6 +139,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    console.log('uploadQuestion:onShow:sessionId:' + this.data.sessionId);
+    if (this.data.sessionId){
+      this.loadQuestions(this.data.sessionId);
+    }
   },
 
   /**

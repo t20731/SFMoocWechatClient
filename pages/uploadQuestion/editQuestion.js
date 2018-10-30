@@ -140,8 +140,9 @@ Page({
           }
           console.log('sessionId: ' + that.data.sessionId);
           setTimeout(function () {
-            wx.redirectTo({
-              url: 'uploadQuestion?sessionId=' + that.data.sessionId,
+            wx.navigateBack({
+              delta: 1
+              //url: 'uploadQuestion?sessionId=' + that.data.sessionId,
             })
           }, 1000);
         },

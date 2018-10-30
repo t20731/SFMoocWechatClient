@@ -92,6 +92,20 @@ Page({
     })
   },
 
+  onStartQuiz: function () {
+    let userInfo = wx.getStorageSync('userInfo');
+    let isCheckedIn = WCache.get(this.data.sessionId + '_checkedIn');
+    if (!userInfo) {
+      Util.showToast('Please login fisrt', 'none', 2000);
+    } else if (!isCheckedIn) {
+      Util.showToast('Please check in first', 'none', 2000);
+    } else {
+      wx.navigateTo({
+        url: '../exam/exam?sessionId=' + this.data.sessionId,
+      })
+    }
+  },
+
   onRegister: function(event) {
     // call API to register the event
     console.log('Register: ', event);
@@ -128,7 +142,7 @@ Page({
   },
 
   _isCheckedIn() {
-    let isCheckedIn = WCache.get('checkedIn');
+    let isCheckedIn = WCache.get(this.data.sessionId + '_checkedIn');
     if (isCheckedIn) {
       this._markCheckedIn();
     }
@@ -157,6 +171,7 @@ Page({
     this.setData({ isCheckInModalHidden: true });
     let userId = Util.getUserId();
     let checkInCode = this.data.checkInCode;
+    var that = this;
     WXRequest.post('/checkin/submit', {
       sessionId: this.data.eventDetail.id,
       userId: userId,
@@ -164,7 +179,7 @@ Page({
     }).then(res => {
       if (res.data.msg === 'ok') {
         Util.showToast('签到成功', 'success', 2000);
-        WCache.put('checkedIn', true, 24 * 60 * 60);
+        WCache.put(that.data.sessionId + '_checkedIn', true, 24 * 60 * 60);
         this._markCheckedIn();
       }
     }).catch(e => {

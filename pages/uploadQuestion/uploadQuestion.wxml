@@ -6,7 +6,7 @@
         <view class="questionTitle">
         {{index + 1}}: {{item.content}}?
         </view>
-        <view class="">
+        <view class="" wx:if="{{!isQuestionPublished}}">
           <image class="editQuesIcon" data-quesIndex="{{index}}" src="../../images/edit_outline.png" bindtap="editQuestion"></image>
           <image class="deleteQuesIcon" data-quesIndex="{{index}}" src="../../images/rounded_delete.png" bindtap="handleDeleteQuestionClick"></image>
         </view>
@@ -16,6 +16,6 @@
       </view>
     </view>
   </view>
-  <button class='fixedBottomBtn whiteBtn publishQuesBtn' bindtap="publishQuestions">Publish</button>
-  <button class="uniformBtn fixedBottomBtn addQuesBtn" bindtap="addQuestion">Add</button>
+  <button class='fixedBottomBtn whiteBtn publishQuesBtn' bindtap="publishQuestions" disabled="{{isQuestionPublished}}">Publish</button>
+  <button class="uniformBtn fixedBottomBtn addQuesBtn" bindtap="addQuestion" disabled="{{isQuestionPublished}}">Add</button>
 </view>

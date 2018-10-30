@@ -12,7 +12,8 @@ Page({
     questions: [],
     answers: {},
     isExamAvailable: false,
-    isSubmitBtnDisabled: false
+    isSubmitBtnDisabled: false,
+    sessionId: 0
   },
 
   /**
@@ -20,6 +21,9 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
+    that.setData({
+      sessionId: options.sessionId
+    })
     wx.request({
       url: app.globalData.host + '/exam/load/question/' + options.sessionId,
       method: 'GET',
@@ -30,11 +34,11 @@ Page({
             questions: res.data.retObj,
             isExamAvailable: isExamAvailable
           });
-          let isExamSubmitted = WCache.get('isExamSubmitted') || false;
+          let isExamSubmitted = WCache.get(options.sessionId + '_isExamSubmitted') || false;
           that.setData({ isExamSubmitted: isExamSubmitted });
           if (isExamAvailable && isExamSubmitted) {
             // put correct answer into per question
-            let correctAnswerMap = WCache.get('correctAnswerMap');
+            let correctAnswerMap = WCache.get(options.sessionId + '_correctAnswerMap');
             that.setCorrectAnswerOfExam(correctAnswerMap);
           }
         }
@@ -64,12 +68,13 @@ Page({
     let that = this;
     let isValid = this.validateAnswers();
     if (!isValid) {
-      Util.showToast('还有题目未作答', 'none', 2000);
+      Util.showToast('Please answer all the questions', 'none', 2000);
     } else {
       wx.request({
         url: app.globalData.host + '/exam/submit',
         method: 'POST',
         data: {
+          sessionId: that.data.sessionId,
           userId: app.globalData.openId,
           answerMap: this.data.answers
         },
@@ -89,8 +94,13 @@ Page({
             });
             that.setData({ questions: that.data.questions});
 
-            WCache.put('isExamSubmitted', true, 60*60*12);
-            WCache.put('correctAnswerMap', that.data.correctAnswerMap, 60*60*12);
+            WCache.put(that.data.sessionId + '_isExamSubmitted', true, 60*60*12);
+            WCache.put(that.data.sessionId + '_correctAnswerMap', that.data.correctAnswerMap, 60*60*12);
+            // setTimeout(function () {
+            //   wx.navigateBack({
+            //     delta: 1
+            //   })
+            // }, 2000);
           } else if (res.data.msg === 'not_authorized' && res.data.status === -1){
             Util.showToast('您今天不能答题哦', 'none', 2000);
           } else if (res.data.msg === 'not_authorized' && res.data.status === -2) {
