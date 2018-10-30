@@ -1,0 +1,57 @@
+<!--pages/home/pointsDetail.wxml-->
+<view class="page">
+  <view class="page__bd">
+    <text class="weui-cells__title">History of Points</text>
+    <view class="weui-panel weui-panel_access" wx:if="{{details.length > 0}}" wx:for="{{details}}" wx:key="date">
+      <view class="weui-panel">
+        <view class="weui-panel__hd">{{item.date}}</view>
+        <view class="weui-panel__bd">
+          <view class="weui-media-box weui-media-box_small-appmsg">
+            <view class="weui-cells weui-cells_in-small-appmsg">
+              <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" wx:if="{{item.checkin > 0}}">
+                <view class="weui-cell__bd weui-cell_primary">
+                  <view>签到</view>
+                </view>
+                <view class="weui-cell__ft">+{{item.checkin}}</view>
+              </view>
+              <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" wx:if="{{item.host > 0}}">
+                <view class="weui-cell__bd weui-cell_primary">
+                  <view>分享</view>
+                </view>
+                <view class="weui-cell__ft">+{{item.host}}</view>
+              </view>
+              <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" wx:if="{{item.exam > 0}}">
+                <view class="weui-cell__bd weui-cell_primary">
+                  <view>答题</view>
+                </view>
+                <view class="weui-cell__ft">+{{item.exam}}</view>
+              </view>
+              <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" wx:if="{{item.lottery > 0}}">
+                <view class="weui-cell__bd weui-cell_primary">
+                  <view>抽奖</view>
+                </view>
+                <view class="weui-cell__ft">+{{item.lottery}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel">
+        <view class="weui-panel__bd">
+          <view class="weui-media-box weui-media-box_small-appmsg">
+            <view class="weui-cells weui-cells_in-small-appmsg">
+              <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" wx:if="{{initial > 0}}">
+                <view class="weui-cell__bd weui-cell_primary">
+                  <view>初始值</view>
+                </view>
+                <view class="weui-cell__ft">+{{initial}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 

@@ -6,7 +6,12 @@
     </button>
     <block wx:else>
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <view class="userinfoRightSection">
+        <view class="userinfo-nickname">{{userInfo.nickName}}</view>
+        <view>2000</view>
+        <view class="userinfoPointsDetail">
+        <navigator url="pointsDetail?userId={{userInfo.id}}">Points Detail</navigator></view>
+      </view>
     </block>
   </view>
   <view class="page__bd">

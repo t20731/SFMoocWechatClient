@@ -12,7 +12,8 @@
     "pages/uploadQuestion/uploadQuestion",
     "pages/uploadQuestion/editQuestion",
     "pages/exam/exam",
-    "pages/exam/examList"
+    "pages/exam/examList",
+    "pages/home/pointsDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

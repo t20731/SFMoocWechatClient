@@ -1,0 +1,5 @@
+/* pages/home/pointsDetail.wxss */
+.weui-cell__ft {
+  color: #FDBC40;
+  font-size: 1.0rem;
+} 

@@ -8,8 +8,9 @@
   background: #FFF;
   color: #fff;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 30rpx;
 }
 
 /* .userinfo {
@@ -21,14 +22,17 @@
 .userinfo-avatar {
   width: 128rpx;
   height: 128rpx;
-  margin: 30rpx;
+  margin-right: 30rpx;
   border-radius: 50%;
 }
-
-.userinfo-nickname {
+.userinfo .userinfoRightSection {
   color: #000000;
+  display: inline-block;
 }
-
+.userinfoRightSection .userinfoPointsDetail {
+  color: #0076cb;
+  font-size: 20rpx;
+}
 .loginButton {
   margin-top: 55px;
   width: 50%;
