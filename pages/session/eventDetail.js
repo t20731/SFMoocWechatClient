@@ -5,6 +5,11 @@ import Util from '../../utils/util';
 const ENROLL_NUMBER = 1;
 Page({
   data: { // 参与页面渲染的数据
+    difficulties: {
+      '0': 'Beginner',
+      '1': 'Intermediate',
+      '2': 'Advanced'
+    },
     isOwner: false,
     disabled: false,
     loading: false,

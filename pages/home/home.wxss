@@ -57,7 +57,7 @@
   text-align: center;
 }
 .page__bd{
-  margin-top:300rpx;
+  padding-top: 220rpx;
   background: #FFF;
 }
 

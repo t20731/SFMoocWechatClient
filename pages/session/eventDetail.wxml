@@ -16,7 +16,10 @@
     <text>Location: </text>{{eventDetail.location.name}}
     </view>
     <view class="flex-item event-detail-location">
-    <text>Difficulty: </text>{{eventDetail.difficulty}}
+      <text>Difficulty: </text>{{difficulties[eventDetail.difficulty]}}
+    </view>
+    <view class="flex-item event-detail-location">
+      <text>Direction: </text>{{eventDetail.direction.name}}
     </view>
     <view class="flex-item event-detail-location">
     <text>Enrollments: </text>{{eventDetail.enrollments}}
@@ -34,13 +37,13 @@
       </view>
     </block>
     <block wx:else>
-      <view class="flex-item">
+      <view wx:if="{{disabled}}" class="flex-item">
         <modal id="checkInModal" hidden="{{isCheckInModalHidden}}" title="Please type check in code" confirm-text="Submit" cancel-text="Cancel" bindconfirm="submitCheckInCode" bindcancel="cancelCheckIn">
           <input name="checkInCode" bindinput="onCheckInCodeInput" class="weui-input" placeholder="Check in Code" />
         </modal>
         <button bindtap='onCheckIn' type="primary" disabled="{{checkInDisabled}}">{{checkInBtnVal}}</button>
       </view>
-      <view class="flex-item">
+      <view wx:if="{{disabled}}" class="flex-item">
         <button bindtap='onStartQuiz' type="primary" disabled="{{startQuizBtnDisabled}}">{{startQuizBtnVal}}</button>
       </view>
       <view class="flex-item">
