@@ -12,7 +12,7 @@ const showToast = function (msg, icon, time) {
 
 const getUserId = function () {
   var userInfo = wx.getStorageSync('userInfo');
-  var userId = userInfo && userInfo.id || null;
+  var userId = userInfo && userInfo.id || 'abc';
   return userId;
 };
 

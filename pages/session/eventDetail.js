@@ -199,7 +199,7 @@ Page({
 
   _markStarted(checkInCode) {
     this.setData({
-      startBtnVal: `Started (${checkInCode})`,
+      startBtnVal: `Check-in Code: (${checkInCode})`,
       startBtnDisabled: true,
     });
   },
