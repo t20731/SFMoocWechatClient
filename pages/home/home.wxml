@@ -10,7 +10,8 @@
         <view class="userinfo-nickname">{{userInfo.nickName}}</view>
         <view>2000</view>
         <view class="userinfoPointsDetail">
-        <navigator url="pointsDetail?userId={{userInfo.id}}">Points Detail</navigator></view>
+          <navigator url="pointsDetail?userId={{userInfo.id}}">Points Detail</navigator>
+        </view>
       </view>
     </view>
   </view>
@@ -25,8 +26,8 @@
         <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
       </view>
       <view class="weui-tab__panel">
-        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-          <!-- Learning -->
+        <!-- Learning -->
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">          
           <view id="{{item.id}}" bindtap='goLearnSession' class="eventItem" wx:for="{{learnSessions}}" wx:key="id">
             <view class='leftContent'>
               <image src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg">
@@ -34,21 +35,21 @@
             </view>
             <view class="rightContent">
               <view class="title">
-              <text>{{item.topic}}</text>
+                <text>{{item.topic}}</text>
               </view>
               <view class="speaker">{{item.owner.nickName}}</view>
               <view class="location">
-              {{item.startDate}} | {{item.location.name}}
-              <view class="count">
-                <image src="../../images/mini_people.png"></image>
-                <text>{{item.enrollments}}</text>
-              </view>
+                {{item.startDate}} | {{item.location.name}}
+                <view class="count">
+                  <image src="../../images/mini_people.png"></image>
+                  <text>{{item.enrollments}}</text>
+                </view>
               </view>
             </view>
           </view>
         </view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-          <!-- Sharing -->
+        <!-- Sharing -->
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">          
           <view wx:if="{{ownedSessionsIsPullDownLoading}}" class="weui-loadmore">
             <view class="weui-loading"></view>
             <view class="weui-loadmore__tips">Loading</view>
@@ -60,15 +61,15 @@
             </view>
             <view class="rightContent">
               <view class="title">
-              <text>{{item.topic}}</text>
+                <text>{{item.topic}}</text>
               </view>
               <view class="speaker">{{item.owner.nickName}}</view>
               <view class="location">
-              {{item.startDate}} | {{item.location.name}}
-              <view class="count">
-                <image src="../../images/mini_people.png"></image>
-                <text>{{item.enrollments}}</text>
-              </view>
+                {{item.startDate}} | {{item.location.name}}
+                <view class="count">
+                  <image src="../../images/mini_people.png"></image>
+                  <text>{{item.enrollments}}</text>
+                </view>
               </view>
             </view>
           </view>
@@ -77,9 +78,31 @@
             <view class="weui-loadmore__tips">Loading</view>
           </view>
           <view wx:if="{{ownedSessionsIsNoData}}" class="weui-loadmore weui-loadmore_line">
-              <view class="weui-loadmore__tips weui-loadmore__tips_in-line">No More Data</view>
+            <view class="weui-loadmore__tips weui-loadmore__tips_in-line">No More Data</view>
           </view>
           <view bindtap="onCreateSession" class="session-create-btn"></view>
+        </view>
+        <!-- Completed -->
+        <view class="weui-tab__content" hidden="{{activeIndex != 2}}">       
+          <view id="{{item.id}}" class="eventItem" wx:for="{{compeletedSessions}}" wx:key="id">
+            <view class='leftContent'>
+              <image src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg">
+              </image>
+            </view>
+            <view class="rightContent">
+              <view class="title">
+                <text>{{item.topic}}</text>
+              </view>
+              <view class="speaker">{{item.owner.nickName}}</view>
+              <view class="location">
+                {{item.startDate}} | {{item.location.name}}
+                <view class="count">
+                  <image src="../../images/mini_people.png"></image>
+                  <text>{{item.enrollments}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
         </view>
       </view>
     </view>

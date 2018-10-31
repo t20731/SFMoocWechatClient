@@ -17,7 +17,7 @@ Page({
     isCheckinModalHidden: true,
     isGenerateCodeModal: true,
     checkinCode: '',
-    tabs: ["Learning", "Sharing"],
+    tabs: ["Learning", "Sharing", "Completed"],
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
@@ -26,7 +26,8 @@ Page({
     ownedSessionsIsNoData: false,
     pageNum: 1,
     learnSessions: [],
-    ownedSessions: []
+    ownedSessions: [],
+    compeletedSessions: []
   },
 
   /**
@@ -63,40 +64,59 @@ Page({
   },
 
   tabClick: function (e) {
+    let currentIndex = e.currentTarget.id;
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
-      activeIndex: e.currentTarget.id
+      activeIndex: currentIndex
     });
-
-    if (this.data.ownedSessions.length <= 0) {
+    if (currentIndex == 1 && this.data.ownedSessions.length <= 0) {
       this._loadOwnedSessions();
+    } else if (currentIndex == 2 && this.data.compeletedSessions.length <= 0){
+      this._loadCompletedSessions();
     }
   },
 
   _loadLearnSessions() {
     console.log('_loadLearnSessions');
-    this._loadSessions('userId', 'learnSessions');
+    this._loadUnCompletedSessions('userId', 'learnSessions');
   },
 
   _loadOwnedSessions() {
     console.log('_loadOwnedSessions');
-    this._loadSessions('ownerId', 'ownedSessions');
+    this._loadUnCompletedSessions('ownerId', 'ownedSessions');
   },
 
-  _loadSessions(role, name) {
-    this._setLoading(name, true);
-
+  _loadUnCompletedSessions(role, name) {
+    console.log('_loadUnCompletedSessions');
     let userId = Util.getUserId();
     let pageNum = this.data.pageNum;
-    WXRequest.post('/session/list', {
+    let postData = {
       pageNum: pageNum,
       pageSize: PAGE_SIZE,
       [role]: userId
-    }).then(res => {
+    }
+    this._loadSessions(postData, name);
+  },
+
+  _loadCompletedSessions() {
+    console.log('_loadCompletedSessions');
+    let pageNum = this.data.pageNum;
+    let postData = {
+      pageNum: pageNum,
+      pageSize: PAGE_SIZE,
+      completed: 1
+    }
+    this._loadSessions(postData, 'compeletedSessions');
+  },
+
+  _loadSessions(postData, name) {
+    this._setLoading(name, true);
+    //  let userId = Util.getUserId();
+    let pageNum = this.data.pageNum;
+    WXRequest.post('/session/list', postData).then(res => {
       if (res.data.msg === 'ok') {
         console.log(res.data);
         this._setLoading(name, false);
-        
         if (pageNum === 1) {
           this.setData({
             [name]: res.data.retObj,
@@ -221,17 +241,15 @@ Page({
     const activeIndex = this.data.activeIndex;
     if (activeIndex == 0) {
       this._loadLearnSessions();
-    } else {
+    } else if (activeIndex == 1){
       this.setData({
         ownedSessionsIsPullDownLoading: true,
         ownedSessionsIsNoData: false
       });
       this._loadOwnedSessions();
+    } else if (activeIndex == 2){
+      this._loadCompletedSessions();
     }
-    // console.log('home::onPullDownRefresh::isSessionOwner:' + app.globalData.isSessionOwner)
-    // if (app.globalData.openId) {
-    //   this.setSessionOwner(app.globalData.openId)
-    // }
   },
 
   /**
@@ -245,8 +263,10 @@ Page({
     const activeIndex = this.data.activeIndex;
     if (activeIndex == 0) {
       this._loadLearnSessions();
-    } else {
+    } else if (activeIndex == 1) {
       this._loadOwnedSessions();
+    } else if (activeIndex == 2){
+      this._loadCompletedSessions();
     }
   },
 
