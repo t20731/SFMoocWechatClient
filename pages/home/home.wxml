@@ -8,7 +8,7 @@
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <view class="userinfoRightSection">
         <view class="userinfo-nickname">{{userInfo.nickName}}</view>
-        <view>2000</view>
+        <view>{{totalPoints}}</view>
         <view class="userinfoPointsDetail">
           <navigator url="pointsDetail?userId={{userInfo.id}}">Points Detail</navigator>
         </view>

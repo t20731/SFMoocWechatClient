@@ -27,7 +27,8 @@ Page({
     pageNum: 1,
     learnSessions: [],
     ownedSessions: [],
-    compeletedSessions: []
+    compeletedSessions: [],
+    totalPoints: 0
   },
 
   /**
@@ -193,13 +194,30 @@ Page({
             userInfo: user,
             hasUserInfo: true
           })
-          wx.setStorageSync('userInfo', user);   
+          wx.setStorageSync('userInfo', user);  
+          that.getTotalPoints(openid);
         },
         fail: function (e) {
             Util.showToast('登录失败', 'none', 1500);
         }
       })
     }
+  },
+  
+  getTotalPoints: function (openid){
+    var that = this;
+    wx.request({
+      url: app.globalData.host + '/user/totalPoints/' + openid,
+      method: 'GET',
+      success: function (res) {
+        that.setData({
+          totalPoints: res.data.retObj
+        })
+      },
+      fail: function (e) {
+        Util.showToast('Failed to get total points', 'none', 1500);
+      }
+    })
   },
 
   cancelGenerateCode: function () {
@@ -216,7 +234,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    var userInfo = wx.getStorageSync('userInfo');
+    if (userInfo != 'undefined' && userInfo.id){
+      this.getTotalPoints(userInfo.id);
+    }
   },
 
   /**
