@@ -61,6 +61,13 @@ Page({
       console.log(e);
     });
   },
+
+  goRankDetail(e) {
+    let userId = e.currentTarget.id;
+    wx.navigateTo({
+      url: '../rankinglist/rankingdetail?userId=' + userId,
+    })
+  },
   
   _isOwner(ownerId) {
     let userId = Util.getUserId();
