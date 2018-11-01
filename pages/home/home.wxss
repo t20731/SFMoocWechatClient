@@ -70,8 +70,9 @@
   border-bottom: none;
 }
 
-.weui-tab__panel{
+.weui-tab__panel {
   border: none;
+  height: 100vh;
 }
 
 .weui-tab__content{
