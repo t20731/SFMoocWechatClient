@@ -93,8 +93,12 @@ function getNewDateArry() {
   var year = withData(newDate.getFullYear()),
     mont = withData(newDate.getMonth() + 1),
     date = withData(newDate.getDate()),
-    hour = withData(newDate.getHours()),
-    minu = withData(newDate.getMinutes());
+    hour = withData(newDate.getHours());
+
+  var minu = newDate.getMinutes() ;
+  minu = Math.ceil(minu / 5) * 5;
+  minu = minu === 60 ? 0 : minu;
+  minu = withData(minu);
 
   return [year, mont, date, hour, minu];
 }
