@@ -1,4 +1,5 @@
 <!--pages/explore/explore.wxml-->
+<import src="../components/templates/loadingText.wxml"/>
 <wxs src="../../utils/formatter.wxs" module="formatter">
 </wxs>
 <view class="page">
@@ -40,6 +41,7 @@
           </view>
         </view>
         <view class="noDataMsg" wx:if="{{showNoData}}"> No Session yet! </view>
+        <template is="loadingText" data="{{...loadingStatusVals}}"/>
       </swiper-item>
     </swiper>
   </view>

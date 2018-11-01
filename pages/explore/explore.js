@@ -16,11 +16,16 @@ Page({
     showFilterPopup: false,
     directions: [],
     sessions: [],
+    pageNum: 1,
     showNoData: 'false',
     difficultyLevels: CONST.DIFFICULTY_LEVELS,
     orderByFields: CONST.ORDER_BY,
     selectedLevel: -1,
-    selectedOrder: null
+    selectedOrder: null,
+    loadingStatusVals: {
+      isLoading: false,
+      isNoMoreData: false
+    }
   },
 
   /**
@@ -50,6 +55,7 @@ Page({
 
   swichNav: function (evt) {
     let cur = evt.target.dataset.current;
+    this._resetData();
     if (this.data.selectedTabIndex === cur) { 
       return false; 
     } else {
@@ -57,6 +63,7 @@ Page({
     }
   },
   switchTab: function (evt) {
+    this._resetData();
     let cur = evt.detail.current;
     this.loadNewTabItemData(cur);    
   },
@@ -213,9 +220,64 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if (this.data.loadingStatusVals.isNoMoreData) return;
+    this._setLoadingText('isLoading', true);
+    let selectedIndex = this.data.selectedTabIndex;
+    let directionId = this.data.directions[selectedIndex].id;
+    let pageNum = this.data.pageNum + 1;
+    this.setData({
+      pageNum: pageNum
+    });
+    WXRequest.post('/session/list', {
+      "pageNum": pageNum,
+      "pageSize": 6,
+      "directionId": directionId
+      // "orderField": "total_members"
+    }).then(res => {
+      if (res.data.msg === 'ok') {
+        console.log(this.data.sessions);
+        if (res.data.retObj.length) {
+          let newSessions = this.data.sessions.concat(res.data.retObj)
+          let swiperHeight = this.getCoumptedSwiperHeight(newSessions.length);
+          this.setData({
+            sessions: newSessions,
+            swiperHeight: swiperHeight,
+            showNoData: false
+          });
+          console.log(this.data.sessions);
+        } else {
+          if (!this.data.loadingStatusVals.isNoMoreData) {
+            this._setLoadingText('isNoMoreData', true);
+          }
+        }
+      }
+      this._setLoadingText('isLoading', false);
+    }).catch(e => {
+      console.log(e)
+      this._setLoadingText('isLoading', false);
+    });
   },
-
+  // Todo: miss loading text
+  _setLoadingText: function (propName, status) {
+    this.data.loadingStatusVals[propName] = status;
+    this.setData({
+      loadingStatusVals: this.data.loadingStatusVals,
+    });
+    if (propName === 'isNoMoreData' ) {
+      this.setData({
+        swiperHeight: this.data.swiperHeight + 85
+      })
+    }
+  },
+  _resetData: function () {
+    this.setData({
+      pageNum: 1,
+      loadingStatusVals: {
+        isLoading: false,
+        isNoMoreData: false
+      }
+    });
+  },
   /**
    * 用户点击右上角分享
    */
