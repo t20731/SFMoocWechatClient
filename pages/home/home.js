@@ -112,20 +112,34 @@ Page({
 
   _loadSessions(postData, name) {
     this._setLoading(name, true);
-    //  let userId = Util.getUserId();
     let pageNum = this.data.pageNum;
     WXRequest.post('/session/list', postData).then(res => {
       if (res.data.msg === 'ok') {
         console.log(res.data);
         this._setLoading(name, false);
+        let sessionPerPage = res.data.retObj;
         if (pageNum === 1) {
-          this.setData({
-            [name]: res.data.retObj,
-            ownedSessionsIsPullDownLoading: false
-          });
+          let length = sessionPerPage.length;
+          if (length > 0 && length < 5) {
+            this.setData({
+              [name]: res.data.retObj,
+              [name + 'IsNoData']: true,
+              ownedSessionsIsPullDownLoading: false
+            });
+          } else if (length === 5) {
+            this.setData({
+              [name]: res.data.retObj,
+              ownedSessionsIsPullDownLoading: false
+            });
+          } else {
+            this.setData({
+              [name + 'IsNoData']: true,
+              ownedSessionsIsPullDownLoading: false
+            });
+          }
+          
         } else {
-          let increment = res.data.retObj;
-          if (increment.length > 0) {
+          if (sessionPerPage.length > 0) {
             this.setData({
               [name]: [...this.data[name], ...res.data.retObj]
             });

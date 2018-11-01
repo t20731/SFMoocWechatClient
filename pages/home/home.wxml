@@ -47,7 +47,15 @@
               </view>
             </view>
           </view>
+          <view wx:if="{{learnSessionsIsLoading}}" class="weui-loadmore">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">Loading</view>
+          </view>
+          <view wx:if="{{learnSessionsIsNoData}}" class="weui-loadmore weui-loadmore_line">
+            <view class="weui-loadmore__tips weui-loadmore__tips_in-line">No More Data</view>
+          </view>
         </view>
+        
         <!-- Sharing -->
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">          
           <view wx:if="{{ownedSessionsIsPullDownLoading}}" class="weui-loadmore">
