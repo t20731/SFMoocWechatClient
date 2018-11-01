@@ -1,18 +1,28 @@
 <!--pages/session/newEvent.wxml-->
 <view class="page">
 <form bindsubmit="onSubmit" bindreset="onReset">
-  <view class="weui-cells__title">Topic</view>
+  <view class="weui-cells__title"><!-- Topic --></view>
   <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">
+              <i-icon type="task" size="28" color="#80848f" />
+            </view>
+          </view>
           <view class="weui-cell__bd">
               <input name="topic" class="weui-input" placeholder="Topic (Required)" />
           </view>
       </view>
   </view>
 
-  <view class="weui-cells__title">Start Date</view>
+  <view class="weui-cells__title"><!-- Start Date --></view>
   <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_input">
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">
+          <i-icon type="clock" size="28" color="#80848f" />
+        </view>
+      </view>
       <view class="weui-cell__bd">
         <picker mode="multiSelector" name="startDateTime" value="{{startDateTime}}" bindchange="changeSartDateTimeVal" bindcolumnchange="changeStartDateTimeColumn" range="{{dateTimeArray}}">
           <view class="weui-input">
@@ -23,11 +33,13 @@
     </view>
   </view>
 
-  <view class="weui-cells__title"></view>
+  <view class="weui-cells__title"><!-- Duration --></view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_select">
       <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">Duration</view>
+        <view class="weui-label">
+          <i-icon type="time" size="28" color="#80848f" />
+        </view>
       </view>
       <view class="weui-cell__bd">
         <picker name="duration" bindchange="bindDurationChange" value="{{durationIndex}}" range="{{durations}}">
@@ -37,24 +49,13 @@
     </view>
   </view>
 
-  <!-- <view class="weui-cells__title">End Date</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__bd">
-        <picker mode="multiSelector" name="endDateTime" value="{{endDateTime}}" bindchange="changeEndDateTime" bindcolumnchange="changeEndDateTimeColumn" range="{{dateTimeArray}}">
-          <view class="weui-input">
-            {{dateTimeArray[0][endDateTime[0]]}}-{{dateTimeArray[1][endDateTime[1]]}}-{{dateTimeArray[2][endDateTime[2]]}} {{dateTimeArray[3][endDateTime[3]]}}:{{dateTimeArray[4][endDateTime[4]]}}
-          </view>
-        </picker>
-      </view>
-    </view>
-  </view> -->
-
-  <view class="weui-cells__title"></view>
+  <view class="weui-cells__title"><!-- Location --></view>
   <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_select">
       <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">Location</view>
+        <view class="weui-label">
+          <i-icon type="coordinates" size="28" color="#80848f" />
+        </view>
       </view>
       <view class="weui-cell__bd">
         <picker name="location" bindchange="bindLocationChange" value="{{locationIndex}}" range="{{locations}}" range-key="name">
@@ -64,11 +65,13 @@
     </view>
   </view>
 
-  <view class="weui-cells__title"></view>
+  <view class="weui-cells__title"><!-- Direction --></view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_select">
       <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">Direction</view>
+        <view class="weui-label">
+          <i-icon type="flag" size="28" color="#80848f" />
+        </view>
       </view>
       <view class="weui-cell__bd">
         <picker name="direction" bindchange="bindDirectionChange" value="{{directionIndex}}" range="{{directions}}" range-key="name">
@@ -78,11 +81,13 @@
     </view>
   </view>
 
-  <view class="weui-cells__title"></view>
+  <view class="weui-cells__title"><!-- Difficulty --></view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_select">
       <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">Difficulty</view>
+        <view class="weui-label">
+          <i-icon type="integral" size="28" color="#80848f" />
+        </view>
       </view>
       <view class="weui-cell__bd">
         <picker name="difficulty" bindchange="bindDifficultyChange" value="{{difficultyIndex}}" range="{{difficulties}}">
@@ -92,7 +97,10 @@
     </view>
   </view>
 
-  <view class="weui-cells__title">Description</view>
+  <view class="weui-cells__title">
+    <!-- Description -->
+    <i-icon type="document" size="28" color="#80848f" />
+  </view>
   <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell">
           <view class="weui-cell__bd">

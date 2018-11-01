@@ -1,1 +1,6 @@
-{}
+{
+  "navigationBarTitleText": "Create New Session",
+  "usingComponents": {
+    "i-icon": "../components/icon/index"
+  }
+}
