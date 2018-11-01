@@ -8,7 +8,7 @@
     </view>
     <view class="tabbarWrapper">
       <scroll-view scroll-x="true" class="categoryTabBar" scroll-left="{{scrollLeft}}">
-        <view wx:for="{{directions}}" wx:key="id" class="tabItem {{currentTab==index?'active':''}}"  data-current="{{index}}" bindtap="swichNav" >
+        <view wx:for="{{directions}}" wx:key="index" class="tabItem {{selectedTabIndex==index?'active':''}}"  data-current="{{index}}" bindtap="swichNav" >
           {{item.name}}
         </view>
       </scroll-view>
@@ -18,7 +18,7 @@
     </view>
   </view>
   <view class="exploreContent">
-    <swiper style="height: {{swiperHeight}}rpx" class="tabContent" current="{{currentTab}}" duration="300" bindchange="switchTab">
+    <swiper style="height: {{swiperHeight}}rpx" class="tabContent" current="{{selectedTabIndex}}" duration="300" bindchange="switchTab">
       <swiper-item class="" wx:for="{{directions}}" wx:key="id">
         <view id="{{item.id}}" bindtap='goDetail' class="eventItem" wx:for="{{sessions}}" wx:key="id">
           <view class='leftContent'>
@@ -39,7 +39,7 @@
             </view>
           </view>
         </view>
-        <view class="noDataMsg" wx:if="{{showNoData}}"> No event yet! </view>
+        <view class="noDataMsg" wx:if="{{showNoData}}"> No Session yet! </view>
       </swiper-item>
     </swiper>
   </view>

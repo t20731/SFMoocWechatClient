@@ -11,7 +11,7 @@ Page({
    */
   data: {
     // tabItems: CONST.EXPLORE_TOPIC_CATEGORY,
-    currentTab: 0,
+    selectedTabIndex: 0,
     scrollLeft: 0,
     showFilterPopup: false,
     directions: [],
@@ -50,7 +50,7 @@ Page({
 
   swichNav: function (evt) {
     let cur = evt.target.dataset.current;
-    if (this.data.currentTab === cur) { 
+    if (this.data.selectedTabIndex === cur) { 
       return false; 
     } else {
       this.loadNewTabItemData(cur);
@@ -61,14 +61,15 @@ Page({
     this.loadNewTabItemData(cur);    
   },
 
-  loadNewTabItemData: function (currentTab) {
+  loadNewTabItemData: function (selectedTabIndex) {
     this.setData({
-      currentTab: currentTab
+      selectedTabIndex: selectedTabIndex
     });
+    let directionId = this.data.directions[selectedTabIndex].id;
     WXRequest.post('/session/list', {
       "pageNum": 1,
       "pageSize": 10,
-      "directionId": currentTab,
+      "directionId": directionId,
       "orderField": "total_members"
     }).then(res => {
       if (res.data.msg === 'ok') {
@@ -131,10 +132,11 @@ Page({
     if (this.data.selectedLevel < 0 && !this.data.selectedOrder) {
       return;
     }
+    let directionId = this.data.directions[selectedTabIndex].id;    
     WXRequest.post('/session/list', {
       "pageNum": 1,
       "pageSize": 10,
-      "directionId": this.data.currentTab,
+      "directionId": directionId,
       "difficulty": this.data.selectedLevel,
       "orderField": this.data.selectedOrder
     }).then(res => {
