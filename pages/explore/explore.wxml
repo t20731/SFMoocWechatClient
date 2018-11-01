@@ -8,7 +8,7 @@
     </view>
     <view class="tabbarWrapper">
       <scroll-view scroll-x="true" class="categoryTabBar" scroll-left="{{scrollLeft}}">
-        <view wx:for="{{directions}}" wx:key="id" class="tabItem {{currentTab==item.id?'active':''}}"  data-current="{{item.id}}" bindtap="swichNav" >
+        <view wx:for="{{directions}}" wx:key="id" class="tabItem {{currentTab==index?'active':''}}"  data-current="{{index}}" bindtap="swichNav" >
           {{item.name}}
         </view>
       </scroll-view>

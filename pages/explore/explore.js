@@ -11,7 +11,7 @@ Page({
    */
   data: {
     // tabItems: CONST.EXPLORE_TOPIC_CATEGORY,
-    currentTab: 2,
+    currentTab: 0,
     scrollLeft: 0,
     showFilterPopup: false,
     directions: [],
