@@ -51,11 +51,11 @@ const getDateTime = (datetime) => {
 function withData(param) {
   return param < 10 ? '0' + param : '' + param;
 }
-function getLoopArray(start, end) {
+function getLoopArray(start, end, increment = 1) {
   var start = start || 0;
   var end = end || 1;
   var array = [];
-  for (var i = start; i <= end; i++) {
+  for (var i = start; i <= end; i += increment) {
     array.push(withData(i));
   }
   return array;
@@ -111,7 +111,7 @@ function dateTimePicker(startYear, endYear, date) {
   dateTimeArray[1] = getLoopArray(1, 12);
   dateTimeArray[2] = getMonthDay(defaultDate[0], defaultDate[1]);
   dateTimeArray[3] = getLoopArray(0, 23);
-  dateTimeArray[4] = getLoopArray(0, 59);
+  dateTimeArray[4] = getLoopArray(0, 59, 5);
 
   dateTimeArray.forEach((current, index) => {
     dateTime.push(current.indexOf(defaultDate[index]));
