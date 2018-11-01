@@ -1,4 +1,6 @@
 <!--home.wxml-->
+<wxs src="../../utils/formatter.wxs" module="formatter">
+</wxs>
 <view class="page">
   <view class="userinfo">
     <button class="loginButton" type="primary" plain="true" wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
@@ -30,8 +32,8 @@
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">          
           <view id="{{item.id}}" bindtap='goLearnSession' class="eventItem" wx:for="{{learnSessions}}" wx:key="id">
             <view class='leftContent'>
-              <image src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg">
-              </image>
+              <image wx:if="{{item.tileImageSrc}}" src="{{formatter.getImageUrl(item.tileImageSrc)}}"></image>
+              <image wx:else src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg"></image>
             </view>
             <view class="rightContent">
               <view class="title">
@@ -39,7 +41,7 @@
               </view>
               <view class="speaker">{{item.owner.nickName}}</view>
               <view class="location">
-                {{item.startDate}} | {{item.location.name}}
+                {{formatter.getDate(item.createdDate)}}
                 <view class="count">
                   <image src="../../images/mini_people.png"></image>
                   <text>{{item.enrollments}}</text>
@@ -64,8 +66,8 @@
           </view>
           <view id="{{item.id}}" bindtap='goOwnedSession' class="eventItem" wx:for="{{ownedSessions}}" wx:key="id">
             <view class='leftContent'>
-              <image src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg">
-              </image>
+              <image wx:if="{{item.tileImageSrc}}" src="{{formatter.getImageUrl(item.tileImageSrc)}}"></image>
+              <image wx:else src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg"></image>
             </view>
             <view class="rightContent">
               <view class="title">
@@ -73,7 +75,7 @@
               </view>
               <view class="speaker">{{item.owner.nickName}}</view>
               <view class="location">
-                {{item.startDate}} | {{item.location.name}}
+                {{formatter.getDate(item.createdDate)}}
                 <view class="count">
                   <image src="../../images/mini_people.png"></image>
                   <text>{{item.enrollments}}</text>
@@ -94,8 +96,8 @@
         <view class="weui-tab__content" hidden="{{activeIndex != 2}}">       
           <view id="{{item.id}}" class="eventItem" wx:for="{{compeletedSessions}}" wx:key="id">
             <view class='leftContent'>
-              <image src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg">
-              </image>
+              <image wx:if="{{item.tileImageSrc}}" src="{{formatter.getImageUrl(item.tileImageSrc)}}"></image>
+              <image wx:else src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg"></image>
             </view>
             <view class="rightContent">
               <view class="title">
@@ -103,7 +105,7 @@
               </view>
               <view class="speaker">{{item.owner.nickName}}</view>
               <view class="location">
-                {{item.startDate}} | {{item.location.name}}
+                {{formatter.getDate(item.createdDate)}}
                 <view class="count">
                   <image src="../../images/mini_people.png"></image>
                   <text>{{item.enrollments}}</text>

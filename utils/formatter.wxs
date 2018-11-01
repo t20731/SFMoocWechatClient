@@ -2,6 +2,12 @@
 var getDate = function (time) {
   return time.split(' ')[0];
 }
+
+var getImageUrl = function (src){
+  //return 'http://localhost:8090' + src;
+  return 'https://sfmooc-api.techtuesday.club' + src;
+}
 module.exports = {
-  getDate: getDate
+  getDate: getDate,
+  getImageUrl: getImageUrl
 }

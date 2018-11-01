@@ -22,8 +22,8 @@
       <swiper-item class="" wx:for="{{directions}}" wx:key="id">
         <view id="{{item.id}}" bindtap='goDetail' class="eventItem" wx:for="{{sessions}}" wx:key="id">
           <view class='leftContent'>
-            <image src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg">
-            </image>
+            <image wx:if="{{item.tileImageSrc}}" src="{{formatter.getImageUrl(item.tileImageSrc)}}"></image>
+            <image wx:else src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg"></image>
           </view>
           <view class="rightContent">
             <view class="title">
