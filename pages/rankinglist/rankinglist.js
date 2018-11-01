@@ -6,7 +6,8 @@ const app = getApp()
 Page({
   data: {
     myRanking: {},
-    rankingList: []
+    rankingList: [],
+    hasUserInfo: false
   },
   onLoad: function () {
     
@@ -14,6 +15,11 @@ Page({
 
   init: function(){
     var userInfo = wx.getStorageSync('userInfo');
+    if (userInfo) {
+      this.setData({
+        hasUserInfo: true
+      })
+    }
     var that = this;
     wx.request({
       url: app.globalData.host + '/ranking/list',
@@ -32,12 +38,14 @@ Page({
   },
 
   findMyRanking: function () {
-    let myId = wx.getStorageSync('userInfo').id; 
-    let myRanking = this.data.rankingList.filter(item => item.userId === myId)[0];
-    this.setData({
+    let userInfo = wx.getStorageSync('userInfo');
+    if (userInfo && userInfo.id){
+      let myId = userInfo.id;
+      let myRanking = this.data.rankingList.filter(item => item.userId === myId)[0];
+      this.setData({
         myRanking: myRanking
-    });
-
+      });
+    }
   },
 
   onShow: function(){
