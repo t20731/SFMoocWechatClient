@@ -10,9 +10,12 @@
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <view class="userinfoRightSection">
         <view class="userinfo-nickname">{{userInfo.nickName}}</view>
-        <view>{{totalPoints}}</view>
-        <view class="userinfoPointsDetail">
-          <navigator url="pointsDetail?userId={{userInfo.id}}">Points Detail</navigator>
+        <view class="userinfoCredits">
+          <view>{{totalPoints}}</view>
+          <view class="userinfoPointsDetail">
+            <navigator url="pointsDetail?userId={{userInfo.id}}">Credits</navigator>
+            <image src="../../images/right_arrow1.png" class="navIcon"></image>
+          </view>
         </view>
       </view>
     </view>
@@ -29,7 +32,7 @@
       </view>
       <view class="weui-tab__panel">
         <!-- Learning -->
-        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">          
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
           <view id="{{item.id}}" bindtap='goLearnSession' class="eventItem" wx:for="{{learnSessions}}" wx:key="id">
             <view class='leftContent'>
               <image wx:if="{{item.tileImageSrc}}" src="{{formatter.getImageUrl(item.tileImageSrc)}}"></image>
@@ -57,9 +60,9 @@
             <view class="weui-loadmore__tips weui-loadmore__tips_in-line">No More Data</view>
           </view>
         </view>
-        
+
         <!-- Sharing -->
-        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">          
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
           <view wx:if="{{ownedSessionsIsPullDownLoading}}" class="weui-loadmore">
             <view class="weui-loading"></view>
             <view class="weui-loadmore__tips">Loading</view>
@@ -93,7 +96,7 @@
           <view bindtap="onCreateSession" class="session-create-btn"></view>
         </view>
         <!-- Completed -->
-        <view class="weui-tab__content" hidden="{{activeIndex != 2}}">       
+        <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
           <view id="{{item.id}}" class="eventItem" wx:for="{{compeletedSessions}}" wx:key="id">
             <view class='leftContent'>
               <image wx:if="{{item.tileImageSrc}}" src="{{formatter.getImageUrl(item.tileImageSrc)}}"></image>

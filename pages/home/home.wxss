@@ -32,8 +32,17 @@
   border-radius: 50%;
   border: 1px solid #FFF;
 }
-.userinfoRightSection .userinfoPointsDetail {
+.userinfoCredits{
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+.userinfoCredits .userinfoPointsDetail {
+  display: flex;
+  align-items: center;
+  margin-left: 10rpx;
   font-size: 20rpx;
+  padding-left: 10rpx;
   border-radius: 20rpx;
   text-align: center;
   background: #003399;
@@ -43,10 +52,8 @@
   width: 50%;
 }
 .navIcon {
-  margin-right: 18rpx;
-  vertical-align: middle;
-  width: 48rpx; 
-  height: 48rpx;
+  width: 16rpx; 
+  height: 20rpx;
 }
 
 #generateCodeModal view {

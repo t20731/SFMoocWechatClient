@@ -18,7 +18,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#FFF",
-    "navigationBarTitleText": "T2",
+    "navigationBarTitleText": "SFMooc",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
@@ -29,7 +29,7 @@
     "list": [
       {
         "pagePath": "pages/explore/explore",
-        "text": "Explore",
+        "text": "Session",
         "iconPath": "images/attention.png",
         "selectedIconPath": "images/attention_fill.png"
       },
@@ -41,7 +41,7 @@
       },
       {
         "pagePath": "pages/home/home",
-        "text": "Home",
+        "text": "Me",
         "iconPath": "images/people.png",
         "selectedIconPath": "images/people_fill.png"
       }
