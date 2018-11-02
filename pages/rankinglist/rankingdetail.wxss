@@ -83,14 +83,31 @@
   margin: 8rpx 0 0 20rpx;
 }
 .skillItem {
+  position: relative;
+  margin-bottom: 40rpx;
+}
+.skillContent image{
+  width: 70rpx;
+  height: 70rpx;
+  border-radius:50%;
+}
+.skillItem i-icon{
+  position: absolute;
+  right: 10rpx;
+  top: 6rpx;
+}
+.endorsement {
   display: flex;
-  height: 100rpx;
+  align-items: center;
+  margin:20rpx 0;
+}
+.endorsement text {
+  color: #71777D;
+  margin-left: 20rpx;
+  font-size: 26rpx;
 }
 .skillItem .skillTag {
-  flex: 1;
-}
-.skillItem text {
-  font-size: 28rpx;
+  font-size: 32rpx;
   background: #e8e8ed;
   border-radius: 28rpx;
   padding: 10rpx 16rpx;

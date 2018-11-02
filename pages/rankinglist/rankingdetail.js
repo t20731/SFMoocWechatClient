@@ -41,7 +41,7 @@ Page({
     initial: 0,
     userInfo: {},
     details: [],
-    tabs: ['Capability', 'Introduction', 'Recognition'],
+    tabs: ['Competence', 'Introduction', 'Endorsement'],
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
