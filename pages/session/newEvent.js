@@ -103,25 +103,6 @@ Page({
     this.inputChange('durationIndex', e.detail.value);
   },
 
-  // changeEndDateTime(e) {
-  //   let dateTime = e.detail.value;
-  //   let endDateTimeVal = this._calDateTimeVal(dateTime);
-  //   this.inputChange('endDateTimeVal', endDateTimeVal);
-  // },
-
-  // changeEndDateTimeColumn(e) {
-  //   let arr = this.data.endDateTime,
-  //     dateArr = this.data.dateTimeArray;
-
-  //   arr[e.detail.column] = e.detail.value;
-  //   dateArr[2] = Util.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
-
-  //   this.setData({
-  //     dateTimeArray: dateArr,
-  //     endDateTime: arr
-  //   });
-  // },
-
   bindLocationChange: function (e) {
     this.inputChange('locationIndex', e.detail.value);
   },
@@ -141,7 +122,6 @@ Page({
   },
 
   onSubmit: function(event) {
-    console.log(event);
     let value = event.detail.value;
     let eventDetail = this._buildEventDetail(value);
 
@@ -181,10 +161,12 @@ Page({
   },
 
   _calEndDateTimeVal: (startDateTime, duration) => {
-    console.log(startDateTime, duration);
+    let iosTime = startDateTime.replace(/-/g, '/');
+
     let n = duration.split(' ')[0];
     let time = parseInt(n === '1' ? '60' : n);
-    let endDateTime = new Date(new Date(startDateTime).getTime() + time * 60 * 1000);
+    let endDateTime = new Date(new Date(iosTime).getTime() + time * 60 * 1000);
+
     return Util.getDateTime(endDateTime);
   },
 
