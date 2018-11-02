@@ -139,7 +139,8 @@ Page({
     if (this.data.selectedLevel < 0 && !this.data.selectedOrder) {
       return;
     }
-    let directionId = this.data.directions[selectedTabIndex].id;    
+    let selectedIndex = this.data.selectedTabIndex;
+    let directionId = this.data.directions[selectedIndex].id;    
     WXRequest.post('/session/list', {
       "pageNum": 1,
       "pageSize": 10,
