@@ -1,7 +1,7 @@
 <!--pages/home/pointsDetail.wxml-->
 <view class="page">
   <view class="page__bd">
-    <text class="weui-cells__title">History of Points</text>
+    <text class="weui-cells__title">History of Credits</text>
     <view class="weui-panel weui-panel_access" wx:if="{{details.pointsList.length > 0}}" wx:for="{{details.pointsList}}" wx:key="date">
       <view class="weui-panel">
         <view class="weui-panel__hd">{{item.date}}</view>

@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "Capability",
+  "navigationBarTitleText": "Profile",
   "usingComponents": {
     "i-icon": "../components/icon/index"
   }

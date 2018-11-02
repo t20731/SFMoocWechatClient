@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "Explore",
+  "navigationBarTitleText": "Session",
   "usingComponents": {
     "i-drawer": "../components/popup"
   }
