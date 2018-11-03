@@ -24,6 +24,8 @@ Page({
     ownedSessionsIsPullDownLoading: false,
     ownedSessionsIsLoading: false,
     ownedSessionsIsNoData: false,
+    learnSessionsIsLoading: false,
+    learnSessionsIsNoData: false,
     pageNum: 1,
     learnSessions: [],
     ownedSessions: [],
@@ -71,8 +73,14 @@ Page({
       activeIndex: currentIndex
     });
     if (currentIndex == 1 && this.data.ownedSessions.length <= 0) {
+      this.setData({
+        pageNum: 1
+      });
       this._loadOwnedSessions();
     } else if (currentIndex == 2 && this.data.completedSessions.length <= 0){
+      this.setData({
+        pageNum: 1
+      });
       this._loadCompletedSessions();
     }
   },
