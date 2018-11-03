@@ -22,10 +22,6 @@ let skillPoints = [
     points: 12
   },
   {
-    name: 'Database',
-    points: 10
-  },
-  {
     name: 'Linux',
     points: 8
   },
