@@ -109,9 +109,6 @@
           </view>
       </view>
   </view>
-
-  <view class="weui-btn-area">
-    <button formType="submit" class="weui-btn" type="primary">Publish</button>
-  </view>
+  <button class="uniformBtn" form-type="submit">Publish</button>
 </form>
 </view>

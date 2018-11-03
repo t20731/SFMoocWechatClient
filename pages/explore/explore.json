@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "Session",
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "i-drawer": "../components/popup"
   }

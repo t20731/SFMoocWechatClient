@@ -1,3 +1,7 @@
 .weui-label {
   width: 80px;
 }
+
+.uniformBtn {
+  margin-top: 40rpx;
+}

@@ -127,9 +127,12 @@ Page({
 
     WXRequest.post('/session/edit', eventDetail).then(res => {
       if (res.data.msg === 'ok') {
-        wx.navigateBack({
-          delta: 1
-        });
+        Util.showToast('Success', 'success', 1000);
+        setTimeout(function () {
+          wx.navigateBack({
+            delta: 1
+          });
+        }, 1000);
       }
     }).catch(e => {
       console.log(e);

@@ -55,3 +55,7 @@
 .session-start-btn.hide {
   display: none;
 }
+
+.uniformBtn {
+  width: 100%;
+}
