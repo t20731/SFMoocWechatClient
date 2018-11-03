@@ -97,7 +97,7 @@
         </view>
         <!-- Completed -->
         <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
-          <view id="{{item.id}}" bindtap='goCompletedSession' class="eventItem" wx:for="{{compeletedSessions}}" wx:key="id">
+          <view id="{{item.id}}" bindtap='goCompletedSession' class="eventItem" wx:for="{{completedSessions}}" wx:key="id">
             <view class='leftContent'>
               <image wx:if="{{item.tileImageSrc}}" src="{{formatter.getImageUrl(item.tileImageSrc)}}"></image>
               <image wx:else src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg"></image>
@@ -115,6 +115,13 @@
                 </view>
               </view>
             </view>
+          </view>
+          <view wx:if="{{completedSessionsIsLoading}}" class="weui-loadmore">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">Loading</view>
+          </view>
+          <view wx:if="{{completedSessionsIsNoData}}" class="weui-loadmore weui-loadmore_line">
+            <view class="weui-loadmore__tips weui-loadmore__tips_in-line">No More Data</view>
           </view>
         </view>
       </view>

@@ -27,7 +27,7 @@ Page({
     pageNum: 1,
     learnSessions: [],
     ownedSessions: [],
-    compeletedSessions: [],
+    completedSessions: [],
     totalPoints: 0
   },
 
@@ -72,7 +72,7 @@ Page({
     });
     if (currentIndex == 1 && this.data.ownedSessions.length <= 0) {
       this._loadOwnedSessions();
-    } else if (currentIndex == 2 && this.data.compeletedSessions.length <= 0){
+    } else if (currentIndex == 2 && this.data.completedSessions.length <= 0){
       this._loadCompletedSessions();
     }
   },
@@ -101,13 +101,15 @@ Page({
 
   _loadCompletedSessions() {
     console.log('_loadCompletedSessions');
+    let userId = Util.getUserId();
     let pageNum = this.data.pageNum;
     let postData = {
       pageNum: pageNum,
       pageSize: PAGE_SIZE,
-      completed: 1
+      completed: 1,
+      userId: userId
     }
-    this._loadSessions(postData, 'compeletedSessions');
+    this._loadSessions(postData, 'completedSessions');
   },
 
   _loadSessions(postData, name) {
