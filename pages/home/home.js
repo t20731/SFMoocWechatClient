@@ -176,6 +176,13 @@ Page({
     })
   },
 
+  goCompletedSession(event){
+    let id = event.currentTarget.id;
+    wx.navigateTo({
+      url: '../session/eventDetail?id=' + id + '&&isCompleted=true'
+    })
+  },
+
   onCreateSession() {
     wx.navigateTo({
       url: '../session/newEvent'

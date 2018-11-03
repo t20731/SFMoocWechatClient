@@ -25,7 +25,8 @@ Page({
     checkInCode: '',
     isCheckInModalHidden: true,
     startQuizBtnVal: 'Quiz',
-    startQuizBtnDisabled: false
+    startQuizBtnDisabled: false,
+    isCompleted: false
   },
 
   onLoad: function (e) {
@@ -33,6 +34,11 @@ Page({
     this.setData({
       sessionId: e.id
     });
+    if (e.isCompleted){
+      this.setData({
+        isCompleted: e.isCompleted
+      });
+    }
     this._checkGuest(userId);
     this._isCheckedIn();
     WXRequest.post('/session/detail',{
