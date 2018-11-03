@@ -5,7 +5,7 @@
 <view class="page">
   <view class="exploreHeader">
     <view class="searchInput">
-      <input placeholder='Java SAPUI5 HANA' bindfocus="goToSearchPage"></input>
+      <input placeholder='Java SAPUI5 HANA' disabled ="false" bindtap="goToSearchPage"></input>
       <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000">  
         <block wx:for="{{imgPaths}}" wx:key="index">  
           <swiper-item>

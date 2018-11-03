@@ -42,7 +42,9 @@ page {
 .t2Page {
   padding: 0.5rem;
 }
-
+.eventItem image {
+  border-radius: 10rpx;
+}
 .uniformBtn {
   background: #0076cb;
   width: 95%;
