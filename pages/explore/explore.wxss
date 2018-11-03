@@ -2,8 +2,10 @@
 .page {
   background: #FFF;
 }
+.page image {
+  border-radius:10rpx;
+}
 .exploreHeader {
-  padding: 10rpx;
   text-align: center;
   position:fixed;
   z-index: 6;
@@ -12,14 +14,21 @@
   width:100%;
   background:#FFF;
 }
-.exploreHeader .searchInput {
-  height: 60rpx;
+.exploreHeader .swiper {
+  height: 300rpx;
+}
+.exploreHeader .swiper image {
+  height: 100%;
+  width: 100%;
 }
 .exploreHeader input {
   border-radius:35rpx;
-  border:1px solid #CCC;
-  width:90%;
-  margin:0 auto;
+  border: 1px solid #CCC;
+  width: 70%;
+  position:absolute;
+  top: 50rpx;
+  left: 13%;
+  z-index: 99;
 }
 .tabbarWrapper {
   display: flex;
@@ -32,18 +41,6 @@
   white-space: nowrap;
 }
 .categoryTabBar {
-  /* height: 80rpx; */
-  /* width: 100%; 
-  box-sizing: border-box;
-  overflow: hidden;
-  line-height: 80rpx;
-  font-size: 16px; 
-  white-space: nowrap; */
-
-  /* position: fixed;
-  top: 70rpx; 
-  left: 0; 
-  z-index: 99; */
   width: 90%;
   flex: 1;
 }
@@ -78,23 +75,20 @@
   border-radius: 16rpx;
 }
 .tabContent {
-  margin-top: 160rpx;
-  padding: 0 15rpx;
+  margin-top: 380rpx;
+  padding: 10rpx;
 }
-
 .noDataMsg {
   text-align: center;
   color: #71777D;
   margin-top: 45%;
 }
-
 .popup-container {
   width: 60vw;
 	height: 80vh;
   margin-top: -23vh;
 	background: #fff;
 }
-
 .popup-container button{
   width: 160rpx;
   color: #FFF;
@@ -103,7 +97,6 @@
   float: right;
   margin: 40rpx 10rpx 0 0;
 }
-
 .selectedTag {
   background-color: #0076cb !important;
   color: #FFF;

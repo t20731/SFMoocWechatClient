@@ -4,13 +4,15 @@ App({
   globalData: {
      //host: 'http://localhost:8090',
      host: 'https://sfmooc-api.techtuesday.club',
-     openId:''
+     openId:'',
+     systemInfo: {}
   },
   data: {
   },
   onLaunch: function () {
     console.log('app::onLaunch')
-    var openid = wx.getStorageSync('openid');
+    let openid = wx.getStorageSync('openid');
+    this.globalData.systemInfo = wx.getSystemInfoSync();
     if (!openid) {
       var that = this
       // 登录

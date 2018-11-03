@@ -3,6 +3,8 @@ import Util from '../../utils/util';
 import WXRequest from '../../utils/wxRequest';
 import * as CONST from '../../utils/const';
 const app = getApp()
+const systemInfo = app.globalData.systemInfo;
+let listVisibleHeight = systemInfo.windowHeight * (750 / systemInfo.windowWidth) - 400
 
 Page({
 
@@ -10,6 +12,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    listVisibleHeight: listVisibleHeight,
+    imgPaths: [
+      '../../images/vue.jpg',
+      '../../images/weapp.jpg',
+      '../../images/python.jpg',
+    ],
     // tabItems: CONST.EXPLORE_TOPIC_CATEGORY,
     selectedTabIndex: 0,
     scrollLeft: 0,
@@ -42,10 +50,11 @@ Page({
     }).then(res => {
       if (res.data.msg === 'ok') {
         console.log(res.data);
+        let swiperHeight = this.getCoumptedSwiperHeight(res.data.retObj.sessions.length)
         this.setData({
           directions: res.data.retObj.directions,
           sessions: res.data.retObj.sessions,
-          swiperHeight: res.data.retObj.sessions.length * 200
+          swiperHeight: swiperHeight
         });
       }
     }).catch(e => {
@@ -183,17 +192,6 @@ Page({
    */
   onShow: function () {
     //  this.init();
-    let that = this
-    wx.getSystemInfo({
-      success: function (res) {
-        console.log('----systeminfo----');
-        console.log(res);
-        that.setData({
-          listVisibleHeight: res.windowHeight * (750 / res.windowWidth) - 160
-        });
-        console.log(res.windowHeight * (750 / res.windowWidth) - 160);
-      }
-    });
   },
 
   /**
@@ -231,7 +229,7 @@ Page({
     });
     WXRequest.post('/session/list', {
       "pageNum": pageNum,
-      "pageSize": 6,
+      "pageSize": 10,
       "directionId": directionId
       // "orderField": "total_members"
     }).then(res => {
