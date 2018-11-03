@@ -82,24 +82,12 @@ Page({
       selectedTabIndex: selectedTabIndex
     });
     let directionId = this.data.directions[selectedTabIndex].id;
-    WXRequest.post('/session/list', {
+    let options = {
       "pageNum": 1,
       "pageSize": 10,
-      "directionId": directionId,
-      "orderField": "total_members"
-    }).then(res => {
-      if (res.data.msg === 'ok') {
-        console.log(res.data);
-        let swiperHeight = this.getCoumptedSwiperHeight(res.data.retObj.length);
-        this.setData({
-          sessions: res.data.retObj,
-          swiperHeight: swiperHeight,
-          showNoData: res.data.retObj.length === 0
-        });
-      }
-    }).catch(e => {
-      console.log(e)
-    });
+      "directionId": directionId
+    };
+    this._fetchSessionList(options);
   },
   getCoumptedSwiperHeight: function (count) {
     let itemsHeight = count * 200;
@@ -179,6 +167,18 @@ Page({
       selectedOrder: ''
     });
   },
+  _fetchSessionList: function (options) {
+    return WXRequest.post('/session/list', options).then(res => {
+      let swiperHeight = this.getCoumptedSwiperHeight(res.data.retObj.length);
+      this.setData({
+        sessions: res.data.retObj,
+        swiperHeight: swiperHeight,
+        showNoData: res.data.retObj.length === 0,
+      });
+    }).catch(e => {
+      console.log(e)
+    });
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -213,6 +213,14 @@ Page({
    */
   onPullDownRefresh: function () {
     console.log('onPullDownRefresh...');
+    let selectedIndex = this.data.selectedTabIndex;
+    let directionId = this.data.directions[selectedIndex].id;
+    let options = {
+      "pageNum": 1,
+      "pageSize": 10,
+      "directionId": directionId,
+    };
+    this._fetchSessionList(options);
   },
 
   /**
