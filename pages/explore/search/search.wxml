@@ -2,13 +2,11 @@
 <wxs src="../../../utils/formatter.wxs" module="formatter">
 </wxs>
 <view class="page">
-  <view class="inputSearch">
-    <!--<form bindsubmit="formSubmit" bindreset="formReset">-->
+  <view class="searchBar">
     <input placeholder="Search event" confirm-type="search" bindinput="handleInputChange" value="{{searchValue}}" />
     <view class="close" hidden="{{isCloseHidden}}" bindtap="resetInputValue">X</view>
     <button formType="submit" class="searchSubmit" hidden="{{searchSubmitHidden}}" bindtap="searchEvents">Search</button>
     <button formType="reset" class="searchReset" hidden="{{searchResetHidden}}" bindtap="cancelSearch">Cancel</button>
-    <!--</form>-->
   </view>
   <view class="searchKeywords" hidden="{{searchKeywordsHidden}}">
     <!--hot search-->
@@ -28,7 +26,7 @@
 
   <!--search result-->
   <view class="searchResult" hidden="{{!searchKeywordsHidden}}">
-    <view class="searchResultCount">There are {{searchResultCount}} events related</view>
+    <view class="searchResultCount">There are {{searchResultCount}} session(s) related</view>
     <view id="{{item.id}}" bindtap='goDetail' class="eventItem" wx:for="{{searchResult}}" wx:key="id">
         <view class='leftContent'>
           <image wx:if="{{item.tileImageSrc}}" src="{{formatter.getImageUrl(item.tileImageSrc)}}"></image>
