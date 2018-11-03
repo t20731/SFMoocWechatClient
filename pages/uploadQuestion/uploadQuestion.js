@@ -111,7 +111,7 @@ Page({
             });
             WCache.put(that.data.sessionId + '_isQuestionPublished', true, 60 * 60 * 12);
           } else if (res.data.msg === 'not_authorized') {
-            Util.showToast('Not Authorized', 'none', 2000);
+            Util.showToast('Enrollments has not reached the threshold', 'none', 2000);
           } else if (res.data.msg === 'published') {
             Util.showToast('Published', 'none', 2000);
           }

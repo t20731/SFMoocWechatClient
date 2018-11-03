@@ -190,7 +190,7 @@ Page({
       code: checkInCode
     }).then(res => {
       if (res.data.msg === 'ok') {
-        Util.showToast('签到成功', 'success', 2000);
+        Util.showToast('Success', 'success', 2000);
         WCache.put(that.data.sessionId + '_checkedIn', true, 24 * 60 * 60);
         this._markCheckedIn();
       }
