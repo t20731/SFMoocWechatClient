@@ -23,6 +23,7 @@ Page({
     scrollLeft: 0,
     showFilterPopup: false,
     directions: [],
+    hotSessions: [],
     sessions: [],
     pageNum: 1,
     showNoData: 'false',
@@ -44,20 +45,27 @@ Page({
   },
 
   init: function(){
+    wx.showLoading({
+      title: 'Loading',
+      mask: true
+    })
     WXRequest.post('/session/all', {
       pageNum: 1,
       pageSize: 10
     }).then(res => {
+      wx.hideLoading();
       if (res.data.msg === 'ok') {
         console.log(res.data);
         let swiperHeight = this.getCoumptedSwiperHeight(res.data.retObj.sessions.length)
         this.setData({
           directions: res.data.retObj.directions,
+          hotSessions: res.data.retObj.hotSessions,
           sessions: res.data.retObj.sessions,
           swiperHeight: swiperHeight
         });
       }
     }).catch(e => {
+        wx.hideLoading();
         console.log(e)
     });
   },
@@ -221,6 +229,7 @@ Page({
       "directionId": directionId,
     };
     this._fetchSessionList(options);
+    wx.stopPullDownRefresh();
   },
 
   /**
