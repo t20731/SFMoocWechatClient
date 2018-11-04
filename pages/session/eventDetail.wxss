@@ -20,8 +20,8 @@
 
 .session-avatar-wrapper {
   position: absolute;
-  top: 264rpx;
   left: 40rpx;
+  bottom: 92rpx;
   width: 60px;
   height: 60px;
   border: 4px #fff solid;
@@ -37,8 +37,8 @@
 
 .event-detail-nickname {
   position: absolute;
-  top: 412rpx;
   left: 44rpx;
+  bottom: 36rpx;
   font-size: 14px;
   color: #fff;
 }
