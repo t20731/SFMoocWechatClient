@@ -21,9 +21,11 @@ Page({
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
+    tabArr: ["learnSessions", "ownedSessions", "completedSessions"],
     ownedSessionsIsPullDownLoading: false,
     ownedSessionsIsLoading: false,
     ownedSessionsIsNoData: false,
+    learnSessionsIsPullDownLoading: false,
     learnSessionsIsLoading: false,
     learnSessionsIsNoData: false,
     pageNum: 1,
@@ -134,17 +136,17 @@ Page({
             this.setData({
               [name]: res.data.retObj,
               [name + 'IsNoData']: true,
-              ownedSessionsIsPullDownLoading: false
+              [name + 'IsPullDownLoading']: false
             });
           } else if (length === 5) {
             this.setData({
               [name]: res.data.retObj,
-              ownedSessionsIsPullDownLoading: false
+              [name + 'IsPullDownLoading']: false
             });
           } else {
             this.setData({
               [name + 'IsNoData']: true,
-              ownedSessionsIsPullDownLoading: false
+              [name + 'IsPullDownLoading']: false
             });
           }
           
@@ -287,17 +289,17 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.setData({
-      pageNum: 1
-    });
     const activeIndex = this.data.activeIndex;
+    let name = this.data.tabArr[activeIndex];
+    this.setData({
+      pageNum: 1,
+      [name + 'IsPullDownLoading']: true,
+      [name + 'IsNoData']: false
+    });
     if (activeIndex == 0) {
       this._loadLearnSessions();
     } else if (activeIndex == 1){
-      this.setData({
-        ownedSessionsIsPullDownLoading: true,
-        ownedSessionsIsNoData: false
-      });
+      
       this._loadOwnedSessions();
     } else if (activeIndex == 2){
       this._loadCompletedSessions();

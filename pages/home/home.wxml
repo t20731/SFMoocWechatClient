@@ -33,6 +33,10 @@
       <view class="weui-tab__panel">
         <!-- Learning -->
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+          <view wx:if="{{learnSessionsIsPullDownLoading}}" class="weui-loadmore">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">Loading</view>
+          </view>
           <view id="{{item.id}}" bindtap='goLearnSession' class="eventItem" wx:for="{{learnSessions}}" wx:key="id">
             <view class='leftContent'>
               <image wx:if="{{item.tileImageSrc}}" src="{{formatter.getImageUrl(item.tileImageSrc)}}"></image>
@@ -97,6 +101,10 @@
         </view>
         <!-- Completed -->
         <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+          <view wx:if="{{completedSessionsIsPullDownLoading}}" class="weui-loadmore">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">Loading</view>
+          </view>
           <view id="{{item.id}}" bindtap='goCompletedSession' class="eventItem" wx:for="{{completedSessions}}" wx:key="id">
             <view class='leftContent'>
               <image wx:if="{{item.tileImageSrc}}" src="{{formatter.getImageUrl(item.tileImageSrc)}}"></image>
