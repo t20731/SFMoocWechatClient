@@ -4,8 +4,10 @@ var getDate = function (time) {
 }
 
 var getImageUrl = function (src){
-  //return 'http://localhost:8090' + src;
-  return 'https://sfmooc-api.techtuesday.club' + src;
+  if (src) {
+    //return 'http://localhost:8090' + src;
+    return 'https://sfmooc-api.techtuesday.club' + src;
+  }
 }
 module.exports = {
   getDate: getDate,
