@@ -18,6 +18,10 @@
     {{eventDetail.description}}
     </view>
     <view class="flex-item">
+      <view>Presenter</view>
+      <text>{{eventDetail.owner.nickName}}</text>
+    </view>
+    <view class="flex-item">
       <view>When</view>
       <text>{{eventDetail.startDate}} - {{eventDetail.endDate}}</text>
     </view>
