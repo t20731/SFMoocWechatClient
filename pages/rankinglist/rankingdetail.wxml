@@ -61,7 +61,7 @@
               <i-icon type="add" size="28" color="#0076cb" custom="sfAdd" data-skillIndex="{{index}}" bindtap="addSkillPoints"/>
             </view>
             <view wx:else>
-              <i-icon type="right" size="28" color="#0076cb" custom="sfRight"/>
+              <i-icon type="right" size="28" color="#0076cb" custom="sfRight" data-skillIndex="{{index}}" bindtap="revertAddSkillPoints"/>
             </view>
           </view>
         </view>

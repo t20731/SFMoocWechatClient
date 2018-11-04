@@ -94,6 +94,14 @@ Page({
       skillPoints: this.data.skillPoints
     });
   },
+  revertAddSkillPoints: function (evt) {
+    let index = evt.target.dataset.skillindex;
+    this.data.skillPoints[index].points -= 1;
+    this.data.skillPoints[index].endorsed = false;
+    this.setData({
+      skillPoints: this.data.skillPoints
+    });
+  },
   touchHandler: function (e) {
     console.log(radarChart.getCurrentDataIndex(e));
   },
