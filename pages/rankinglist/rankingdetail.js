@@ -7,27 +7,33 @@ let radarChart = null;
 let skillPoints = [
   {
     name: 'Java',
-    points: 19
+    points: 19,
+    endorsed: false
   },
   {
     name: 'Database',
-    points: 10
+    points: 10,
+    endorsed: false
   },
   {
     name: 'Javascript',
-    points: 16
+    points: 16,
+    endorsed: false
   },
   {
     name: 'Testing',
-    points: 12
+    points: 12,
+    endorsed: false
   },
   {
     name: 'Linux',
-    points: 8
+    points: 8,
+    endorsed: false
   },
   {
     name: 'UI Design',
-    points: 6
+    points: 6,
+    endorsed: false
   }
 ]
 
@@ -83,6 +89,7 @@ Page({
   addSkillPoints: function (evt) {
     let index = evt.target.dataset.skillindex;
     this.data.skillPoints[index].points += 1;
+    this.data.skillPoints[index].endorsed = true;
     this.setData({
       skillPoints: this.data.skillPoints
     });
