@@ -67,7 +67,7 @@ Page({
     this.setSearchHistory(newHistoryData);
     WXRequest.post('/session/list', {
       pageNum: 1,
-      pageSize: 10,
+      pageSize: 50,
       keyWord: this.data.searchValue
     }).then(res => {
       if (res.data.msg === 'ok') {

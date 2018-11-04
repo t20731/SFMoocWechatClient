@@ -26,7 +26,8 @@ Page({
     isCheckInModalHidden: true,
     startQuizBtnVal: 'Quiz',
     startQuizBtnDisabled: false,
-    isCompleted: false
+    isCompleted: false,
+    isRegistered: false
   },
 
   onLoad: function (e) {
@@ -94,7 +95,7 @@ Page({
   },
 
   _checkGuest: function (userId) {
-    if (userId === null) {
+    if (userId === 'abc') {
       // guest cannot register
       this.setData({
         registerBtnVal: 'Login to Register',
@@ -105,7 +106,7 @@ Page({
 
   _markRegistered: function () {
     this.setData({
-      disabled: true,
+      isRegistered: true,
       registerBtnVal: 'Registered'
     });
   },
@@ -134,7 +135,6 @@ Page({
     // call API to register the event
     console.log('Register: ', event);
     this.setData({
-      disabled: !this.data.disabled,
       loading: !this.data.loading,
     });
 
@@ -148,12 +148,10 @@ Page({
         Util.showToast('Successfully');
         this.setData({
           loading: false,
+          isRegistered: true,
           registerBtnVal: 'Registered'
         })
       } else {
-        this.setData({
-          disabled: false
-        });
         this.showError('Register failed. Please try again');
       }
     }).catch(e => {
@@ -218,6 +216,7 @@ Page({
   onStartSession(event) {
     let userId = Util.getUserId();
     let canStart = this._canStart(this.data.eventDetail.enrollments);
+    var that = this;
     if (canStart) {
       WXRequest.post('/session/start', {
         sessionId: this.data.eventDetail.id,
@@ -227,6 +226,7 @@ Page({
           console.log(res.data);
           let checkInCode = res.data.retObj.CheckInCode;
           this._markStarted(checkInCode);
+          WCache.put(that.data.sessionId + '_started', true, 24 * 60 * 60);
         }
       }).catch(e => {
         console.log(e);

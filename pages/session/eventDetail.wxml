@@ -52,17 +52,17 @@
         </view>
       </block>
       <block wx:else>
-        <view wx:if="{{disabled}}" class="flex-item">
+        <view wx:if="{{isRegistered}}" class="flex-item">
           <modal id="checkInModal" hidden="{{isCheckInModalHidden}}" title="Please type check in code" confirm-text="Submit" cancel-text="Cancel" bindconfirm="submitCheckInCode" bindcancel="cancelCheckIn">
             <input name="checkInCode" bindinput="onCheckInCodeInput" class="weui-input" placeholder="Check in Code" />
           </modal>
           <button bindtap='onCheckIn' class="uniformBtn" disabled="{{checkInDisabled}}">{{checkInBtnVal}}</button>
         </view>
-        <view wx:if="{{disabled}}" class="flex-item">
+        <view wx:if="{{isRegistered}}" class="flex-item">
           <button bindtap='onStartQuiz' class="uniformBtn" disabled="{{startQuizBtnDisabled}}">{{startQuizBtnVal}}</button>
         </view>
-        <view class="flex-item" wx:if="{{!disabled}}">
-          <button bindtap='onRegister' class="uniformBtn" loading="{{loading}}">{{registerBtnVal}}</button>
+        <view class="flex-item" wx:if="{{!isRegistered}}">
+          <button bindtap='onRegister' class="uniformBtn" disabled="{{disabled}}" loading="{{loading}}">{{registerBtnVal}}</button>
         </view>
       </block>
     </view>

@@ -97,8 +97,11 @@ Page({
   
   publishQuestions: function () {
     var that = this;
+    let isStarted = WCache.get(this.data.sessionId + '_started');
     if (this.data.questions.length != 3) {
       Util.showToast('Minimum 3 questions', 'none', 2000);
+    } else if (!isStarted){
+      Util.showToast('Please start session first', 'none', 2000);
     } else {
       wx.request({
         url: app.globalData.host + '/question/publish/' + that.data.sessionId,

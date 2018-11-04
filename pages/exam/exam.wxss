@@ -36,3 +36,8 @@ radio .wx-radio-input.wx-radio-input-checked{
   color: #71777D;
   margin-top: 45%;
 }
+
+button[disabled]:not([type]) {
+  color:rgba(255, 255, 255, 0.6);
+  background:#5B9CCB;
+}
