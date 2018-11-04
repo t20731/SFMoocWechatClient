@@ -13,7 +13,7 @@
 }
 .close {
   position: absolute;
-  right: 190rpx;
+  right: 174rpx;
   width: 40rpx;
   height: 40rpx;
   text-align: center;
@@ -22,14 +22,13 @@
   background: grey;
 }
 .searchBar input {
-  width: 70%;
+  width: 63%;
   height: 60rpx;
   background: #e8e8ed;
   border-radius: 60rpx;
-  padding-left: 30rpx;
+  padding: 0 50rpx;
   font-size: 28rpx;
   margin-left: 2%;
-  position: relative;
 }
 .searchBar button {
   font-size: 24rpx;
