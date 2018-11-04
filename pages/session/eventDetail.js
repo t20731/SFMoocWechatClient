@@ -41,10 +41,16 @@ Page({
     }
     this._checkGuest(userId);
     this._isCheckedIn();
+
+    wx.showLoading({
+      title: 'Loading',
+      mask: true
+    })
     WXRequest.post('/session/detail',{
       sessionId: e.id,
       userId: userId
     }).then(res => {
+      wx.hideLoading();
       if (res.data.msg === 'ok') {
         console.log(res.data);
         let retObj = res.data.retObj;
