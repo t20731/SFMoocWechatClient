@@ -112,7 +112,3 @@
   color: #fff;
   font-size: 30px;
 }
-
-.eventItem {
-  height: 148rpx;
-}
