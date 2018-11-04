@@ -32,6 +32,7 @@ Page({
     learnSessions: [],
     ownedSessions: [],
     completedSessions: [],
+    completedSessionsIsNoData: false,
     totalPoints: 0
   },
 
@@ -65,11 +66,13 @@ Page({
       }
     });
 
+    this._setLoading('learnSessions', true);
     this._loadLearnSessions();
   },
 
   tabClick: function (e) {
     let currentIndex = e.currentTarget.id;
+    let name = this.data.tabArr[currentIndex];
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: currentIndex
@@ -78,11 +81,13 @@ Page({
       this.setData({
         pageNum: 1
       });
+      this._setLoading(name, true);
       this._loadOwnedSessions();
     } else if (currentIndex == 2 && this.data.completedSessions.length <= 0){
       this.setData({
         pageNum: 1
       });
+      this._setLoading(name, true);
       this._loadCompletedSessions();
     }
   },
@@ -123,7 +128,6 @@ Page({
   },
 
   _loadSessions(postData, name) {
-    this._setLoading(name, true);
     let pageNum = this.data.pageNum;
     WXRequest.post('/session/list', postData).then(res => {
       if (res.data.msg === 'ok') {
@@ -304,6 +308,7 @@ Page({
     } else if (activeIndex == 2){
       this._loadCompletedSessions();
     }
+    wx.stopPullDownRefresh();
   },
 
   /**
@@ -311,10 +316,13 @@ Page({
    */
   onReachBottom: function () {
     let pageNum = this.data.pageNum + 1;
-    this.setData({
-      pageNum: pageNum
-    });
     const activeIndex = this.data.activeIndex;
+    let name = this.data.tabArr[activeIndex];
+    this._setLoading(name, true);
+    this.setData({
+      pageNum: pageNum,
+      [name + 'IsNoData']: false
+    });
     if (activeIndex == 0) {
       this._loadLearnSessions();
     } else if (activeIndex == 1) {
