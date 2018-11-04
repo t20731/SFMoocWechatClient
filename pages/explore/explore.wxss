@@ -81,10 +81,10 @@
   margin-top: 45%;
 }
 .popup-container {
-  width: 60vw;
-	height: 80vh;
-  margin-top: -23vh;
-	background: #fff;
+  width: 100vw;
+  height: 48vh;
+  margin-top: -53vh;
+  background: #fff;
 }
 .popup-container button{
   width: 160rpx;
@@ -92,7 +92,7 @@
   background: #0076cb;
   font-size: 28rpx;
   float: right;
-  margin: 40rpx 10rpx 0 0;
+  margin: 60rpx 50rpx 0 0;
 }
 .selectedTag {
   background-color: #0076cb !important;
