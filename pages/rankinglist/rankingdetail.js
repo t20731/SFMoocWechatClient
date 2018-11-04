@@ -42,7 +42,6 @@ Page({
   data: {
     initial: 0,
     userInfo: {},
-    details: [],
     tabs: ['Competence', 'Introduction', 'Endorsement'],
     activeIndex: 0,
     sliderOffset: 0,
@@ -63,19 +62,18 @@ Page({
         });
       }
     });
-    if(userId){
+    if (userId) {
       wx.request({
-        url: app.globalData.host + '/ranking/points/' + userId,
+        url: app.globalData.host + '/user/' + userId,
         method: 'GET',
         success: function (res) {
           console.log(res.data);
           that.setData({
-            userInfo: res.data.retObj.user,
-            details: res.data.retObj.pointsList
+            userInfo: res.data.retObj
           });
         },
         fail: function (e) {
-          Util.showToast('数据获取失败', 'none', 2000);
+          Util.showToast('Failed to get user data', 'none', 2000);
         }
       })
     }

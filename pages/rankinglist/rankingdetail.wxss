@@ -73,6 +73,10 @@
 .introduction i-icon {
   margin-right: 20rpx;
 }
+
+ .introduction text {
+  font-size: 18px;
+} 
 .githubInfo image{
   width: 28px;
   height: 28px;

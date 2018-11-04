@@ -24,23 +24,23 @@
         <view class="weui-tab__content capabilitySubTab introduction" hidden="{{activeIndex != 1}}">
           <view>
             <i-icon type="brush" size="28" color="#80848f" />
-            <text>Later Equals Never</text>
+            <text>{{userInfo.signature == null ? 'No data' : userInfo.signature}}</text>
           </view>
           <view>
             <i-icon type="group" size="28" color="#80848f" />
-            <text>Platform Rule Engine</text>
+            <text>{{userInfo.department == null ? 'No data' : userInfo.department}}</text>
           </view>
           <view>
             <i-icon type="coordinates" size="28" color="#80848f"/>
-            <text>PVG03 D3.15</text>
+            <text>{{userInfo.seat == null ? 'No data' : userInfo.seat}}</text>
           </view>
           <view>
             <i-icon type="eit" size="28" color="#80848f"/>
-            <text>https://juejin.im/user/test</text>
+            <text>{{userInfo.blog == null ? 'No data' : userInfo.blog}}</text>
           </view>
           <view class="githubInfo">
             <image src="../../images/github.png"></image>
-            <text>https://github.com/t20731</text>
+            <text>{{userInfo.github == null ? 'No data' : userInfo.github}}</text>
           </view>
 
         </view>
