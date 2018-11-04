@@ -80,8 +80,15 @@ Page({
         },
         success: function (res) {
           if (res.data.msg === 'ok') {
-            let msg = 'Number of correct answers: ' + res.data.retObj.points;
-            Util.showToast(msg, 'none', 2000);
+            wx.showModal({
+              content: 'Number of correct answers: ' + res.data.retObj.points,
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                  console.log('Confirmed')
+                }
+              }
+            });
             that.setData({
               correctAnswerMap: res.data.retObj.answerMap,
               isSubmitBtnDisabled: true
@@ -96,11 +103,7 @@ Page({
 
             WCache.put(that.data.sessionId + '_isExamSubmitted', true, 60*60*12);
             WCache.put(that.data.sessionId + '_correctAnswerMap', that.data.correctAnswerMap, 60*60*12);
-            // setTimeout(function () {
-            //   wx.navigateBack({
-            //     delta: 1
-            //   })
-            // }, 2000);
+
           } else if (res.data.msg === 'not_authorized' && res.data.status === -1){
             Util.showToast('not_authorized', 'none', 2000);
           } else if (res.data.msg === 'not_authorized' && res.data.status === -2) {
