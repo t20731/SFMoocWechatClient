@@ -9,7 +9,17 @@ var getImageUrl = function (src){
     return 'https://sfmooc-api.techtuesday.club' + src;
   }
 }
+var getDifficulty = function (difficulty) {
+  if (difficulty === 0) {
+    return 'Beginner';
+  } else if (difficulty === 1) {
+    return 'Intermediate';
+  } else {
+    return 'Advanced';
+  }
+}
 module.exports = {
   getDate: getDate,
-  getImageUrl: getImageUrl
+  getImageUrl: getImageUrl,
+  getDifficulty: getDifficulty
 }
