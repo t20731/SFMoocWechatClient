@@ -1,59 +1,63 @@
 .page {
-  padding: 10rpx 20rpx;
+  padding: 0 20rpx 10rpx;
   background: #fff;
 }
 
-.flex-item:not(:first-child) {
-  margin-top: 10rpx
-}
-.event-detail-title {
-  text-align: center;
-  font-weight: 700;
+.flex-item {
+  margin-bottom: 40rpx;
+  font-size: 14px;
 }
 
-.event-detail-author {
-  margin-bottom: 5px;
-  font-weight: bold;
+.session-detail-header {
+  position: relative;
+  width: 100%;
+  background: #fff;
+}
+
+.session-header-bg {
+  width: 100%;
+}
+
+.session-avatar-wrapper {
+  position: absolute;
+  top: 264rpx;
+  left: 40rpx;
+  width: 60px;
+  height: 60px;
+  border: 4px #fff solid;
+  border-radius: 5px;
+  background: #fff;
 }
 
 .event-detail-avatar {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 5px;
 }
 
 .event-detail-nickname {
-  margin-top: -10px;
-  font-size: 13px;
-  font-weight: 300;
+  position: absolute;
+  top: 412rpx;
+  left: 44rpx;
+  font-size: 14px;
+  color: #fff;
 }
 
-.event-detail-duration {
-  font-size: 13px;
-}
-
-.event-detail-location {
-  font-size: 13px;
-}
-
-.event-detail-duration text:first-child,
-.event-detail-location text:first-child {
+.session-detail-topic {
+  font-size: 20px;
   font-weight: bold;
 }
 
-.event-detail-desc {
-  font-size: 14px;
-  background: #b3d4db;
-  border-radius: 5px;
+.flex-item view {
+  font-weight: bold;
 }
 
-/* .event-detail-register {
-  color: #fff;
-  background: #0076cb;
-} */
+.flex-item text {
+  font-size: 13px;
+}
 
-.session-start-btn.hide {
-  display: none;
+.session-detail-action .flex-item {
+  margin-bottom: 10rpx;
 }
 
 .uniformBtn {
@@ -64,4 +68,3 @@ button[disabled]:not([type]) {
   color:rgba(255, 255, 255, 0.6);
   background:#5B9CCB;
 }
-

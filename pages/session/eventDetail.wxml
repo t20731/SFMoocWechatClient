@@ -1,34 +1,42 @@
 <!--pages/explore/eventDetail.wxml-->
+<view class="session-detail-header">
+  <image class="session-header-bg" src="../../images/session_detail.jpeg"></image>
+  <view class="session-avatar-wrapper">
+    <image id="{{eventDetail.owner.id}}" bindtap="goRankDetail" class="event-detail-avatar" mode="scaleToFill" src="{{eventDetail.owner.avatarUrl}}"></image>
+  </view>
+  <view class="event-detail-nickname">{{eventDetail.owner.nickName}}</view>
+</view>
+
 <view class="page">
-  <view class="event-detail-title">{{eventDetail.topic}}</view>
   <view class="flex-wrp">
+    <view class="flex-item session-detail-topic">
+      {{eventDetail.topic}}
+    </view>
     <view class="flex-item">
-    <view class="event-detail-author">Presenter</view>
-      <image id="{{eventDetail.owner.id}}" bindtap="goRankDetail" class="event-detail-avatar" mode="scaleToFill" src="{{eventDetail.owner.avatarUrl}}"></image>
-      <view class="event-detail-nickname">{{eventDetail.owner.nickName}}</view>
-    </view>
-    <view class="flex-item event-detail-duration">
-      <text>When: </text>
-      <text>{{eventDetail.startDate}} - {{eventDetail.endDate}}</text>
-    </view>
-    <view class="flex-item event-detail-location">
-    <!-- Use icon instead later -->
-    <text>Location: </text>{{eventDetail.location.name}}
-    </view>
-    <view class="flex-item event-detail-location">
-      <text>Difficulty: </text>{{difficulties[eventDetail.difficulty]}}
-    </view>
-    <view class="flex-item event-detail-location">
-      <text>Direction: </text>{{eventDetail.direction.name}}
-    </view>
-    <view class="flex-item event-detail-location">
-    <text>Enrollments: </text>{{eventDetail.enrollments}}
-    </view>
-    <view class="flex-item event-detail-desc">
     {{eventDetail.description}}
     </view>
+    <view class="flex-item">
+      <view>When</view>
+      <text>{{eventDetail.startDate}} - {{eventDetail.endDate}}</text>
+    </view>
+    <view class="flex-item">
+      <view>Location</view>
+      <text>{{eventDetail.location.name}}</text>
+    </view>
+    <view class="flex-item">
+      <view>Difficulty</view>
+      <text>{{difficulties[eventDetail.difficulty]}}</text>
+    </view>
+    <view class="flex-item">
+      <view>Direction</view>
+      <text>{{eventDetail.direction.name}}</text>
+    </view>
+    <view class="flex-item">
+      <view>Enrollments</view>
+      <text>{{eventDetail.enrollments}}</text>
+    </view>
     
-    <view wx:if="{{!isCompleted}}">
+    <view class="session-detail-action" wx:if="{{!isCompleted}}">
       <block wx:if="{{isOwner}}">
         <view class="flex-item" wx:if="{{isOwner}}">
           <button bindtap='onStartSession' class="uniformBtn" disabled="{{startBtnDisabled}}">{{startBtnVal}}</button>
