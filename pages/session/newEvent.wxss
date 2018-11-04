@@ -1,5 +1,5 @@
 .weui-label {
-  width: 80px;
+  width: 50px;
 }
 
 .uniformBtn {

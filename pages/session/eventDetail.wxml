@@ -1,6 +1,8 @@
 <!--pages/explore/eventDetail.wxml-->
+<wxs src="../../utils/formatter.wxs" module="formatter">
+</wxs>
 <view class="session-detail-header">
-  <image class="session-header-bg" src="../../images/session_detail.jpeg"></image>
+  <image class="session-header-bg" src="{{formatter.getImageUrl(eventDetail.tileImageSrc)}}"></image>
   <view class="session-avatar-wrapper">
     <image id="{{eventDetail.owner.id}}" bindtap="goRankDetail" class="event-detail-avatar" mode="scaleToFill" src="{{eventDetail.owner.avatarUrl}}"></image>
   </view>
