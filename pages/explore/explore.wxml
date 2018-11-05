@@ -40,7 +40,7 @@
             </view>
             <view class="speaker">{{item.owner.nickName}}</view>
             <view class="location">
-            {{formatter.getDate(item.createdDate)}} | {{formatter.getDifficulty(item.difficulty)}}
+            {{formatter.getDate(item.startDate)}} | {{formatter.getDifficulty(item.difficulty)}}
             <view class="count">
               <image src="../../images/mini_people.png"></image>
               <text>{{item.enrollments}}</text>

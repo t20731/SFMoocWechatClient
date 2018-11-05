@@ -14,7 +14,7 @@
 .exploreHeader i-icon {
   position: absolute;
   z-index: 100;
-  left: 7%;
+  left: 6%;
   top: 46rpx;
 }
 .exploreHeader .swiper {

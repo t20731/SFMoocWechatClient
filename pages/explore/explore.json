@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "Session",
+  "navigationBarTitleText": "SF Skr",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "i-drawer": "../components/popup",
