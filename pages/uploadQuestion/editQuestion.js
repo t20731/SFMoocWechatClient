@@ -30,9 +30,11 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-    that.setData({
-      sessionId: options.sessionId
-    });
+    if (options.sessionId){
+      that.setData({
+        sessionId: options.sessionId
+      });
+    }
     let quesInfoStr = options.quesInfoStr;
     if (quesInfoStr) {
       let questionObj = JSON.parse(quesInfoStr);
