@@ -5,6 +5,7 @@
 <view class="page">
   <view class="exploreHeader">
     <view class="searchInput">
+      <i-icon type="search" size="28" color="#80848f"/>
       <input placeholder='Java SAPUI5 HANA' disabled ="false" bindtap="goToSearchPage"></input>
       <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000">  
         <block wx:for="{{hotSessions}}" wx:key="index">  

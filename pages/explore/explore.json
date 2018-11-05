@@ -2,6 +2,7 @@
   "navigationBarTitleText": "Session",
   "enablePullDownRefresh": true,
   "usingComponents": {
-    "i-drawer": "../components/popup"
+    "i-drawer": "../components/popup",
+    "i-icon": "../components/icon/index"
   }
 }

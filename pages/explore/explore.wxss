@@ -11,6 +11,12 @@
   width:100%;
   background:#FFF;
 }
+.exploreHeader i-icon {
+  position: absolute;
+  z-index: 100;
+  left: 7%;
+  top: 46rpx;
+}
 .exploreHeader .swiper {
   height: 300rpx;
 }
@@ -22,10 +28,11 @@
   border-radius:35rpx;
   border: 1px solid #CCC;
   width: 90%;
-  position:absolute;
+  position: absolute;
   top: 50rpx;
   left: 5%; 
   z-index: 99;
+  background: rgba(255, 255, 255, 0.6);
 }
 .tabbarWrapper {
   display: flex;
