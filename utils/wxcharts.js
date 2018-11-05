@@ -1444,7 +1444,7 @@ function drawLegend(series, opts, config, context) {
         legendList = _calLegendData.legendList;
 
     var padding = 5;
-    var marginTop = 8;
+    var marginTop = 20;
     var shapeWidth = 15;
     legendList.forEach(function (itemList, listIndex) {
         var width = 0;
