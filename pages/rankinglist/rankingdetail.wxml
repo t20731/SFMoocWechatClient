@@ -49,11 +49,11 @@
             <view class="skillContent">
               <text class="skillTag">{{item.name}} . {{item.points}}</text>
               <view class="endorsement" wx:if="{{index==0 || index==2}}">
-                <image src="../../images/defaultUser.png"></image>
+                <image src="../../images/hong.jpg"></image>
                 <text>Endorsed by Hong Yuan</text>
               </view>
               <view class="endorsement" wx:if="{{index==0 || index==1}}"> 
-                <image src="../../images/defaultUser.png"></image>
+                <image src="../../images/jessica.jpg"></image>
                 <text>Endorsed by Jessica Yang</text>
               </view>
             </view>
