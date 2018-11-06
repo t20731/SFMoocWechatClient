@@ -32,7 +32,7 @@
   top: 50rpx;
   left: 5%; 
   z-index: 99;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.5);
 }
 .tabbarWrapper {
   display: flex;
