@@ -68,3 +68,18 @@ button[disabled]:not([type]) {
   color:rgba(255, 255, 255, 0.6);
   background:#5B9CCB;
 }
+.reward {
+  color: #0076cb;
+  border: 1px solid #0076cb;
+  text-align: center;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10rpx;
+}
+.reward image {
+  width: 60rpx;
+  height: 60rpx;
+}

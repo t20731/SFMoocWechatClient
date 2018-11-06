@@ -52,11 +52,15 @@
         </view>
       </block>
       <block wx:else>
+        <view class="reward" wx:if="{{checkInDisabled}}">
+          <image src="../../images/money.png"></image>
+          <text>Reward</text>
+        </view>
         <view wx:if="{{isRegistered}}" class="flex-item">
           <modal id="checkInModal" hidden="{{isCheckInModalHidden}}" title="Please type check in code" confirm-text="Submit" cancel-text="Cancel" bindconfirm="submitCheckInCode" bindcancel="cancelCheckIn">
             <input name="checkInCode" bindinput="onCheckInCodeInput" class="weui-input" placeholder="Check in Code" />
           </modal>
-          <button bindtap='onCheckIn' class="uniformBtn" disabled="{{checkInDisabled}}">{{checkInBtnVal}}</button>
+          <button bindtap='onCheckIn' class="uniformBtn" wx:if="{{!checkInDisabled}}">{{checkInBtnVal}}</button>
         </view>
         <view wx:if="{{isRegistered}}" class="flex-item">
           <button bindtap='onStartQuiz' class="uniformBtn" disabled="{{startQuizBtnDisabled}}">{{startQuizBtnVal}}</button>
