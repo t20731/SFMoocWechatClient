@@ -80,15 +80,18 @@ Page({
         },
         success: function (res) {
           if (res.data.msg === 'ok') {
-            wx.showModal({
-              content: 'Number of correct answers: ' + res.data.retObj.points,
-              showCancel: false,
-              success: function (res) {
-                if (res.confirm) {
-                  console.log('Confirmed')
-                }
-              }
-            });
+            Util.showToast('Credits +' + res.data.retObj.points, 'success', 3000);
+            // wx.showModal({
+            //   content: 'Credits + ' + res.data.retObj.points,
+            //   confirmText: 'Confirm',
+            //   confirmColor: '#0076cb',
+            //   showCancel: false,
+            //   success: function (res) {
+            //     if (res.confirm) {
+            //       console.log('Confirmed')
+            //     }
+            //   }
+            // });
             that.setData({
               correctAnswerMap: res.data.retObj.answerMap,
               isSubmitBtnDisabled: true

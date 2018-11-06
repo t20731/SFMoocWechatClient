@@ -15,7 +15,7 @@
       {{eventDetail.topic}}
     </view>
     <view class="flex-item">
-    {{eventDetail.description}}
+      {{eventDetail.description}}
     </view>
     <view class="flex-item">
       <view>Presenter</view>
@@ -41,7 +41,7 @@
       <view>Enrollments</view>
       <text>{{eventDetail.enrollments}}</text>
     </view>
-    
+
     <view class="session-detail-action" wx:if="{{!isCompleted}}">
       <block wx:if="{{isOwner}}">
         <view class="flex-item" wx:if="{{isOwner}}">
@@ -52,7 +52,7 @@
         </view>
       </block>
       <block wx:else>
-        <view class="reward" wx:if="{{checkInDisabled}}">
+        <view class="reward" wx:if="{{checkInDisabled}}" bindtap='onReward'>
           <image src="../../images/money.png"></image>
           <text>Reward</text>
         </view>
@@ -69,6 +69,9 @@
           <button bindtap='onRegister' class="uniformBtn" disabled="{{disabled}}" loading="{{loading}}">{{registerBtnVal}}</button>
         </view>
       </block>
+      <modal id="rewardModal" hidden="{{isRewardModalHidden}}" title="Please input the reward amount" confirm-text="Submit" cancel-text="Cancel" bindconfirm="submitRewardAmount" bindcancel="cancelReward">
+        <input name="checkInCode" bindinput="onCheckInCodeInput" class="weui-input" placeholder="Reward amount" />
+      </modal>
     </view>
   </view>
 </view>

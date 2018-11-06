@@ -13,7 +13,7 @@
       </radio-group>
     </view>
   </view>
-  <button class="uniformBtn fixedBottomBtn submitExamrBtn"  wx:if="{{isExamAvailable}}" disabled="{{isSubmitBtnDisabled || isExamSubmitted}}" bindtap="submitExam">提交</button>
+  <button class="uniformBtn fixedBottomBtn submitExamrBtn"  wx:if="{{isExamAvailable}}" disabled="{{isSubmitBtnDisabled || isExamSubmitted}}" bindtap="submitExam">Submit</button>
   <view wx:if="{{!isExamAvailable}}" class="noDataMsg">
     No quiz published yet!
   </view>
