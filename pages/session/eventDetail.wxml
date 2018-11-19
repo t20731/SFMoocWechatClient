@@ -15,7 +15,7 @@
       {{eventDetail.topic}}
       <view class="likeView">
       <image class="likeBtn" wx:if="{{isLiked}}" src="../../images/like.png" bindtap="onChangeLikeStatus"/>
-      <image class="likeBtn" wx:else src="../../images/unlike.png" bindtap="onChangeLikeStatus" />
+      <image class="likeBtn" wx:else src="../../images/unlike.png" bindtap="onChangeLikeStatus"/>
       <text class="likeBtnMsg">like/unlike this session</text>
     </view>
     </view>

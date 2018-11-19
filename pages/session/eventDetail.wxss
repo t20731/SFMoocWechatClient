@@ -90,7 +90,7 @@ button[disabled]:not([type]) {
   display: block;
 }
 
-text.likeBtnMsg {
+.likeBtnMsg {
   display: inline-block;
   padding: 10rpx;
   color: #5B9CCB;

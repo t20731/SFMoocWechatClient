@@ -37,7 +37,7 @@ Page({
     this.setData({
       sessionId: e.id
     });
-    if (e.isCompleted){
+    if (e.isCompleted) {
       this.setData({
         isCompleted: e.isCompleted
       });
@@ -49,7 +49,7 @@ Page({
       title: 'Loading',
       mask: true
     })
-    WXRequest.post('/session/detail',{
+    WXRequest.post('/session/detail', {
       sessionId: e.id,
       userId: userId
     }).then(res => {
@@ -83,7 +83,7 @@ Page({
       url: '../rankinglist/rankingdetail?userId=' + userId,
     })
   },
-  
+
   _isOwner(ownerId) {
     let userId = Util.getUserId();
     if (ownerId === userId) {
@@ -115,11 +115,11 @@ Page({
   },
 
   onChangeLikeStatus: function () {
-    if (this.data.isRegistered){
+    if (this.data.isRegistered) {
       let userId = Util.getUserId();
       let likeStatus = this.data.isLiked ? 0 : 1;
       let likeMessage = '';
-      if (likeStatus === 0){
+      if (likeStatus === 0) {
         likeMessage = 'We will do better!'
       } else {
         likeMessage = 'Thank you!'
@@ -149,10 +149,10 @@ Page({
     else {
       Util.showToast('please register first!');
     }
-    
+
   },
 
-  onManageQuiz: function(){
+  onManageQuiz: function () {
     wx.navigateTo({
       url: '../uploadQuestion/uploadQuestion?sessionId=' + this.data.sessionId,
     })
@@ -172,7 +172,7 @@ Page({
     }
   },
 
-  onRegister: function(event) {
+  onRegister: function (event) {
     // call API to register the event
     console.log('Register: ', event);
     this.setData({
@@ -204,20 +204,20 @@ Page({
     });
   },
 
-  onReward: function(){
+  onReward: function () {
     this.setData({
       isRewardModalHidden: false
     });
   },
-  
-  submitRewardAmount: function(){
+
+  submitRewardAmount: function () {
     console.log('submitRewardAmount');
     this.setData({
       isRewardModalHidden: true
     });
   },
 
-  cancelReward: function(){
+  cancelReward: function () {
     console.log('cancelReward');
     this.setData({
       isRewardModalHidden: true
@@ -268,7 +268,7 @@ Page({
     }).catch(e => {
       console.log(e);
     });
-  },    
+  },
 
   cancelCheckIn() {
     this.setData({ isCheckInModalHidden: true });
@@ -305,7 +305,7 @@ Page({
     });
   },
 
-  showError: function(title) {
+  showError: function (title) {
     Util.showToast(title, 'none');
   }
 });
