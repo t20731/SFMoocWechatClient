@@ -83,3 +83,19 @@ button[disabled]:not([type]) {
   width: 60rpx;
   height: 60rpx;
 }
+
+.likeBtn {
+  width: 60rpx;
+  height: 60rpx;
+  display: block;
+}
+
+text.likeBtnMsg {
+  display: inline-block;
+  padding: 10rpx;
+  color: #5B9CCB;
+}
+
+.likeView {
+  display: inline-flex;
+}

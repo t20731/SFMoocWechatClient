@@ -28,7 +28,8 @@ Page({
     startQuizBtnVal: 'Quiz',
     startQuizBtnDisabled: false,
     isCompleted: false,
-    isRegistered: false
+    isRegistered: false,
+    isLiked: false
   },
 
   onLoad: function (e) {
@@ -108,8 +109,47 @@ Page({
   _markRegistered: function () {
     this.setData({
       isRegistered: true,
-      registerBtnVal: 'Registered'
+      registerBtnVal: 'Registered',
+      isLikeBtnEnabled: true
     });
+  },
+
+  onChangeLikeStatus: function () {
+    if (this.data.isRegistered){
+      let userId = Util.getUserId();
+      let likeStatus = this.data.isLiked ? 0 : 1;
+      let likeMessage = '';
+      if (likeStatus === 0){
+        likeMessage = 'We will do better!'
+      } else {
+        likeMessage = 'Thank you!'
+      }
+      WXRequest.post('/session/like/', {
+        userId: userId,
+        sessionId: this.data.eventDetail.id,
+        like: likeStatus
+      }).then(res => {
+        if (res.data.msg === 'ok') {
+          console.log(res.data);
+          Util.showToast(likeMessage);
+          this.setData({
+            isLiked: !this.data.isLiked,
+          })
+        } else {
+          this.showError('Register failed. Please try again');
+        }
+      }).catch(e => {
+        this.showError('Please try again');
+        console.log(e);
+      });
+      this.setData({
+        loading: !this.data.loading,
+      });
+    }
+    else {
+      Util.showToast('please register first!');
+    }
+    
   },
 
   onManageQuiz: function(){
