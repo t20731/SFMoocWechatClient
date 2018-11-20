@@ -29,7 +29,8 @@ Page({
     startQuizBtnDisabled: false,
     isCompleted: false,
     isRegistered: false,
-    isLiked: false
+    isLiked: false,
+    likeMessage: 'Click the icon if you like this session!'
   },
 
   onLoad: function (e) {
@@ -118,11 +119,11 @@ Page({
     if (this.data.isRegistered) {
       let userId = Util.getUserId();
       let likeStatus = this.data.isLiked ? 0 : 1;
-      let likeMessage = '';
+      let newMessage = '';
       if (likeStatus === 0) {
-        likeMessage = 'We will do better!'
+        newMessage = 'You unlike this session!'
       } else {
-        likeMessage = 'Thank you!'
+        newMessage = ' You like this session!'
       }
       WXRequest.post('/session/like/', {
         userId: userId,
@@ -131,9 +132,9 @@ Page({
       }).then(res => {
         if (res.data.msg === 'ok') {
           console.log(res.data);
-          Util.showToast(likeMessage);
           this.setData({
             isLiked: !this.data.isLiked,
+            likeMessage: newMessage
           })
         } else {
           this.showError('Register failed. Please try again');
@@ -147,7 +148,7 @@ Page({
       });
     }
     else {
-      Util.showToast('please register first!');
+      Util.showError('please register first!');
     }
 
   },
