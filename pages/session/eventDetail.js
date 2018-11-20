@@ -28,13 +28,15 @@ Page({
     startQuizBtnVal: 'Quiz',
     startQuizBtnDisabled: false,
     isCompleted: false,
-    isRegistered: false
+    isRegistered: false,
+    like: 0
   },
 
   onLoad: function (e) {
     let userId = Util.getUserId();
     this.setData({
-      sessionId: e.id
+      sessionId: e.id,
+      like: 0
     });
     if (e.isCompleted){
       this.setData({
@@ -109,6 +111,25 @@ Page({
     this.setData({
       isRegistered: true,
       registerBtnVal: 'Registered'
+    });
+  },
+
+  onLike: function (event) {
+    let userId = Util.getUserId();
+    let likeUpdate = !this.data.like ? 1 : 0;
+    this.setData({
+      like: likeUpdate
+    });
+    WXRequest.post('/session/like', {
+      userId: userId,
+      sessionId: this.data.eventDetail.id,
+      like: likeUpdate
+    }).then(res => {
+      if (res.data.msg === 'ok') {
+        console.log(res.data);
+      }
+    }).catch(e => {
+      console.log(e);
     });
   },
 

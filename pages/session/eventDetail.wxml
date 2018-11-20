@@ -42,6 +42,11 @@
       <text>{{eventDetail.enrollments}}</text>
     </view>
 
+    <view class="like" wx:if="{{isRegistered}}">
+      <image wx:if="{{!!like}}" src="../../images/like_fill.png" bindtap='onLike'></image>
+      <image wx:if="{{!like}}" src="../../images/like.png" bindtap='onLike'></image>
+    </view>
+
     <view class="session-detail-action" wx:if="{{!isCompleted}}">
       <block wx:if="{{isOwner}}">
         <view class="flex-item" wx:if="{{isOwner}}">

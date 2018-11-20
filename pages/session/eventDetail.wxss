@@ -83,3 +83,7 @@ button[disabled]:not([type]) {
   width: 60rpx;
   height: 60rpx;
 }
+.like image {
+  width: 60rpx;
+  height: 60rpx;
+}
