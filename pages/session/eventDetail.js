@@ -17,6 +17,7 @@ Page({
     startBtnVal: 'Start Session',
     startBtnDisabled: false,
     quizBtnVal: 'Quiz Management',
+    lotteryBtnVal: 'Feel Lucky',
     quizBtnDisabled: false,
     eventDetail: null,
     sessionId: 0,
@@ -128,6 +129,20 @@ Page({
     } else {
       wx.navigateTo({
         url: '../exam/exam?sessionId=' + this.data.sessionId,
+      })
+    }
+  },
+
+  onStartLottery: function () {
+    let userInfo = wx.getStorageSync('userInfo');
+    let isCheckedIn = WCache.get(this.data.sessionId + '_checkedIn');
+    if (!userInfo) {
+      Util.showToast('Please login fisrt', 'none', 2000);
+    } else if (!isCheckedIn) {
+      Util.showToast('Please check in first', 'none', 2000);
+    } else {
+      wx.navigateTo({
+        url: '../lottery/lottery?sessionId=' + this.data.sessionId + '&isOwner=' + this.data.isOwner,
       })
     }
   },

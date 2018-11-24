@@ -50,6 +50,9 @@
         <view class="flex-item" wx:if="{{isOwner}}">
           <button bindtap='onManageQuiz' class="uniformBtn" disabled="{{quizBtnDisabled}}">{{quizBtnVal}}</button>
         </view>
+        <view class="flex-item" wx:if="{{isOwner}}">
+          <button bindtap='onStartLottery' class="uniformBtn">{{lotteryBtnVal}}</button>
+        </view>
       </block>
       <block wx:else>
         <view class="reward" wx:if="{{checkInDisabled}}" bindtap='onReward'>
@@ -64,6 +67,9 @@
         </view>
         <view wx:if="{{isRegistered}}" class="flex-item">
           <button bindtap='onStartQuiz' class="uniformBtn" disabled="{{startQuizBtnDisabled}}">{{startQuizBtnVal}}</button>
+        </view>
+        <view wx:if="{{isRegistered}}" class="flex-item">
+          <button bindtap='onStartLottery' class="uniformBtn">{{lotteryBtnVal}}</button>
         </view>
         <view class="flex-item" wx:if="{{!isRegistered}}">
           <button bindtap='onRegister' class="uniformBtn" disabled="{{disabled}}" loading="{{loading}}">{{registerBtnVal}}</button>

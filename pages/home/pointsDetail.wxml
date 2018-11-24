@@ -26,6 +26,12 @@
                 </view>
                 <view class="weui-cell__ft">+{{item.exam}}</view>
               </view>
+              <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" wx:if="{{item.lottery > 0}}">
+                <view class="weui-cell__bd weui-cell_primary">
+                  <view>Lottery</view>
+                </view>
+                <view class="weui-cell__ft">+{{item.lottery}}</view>
+              </view>
             </view>
           </view>
         </view>

@@ -70,3 +70,8 @@
   height: 64rpx;
   margin-right: 0.5rem;
 }
+
+button[disabled]:not([type]) {
+  color:rgba(255, 255, 255, 0.6);
+  background:#5B9CCB;
+}

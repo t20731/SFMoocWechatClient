@@ -4,6 +4,8 @@ App({
   globalData: {
      //host: 'http://localhost:8090',
      host: 'https://sfmooc-api.techtuesday.club',
+     //wshost: 'ws://localhost:8090',
+     wshost: 'wss://sfmooc-api.techtuesday.club',
      openId:'',
      systemInfo: {}
   },

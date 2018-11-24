@@ -9,7 +9,7 @@
     <button class="submitNumberBtn" form-type="submit" disabled="{{isSubmitBtnDisabled || luckyDogs.length}}">提交抽奖号码      </button>
   </form>
 
-<view class="launchLotterySection" wx:if="{{isSessionOwner}}">
+<view class="launchLotterySection" wx:if="{{isSessionOwner == 'true'}}">
   <button class="launchBtn" disabled="{{isLaunchBtnDisabled || luckyDogs.length}}" bindtap="launchLottery">开奖</button>
 </view>
 <view class="luckNumberMsg" wx:if="{{!!finalLuckyNumber}}">中奖号码是<text>{{finalLuckyNumber}}</text>

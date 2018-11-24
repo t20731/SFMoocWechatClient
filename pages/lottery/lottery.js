@@ -13,6 +13,7 @@ Page({
    */
   data: {
     userCount: 1,
+    sessionId: 0,
     isSessionOwner: false,
     mypickNumber: '',
     luckyNumber: 0,
@@ -26,17 +27,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let sessionId = parseInt(options.sessionId);
+    let isOwner = options.isOwner;
+    console.log("sessionId: " + sessionId);
+    console.log("isOwner: " + isOwner);
     this.setData({
-      isSessionOwner: app.globalData.isSessionOwner
+      sessionId: sessionId,
+      isSessionOwner: isOwner
     });
-    let storedUsercount = WCache.get('usercount');
+    let storedUsercount = WCache.get(sessionId +'_usercount');
+    console.log('storedUsercount: ' + storedUsercount);
     if (storedUsercount == undefined){
-       this.getUserCount();
+       this.getUserCount(sessionId);
     } else {
       this.setData({ userCount: storedUsercount });
     }
 
-    let storedPickNumber = WCache.get('mypickNumber');
+    let storedPickNumber = WCache.get(sessionId + '_mypickNumber');
+    console.log('storedPickNumber: ' + storedPickNumber);
     if (storedPickNumber != undefined){
       this.setData({
         mypickNumber: storedPickNumber,
@@ -44,7 +52,8 @@ Page({
       });
     }
 
-    let storedLuckyList = WCache.get('storedLuckyDogs');
+    let storedLuckyList = WCache.get(sessionId + '_storedLuckyDogs');
+    console.log('storedLuckyList: ' + storedLuckyList);
     if (storedLuckyList && storedLuckyList.length) {
       this.setData({luckyDogs: storedLuckyList});
     }else{
@@ -54,14 +63,14 @@ Page({
     }
   },
 
-  getUserCount: function(){
+  getUserCount: function(sessionId){
     let that = this;
     wx.request({
-      url: app.globalData.host + '/session/usercount',
+      url: app.globalData.host + '/session/usercount/' + sessionId,
       method: 'GET',
       success: function (res) {
         that.setData({ userCount: res.data.retObj })
-        WCache.put('usercount', res.data.retObj, 60 * 60);
+        WCache.put(sessionId + '_usercount', res.data.retObj, 24 * 60 * 60);
       },
       fail: function (err) {
         console.log('Failed to get user account');
@@ -85,8 +94,13 @@ Page({
     let isVialid = this.checkPickNumber('', pickNumber);
     if (isVialid) {
       wx.request({
-        url: app.globalData.host + '/lottery/bet/' + app.globalData.openId + '/' + pickNumber,
-        method: 'GET',
+        url: app.globalData.host + '/lottery/bet/',
+        method: 'POST',
+        data:{
+          userId: app.globalData.openId,
+          sessionId: this.data.sessionId,
+          pickNumber: parseInt(pickNumber)
+        },
         success: function (res) {
           if (res.data.msg === 'ok') {
             let msg = '抽奖号下注成功';
@@ -95,7 +109,7 @@ Page({
               mypickNumber: pickNumber,
               isSubmitBtnDisabled: true
             });
-            WCache.put('mypickNumber', pickNumber, 60 * 60);
+            WCache.put(that.data.sessionId+'_mypickNumber', pickNumber, 24 * 60 * 60);
             that.initSocket();
           }
         },
@@ -107,13 +121,14 @@ Page({
   },
 
   launchLottery: function (evt) {
+    var that = this;
     wx.showModal({
       title: '提示',
       content: '确定开奖吗？',
       success: function(res){
         if(res.confirm){
           if (socketOpen) {
-            stompClient.send("/app/draw", {}, app.globalData.openId);
+            stompClient.send("/app/draw", {}, that.data.sessionId);
           }
         }
       }
@@ -143,7 +158,7 @@ Page({
     }
 
     wx.connectSocket({
-      url: app.globalData.wshost+'/t2-websocket'
+      url: app.globalData.wshost+'/sfmooc-websocket'
     })
     wx.onSocketOpen(function (res) {
       console.log("connected");
@@ -194,7 +209,7 @@ Page({
         // close connection
         this.closeSocket();
         // store lottery result in storage within 1 hour
-        WCache.put('storedLuckyDogs', luckyDogs, 60*60);
+        WCache.put(this.data.sessionId + '_storedLuckyDogs', luckyDogs, 24 * 60 * 60);
       }
     }
   },
