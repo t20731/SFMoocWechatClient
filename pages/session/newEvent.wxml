@@ -10,7 +10,7 @@
             </view>
           </view>
           <view class="weui-cell__bd">
-              <input name="topic" class="weui-input" placeholder="Topic (Required)" />
+              <input name="topic" class="weui-input" placeholder="Topic (Required)" value="{{formData.topic}}" />
           </view>
       </view>
   </view>
@@ -104,7 +104,11 @@
   <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell">
           <view class="weui-cell__bd">
-              <textarea name="description" class="weui-textarea" placeholder="Description" style="height: 3.3em" />
+              <textarea name="description"
+                class="weui-textarea"
+                placeholder="Description"
+                style="height: 3.3em"
+                value="{{formData.description}}" />
               <view class="weui-textarea-counter">0/200</view>
           </view>
       </view>

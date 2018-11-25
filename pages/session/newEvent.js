@@ -28,7 +28,10 @@ Page({
       { id: 2, name: "Cutting Edge Tech", imageSrc: null },
       { id: 3, name: "Frontend", imageSrc: null }
     ],
-    directionIndex: 0
+    directionIndex: 0,
+    mode: "create",
+    editSessionDetail: null,
+    formData: {}
   },
 
   /**
@@ -37,6 +40,8 @@ Page({
   onLoad: function (options) {
     this._initDateTimePicker();
     this._initData();
+
+    this._initEditData(options);
   },
 
   _initData: function() {
@@ -47,6 +52,52 @@ Page({
         this.setData({
           directions: retObj.directions,
           locations: retObj.locations
+        });
+      }
+    }).catch(e => {
+      console.log(e);
+    });
+  },
+
+  _initEditData: function(options) {
+    // if there is no 'id' params in page options, means it's not an edit action
+    if (options == null || options.id == null) {
+      wx.setNavigationBarTitle({
+        title: "Create New Session"
+      })
+      return;
+    }
+
+    // handle edit data init
+    this.setData({
+      mode: "edit"
+    })
+    wx.setNavigationBarTitle({
+      title: "Edit Session Detail"
+    })
+    let userId = Util.getUserId();
+
+    wx.showLoading({
+      title: 'Loading',
+      mask: true
+    })
+    WXRequest.post('/session/detail', {
+      sessionId: options.id,
+      userId: userId
+    }).then(res => {
+      wx.hideLoading();
+      if (res.data.msg === 'ok') {
+        const retObj = res.data.retObj;
+
+        this.setData({
+          editSessionDetail: retObj.session,
+          formData: retObj.session,
+          startDateTime: this._calDateTimeStr2Arr(retObj.session.startDate),
+          startDateTimeVal: retObj.session.startDate,
+          durationIndex: this._calDuartionIndex(retObj.session.startDate,retObj.session.endDate),
+          locationIndex: this.data.locations.map(val => val.name).indexOf(retObj.session.location.name),
+          directionIndex: this.data.directions.map(val => val.name).indexOf(retObj.session.direction.name),
+          difficultyIndex: retObj.session.difficulty
         });
       }
     }).catch(e => {
@@ -84,6 +135,39 @@ Page({
     let dateTimeVal = `${temp[0]}-${temp[1]}-${temp[2]} ${temp[3]}:${ temp[4]}`;
     console.log(dateTimeVal);
     return dateTimeVal;
+  },
+
+  _calDateTimeStr2Arr: function (dateStr) {
+    let dateTimeObj = Util.dateTimePicker(this.data.startYear, this.data.endYear);
+
+    const dateStrArr = dateStr.match(/(\d+)-(\d+)-(\d+) (\d+):(\d+)/);
+    dateStrArr.splice(0, 1)
+
+    const arrMap = dateTimeObj.dateTimeArray
+    return dateStrArr.map((val, index) => {
+      return arrMap[index].indexOf(val)
+    })
+  },
+  _calDuartionIndex: function (startDateStr, endDateStr) {
+    const val = this._calDuartionVal(startDateStr,endDateStr);
+    return this.data.durations.indexOf(val);
+  },
+
+  _calDuartionVal : function (startDateStr,endDateStr) {
+    const startDateTimestamp = new Date(startDateStr).getTime();
+    const endDateTimestamp = new Date(endDateStr).getTime();
+    const durationMin = (endDateTimestamp - startDateTimestamp)/60000;
+    if (durationMin < 60) {
+      return durationMin > 1 ? `${durationMin} Minutes` : `${durationMin} Minute`
+    }
+
+    const durationHour = durationMin / 60
+    if (durationHour < 24) {
+      return durationHour > 1 ? `${durationHour} Hours` : `${durationHour} Hour`
+    }
+
+    // TODO extend in future if need
+    return durationHour + " Hours"
   },
 
   changeStartDateTimeColumn(e) {
