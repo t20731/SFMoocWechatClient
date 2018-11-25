@@ -209,6 +209,10 @@ Page({
     let value = event.detail.value;
     let eventDetail = this._buildEventDetail(value);
 
+    if (this.data.mode == "edit" && this.data.editSessionDetail != null) {
+      eventDetail.id = this.data.editSessionDetail.id
+    }
+
     WXRequest.post('/session/edit', eventDetail).then(res => {
       if (res.data.msg === 'ok') {
         Util.showToast('Success', 'success', 1000);

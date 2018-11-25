@@ -5,6 +5,7 @@ import Util from '../../utils/util';
 const ENROLL_NUMBER = 1;
 Page({
   data: { // 参与页面渲染的数据
+    pageQueries: {},
     difficulties: {
       '0': 'Beginner',
       '1': 'Intermediate',
@@ -29,17 +30,28 @@ Page({
     startQuizBtnVal: 'Quiz',
     startQuizBtnDisabled: false,
     isCompleted: false,
-    isRegistered: false
+    isRegistered: false,
+    canEdit: false
   },
 
   onLoad: function (e) {
+    this.data.pageQueries = e;
+  },
+
+  onShow: function () {
+    this.doLoadDetail()
+  },
+
+  doLoadDetail: function () {
+    const {id, isCompleted} = this.data.pageQueries;
+
     let userId = Util.getUserId();
     this.setData({
-      sessionId: e.id
+      sessionId: id
     });
-    if (e.isCompleted){
+    if (isCompleted) {
       this.setData({
-        isCompleted: e.isCompleted
+        isCompleted: isCompleted
       });
     }
     this._checkGuest(userId);
@@ -49,8 +61,8 @@ Page({
       title: 'Loading',
       mask: true
     })
-    WXRequest.post('/session/detail',{
-      sessionId: e.id,
+    WXRequest.post('/session/detail', {
+      sessionId: id,
       userId: userId
     }).then(res => {
       wx.hideLoading();
@@ -62,7 +74,8 @@ Page({
         let isOwner = this._isOwner(eventDetail.owner.id);
         this.setData({
           isOwner: isOwner,
-          eventDetail: eventDetail
+          eventDetail: eventDetail,
+          canEdit: isOwner && (new Date(eventDetail.endDate).getTime() > Date.now())
         });
         if (userId && retObj.userRegistered) {
           this._markRegistered();

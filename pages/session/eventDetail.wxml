@@ -15,7 +15,7 @@
       <text>
         {{eventDetail.topic}}
       </text>
-      <image src="../../images/edit.png" mode="aspectFit" bindtap="onEditSession"></image>
+      <image src="../../images/edit.png" mode="aspectFit" bindtap="onEditSession" wx:if="{{canEdit}}"></image>
     </view>
 
     <view class="flex-item">
