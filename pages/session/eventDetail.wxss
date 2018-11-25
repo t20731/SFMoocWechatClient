@@ -46,6 +46,14 @@
 .session-detail-topic {
   font-size: 20px;
   font-weight: bold;
+  display: flex;
+  justify-content:space-between; 
+}
+
+
+.session-detail-topic image {
+  height: 60rpx;
+  width: 60rpx;
 }
 
 .flex-item view {

@@ -273,6 +273,12 @@ Page({
     }
   },
 
+  onEditSession() {
+    wx.navigateTo({
+      url: '../session/newEvent?id=' + this.data.sessionId
+    });
+  },
+
   _markStarted(checkInCode) {
     this.setData({
       startBtnVal: `Check-in Code: (${checkInCode})`,

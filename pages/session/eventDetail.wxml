@@ -12,8 +12,12 @@
 <view class="page">
   <view class="flex-wrp">
     <view class="flex-item session-detail-topic">
-      {{eventDetail.topic}}
+      <text>
+        {{eventDetail.topic}}
+      </text>
+      <image src="../../images/edit.png" mode="aspectFit" bindtap="onEditSession"></image>
     </view>
+
     <view class="flex-item">
       {{eventDetail.description}}
     </view>
