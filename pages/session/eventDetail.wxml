@@ -9,7 +9,7 @@
   <view class="event-detail-nickname">{{eventDetail.owner.nickName}}</view>
 </view>
 
-<view class="page">
+<!-- <view class="page">
   <view class="flex-wrp">
     <view class="flex-item session-detail-topic">
       <text>
@@ -83,5 +83,85 @@
         <input name="checkInCode" bindinput="onCheckInCodeInput" class="weui-input" placeholder="Reward amount" />
       </modal>
     </view>
+  </view>
+</view> -->
+
+<view class="page">
+  <view class="flex-wrp">
+    <view class="flex-item session-detail-topic">
+      <text>
+        {{eventDetail.topic}}
+      </text>
+      <image src="../../images/edit.png" mode="aspectFit" bindtap="onEditSession" wx:if="{{canEdit}}"></image>
+    </view>
+
+    <view class="flex-item">
+      {{eventDetail.description}}
+    </view>
+    <view class="flex-item">
+      <view>Presenter</view>
+      <text>{{eventDetail.owner.nickName}}</text>
+    </view>
+    <view class="flex-item">
+      <view>When</view>
+      <text>{{eventDetail.startDate}} - {{eventDetail.endDate}}</text>
+    </view>
+    <view class="flex-item">
+      <view>Location</view>
+      <text>{{eventDetail.location.name}}</text>
+    </view>
+    <view class="flex-item">
+      <view>Difficulty</view>
+      <text>{{difficulties[eventDetail.difficulty]}}</text>
+    </view>
+    <view class="flex-item">
+      <view>Direction</view>
+      <text>{{eventDetail.direction.name}}</text>
+    </view>
+    <view class="flex-item">
+      <view>Enrollments</view>
+      <text>{{eventDetail.enrollments}}</text>
+    </view>
+
+    <view class="session-detail-action" wx:if="{{!isCompleted}}">
+      <block wx:if="{{isOwner}}">
+      </block>
+      <block wx:else>
+        <view wx:if="{{isRegistered}}" class="flex-item">
+          <modal id="checkInModal" hidden="{{isCheckInModalHidden}}" title="Please type check in code" confirm-text="Submit" cancel-text="Cancel" bindconfirm="submitCheckInCode" bindcancel="cancelCheckIn">
+            <input name="checkInCode" bindinput="onCheckInCodeInput" class="weui-input" placeholder="Check in Code" />
+          </modal>
+        </view>
+      </block>
+      <modal id="rewardModal" hidden="{{isRewardModalHidden}}" title="Please input the reward amount" confirm-text="Submit" cancel-text="Cancel" bindconfirm="submitRewardAmount" bindcancel="cancelReward">
+        <input name="checkInCode" bindinput="onCheckInCodeInput" class="weui-input" placeholder="Reward amount" />
+      </modal>
+    </view>
+  </view>
+  <view class="weui-footer weui-footer_fixed-bottom footerBar" wx:if="{{isRegistered}}">
+    <view class="weui-footer__links">
+      <view class='weui-footer__link' bindtap='onStartSession' disabled="{{startBtnDisabled}}" wx:if="{{isOwner&&!isCompleted}}">
+        {{startBtnVal}}
+      </view>
+      <view class='weui-footer__link' bindtap='onManageQuiz' class="uniformBtn" disabled="{{quizBtnDisabled}}" wx:if="{{isOwner&&!isCompleted}}">{{quizBtnVal}}
+      </view>
+      <view class='weui-footer__link' bindtap='onCheckIn' disabled="{{checkInDisabled}}" wx:if="{{!isOwner&&!isCompleted}}">
+        {{checkInBtnVal}}
+      </view>
+      <view class='weui-footer__link' bindtap='onStartQuiz' disabled="{{startQuizBtnDisabled}}" wx:if="{{!isOwner&&!isCompleted}}">
+        {{startQuizBtnVal}}
+      </view>
+      <view class='weui-footer__link' bindtap='onStartLottery'wx:if="{{!isCompleted}}">
+        {{lotteryBtnVal}}
+      </view>
+      <view class='weui-footer__link' bindtap='onClickLike'>
+      <image class="likeBtn" wx:if="{{isLiked}}" src="../../images/like.png" bindtap="onChangeLikeStatus"/>
+      <image class="likeBtn" wx:else src="../../images/unlike.png" bindtap="onChangeLikeStatus"/>
+        {{totalLikeCount}}
+      </view>
+    </view>
+  </view>
+  <view class="flex-item" wx:if="{{!isRegistered&&!isCompleted}}">
+    <button bindtap='onRegister' class="uniformBtn" disabled="{{disabled}}" loading="{{loading}}">{{registerBtnVal}}</button>
   </view>
 </view>

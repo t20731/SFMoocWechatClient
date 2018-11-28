@@ -31,7 +31,9 @@ Page({
     startQuizBtnDisabled: false,
     isCompleted: false,
     isRegistered: false,
-    canEdit: false
+    canEdit: false,
+    isLiked: 0,
+    totalLikeCount: 0
   },
 
   onLoad: function (e) {
@@ -70,12 +72,13 @@ Page({
         console.log(res.data);
         let retObj = res.data.retObj;
         let eventDetail = retObj.session;
-
+        let likeCount = eventDetail.userLike;
         let isOwner = this._isOwner(eventDetail.owner.id);
         this.setData({
           isOwner: isOwner,
           eventDetail: eventDetail,
-          canEdit: isOwner && (new Date(eventDetail.endDate).getTime() > Date.now())
+          canEdit: isOwner && (new Date(eventDetail.endDate).getTime() > Date.now()),
+          totalLikeCount: likeCount
         });
         if (userId && retObj.userRegistered) {
           this._markRegistered();
@@ -157,6 +160,18 @@ Page({
       wx.navigateTo({
         url: '../lottery/lottery?sessionId=' + this.data.sessionId + '&isOwner=' + this.data.isOwner,
       })
+    }
+  },
+
+  onClickLike: function () {
+    let userInfo = wx.getStorageSync('userInfo');
+    let isCheckedIn = WCache.get(this.data.sessionId + '_checkedIn');
+    if (!userInfo) {
+      Util.showToast('Please login fisrt', 'none', 2000);
+    } else if (!isCheckedIn) {
+      Util.showToast('Please check in first', 'none', 2000);
+    } else {
+
     }
   },
 
@@ -297,6 +312,34 @@ Page({
       startBtnVal: `Check-in Code: (${checkInCode})`,
       startBtnDisabled: true,
     });
+  },
+
+  onChangeLikeStatus: function () {
+      let userId = Util.getUserId();
+      let likeStatus = this.data.isLiked === 1 ? 0 : 1;
+      let addCount = likeStatus === 1? 1:-1;
+      let currenttotalLikeCount = this.data.eventDetail.likeCount + addCount;
+      WXRequest.post('/session/like/', {
+        userId: userId,
+        sessionId: this.data.eventDetail.id,
+        like: likeStatus
+      }).then(res => {
+        if (res.data.msg === 'ok') {
+          console.log(res.data);
+          this.setData({
+            isLiked: likeStatus,
+            totalLikeCount: currenttotalLikeCount
+          })
+        } else {
+          this.showError('Register failed. Please try again');
+        }
+      }).catch(e => {
+        this.showError('Please try again');
+        console.log(e);
+      });
+      // this.setData({
+      //   loading: !this.data.loading,
+      // });
   },
 
   showError: function(title) {
