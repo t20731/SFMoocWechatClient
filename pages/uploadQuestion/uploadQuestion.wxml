@@ -4,7 +4,7 @@
     <view class="questionContainer" wx:for="{{questions}}" wx:key="index">
       <view class="questionHeader">
         <view class="questionTitle">
-        {{index + 1}}: {{item.content}}?
+        {{index + 1}}: {{item.content}}
         </view>
         <view class="" wx:if="{{!isQuestionPublished}}">
           <image class="editQuesIcon" data-quesIndex="{{index}}" src="../../images/edit_outline.png" bindtap="editQuestion"></image>

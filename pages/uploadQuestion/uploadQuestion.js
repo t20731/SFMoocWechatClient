@@ -54,9 +54,9 @@ Page({
 
   editQuestion: function (evt) {
     let quesIndex = evt.target.dataset.quesindex;
-    let quesInfoStr = JSON.stringify(this.data.questions[quesIndex]);
+    let questionId = this.data.questions[quesIndex].id;
     wx.navigateTo({
-      url:'editQuestion?quesInfoStr=' + quesInfoStr
+      url: 'editQuestion?questionId=' + questionId
     })
   },
 

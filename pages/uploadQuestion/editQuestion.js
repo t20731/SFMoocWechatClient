@@ -30,37 +30,46 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-    if (options.sessionId){
-      that.setData({
-        sessionId: options.sessionId
-      });
-    }
-    let quesInfoStr = options.quesInfoStr;
-    if (quesInfoStr) {
-      let questionObj = JSON.parse(quesInfoStr);
-      let options = questionObj.options.map((obj, index) => {
-        if (!that.data.optionValues.includes(obj.number)) {
-          this.data.optionValues.push(obj.number);
-        }
-        if (obj.isAnswer) {
-          that.setData({
-            correctOption: {index: index}
-          });
-        }
-        return {
-          label: obj.number,
-          value: obj.content,
-        }
-      })
+    let questionId = options.questionId;
+    this.loadOneQuestion(questionId);
+  },
 
-      this.setData({
-        id: questionObj.id,
-        sessionId: questionObj.sessionId,
-        title: questionObj.content,
-        options: options,
-        optionValues: this.data.optionValues
-      });
-    }
+  loadOneQuestion: function (questionId) {
+    let that = this;
+    wx.request({
+      url: app.globalData.host + '/question/load_one/' + questionId,
+      method: 'GET',
+      success: function (res) {
+        if (res.data.msg === 'ok') {
+          let questionObj = res.data.retObj;
+          if (questionObj) {
+            let options = questionObj.options.map((obj, index) => {
+              if (!that.data.optionValues.includes(obj.number)) {
+                that.data.optionValues.push(obj.number);
+              }
+              if (obj.isAnswer) {
+                that.setData({
+                  correctOption: { index: index }
+                });
+              }
+              return {
+                label: obj.number,
+                value: obj.content,
+              }
+            })
+
+            that.setData({
+              id: questionObj.id,
+              sessionId: questionObj.sessionId,
+              title: questionObj.content,
+              options: options,
+              optionValues: that.data.optionValues
+            });
+          }
+
+        }
+      }
+    })
   },
 
   handleAddQuesClick: function () {
