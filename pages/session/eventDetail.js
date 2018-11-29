@@ -15,14 +15,14 @@ Page({
     disabled: false,
     loading: false,
     registerBtnVal: 'Register',
-    startBtnVal: 'Start Session',
+    startBtnVal: 'Start',
     startBtnDisabled: false,
-    quizBtnVal: 'Quiz Management',
-    lotteryBtnVal: 'Feel Lucky',
+    quizBtnVal: 'Quiz-M',
+    lotteryBtnVal: 'Lucky',
     quizBtnDisabled: false,
     eventDetail: null,
     sessionId: 0,
-    checkInBtnVal: 'Check In',
+    checkInBtnVal: 'Check-In',
     checkInDisabled: false,
     checkInCode: '',
     isCheckInModalHidden: true,
@@ -163,17 +163,17 @@ Page({
     }
   },
 
-  onClickLike: function () {
-    let userInfo = wx.getStorageSync('userInfo');
-    let isCheckedIn = WCache.get(this.data.sessionId + '_checkedIn');
-    if (!userInfo) {
-      Util.showToast('Please login fisrt', 'none', 2000);
-    } else if (!isCheckedIn) {
-      Util.showToast('Please check in first', 'none', 2000);
-    } else {
+  // onClickLike: function () {
+  //   let userInfo = wx.getStorageSync('userInfo');
+  //   let isCheckedIn = WCache.get(this.data.sessionId + '_checkedIn');
+  //   if (!userInfo) {
+  //     Util.showToast('Please login fisrt', 'none', 2000);
+  //   } else if (!isCheckedIn) {
+  //     Util.showToast('Please check in first', 'none', 2000);
+  //   } else {
 
-    }
-  },
+  //   }
+  // },
 
   onRegister: function(event) {
     // call API to register the event
@@ -237,7 +237,7 @@ Page({
   _markCheckedIn() {
     this.setData({
       checkInDisabled: true,
-      checkInBtnVal: 'Checked In'
+      checkInBtnVal: 'Checked-In'
     });
   },
 
@@ -294,10 +294,9 @@ Page({
       this.showError('Please try again');
       console.log(e);
     });
-    this.setData({
-      loading: !this.data.loading,
-    });
-
+    // this.setData({
+    //   loading: !this.data.loading,
+    // });
   },
   onStartSession(event) {
     let userId = Util.getUserId();
@@ -331,14 +330,14 @@ Page({
 
   _markStarted(checkInCode) {
     this.setData({
-      startBtnVal: `Check-in Code: (${checkInCode})`,
+      startBtnVal: `Code(${checkInCode})`,
       startBtnDisabled: true,
     });
   },
 
   onChangeLikeStatus: function () {
     let isCheckedIn = WCache.get(this.data.sessionId + '_checkedIn');
-    if (!isCheckedIn) {
+    if (!isCheckedIn && !this.data.isOwner) {
       Util.showToast('Please check in first', 'none', 2000);
     } else {
       let userId = Util.getUserId();
@@ -363,9 +362,9 @@ Page({
         this.showError('Please try again');
         console.log(e);
       });
-      this.setData({
-        loading: !this.data.loading,
-      });
+      // this.setData({
+      //   loading: !this.data.loading,
+      // });
     }
   },
 

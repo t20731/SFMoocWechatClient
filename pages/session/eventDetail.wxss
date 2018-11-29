@@ -68,9 +68,9 @@
   margin-bottom: 10rpx;
 }
 
-.session-detail-action {
+/* .session-detail-action {
   padding-bottom: 40px 
-}
+} */
 
 .uniformBtn {
   width: 100%;
@@ -101,6 +101,9 @@ button[disabled]:not([type]) {
   height: 60rpx;
 }
 
+.flex-wrp {
+  padding-bottom: 60rpx;
+}
 .footerBar{ 
   display: flex;
   flex-direction: row;

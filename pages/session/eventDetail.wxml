@@ -138,22 +138,24 @@
       </modal>
     </view>
   </view>
-  <view class="weui-footer weui-footer_fixed-bottom footerBar" wx:if="{{isRegistered}}">
+  <view class="weui-footer weui-footer_fixed-bottom footerBar" wx:if="{{isRegistered||isOwner}}">
     <view class="weui-footer__links">
-      <view class='weui-footer__link' bindtap='onStartSession' disabled="{{startBtnDisabled}}" wx:if="{{isOwner&&!isCompleted}}">
-        {{startBtnVal}}
+      <view class='weui-footer__link' wx:if="{{isOwner&&!isCompleted}}">
+        <image class="likeBtn" wx:if="{{!startBtnDisabled}}" src="../../images/start.png" bindtap="onStartSession" />
+        <image class="likeBtn" wx:else src="../../images/started.png" /> {{startBtnVal}}
       </view>
-      <view class='weui-footer__link' bindtap='onManageQuiz' class="uniformBtn" disabled="{{quizBtnDisabled}}" wx:if="{{isOwner&&!isCompleted}}">{{quizBtnVal}}
+      <view class='weui-footer__link' bindtap='onManageQuiz' wx:if="{{isOwner&&!isCompleted}}">
+        <image class="likeBtn" wx:if="{{!quizBtnDisabled}}" src="../../images/manageExam.png" /> {{quizBtnVal}}
       </view>
       <view class='weui-footer__link' wx:if="{{!isOwner&&!isCompleted}}">
         <image class="likeBtn" wx:if="{{!checkInDisabled}}" src="../../images/checkIn2.png" bindtap="onCheckIn" />
         <image class="likeBtn" wx:else src="../../images/checkedIn.png" /> {{checkInBtnVal}}
       </view>
-      <view class='weui-footer__link' bindtap='onStartQuiz' disabled="{{startQuizBtnDisabled}}" wx:if="{{!isOwner&&!isCompleted}}">
-        {{startQuizBtnVal}}
+      <view class='weui-footer__link' bindtap='onStartQuiz' wx:if="{{!isOwner&&!isCompleted}}">
+        <image class="likeBtn" wx:if="{{!startQuizBtnDisabled}}" src="../../images/exam.png" /> {{startQuizBtnVal}}
       </view>
       <view class='weui-footer__link' bindtap='onStartLottery' wx:if="{{!isCompleted}}">
-        {{lotteryBtnVal}}
+        <image class="likeBtn" src="../../images/lottery.png" /> {{lotteryBtnVal}}
       </view>
       <view class='weui-footer__link' bindtap='onClickLike'>
         <image class="likeBtn" wx:if="{{isLiked}}" src="../../images/like.png" bindtap="onChangeLikeStatus" />
@@ -161,7 +163,7 @@
       </view>
     </view>
   </view>
-  <view class="flex-item" wx:if="{{!isRegistered&&!isCompleted}}">
+  <view class="flex-item" wx:if="{{!isRegistered&&!isComplete && !isOwner}}">
     <button bindtap='onRegister' class="uniformBtn" disabled="{{disabled}}" loading="{{loading}}">{{registerBtnVal}}</button>
   </view>
 </view>
