@@ -339,7 +339,10 @@ Page({
     let isCheckedIn = WCache.get(this.data.sessionId + '_checkedIn');
     if (!isCheckedIn && !this.data.isOwner) {
       Util.showToast('Please check in first', 'none', 2000);
-    } else {
+    } else if (this.data.isOwner && (this.data.startBtnVal === 'Start')){
+      Util.showToast('Please start the session first', 'none', 2000);
+    }
+    else {
       let userId = Util.getUserId();
       let likeStatus = this.data.isLiked === 1 ? 0 : 1;
       let addCount = likeStatus === 1 ? 1 : -1;
