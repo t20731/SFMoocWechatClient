@@ -58,7 +58,6 @@ Page({
     }
     this._checkGuest(userId);
     this._isCheckedIn();
-
     wx.showLoading({
       title: 'Loading',
       mask: true
@@ -72,7 +71,7 @@ Page({
         console.log(res.data);
         let retObj = res.data.retObj;
         let eventDetail = retObj.session;
-        let likeCount = eventDetail.userLike;
+        let likeCount = retObj.userLike;
         let isOwner = this._isOwner(eventDetail.owner.id);
         this.setData({
           isOwner: isOwner,
@@ -91,6 +90,7 @@ Page({
     }).catch(e => {
       console.log(e);
     });
+    this._getLike(userId);
   },
 
   goRankDetail(e) {
@@ -277,6 +277,28 @@ Page({
     this.setData({ isCheckInModalHidden: true });
   },
 
+  _getLike: function (userId) {
+    WXRequest.post('/session/getlike/', {
+      userId: userId,
+      sessionId: this.data.sessionId
+    }).then(res => {
+      if (res.data.msg === 'ok') {
+        console.log("aaa" + res.data.msg);
+        this.setData({
+          isLiked: res.data.retObj
+        })
+      } else {
+        this.showError('get like count failed. Please try again');
+      }
+    }).catch(e => {
+      this.showError('Please try again');
+      console.log(e);
+    });
+    this.setData({
+      loading: !this.data.loading,
+    });
+
+  },
   onStartSession(event) {
     let userId = Util.getUserId();
     let canStart = this._canStart(this.data.eventDetail.enrollments);
@@ -315,10 +337,14 @@ Page({
   },
 
   onChangeLikeStatus: function () {
+    let isCheckedIn = WCache.get(this.data.sessionId + '_checkedIn');
+    if (!isCheckedIn) {
+      Util.showToast('Please check in first', 'none', 2000);
+    } else {
       let userId = Util.getUserId();
       let likeStatus = this.data.isLiked === 1 ? 0 : 1;
-      let addCount = likeStatus === 1? 1:-1;
-      let currenttotalLikeCount = this.data.eventDetail.likeCount + addCount;
+      let addCount = likeStatus === 1 ? 1 : -1;
+      let currenttotalLikeCount = this.data.totalLikeCount + addCount;
       WXRequest.post('/session/like/', {
         userId: userId,
         sessionId: this.data.eventDetail.id,
@@ -331,15 +357,16 @@ Page({
             totalLikeCount: currenttotalLikeCount
           })
         } else {
-          this.showError('Register failed. Please try again');
+          this.showError('appreciate failed. Please try again');
         }
       }).catch(e => {
         this.showError('Please try again');
         console.log(e);
       });
-      // this.setData({
-      //   loading: !this.data.loading,
-      // });
+      this.setData({
+        loading: !this.data.loading,
+      });
+    }
   },
 
   showError: function(title) {

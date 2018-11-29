@@ -145,19 +145,19 @@
       </view>
       <view class='weui-footer__link' bindtap='onManageQuiz' class="uniformBtn" disabled="{{quizBtnDisabled}}" wx:if="{{isOwner&&!isCompleted}}">{{quizBtnVal}}
       </view>
-      <view class='weui-footer__link' bindtap='onCheckIn' disabled="{{checkInDisabled}}" wx:if="{{!isOwner&&!isCompleted}}">
-        {{checkInBtnVal}}
+      <view class='weui-footer__link' wx:if="{{!isOwner&&!isCompleted}}">
+        <image class="likeBtn" wx:if="{{!checkInDisabled}}" src="../../images/checkIn2.png" bindtap="onCheckIn" />
+        <image class="likeBtn" wx:else src="../../images/checkedIn.png" /> {{checkInBtnVal}}
       </view>
       <view class='weui-footer__link' bindtap='onStartQuiz' disabled="{{startQuizBtnDisabled}}" wx:if="{{!isOwner&&!isCompleted}}">
         {{startQuizBtnVal}}
       </view>
-      <view class='weui-footer__link' bindtap='onStartLottery'wx:if="{{!isCompleted}}">
+      <view class='weui-footer__link' bindtap='onStartLottery' wx:if="{{!isCompleted}}">
         {{lotteryBtnVal}}
       </view>
       <view class='weui-footer__link' bindtap='onClickLike'>
-      <image class="likeBtn" wx:if="{{isLiked}}" src="../../images/like.png" bindtap="onChangeLikeStatus"/>
-      <image class="likeBtn" wx:else src="../../images/unlike.png" bindtap="onChangeLikeStatus"/>
-        {{totalLikeCount}}
+        <image class="likeBtn" wx:if="{{isLiked}}" src="../../images/like.png" bindtap="onChangeLikeStatus" />
+        <image class="likeBtn" wx:else src="../../images/unlike.png" bindtap="onChangeLikeStatus" /> {{totalLikeCount}}
       </view>
     </view>
   </view>
