@@ -53,10 +53,10 @@ Page({
   },
 
   editQuestion: function (evt) {
-    let quesIndex = evt.target.dataset.quesindex;
-    let questionId = this.data.questions[quesIndex].id;
+    let questionIndex = evt.target.dataset.quesindex;
+    let questionId = this.data.questions[questionIndex].id;
     wx.navigateTo({
-      url: 'editQuestion?questionId=' + questionId
+      url: 'editQuestion?questionId=' + questionId + '&questionIndex=' + questionIndex
     })
   },
 

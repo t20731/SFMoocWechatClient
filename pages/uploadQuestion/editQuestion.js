@@ -30,15 +30,20 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-    let questionId = options.questionId;
-    this.loadOneQuestion(questionId);
+    let questionId = parseInt(options.questionId);
+    let questionIndex = parseInt(options.questionIndex);
+    this.loadOneQuestion(questionId, questionIndex);
   },
 
-  loadOneQuestion: function (questionId) {
+  loadOneQuestion: function (questionId, questionIndex) {
     let that = this;
     wx.request({
-      url: app.globalData.host + '/question/load_one/' + questionId,
-      method: 'GET',
+      url: app.globalData.host + '/question/load_one',
+      method: 'POST',
+      data: {
+        questionId: questionId,
+        questionIndex: questionIndex
+      },
       success: function (res) {
         if (res.data.msg === 'ok') {
           let questionObj = res.data.retObj;
