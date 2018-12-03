@@ -301,5 +301,13 @@ Page({
 
   showError: function(title) {
     Util.showToast(title, 'none');
+  },
+  
+  onShareAppMessage: function (res) {
+    return {
+      title: eventDetail.topic,
+      path: '/pages/session/eventDetail?id='+sessionId,
+      imageUrl: app.globalData.host + eventDetail.tileImageSrc
+    }
   }
 });
