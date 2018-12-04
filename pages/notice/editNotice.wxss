@@ -1,0 +1,11 @@
+/* pages/notice/editNotice.wxss */
+.saveBtn {
+  margin-top: 50rpx;
+}
+.editTitle {
+  padding: 10rpx;
+  text-align: center;
+}
+.editTitle >text {
+  font-size: 40rpx;
+}
