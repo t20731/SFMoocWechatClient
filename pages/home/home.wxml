@@ -20,6 +20,10 @@
       </view>
     </view>
   </view>
+  <view class="entries">
+    <image src="../../images/entry_notice.png" class="entry-img" bindtap="onNoticePage"></image>
+    <image src="../../images/entry_schedule.png" class="entry-img" bindtap="onSchedulePage"></image>
+  </view>
   <view class="page__bd">
     <view class="weui-tab">
       <view class="weui-navbar">

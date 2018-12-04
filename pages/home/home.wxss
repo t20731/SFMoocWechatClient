@@ -64,14 +64,14 @@
   text-align: center;
 }
 .page__bd{
-  padding-top: 220rpx;
+  padding-top: 340rpx;
   background: #FFF;
 }
 
 .weui-navbar {
   position: fixed;
   z-index: 1;
-  top: 220rpx;
+  top: 340rpx;
   background: #FFF;
   border-top: 1rpx solid #ccc;
   border-bottom: none;
@@ -111,4 +111,16 @@
   left: 16px;
   color: #fff;
   font-size: 30px;
+}
+
+.entries{
+  position:fixed;
+  top: 220rpx;
+  height: 120rpx;
+}
+
+.entry-img{
+  width: 80rpx;
+  height: 80rpx;
+  margin: 20rpx;
 }

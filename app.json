@@ -13,7 +13,10 @@
     "pages/uploadQuestion/editQuestion",
     "pages/exam/exam",
     "pages/exam/examList",
-    "pages/home/pointsDetail"
+    "pages/home/pointsDetail",
+    "pages/notice/notice",
+    "pages/notice/editNotice"
+
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -337,5 +337,19 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  onNoticePage: function() {
+    wx.navigateTo({
+      url:'../notice/notice'
+    });
+  },
+
+  onSchedulePage: function () {
+    wx.navigateTo({
+      url: '../schedule/schedule'
+    });
   }
+
+
 })
