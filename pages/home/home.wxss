@@ -117,10 +117,30 @@
   position:fixed;
   top: 220rpx;
   height: 120rpx;
+  display: flex;
+  padding: 0 20rpx;
 }
 
-.entry-img{
+.entry-item {
   width: 80rpx;
   height: 80rpx;
-  margin: 20rpx;
+  border-radius: 40rpx;
+  background: black;
+  margin: 15rpx 45rpx 0 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2rpx 2rpx 20rpx 0 #b7b7b7;  
+}
+
+.entry-item-announcement {
+ background-image: linear-gradient( 135deg, #5EFCE8 10%, #736EFE 100%);
+}
+
+.entry-item image {
+  width: 46rpx;
+  height: 46rpx;
+}
+.entry-item-schedule {
+ background-image: linear-gradient( 135deg, #F6CEEC 10%, #D939CD 100%);
 }
