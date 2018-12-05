@@ -33,7 +33,13 @@ Page({
     ownedSessions: [],
     completedSessions: [],
     completedSessionsIsNoData: false,
-    totalPoints: 0
+    totalPoints: 0,
+    actionSheetVisible:false,
+    deleteAction: [{
+      name: "Delete",
+      color: "#ed3f14"
+    }],
+    handleSessionIndex:0
   },
 
   /**
@@ -68,6 +74,79 @@ Page({
 
     this._setLoading('learnSessions', true);
     this._loadLearnSessions();
+  },
+
+  actionSheetClose: function () {
+    this.setData({
+      actionSheetVisible: false
+    });
+  },
+
+  actionSheetClick: function () {
+    let handleSessionIndex = this.data.handleSessionIndex;
+    let handleSession = this.data.ownedSessions[handleSessionIndex];
+    if (handleSession.enrollments){
+      this._cancelSession(handleSession.id);
+    } else {
+      this._deleteSession(handleSession.id);
+    }
+  },
+
+  _deleteSession: function (id) {
+    let itemId = id;
+    const action = [...this.data.deleteAction];
+    action[0].loading = true;
+    this.setData({
+      deleteAction: action
+    });
+    WXRequest.delete('/session/delete/' + itemId).then(res => {
+      if (res.data.msg === 'ok') {
+        setTimeout(() => {
+          action[0].loading = false;
+          this.setData({
+            actionSheetVisible: false,
+            deleteAction: action
+          });
+          Util.showToast('Delete session successfully！')
+          console.log('/session/delete/' + itemId, res.data);
+        }, 500);
+      }
+    }).catch(e => {
+      console.log(e);
+    });
+
+  },
+
+  _cancelSession: function (id) {
+    let itemId = id;
+    const action = [...this.data.deleteAction];
+    action[0].loading = true;
+    this.setData({
+      deleteAction: action
+    });
+    WXRequest.get('/session/cancel/' + itemId).then(res => {
+      if (res.data.msg === 'ok') {
+        setTimeout(() => {
+          action[0].loading = false;
+          this.setData({
+            actionSheetVisible: false,
+            deleteAction: action
+          });
+          Util.showToast('Cancel session successfully！')
+          console.log('/session/cancel/' + itemId, res.data);
+        }, 500)
+      }
+    }).catch(e => {
+      console.log(e);
+    });
+
+  },
+
+  swipeoutBtnTap: function (evt) {
+    this.setData({
+      actionSheetVisible: true,
+      handleSessionIndex: evt.target.dataset.itemindex
+      });
   },
 
   tabClick: function (e) {

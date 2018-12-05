@@ -71,25 +71,45 @@
             <view class="weui-loading"></view>
             <view class="weui-loadmore__tips">Loading</view>
           </view>
-          <view id="{{item.id}}" bindtap='goOwnedSession' class="eventItem" wx:for="{{ownedSessions}}" wx:key="id">
-            <view class='leftContent'>
-              <image wx:if="{{item.tileImageSrc}}" src="{{formatter.getImageUrl(item.tileImageSrc)}}"></image>
-              <image wx:else src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg"></image>
+
+          <i-action-sheet visible="{{actionSheetVisible}}" actions="{{deleteAction}}" show-cancel bind:cancel="actionSheetClose" bind:click="actionSheetClick">
+            <view slot="header" style="padding: 16px">
+              <view style="color: #444;font-size: 16px">Are you sure?</view>
+              <text wx:if="{{ownedSessions[handleSessionIndex].enrollments}}">Can not recover after session cancellation</text>
+              <text wx:if="{{!ownedSessions[handleSessionIndex].enrollments}}">Can not recover after session deletion</text>
             </view>
-            <view class="rightContent">
-              <view class="title">
-                <text>{{item.topic}}</text>
+          </i-action-sheet>
+
+          <i-swipeout id="{{item.id}}" operateWidth="{{160}}" unclosable="{{false}}" toggle="{{false}}"  wx:for="{{ownedSessions}}" wx:for-index='idx' wx:key="id">
+            <view slot="content" bindtap='goOwnedSession' class="eventItem">
+              <view class='leftContent'>
+                <image wx:if="{{item.tileImageSrc}}" src="{{formatter.getImageUrl(item.tileImageSrc)}}"></image>
+                <image wx:else src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg"></image>
               </view>
-              <view class="speaker">{{item.owner.nickName}}</view>
-              <view class="location">
+              <view class="rightContent">
+                <view class="title">
+                  <text>{{item.topic}}</text>
+                </view>
+                <view class="speaker">{{item.owner.nickName}}</view>
+                <view class="location">
                 {{formatter.getDate(item.startDate)}} | {{formatter.getDifficulty(item.difficulty)}}
-                <view class="count">
-                  <image src="../../images/mini_people.png"></image>
-                  <text>{{item.enrollments}}</text>
+                  <view class="count">
+                    <image src="../../images/mini_people.png"></image>
+                    <text>{{item.enrollments}}</text>
+                  </view>
                 </view>
               </view>
             </view>
-          </view>
+            <view slot="button" class="i-swipeout-button-right-group">
+              <view wx:if="{{item.enrollments}}" class="i-swipeout-button-right-item" data-itemIndex="{{idx}}" bindtap="swipeoutBtnTap">
+                Cancel
+              </view>
+              <view wx:if="{{!item.enrollments}}" class="i-swipeout-button-right-item" data-itemIndex="{{idx}}" bindtap="swipeoutBtnTap">
+                Delete
+              </view>
+            </view>
+          </i-swipeout>
+
           <view wx:if="{{ownedSessionsIsLoading}}" class="weui-loadmore">
             <view class="weui-loading"></view>
             <view class="weui-loadmore__tips">Loading</view>
