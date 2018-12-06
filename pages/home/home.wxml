@@ -80,7 +80,7 @@
             </view>
           </i-action-sheet>
 
-          <i-swipeout id="{{item.id}}" operateWidth="{{160}}" unclosable="{{false}}" toggle="{{false}}"  wx:for="{{ownedSessions}}" wx:for-index='idx' wx:key="id">
+          <i-swipeout id="{{item.id}}" operateWidth="{{100}}" unclosable="{{false}}" toggle="{{false}}"  wx:for="{{ownedSessions}}" wx:for-index='idx' wx:key="id">
             <view slot="content" bindtap='goOwnedSession' class="eventItem">
               <view class='leftContent'>
                 <image wx:if="{{item.tileImageSrc}}" src="{{formatter.getImageUrl(item.tileImageSrc)}}"></image>

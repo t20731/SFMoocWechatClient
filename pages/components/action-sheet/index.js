@@ -20,7 +20,7 @@ Component({
         },
         cancelText: {
             type: String,
-            value: 'Close'
+            value: 'No'
         },
         actions: {
             type: Array,

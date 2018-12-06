@@ -89,8 +89,8 @@ page {
   display: inline-block;
 }
 .rightContent {
-  margin-left: 8rpx;
-  padding-left: 6rpx;
+  margin: 0 8rpx;
+  padding: 0 6rpx;
   flex: 1;
 }
 .rightContent .title text {

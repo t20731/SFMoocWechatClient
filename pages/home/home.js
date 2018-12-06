@@ -36,7 +36,7 @@ Page({
     totalPoints: 0,
     actionSheetVisible:false,
     deleteAction: [{
-      name: "Delete",
+      name: "Yes",
       color: "#ed3f14"
     }],
     handleSessionIndex:0
