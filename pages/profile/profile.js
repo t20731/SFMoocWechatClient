@@ -125,15 +125,5 @@ Page({
         isModified: true
       })
     }
-  },
-
-  // bindGenderChange: function (e) {
-  //   this.inputChange('genderIndex', e.detail.value);
-  // },
-
-  // inputChange: function (name, value) {
-  //   this.setData({
-  //     [name]: value
-  //   });
-  // },
+  }
 })
