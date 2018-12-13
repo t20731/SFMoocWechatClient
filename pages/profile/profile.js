@@ -22,19 +22,17 @@ Page({
     let that = this;
     let userId = Util.getUserId();
     if (userId) {
-      wx.request({
-        url: app.globalData.host + '/user/' + userId,
-        method: 'GET',
-        success: function (res) {
-          console.log(res.data);
-          that.setData({
+
+      WXRequest.get('/user/' + userId).then(res => {
+        if (res.data.msg === 'ok') {
+          console.log('/user/', res.data);
+          this.setData({
             userInfo: res.data.retObj
           });
-        },
-        fail: function (e) {
-          Util.showToast('Failed to get user data', 'none', 2000);
         }
-      })
+      }).catch(e => {
+        console.log(e);
+      });
     }
   },
 
