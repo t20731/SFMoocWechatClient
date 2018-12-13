@@ -6,8 +6,9 @@
     <button class="loginButton" type="primary" plain="true" wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
       登录
     </button>
-    <view wx:else class="myInfoCard">
+    <view wx:else class="myInfoCard" bindtap='onProfilePage'>
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <image src="../../images/right_arrow.png" class='navIcon1'></image>
       <view class="userinfoRightSection">
         <view class="userinfo-nickname">{{userInfo.nickName}}</view>
         <view class="userinfoCredits">
@@ -23,9 +24,11 @@
   <view class="entries">
     <view class="entry-item entry-item-announcement" bindtap='onNoticePage'>
       <image src="../../images/entry-notice.png"></image>
+      <text>Notice</text>
     </view>
     <view class="entry-item entry-item-schedule" bindtap='onSchedulePage'>
       <image src="../../images/entry-schedule.png"></image>
+      <text>Schedule</text>
     </view>
   </view>
   <view class="page__bd">

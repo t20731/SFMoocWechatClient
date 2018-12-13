@@ -24,6 +24,7 @@
   color: #FFF;
   height:200rpx;
   background-image: linear-gradient(to right , #7A88FF, #7AFFAF);
+  position:relative;
 }
 .userinfo-avatar {
   width: 128rpx;
@@ -56,6 +57,13 @@
   height: 20rpx;
 }
 
+.navIcon1 {
+  width: 26rpx; 
+  height: 30rpx;
+  position: absolute;
+  right: 10rpx;
+}
+
 #generateCodeModal view {
   display: flex;
 }
@@ -64,14 +72,14 @@
   text-align: center;
 }
 .page__bd{
-  padding-top: 340rpx;
+  padding-top: 360rpx;
   background: #FFF;
 }
 
 .weui-navbar {
   position: fixed;
   z-index: 1;
-  top: 340rpx;
+  top: 360rpx;
   background: #FFF;
   border-top: 1rpx solid #ccc;
   border-bottom: none;
@@ -126,11 +134,12 @@
   height: 80rpx;
   border-radius: 40rpx;
   background: black;
-  margin: 15rpx 45rpx 0 20rpx;
+  margin: 5rpx 45rpx 0 20rpx;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 2rpx 2rpx 20rpx 0 #b7b7b7;  
+  position:relative;
 }
 
 .entry-item-announcement {
@@ -140,6 +149,13 @@
 .entry-item image {
   width: 46rpx;
   height: 46rpx;
+}
+.entry-item text {
+position: absolute;
+top:88rpx;
+justify-content: center;
+font-size:20rpx;
+color:#333
 }
 .entry-item-schedule {
  background-image: linear-gradient( 135deg, #F6CEEC 10%, #D939CD 100%);

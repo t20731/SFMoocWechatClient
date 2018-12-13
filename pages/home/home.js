@@ -349,6 +349,12 @@ Page({
     wx.navigateTo({
       url: '../schedule/schedule'
     });
+  },
+
+  onProfilePage: function () {
+    wx.navigateTo({
+      url: '../profile/profile'
+    })
   }
 
 
