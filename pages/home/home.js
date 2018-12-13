@@ -351,7 +351,7 @@ Page({
     });
   },
 
-  onProfilePage: function () {
+  goToProfilePage: function () {
     wx.navigateTo({
       url: '../profile/profile'
     })

@@ -119,7 +119,7 @@ Page({
     return userDetail;
   },
 
-  bindAnyModify: function(e) {
+  onProfileDataChange: function(e) {
     if (!this.data.isModified) {
       this.setData({
         isModified: true

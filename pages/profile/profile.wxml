@@ -1,4 +1,6 @@
 <!--pages/profile/profile.wxml-->
+<import src="../components/templates/formInput.wxml" />
+
 <view class="page">
   <view class="userinfo">
     <block>
@@ -9,102 +11,26 @@
 
   <form bindsubmit="onSubmit" bindreset="onReset">
 
-    <view class="weui-cells__title"></view>
-    <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">
-                Blog
-              </view>
-            </view>
-            <view class="weui-cell__bd">
-                <input
-                  name="blog" 
-                  class="weui-input" 
-                  placeholder="No Data" 
-                  value="{{userInfo.blog}}"
-                  bindinput="bindAnyModify" />
-            </view>
-        </view>
-    </view>
-
-    <view class="weui-cells__title"></view>
-    <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">
-                Github
-              </view>
-            </view>
-            <view class="weui-cell__bd">
-                <input 
-                  name="github" 
-                  class="weui-input" 
-                  placeholder="No Data"
-                  value="{{userInfo.github}}"
-                  bindinput="bindAnyModify"/>
-            </view>
-        </view>
-    </view>
-
-    <view class="weui-cells__title"></view>
-    <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">
-              Dept.
-              </view>
-            </view>
-            <view class="weui-cell__bd">
-                <input
-                  name="department" 
-                  class="weui-input" 
-                  placeholder="No Data" 
-                  value="{{userInfo.department}}" 
-                  bindinput="bindAnyModify"/>
-            </view>
-        </view>
-    </view>
-
-    <view class="weui-cells__title"></view>
-    <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">
-                Seat
-              </view>
-            </view>
-            <view class="weui-cell__bd">
-                <input 
-                  name="seat" 
-                  class="weui-input" 
-                  placeholder="No Data" 
-                  value="{{userInfo.seat}}" 
-                  bindinput="bindAnyModify"/>
-            </view>
-        </view>
-    </view>
+    <template is='formInput' data="{{ title:'Blog', value:userInfo.blog, name:'blog', onInput: 'onProfileDataChange' }}" />
+    <template is='formInput' data="{{ title: 'Github', value: userInfo.github, name: 'github',onInput: 'onProfileDataChange'}}" />
+    <template is='formInput' data="{{ title:'Dept.', value:userInfo.department, name:'department', onInput: 'onProfileDataChange' }}" />
+    <template is='formInput' data="{{ title:'Seat', value:userInfo.seat, name:'seat', onInput: 'onProfileDataChange' }}" />
 
     <view class="weui-cells__title">
     </view>
     <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell signature-cell">
-            <view class="weui-cell__hd">
-              <view class="weui-label">
-                Sign
-              </view>
-            </view>
-            <view class="weui-cell__bd">
-                <textarea name="signature"
-                  class="weui-textarea"
-                  placeholder="No Data"
-                  style="height: 3.3em"
-                  bindinput="bindAnyModify"
-                  value="{{userInfo.signature}}" />
-                <view class="weui-textarea-counter">0/200</view>
-            </view>
-
+      <view class="weui-cell signature-cell">
+        <view class="weui-cell__hd">
+          <view class="weui-label">
+            Sign
+          </view>
         </view>
+        <view class="weui-cell__bd">
+          <textarea name="signature" class="weui-textarea" placeholder="No Data" style="height: 3.3em" bindinput="onProfileDataChange" value="{{userInfo.signature}}" />
+          <view class="weui-textarea-counter">0/200</view>
+        </view>
+
+      </view>
     </view>
 
     <view class='actions'>

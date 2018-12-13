@@ -6,7 +6,7 @@
     <button class="loginButton" type="primary" plain="true" wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
       登录
     </button>
-    <view wx:else class="myInfoCard" bindtap='onProfilePage'>
+    <view wx:else class="myInfoCard" bindtap='goToProfilePage'>
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <image src="../../images/right_arrow.png" class='navIcon1'></image>
       <view class="userinfoRightSection">
