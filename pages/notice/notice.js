@@ -42,11 +42,11 @@ Page({
   editAnnouncement: function (evt) {
     let noticeId = evt.currentTarget.dataset.noticeid;
     let userInfo = wx.getStorageSync('userInfo');
-    if (userInfo.status === 2) {
+    //  if (userInfo.status === 2) {
       wx.navigateTo({
         url: 'editNotice?noticeId=' + noticeId + '&noticeCont=' + this.data.notice.content,
       })
-    }
+    //  }
   },
 
   /**
