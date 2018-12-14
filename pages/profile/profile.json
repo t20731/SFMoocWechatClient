@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "Profile Detail",
+  "usingComponents": {
+    "i-icon": "../components/icon/index"
+  }
+}

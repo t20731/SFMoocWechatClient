@@ -15,7 +15,8 @@
     "pages/exam/examList",
     "pages/home/pointsDetail",
     "pages/notice/notice",
-    "pages/notice/editNotice"
+    "pages/notice/editNotice",
+    "pages/profile/profile"
 
   ],
   "window": {
