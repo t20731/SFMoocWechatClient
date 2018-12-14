@@ -29,6 +29,7 @@ Page({
       { id: 3, name: "Frontend", imageSrc: null }
     ],
     directionIndex: 0,
+    groupIndex:0,
     mode: "create",
     editSessionDetail: null,
     formData: {}
@@ -45,13 +46,14 @@ Page({
   },
 
   _initData: function() {
-    WXRequest.get('/session/init').then(res => {
+    WXRequest.get('/session/init/' + Util.getUserId()).then(res => {
       if (res.data.msg === 'ok') {
         console.log('/session/init', res.data);
         let retObj = res.data.retObj;
         this.setData({
           directions: retObj.directions,
-          locations: retObj.locations
+          locations: retObj.locations,
+          groups: retObj.groups
         });
       }
     }).catch(e => {
@@ -97,6 +99,7 @@ Page({
           durationIndex: this._calDuartionIndex(retObj.session.startDate,retObj.session.endDate),
           locationIndex: this.data.locations.map(val => val.name).indexOf(retObj.session.location.name),
           directionIndex: this.data.directions.map(val => val.name).indexOf(retObj.session.direction.name),
+          groupIndex: this.data.groups.map(val => val.name).indexOf(retObj.session.group.name),
           difficultyIndex: retObj.session.difficulty
         });
       }
@@ -195,6 +198,10 @@ Page({
     this.inputChange('directionIndex', e.detail.value);
   },
 
+  bindGroupChange: function (e) {
+    this.inputChange('groupIndex', e.detail.value);
+  },
+
   bindDifficultyChange: function(e) {
     this.inputChange('difficultyIndex', e.detail.value);
   },
@@ -246,7 +253,8 @@ Page({
       difficulty: value.difficulty,
       location: {
         id: this.data.locations[value.location].id
-      }
+      },
+      typeId: this.data.groups[value.group].id
     };
     return eventDetail;
   },

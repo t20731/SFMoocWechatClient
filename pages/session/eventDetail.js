@@ -31,7 +31,9 @@ Page({
     startQuizBtnDisabled: false,
     isCompleted: false,
     isRegistered: false,
-    canEdit: false
+    canEdit: false,
+    showLottery:false,
+    showQuiz:false
   },
 
   onLoad: function (e) {
@@ -70,12 +72,13 @@ Page({
         console.log(res.data);
         let retObj = res.data.retObj;
         let eventDetail = retObj.session;
+        console.log(eventDetail.sessionType);
 
         let isOwner = this._isOwner(eventDetail.owner.id);
         this.setData({
           isOwner: isOwner,
           eventDetail: eventDetail,
-          canEdit: isOwner && (new Date(eventDetail.endDate).getTime() > Date.now())
+          canEdit: isOwner && (new Date(eventDetail.endDate).getTime() > Date.now()),
         });
         if (userId && retObj.userRegistered) {
           this._markRegistered();
@@ -83,6 +86,13 @@ Page({
         let checkInCode = eventDetail.checkInCode;
         if (checkInCode) {
           this._markStarted(checkInCode);
+        }
+        let typeId = eventDetail.sessionType.id;
+        if (typeId == 1){
+          this.setData({
+            showQuiz: true,
+            showLottery: true
+          })
         }
       }
     }).catch(e => {
