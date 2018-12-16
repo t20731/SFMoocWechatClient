@@ -115,7 +115,7 @@
   <!-- started non-t2 session -->
   <view wx:if="{{(isRegistered || isOwner) && status == 1 && eventDetail.typeId != 1}}">
     <view class="flex-item" wx:if="{{!isOwner}}">
-      <button bindtap='onCheckIn' class="uniformBtn" wx:if="{{checkInDisabled}}" disabled="{{disabled}}">{{checkInBtnVal}}</button>
+      <button bindtap='onCheckIn' class="uniformBtn" wx:if="{{!checkInDisabled}}">{{checkInBtnVal}}</button>
     </view>
     <view class="flex-item" wx:if="{{isOwner}}">
       <button class="uniformBtn" disabled="{{disabled}}">Code: {{startBtnVal}}</button>
