@@ -195,7 +195,7 @@ Page({
   goCompletedSession(event){
     let id = event.currentTarget.id;
     wx.navigateTo({
-      url: '../session/eventDetail?id=' + id + '&&isCompleted=true'
+      url: '../session/eventDetail?id=' + id 
     })
   },
 

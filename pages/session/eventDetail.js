@@ -15,12 +15,14 @@ Page({
     disabled: false,
     loading: false,
     registerBtnVal: 'Register',
-    startBtnVal: 'Start',
+    unRegisterBtnVal: 'UnRegister',
+    startBtnVal: 'Start Session',
     startBtnDisabled: false,
     quizBtnVal: 'Quiz-M',
-    lotteryBtnVal: 'Lucky',
+    lotteryBtnVal: 'Lottery',
     quizBtnDisabled: false,
     eventDetail: null,
+    status: 0,
     sessionId: 0,
     checkInBtnVal: 'Check-In',
     checkInDisabled: false,
@@ -29,7 +31,6 @@ Page({
     isRewardModalHidden: true,
     startQuizBtnVal: 'Quiz',
     startQuizBtnDisabled: false,
-    isCompleted: false,
     isRegistered: false,
     canEdit: false,
     isLiked: 0,
@@ -38,24 +39,16 @@ Page({
 
   onLoad: function (e) {
     this.data.pageQueries = e;
-  },
-
-  onShow: function () {
-    this.doLoadDetail()
+    this.doLoadDetail();
   },
 
   doLoadDetail: function () {
-    const {id, isCompleted} = this.data.pageQueries;
+    const {id} = this.data.pageQueries;
 
     let userId = Util.getUserId();
     this.setData({
       sessionId: id
     });
-    if (isCompleted) {
-      this.setData({
-        isCompleted: isCompleted
-      });
-    }
     this._checkGuest(userId);
     this._isCheckedIn();
     wx.showLoading({
@@ -76,7 +69,8 @@ Page({
         this.setData({
           isOwner: isOwner,
           eventDetail: eventDetail,
-          canEdit: isOwner && (new Date(eventDetail.endDate).getTime() > Date.now()),
+          status: eventDetail.status,
+          canEdit: isOwner && (eventDetail.status == 0),
           totalLikeCount: likeCount
         });
         if (userId && retObj.userRegistered) {
@@ -163,25 +157,8 @@ Page({
     }
   },
 
-  // onClickLike: function () {
-  //   let userInfo = wx.getStorageSync('userInfo');
-  //   let isCheckedIn = WCache.get(this.data.sessionId + '_checkedIn');
-  //   if (!userInfo) {
-  //     Util.showToast('Please login fisrt', 'none', 2000);
-  //   } else if (!isCheckedIn) {
-  //     Util.showToast('Please check in first', 'none', 2000);
-  //   } else {
-
-  //   }
-  // },
-
   onRegister: function(event) {
-    // call API to register the event
     console.log('Register: ', event);
-    this.setData({
-      loading: !this.data.loading,
-    });
-
     let userId = Util.getUserId();
     WXRequest.post('/session/register/', {
       userId: userId,
@@ -189,12 +166,10 @@ Page({
     }).then(res => {
       if (res.data.msg === 'ok') {
         console.log(res.data);
-        Util.showToast('Successfully');
         this.setData({
-          loading: false,
-          isRegistered: true,
-          registerBtnVal: 'Registered'
+          isRegistered: true
         })
+        Util.showToast('Success', 'success', 1000);
       } else {
         this.showError('Register failed. Please try again');
       }
@@ -207,25 +182,47 @@ Page({
     });
   },
 
-  onReward: function(){
-    this.setData({
-      isRewardModalHidden: false
-    });
-  },
-  
-  submitRewardAmount: function(){
-    console.log('submitRewardAmount');
-    this.setData({
-      isRewardModalHidden: true
+  unRegister: function (event) {
+    console.log('unRegister: ', event);
+    let userId = Util.getUserId();
+    WXRequest.post('/session/unregister/', {
+      userId: userId,
+      sessionId: this.data.eventDetail.id
+    }).then(res => {
+      if (res.data.msg === 'ok') {
+        console.log(res.data);
+        this.setData({
+          isRegistered: false
+        })
+        Util.showToast('Success', 'success', 1000);
+      } else {
+        this.showError('unRegister failed. Please try again');
+      }
+    }).catch(e => {
+      this.showError('Please try again');
+      console.log(e);
     });
   },
 
-  cancelReward: function(){
-    console.log('cancelReward');
-    this.setData({
-      isRewardModalHidden: true
-    });
-  },
+  // onReward: function(){
+  //   this.setData({
+  //     isRewardModalHidden: false
+  //   });
+  // },
+  
+  // submitRewardAmount: function(){
+  //   console.log('submitRewardAmount');
+  //   this.setData({
+  //     isRewardModalHidden: true
+  //   });
+  // },
+
+  // cancelReward: function(){
+  //   console.log('cancelReward');
+  //   this.setData({
+  //     isRewardModalHidden: true
+  //   });
+  // },
 
   _isCheckedIn() {
     let isCheckedIn = WCache.get(this.data.sessionId + '_checkedIn');
@@ -294,9 +291,6 @@ Page({
       this.showError('Please try again');
       console.log(e);
     });
-    // this.setData({
-    //   loading: !this.data.loading,
-    // });
   },
   onStartSession(event) {
     let userId = Util.getUserId();
@@ -330,19 +324,16 @@ Page({
 
   _markStarted(checkInCode) {
     this.setData({
-      startBtnVal: `Code(${checkInCode})`,
+      startBtnVal: `${checkInCode}`,
       startBtnDisabled: true,
+      status: 1
     });
   },
 
   onChangeLikeStatus: function () {
-    let isCheckedIn = WCache.get(this.data.sessionId + '_checkedIn');
-    if (!isCheckedIn && !this.data.isOwner) {
-      Util.showToast('Please check in first', 'none', 2000);
-    } else if (this.data.isOwner && (this.data.startBtnVal === 'Start')){
-      Util.showToast('Please start the session first', 'none', 2000);
-    }
-    else {
+    if (this.data.isOwner){
+      Util.showToast('Cannot like your own session', 'none', 2000);
+    } else {
       let userId = Util.getUserId();
       let likeStatus = this.data.isLiked === 1 ? 0 : 1;
       let addCount = likeStatus === 1 ? 1 : -1;
@@ -359,15 +350,16 @@ Page({
             totalLikeCount: currenttotalLikeCount
           })
         } else {
-          this.showError('appreciate failed. Please try again');
+          if (res.data.msg == 0){
+            Util.showToast('You havent checked in', 'none', 2000);
+          }else{
+            this.showError('Like failed. Please try again');
+          }
         }
       }).catch(e => {
         this.showError('Please try again');
         console.log(e);
       });
-      // this.setData({
-      //   loading: !this.data.loading,
-      // });
     }
   },
 
