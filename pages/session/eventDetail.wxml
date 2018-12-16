@@ -120,7 +120,7 @@
     <view class="flex-button" wx:if="{{isOwner}}">
       <button class="uniformBtn" disabled="{{disabled}}">Code: {{startBtnVal}}</button>
     </view>
-    <view class="reward" >
+    <view class="reward" wx:if="{{isOwner || checkInDisabled}}">
         <image class="likeBtn" wx:if="{{isLiked}}" src="../../images/like.png" bindtap="onChangeLikeStatus" />
         <image class="likeBtn" wx:else src="../../images/unlike.png" bindtap="onChangeLikeStatus" /> {{totalLikeCount}}
     </view>

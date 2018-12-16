@@ -66,19 +66,19 @@ Page({
         let eventDetail = retObj.session;
         let likeCount = retObj.userLike;
         let isOwner = this._isOwner(eventDetail.owner.id);
+        let checkInCode = eventDetail.checkInCode;
+        if (checkInCode) {
+          this._markStarted(checkInCode);
+        }
         this.setData({
           isOwner: isOwner,
           eventDetail: eventDetail,
-          status: eventDetail.status,
-          canEdit: isOwner && (eventDetail.status == 0),
+          status: retObj.session.status,
+          canEdit: isOwner && (retObj.session.status == 0),
           totalLikeCount: likeCount
         });
         if (userId && retObj.userRegistered) {
           this._markRegistered();
-        }
-        let checkInCode = eventDetail.checkInCode;
-        if (checkInCode) {
-          this._markStarted(checkInCode);
         }
       }
     }).catch(e => {
@@ -267,6 +267,8 @@ Page({
         Util.showToast('Credits +1', 'success', 2000);
         WCache.put(that.data.sessionId + '_checkedIn', true, 24 * 60 * 60);
         this._markCheckedIn();
+      } else {
+        Util.showToast('Failed', 'none', 2000);
       }
     }).catch(e => {
       console.log(e);
@@ -352,10 +354,10 @@ Page({
             totalLikeCount: currenttotalLikeCount
           })
         } else {
-          if (res.data.msg == 0){
+          if (res.data.status == 0){
             Util.showToast('You havent checked in', 'none', 2000);
           }else{
-            this.showError('Like failed. Please try again');
+            this.showError('You havent registered this seesion');
           }
         }
       }).catch(e => {
