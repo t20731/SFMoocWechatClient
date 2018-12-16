@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "Session Detail"
+  "navigationBarTitleText": "Session Detail",
+  "enablePullDownRefresh": true
 }

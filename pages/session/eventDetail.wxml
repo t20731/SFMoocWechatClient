@@ -71,14 +71,14 @@
   <view wx:if="{{status == 0}}">
     <view wx:if="{{!isOwner}}">
       <view class="flex-item" wx:if="{{!isRegistered}}">
-        <button bindtap='onRegister' class="uniformBtn" disabled="{{disabled}}">Register</button>
+        <button bindtap='onRegister' class="uniformBtn">Register</button>
       </view>
       <view class="flex-item" wx:else>
-        <button bindtap='unRegister' class="uniformBtn" disabled="{{disabled}}">Unregister</button>
+        <button bindtap='unRegister' class="uniformBtn">Unregister</button>
       </view>
     </view>
     <view class="flex-item" wx:else>
-      <button bindtap='onStartSession' class="uniformBtn" disabled="{{disabled}}">{{startBtnVal}}</button>
+      <button bindtap='onStartSession' class="uniformBtn">{{startBtnVal}}</button>
     </view>
   </view>
   <!-- started t2 session -->
@@ -118,7 +118,7 @@
       <button bindtap='onCheckIn' class="uniformBtn" wx:if="{{checkInDisabled}}" disabled="{{disabled}}">{{checkInBtnVal}}</button>
     </view>
     <view class="flex-item" wx:if="{{isOwner}}">
-      <button class="uniformBtn" disabled="{{disabled}}">{{startBtnVal}}</button>
+      <button class="uniformBtn" disabled="{{disabled}}">Code: {{startBtnVal}}</button>
     </view>
     <view class="reward" >
         <image class="likeBtn" wx:if="{{isLiked}}" src="../../images/like.png" bindtap="onChangeLikeStatus" />
