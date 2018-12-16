@@ -114,10 +114,10 @@
   </view>
   <!-- started non-t2 session -->
   <view wx:if="{{(isRegistered || isOwner) && status == 1 && eventDetail.group.id != 1}}">
-    <view class="flex-item" wx:if="{{!isOwner}}">
+    <view class="flex-button" wx:if="{{!isOwner}}">
       <button bindtap='onCheckIn' class="uniformBtn" wx:if="{{!checkInDisabled}}">{{checkInBtnVal}}</button>
     </view>
-    <view class="flex-item" wx:if="{{isOwner}}">
+    <view class="flex-button" wx:if="{{isOwner}}">
       <button class="uniformBtn" disabled="{{disabled}}">Code: {{startBtnVal}}</button>
     </view>
     <view class="reward" >

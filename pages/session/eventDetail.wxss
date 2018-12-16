@@ -4,6 +4,11 @@
 }
 
 .flex-item {
+  margin-bottom: 40rpx;
+  font-size: 14px;
+}
+
+.flex-button {
   margin-bottom: 20rpx;
   font-size: 14px;
 }
