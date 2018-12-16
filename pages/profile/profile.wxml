@@ -25,7 +25,7 @@
           </view>
         </view>
         <view class="weui-cell__bd">
-          <input name="github" class="weui-input" placeholder="No Data" value="userInfo.github" bindinput="onProfileDataChange" />
+          <input name="github" class="weui-input" placeholder="No Data" value="{{userInfo.github}}" bindinput="onProfileDataChange" />
         </view>
 
       </view>
