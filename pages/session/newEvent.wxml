@@ -20,7 +20,7 @@
       <view class="weui-cell weui-cell_select">
       <view class="weui-cell__hd weui-cell__hd_in-select-after">
         <view class="weui-label">
-          <i-icon type="coordinates" size="28" color="#80848f" />
+          <i-icon type="group" size="28" color="#80848f" />
         </view>
       </view>
       <view class="weui-cell__bd">

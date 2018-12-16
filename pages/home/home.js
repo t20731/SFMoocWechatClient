@@ -33,7 +33,8 @@ Page({
     ownedSessions: [],
     completedSessions: [],
     completedSessionsIsNoData: false,
-    totalPoints: 0
+    totalPoints: 0,
+    isT2User: false
   },
 
   /**
@@ -257,6 +258,30 @@ Page({
     })
   },
 
+  getGroups: function (openid) {
+    var that = this;
+    wx.request({
+      url: app.globalData.host + '/user/groups/' + openid,
+      method: 'GET',
+      success: function (res) {
+        var groups = res.data.retObj;
+        for(var i = 0; i < groups.length; i++){
+            var groupId = groups[i].id;
+            //is t2 user
+            if(groupId == 1){
+              that.setData({
+                isT2User: true
+              })
+              return;
+            }
+        }
+      },
+      fail: function (e) {
+        Util.showToast('Failed to get total points', 'none', 1500);
+      }
+    })
+  },
+
   cancelGenerateCode: function () {
     this.setData({ isGenerateCodeModal: true });
   },
@@ -274,6 +299,7 @@ Page({
     var userInfo = wx.getStorageSync('userInfo');
     if (userInfo != 'undefined' && userInfo.id){
       this.getTotalPoints(userInfo.id);
+      this.getGroups(userInfo.id);
     }
   },
 

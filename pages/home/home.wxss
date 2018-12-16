@@ -72,14 +72,14 @@
   text-align: center;
 }
 .page__bd{
-  padding-top: 360rpx;
+  padding-top: 220rpx;
   background: #FFF;
 }
 
 .weui-navbar {
   position: fixed;
   z-index: 1;
-  top: 360rpx;
+  top: 220rpx;
   background: #FFF;
   border-top: 1rpx solid #ccc;
   border-bottom: none;
@@ -87,8 +87,8 @@
 
 .weui-tab__panel {
   border: none;
-  height: 100vh;
-  padding-top: 100rpx;
+   height: 100vh; 
+  /* padding-top: 100rpx; */
 }
 
 .weui-tab__content{

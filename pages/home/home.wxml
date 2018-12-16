@@ -21,7 +21,7 @@
       </view>
     </view>
   </view>
-  <view class="entries">
+  <!-- <view class="entries" wx:if="{{isT2User}}">
     <view class="entry-item entry-item-announcement" bindtap='onNoticePage'>
       <image src="../../images/entry-notice.png"></image>
       <text>Notice</text>
@@ -30,7 +30,7 @@
       <image src="../../images/entry-schedule.png"></image>
       <text>Schedule</text>
     </view>
-  </view>
+  </view> -->
   <view class="page__bd">
     <view class="weui-tab">
       <view class="weui-navbar">
