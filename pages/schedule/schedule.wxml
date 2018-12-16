@@ -13,8 +13,8 @@
         <image src="{{item.avatarUrl || '../../images/defaultAvatar.png'}}"></image>
       </view>
       <view class='personalInfo'>
-        <view>{{item.nickname}}</view>
-        <view class="department">{{item.department}}</view>
+        <view>{{item.nickName}}</view>
+        <view class="department">{{item.department || "无"}}</view>
       </view>
     </view>
   </view>

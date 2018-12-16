@@ -15,6 +15,22 @@
       </view>
   </view>
 
+   <view class="weui-cells__title"><!-- Group --></view>
+  <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">
+          <i-icon type="coordinates" size="28" color="#80848f" />
+        </view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker name="group" bindchange="bindGroupChange" value="{{groupIndex}}" range="{{groups}}" range-key="name">
+          <view class="weui-select weui-select_in-select-after">{{groups[groupIndex].name}}</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
   <view class="weui-cells__title"><!-- Start Date --></view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_select">
