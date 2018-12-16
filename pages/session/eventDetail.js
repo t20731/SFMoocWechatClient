@@ -22,7 +22,7 @@ Page({
     lotteryBtnVal: 'Lottery',
     quizBtnDisabled: false,
     eventDetail: null,
-    status: 0,
+    status: -1,
     sessionId: 0,
     checkInBtnVal: 'Check-In',
     checkInDisabled: false,
