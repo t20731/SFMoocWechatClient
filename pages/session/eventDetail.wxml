@@ -82,7 +82,7 @@
     </view>
   </view>
   <!-- started t2 session -->
-  <view class="weui-footer weui-footer_fixed-bottom footerBar" wx:if="{{(isRegistered || isOwner) && status == 1 && eventDetail.typeId == 1}}">
+  <view class="weui-footer weui-footer_fixed-bottom footerBar" wx:if="{{(isRegistered || isOwner) && status == 1 && eventDetail.group.id == 1}}">
     <view class="weui-footer__links">
         <block wx:if="{{isOwner}}">
           <view class='weui-footer__link'>
@@ -113,7 +113,7 @@
     </view>
   </view>
   <!-- started non-t2 session -->
-  <view wx:if="{{(isRegistered || isOwner) && status == 1 && eventDetail.typeId != 1}}">
+  <view wx:if="{{(isRegistered || isOwner) && status == 1 && eventDetail.group.id != 1}}">
     <view class="flex-item" wx:if="{{!isOwner}}">
       <button bindtap='onCheckIn' class="uniformBtn" wx:if="{{!checkInDisabled}}">{{checkInBtnVal}}</button>
     </view>
