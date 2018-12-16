@@ -160,26 +160,29 @@ Page({
   onRegister: function(event) {
     console.log('Register: ', event);
     let userId = Util.getUserId();
-    WXRequest.post('/session/register/', {
-      userId: userId,
-      sessionId: this.data.eventDetail.id
-    }).then(res => {
-      if (res.data.msg === 'ok') {
-        console.log(res.data);
-        this.setData({
-          isRegistered: true
-        })
-        Util.showToast('Success', 'success', 1000);
-      } else {
-        this.showError('Register failed. Please try again');
-      }
-    }).catch(e => {
-      this.showError('Please try again');
-      console.log(e);
-    });
-    this.setData({
-      loading: !this.data.loading,
-    });
+    if(userId  == 'abc'){
+      wx.switchTab({
+        url: '../../pages/home/home',
+      })
+    } else {
+      WXRequest.post('/session/register/', {
+        userId: userId,
+        sessionId: this.data.eventDetail.id
+      }).then(res => {
+        if (res.data.msg === 'ok') {
+          console.log(res.data);
+          this.setData({
+            isRegistered: true
+          })
+          Util.showToast('Success', 'success', 1000);
+        } else {
+          this.showError('Register failed. Please try again');
+        }
+      }).catch(e => {
+        this.showError('Please try again');
+        console.log(e);
+      });
+    }
   },
 
   unRegister: function (event) {
@@ -280,7 +283,6 @@ Page({
       sessionId: this.data.sessionId
     }).then(res => {
       if (res.data.msg === 'ok') {
-        console.log("aaa" + res.data.msg);
         this.setData({
           isLiked: res.data.retObj
         })
@@ -365,5 +367,20 @@ Page({
 
   showError: function(title) {
     Util.showToast(title, 'none');
+  },
+
+  // onShareAppMessage: function (res) {
+  //   return {
+  //     title: this.data.eventDetail.topic,
+  //     path: '/pages/session/eventDetail?id=' + this.data.sessionId,
+  //     imageUrl: app.globalData.host + this.data.eventDetail.tileImageSrc
+  //   }
+  // }
+
+  onPullDownRefresh: function () {
+    console.log('eventdetail.js onPullDownRefresh...');
+    this.doLoadDetail();
+    wx.stopPullDownRefresh();
   }
+
 });
