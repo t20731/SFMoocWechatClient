@@ -381,6 +381,12 @@ Page({
     wx.navigateTo({
       url: '../profile/profile'
     })
+  },
+
+  goToCreditPage: function () {
+    wx.navigateTo({
+      url: './pointsDetail?userId=' + this.data.userInfo.id
+    })
   }
 
 

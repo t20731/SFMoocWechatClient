@@ -17,13 +17,15 @@
             <image wx:else="{{userInfo.gender==1}}" style="width: 20px; height: 20px;" src="../../images/gender_boy.png"></image>
           </view>
         </view>
-        <view class="userinfoCredits">
+        <!-- <navigator url="pointsDetail?userId={{userInfo.id}}"> -->
+        <view class="userinfoCredits" catchtap='goToCreditPage'>
           <view>{{totalPoints}}</view>
           <view class="userinfoPointsDetail">
-            <navigator url="pointsDetail?userId={{userInfo.id}}">Credits</navigator>
+            <text>Credits</text>
             <image src="../../images/right_arrow1.png" class="navIcon"></image>
           </view>
         </view>
+        <!-- </navigator> -->
       </view>
     </view>
   </view>
