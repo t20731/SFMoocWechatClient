@@ -17,7 +17,7 @@
       </text>
       <view class="share">
         <button open-type='share' plain="true">
-          <image src="../../images/share2.png"  mode="aspectFit" class="iconshare" />
+          <image src="../../images/share2.png" mode="aspectFit" class="iconshare" />
         </button>
         <image src="../../images/edit.png" class="iconshare" mode="aspectFit" bindtap="onEditSession" wx:if="{{canEdit}}"></image>
       </view>
@@ -77,39 +77,44 @@
         <button bindtap='unRegister' class="uniformBtn">Unregister</button>
       </view>
     </view>
-    <view class="flex-item" wx:else>
-      <button bindtap='onStartSession' class="uniformBtn">{{startBtnVal}}</button>
+    <view wx:else>
+      <view class="flex-button">
+        <button bindtap='onStartSession' class="uniformBtn">{{startBtnVal}}</button>
+      </view>
+      <view class="flex-button" wx:if="{{eventDetail.group.id == 1}}">
+        <button bindtap='onManageQuiz' class="uniformBtn">{{quizBtnVal}}</button>
+      </view>
     </view>
   </view>
   <!-- started t2 session -->
   <view class="weui-footer weui-footer_fixed-bottom footerBar" wx:if="{{(isRegistered || isOwner) && status == 1 && eventDetail.group.id == 1}}">
     <view class="weui-footer__links">
-        <block wx:if="{{isOwner}}">
-          <view class='weui-footer__link'>
-            <image class="likeBtn" src="../../images/started.png" /> 
-            <text>{{startBtnVal}}</text>
-          </view>
-          <view class='weui-footer__link' bindtap='onManageQuiz'>
-            <image class="likeBtn" wx:if="{{!quizBtnDisabled}}" src="../../images/manageExam.png" />
-            <text>{{quizBtnVal}}</text>
-          </view>
-        </block>
-        <block wx:else>
-          <view class='weui-footer__link'>
-            <image class="likeBtn" wx:if="{{!checkInDisabled}}" src="../../images/checkIn2.png" bindtap="onCheckIn" />
-            <image class="likeBtn" wx:else src="../../images/checkedIn.png" /> {{checkInBtnVal}}
-          </view>
-          <view class='weui-footer__link' bindtap='onStartQuiz'>
-            <image class="likeBtn" wx:if="{{!startQuizBtnDisabled}}" src="../../images/exam.png" /> {{startQuizBtnVal}}
-          </view>
-        </block>
-        <view class='weui-footer__link' bindtap='onStartLottery'>
-          <image class="likeBtn" src="../../images/lottery.png" /> {{lotteryBtnVal}}
-        </view>
+      <block wx:if="{{isOwner}}">
         <view class='weui-footer__link'>
-          <image class="likeBtn" wx:if="{{isLiked}}" src="../../images/like.png" bindtap="onChangeLikeStatus" />
-          <image class="likeBtn" wx:else src="../../images/unlike.png" bindtap="onChangeLikeStatus" /> {{totalLikeCount}}
+          <image class="likeBtn" src="../../images/started.png" />
+          <text>{{startBtnVal}}</text>
         </view>
+        <view class='weui-footer__link' bindtap='onManageQuiz'>
+          <image class="likeBtn" wx:if="{{!quizBtnDisabled}}" src="../../images/manageExam.png" />
+          <text>{{quizBtnVal}}</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view class='weui-footer__link'>
+          <image class="likeBtn" wx:if="{{!checkInDisabled}}" src="../../images/checkIn2.png" bindtap="onCheckIn" />
+          <image class="likeBtn" wx:else src="../../images/checkedIn.png" /> {{checkInBtnVal}}
+        </view>
+        <view class='weui-footer__link' bindtap='onStartQuiz'>
+          <image class="likeBtn" wx:if="{{!startQuizBtnDisabled}}" src="../../images/exam.png" /> {{startQuizBtnVal}}
+        </view>
+      </block>
+      <view class='weui-footer__link' bindtap='onStartLottery'>
+        <image class="likeBtn" src="../../images/lottery.png" /> {{lotteryBtnVal}}
+      </view>
+      <view class='weui-footer__link'>
+        <image class="likeBtn" wx:if="{{isLiked}}" src="../../images/like.png" bindtap="onChangeLikeStatus" />
+        <image class="likeBtn" wx:else src="../../images/unlike.png" bindtap="onChangeLikeStatus" /> {{totalLikeCount}}
+      </view>
     </view>
   </view>
   <!-- started non-t2 session -->
@@ -121,15 +126,15 @@
       <button class="uniformBtn" disabled="{{disabled}}">Code: {{startBtnVal}}</button>
     </view>
     <view class="reward" wx:if="{{isOwner || checkInDisabled}}">
-        <image class="likeBtn" wx:if="{{isLiked}}" src="../../images/like.png" bindtap="onChangeLikeStatus" />
-        <image class="likeBtn" wx:else src="../../images/unlike.png" bindtap="onChangeLikeStatus" /> {{totalLikeCount}}
+      <image class="likeBtn" wx:if="{{isLiked}}" src="../../images/like.png" bindtap="onChangeLikeStatus" />
+      <image class="likeBtn" wx:else src="../../images/unlike.png" bindtap="onChangeLikeStatus" /> {{totalLikeCount}}
     </view>
   </view>
   <!-- completed session -->
   <view wx:if="{{status == 2}}">
-     <view class="reward" >
-        <image class="likeBtn" wx:if="{{isLiked}}" src="../../images/like.png" bindtap="onChangeLikeStatus" />
-        <image class="likeBtn" wx:else src="../../images/unlike.png" bindtap="onChangeLikeStatus" /> {{totalLikeCount}}
+    <view class="reward">
+      <image class="likeBtn" wx:if="{{isLiked}}" src="../../images/like.png" bindtap="onChangeLikeStatus" />
+      <image class="likeBtn" wx:else src="../../images/unlike.png" bindtap="onChangeLikeStatus" /> {{totalLikeCount}}
     </view>
   </view>
 </view>
