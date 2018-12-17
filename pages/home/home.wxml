@@ -10,7 +10,13 @@
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <image src="../../images/right_arrow.png" class='navIcon1'></image>
       <view class="userinfoRightSection">
-        <view class="userinfo-nickname">{{userInfo.nickName}}</view>
+        <view class="userinfo-personalinfo">
+          <view class="userinfo-nickname">{{userInfo.nickName}}</view>
+          <view class="userinfo-gender">
+            <image wx:if="{{userInfo.gender==2}}" style="width: 20px; height: 20px;" src="../../images/gender_girl.png"></image>
+            <image wx:else="{{userInfo.gender==1}}" style="width: 20px; height: 20px;" src="../../images/gender_boy.png"></image>
+          </view>
+        </view>
         <view class="userinfoCredits">
           <view>{{totalPoints}}</view>
           <view class="userinfoPointsDetail">

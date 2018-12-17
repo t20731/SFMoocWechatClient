@@ -10,16 +10,32 @@
   </view>
 
   <form bindsubmit="onSubmit" bindreset="onReset">
+    <template is='formInput' data="{{ type:'eit', title:'Blog', value:userInfo.blog, name:'blog', onInput: 'onProfileDataChange' }}" />
+    <template is='formInput' data="{{ type:'group', title:'Dept.', value:userInfo.department, name:'department', onInput: 'onProfileDataChange' }}" />
+    <template is='formInput' data="{{ type:'coordinates', title:'Seat', value:userInfo.seat, name:'seat', onInput: 'onProfileDataChange' }}" />
 
-    <template is='formInput' data="{{ title:'Blog', value:userInfo.blog, name:'blog', onInput: 'onProfileDataChange' }}" />
-    <template is='formInput' data="{{ title: 'Github', value: userInfo.github, name: 'github',onInput: 'onProfileDataChange'}}" />
-    <template is='formInput' data="{{ title:'Dept.', value:userInfo.department, name:'department', onInput: 'onProfileDataChange' }}" />
-    <template is='formInput' data="{{ title:'Seat', value:userInfo.seat, name:'seat', onInput: 'onProfileDataChange' }}" />
+    <view class="weui-cells__title">
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell github-cell">
+        <image src="../../images/github.png" style="width: 26px; height: 26px;"></image>
+        <view class="weui-cell__hd">
+          <view class="weui-label">
+            Github
+          </view>
+        </view>
+        <view class="weui-cell__bd">
+          <input name="github" class="weui-input" placeholder="No Data" value="{{userInfo.github}}" bindinput="onProfileDataChange" />
+        </view>
+
+      </view>
+    </view>
 
     <view class="weui-cells__title">
     </view>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell signature-cell">
+        <i-icon type="brush" size="28" color="#80848f" />
         <view class="weui-cell__hd">
           <view class="weui-label">
             Sign

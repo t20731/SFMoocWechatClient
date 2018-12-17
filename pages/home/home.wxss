@@ -33,6 +33,18 @@
   border-radius: 50%;
   border: 1px solid #FFF;
 }
+
+.userinfo-personalinfo {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.userinfo-personalinfo .userinfo-gender {
+  display: flex;
+  align-items: center;
+  margin-left: 10rpx;
+}
 .userinfoCredits{
   display: flex;
   flex-flow: row;
