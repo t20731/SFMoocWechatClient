@@ -2,6 +2,8 @@ import WXRequest from '../../utils/wxRequest';
 import WCache from '../../utils/wcache';
 import Util from '../../utils/util';
 
+const app = getApp();
+
 const ENROLL_NUMBER = 1;
 Page({
   data: { // 参与页面渲染的数据
@@ -34,12 +36,19 @@ Page({
     isRegistered: false,
     canEdit: false,
     isLiked: 0,
-    totalLikeCount: 0
+    totalLikeCount: 0,
+    share: app.globalData.share
   },
 
   onLoad: function (e) {
     this.data.pageQueries = e;
     this.doLoadDetail();
+  },
+
+  onShow: function(e){
+    this.setData({
+      share: app.globalData.share
+    })
   },
 
   doLoadDetail: function () {
@@ -383,6 +392,13 @@ Page({
     console.log('eventdetail.js onPullDownRefresh...');
     this.doLoadDetail();
     wx.stopPullDownRefresh();
+  },
+
+  goToIndex: function() {
+    app.globalData.share = false;
+    wx.switchTab({
+      url: '../../pages/explore/explore',
+    })
   }
 
 });

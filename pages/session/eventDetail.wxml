@@ -137,4 +137,5 @@
       <image class="likeBtn" wx:else src="../../images/unlike.png" bindtap="onChangeLikeStatus" /> {{totalLikeCount}}
     </view>
   </view>
+  <view  wx:if="{{share}}" bindtap="goToIndex" class="index-navigate-btn"></view>
 </view>
