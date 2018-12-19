@@ -34,12 +34,11 @@ Page({
     completedSessions: [],
     completedSessionsIsNoData: false,
     totalPoints: 0,
-    actionSheetVisible:false,
-    deleteAction: [{
-      name: "Yes",
-      color: "#ed3f14"
-    }],
-    handleSessionIndex:0
+    handleSessionIndex:0,
+    confirmButtonVisible: false,
+    swipeoutUnclosable: true,
+    accessToken: '',
+    registeredUsers: []
   },
 
   /**
@@ -76,17 +75,36 @@ Page({
     this._loadLearnSessions();
   },
 
-  actionSheetClose: function () {
+  onCancelOrDelete: function (evt) {
     this.setData({
-      actionSheetVisible: false
+      confirmButtonVisible: true,
+      swipeoutUnclosable: true,
+      handleSessionIndex: evt.target.dataset.itemindex
     });
   },
 
-  actionSheetClick: function () {
+  onConfirm: function (evt) {
+    let formId = evt.detail.formId;
     let handleSessionIndex = this.data.handleSessionIndex;
     let handleSession = this.data.ownedSessions[handleSessionIndex];
-    if (handleSession.enrollments){
-      this._cancelSession(handleSession.id);
+    this.setData({
+      confirmButtonVisible: false,
+      swipeoutUnclosable: false,
+      handleSessionIndex: evt.target.dataset.itemindex
+    });
+    if (handleSession.enrollments) {
+      let handleSessionId = handleSession.id;
+      WXRequest.get('/session/cancel/' + handleSessionId).then(res => {
+        if (res.data.msg === 'ok') {
+          setTimeout(() => {
+            this._sendNotification(formId, handleSessionId);
+            Util.showToast('Cancel session successfully！')
+            console.log('/session/cancel/' + handleSessionId, res.data);
+          }, 500)
+        }
+      }).catch(e => {
+        console.log(e);
+      });
     } else {
       this._deleteSession(handleSession.id);
     }
@@ -94,19 +112,9 @@ Page({
 
   _deleteSession: function (id) {
     let itemId = id;
-    const action = [...this.data.deleteAction];
-    action[0].loading = true;
-    this.setData({
-      deleteAction: action
-    });
-    WXRequest.delete('/session/delete/' + itemId).then(res => {
+    return WXRequest.delete('/session/delete/' + itemId).then(res => {
       if (res.data.msg === 'ok') {
         setTimeout(() => {
-          action[0].loading = false;
-          this.setData({
-            actionSheetVisible: false,
-            deleteAction: action
-          });
           Util.showToast('Delete session successfully！')
           console.log('/session/delete/' + itemId, res.data);
         }, 500);
@@ -119,19 +127,9 @@ Page({
 
   _cancelSession: function (id) {
     let itemId = id;
-    const action = [...this.data.deleteAction];
-    action[0].loading = true;
-    this.setData({
-      deleteAction: action
-    });
-    WXRequest.get('/session/cancel/' + itemId).then(res => {
+    return WXRequest.get('/session/cancel/' + itemId).then(res => {
       if (res.data.msg === 'ok') {
         setTimeout(() => {
-          action[0].loading = false;
-          this.setData({
-            actionSheetVisible: false,
-            deleteAction: action
-          });
           Util.showToast('Cancel session successfully！')
           console.log('/session/cancel/' + itemId, res.data);
         }, 500)
@@ -142,11 +140,112 @@ Page({
 
   },
 
-  swipeoutBtnTap: function (evt) {
-    this.setData({
-      actionSheetVisible: true,
-      handleSessionIndex: evt.target.dataset.itemindex
-      });
+  _sendNotification: function (fId, sessionId) {
+    let formId = fId;
+    let handleSessionId = sessionId;
+    let sAccessToken = '';
+    let aRegisteredUsers = [];
+
+    WXRequest.get('/web/access_token').then(res => {
+      if (res.data.msg === 'ok') {
+        sAccessToken = res.data.retObj;
+        console.log('/web/access_token', sAccessToken);
+        this.setData({
+          accessToken: sAccessToken
+        });
+
+        // get registered user
+        let url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token='+sAccessToken;
+
+        // let notificationData = {
+        //   "touser": "oP7lN5QcjsvyacGLWZM6AF4LcT48",
+        //   "template_id": app.globalData.template_id,
+        //   "page": "pages/home/home",
+        //   "form_id": formId,
+        //   "data": {
+        //     "keyword1": {
+        //       "value": "会议主题"
+        //     },
+        //     "keyword2": {
+        //       "value": "会议时间"
+        //     },
+        //     "keyword3": {
+        //       "value": "会议地点"
+        //     },
+        //     "keyword4": {
+        //       "value": "会议名称"
+        //     },
+        //     "keyword5": {
+        //       "value": "主办方"
+        //     }
+        //   },
+        //   "emphasis_keyword": "keyword1.DATA"
+        // };
+
+        WXRequest.get('/session/registeredUsers/' + handleSessionId).then(res => {
+          if (res.data.msg === 'ok') {
+            aRegisteredUsers = res.data.retObj;
+            console.log('/session/registeredUsers/' + handleSessionId, res.data.retObj);
+            if (!!aRegisteredUsers && aRegisteredUsers.length > 0) {
+              this.setData({
+                registeredUsers: aRegisteredUsers
+              });
+
+              aRegisteredUsers.map(registerUser => {
+                let notificationData = {
+                  "touser": registerUser,
+                  "weapp_template_msg" : {
+                    "template_id": app.globalData.template_id,
+                    "page": "pages/home/home",
+                    "form_id": fId,
+                    "data": {
+                      "keyword1": {
+                        "value": "会议主题"
+                      },
+                      "keyword2": {
+                        "value": "会议时间"
+                      },
+                      "keyword3": {
+                        "value": "会议地点"
+                      },
+                      "keyword4": {
+                        "value": "会议名称"
+                      },
+                      "keyword5": {
+                        "value": "主办方"
+                      }
+                    },
+                    "emphasis_keyword": "keyword1.DATA"
+
+                  }
+                };
+
+                wx.request({
+                  url: url,
+                  data: notificationData,
+                  method: 'POST', //此处不能有请求头
+                  success: function (res) {
+                    console.log('notificationData',notificationData);
+                    console.log(url);
+                    console.log(res, "Send notification msg");
+                  },
+                  fail: function (err) {
+                    console.log(url);
+                    console.log(err, "Send notification err");
+                    console.log('notificationData', notificationData);
+                  }
+                });
+              });
+            }
+          }
+        }).catch(e => {
+          console.log(e);
+        })
+      }
+    }).catch(e => {
+      console.log(e);
+    })
+
   },
 
   tabClick: function (e) {
@@ -208,7 +307,7 @@ Page({
 
   _loadSessions(postData, name) {
     let pageNum = this.data.pageNum;
-    WXRequest.post('/session/list', postData).then(res => {
+     WXRequest.post('/session/list', postData).then(res => {
       if (res.data.msg === 'ok') {
         console.log(res.data);
         this._setLoading(name, false);

@@ -44,7 +44,8 @@
             </view>
             <view class="rightContent">
               <view class="title">
-                <text>{{item.topic}}</text>
+                <text class="topic">{{item.topic}}</text>
+                <text class="cancelled" hidden="{{item.status != -1}}">Cancelled</text>
               </view>
               <view class="speaker">{{item.owner.nickName}}</view>
               <view class="location">
@@ -71,16 +72,7 @@
             <view class="weui-loading"></view>
             <view class="weui-loadmore__tips">Loading</view>
           </view>
-
-          <i-action-sheet visible="{{actionSheetVisible}}" actions="{{deleteAction}}" show-cancel bind:cancel="actionSheetClose" bind:click="actionSheetClick">
-            <view slot="header" style="padding: 16px">
-              <view style="color: #444;font-size: 16px">Are you sure?</view>
-              <text wx:if="{{ownedSessions[handleSessionIndex].enrollments}}">Can not recover after session cancellation</text>
-              <text wx:if="{{!ownedSessions[handleSessionIndex].enrollments}}">Can not recover after session deletion</text>
-            </view>
-          </i-action-sheet>
-
-          <i-swipeout id="{{item.id}}" operateWidth="{{100}}" unclosable="{{false}}" toggle="{{false}}"  wx:for="{{ownedSessions}}" wx:for-index='idx' wx:key="id">
+          <i-swipeout id="{{item.id}}" operateWidth="{{100}}" unclosable="{{swipeoutUnclosable}}" toggle="{{false}}"  wx:for="{{ownedSessions}}" wx:for-index='idx' wx:key="id">
             <view slot="content" bindtap='goOwnedSession' class="eventItem">
               <view class='leftContent'>
                 <image wx:if="{{item.tileImageSrc}}" src="{{formatter.getImageUrl(item.tileImageSrc)}}"></image>
@@ -88,7 +80,8 @@
               </view>
               <view class="rightContent">
                 <view class="title">
-                  <text>{{item.topic}}</text>
+                  <text class="topic">{{item.topic}}</text>
+                  <text class="cancelled" hidden="{{item.status !== -1}}">Cancelled</text>
                 </view>
                 <view class="speaker">{{item.owner.nickName}}</view>
                 <view class="location">
@@ -101,12 +94,16 @@
               </view>
             </view>
             <view slot="button" class="i-swipeout-button-right-group">
-              <view wx:if="{{item.enrollments}}" class="i-swipeout-button-right-item" data-itemIndex="{{idx}}" bindtap="swipeoutBtnTap">
-                Cancel
-              </view>
-              <view wx:if="{{!item.enrollments}}" class="i-swipeout-button-right-item" data-itemIndex="{{idx}}" bindtap="swipeoutBtnTap">
-                Delete
-              </view>
+              <form name="pushMsgFm" data-itemIndex="{{idx}}" report-submit bindsubmit="onConfirm">
+                <view class="i-swipeout-button-right-item">
+                  <button style="background-color:#0076cb" wx:if="{{item.enrollments && !confirmButtonVisible}}" bindtap="onCancelOrDelete" data-itemIndex="{{idx}}">Cancel</button>
+                  <button wx:if="{{item.enrollments && confirmButtonVisible}}" form-type="submit" data-itemIndex="{{idx}}" type="warn" >Confirm</button>
+                </view>
+                <view class="i-swipeout-button-right-item">
+                  <button style="background-color:#0076cb" wx:if="{{!item.enrollments && !confirmButtonVisible}}" data-itemIndex="{{idx}}" bindtap="onCancelOrDelete" type="primary" >Delete</button>
+                  <button wx:if="{{!item.enrollments && confirmButtonVisible}}" form-type="submit" data-itemIndex="{{idx}}" type="warn" >Confirm</button>
+                </view>
+              </form>
             </view>
           </i-swipeout>
 
@@ -132,7 +129,8 @@
             </view>
             <view class="rightContent">
               <view class="title">
-                <text>{{item.topic}}</text>
+                <text class="topic">{{item.topic}}</text>
+                <text class="cancelled" hidden="{{item.status !== -1}}">Cancelled</text>
               </view>
               <view class="speaker">{{item.owner.nickName}}</view>
               <view class="location">
