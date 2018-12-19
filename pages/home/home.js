@@ -234,6 +234,7 @@ Page({
           })
           wx.setStorageSync('userInfo', user);  
           that.getTotalPoints(openid);
+          that.getGroups(openid);
         },
         fail: function (e) {
             Util.showToast('登录失败', 'none', 1500);
