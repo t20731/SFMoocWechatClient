@@ -2,7 +2,13 @@
   <view class="userinfo">
     <block>
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <view class="userinfo-personalinfo">
+        <view class="userinfo-nickname">{{userInfo.nickName}}</view>
+        <view class="userinfo-gender">
+          <image wx:if="{{userInfo.gender==2}}" style="width: 20px; height: 20px;" src="../../images/gender_girl.png"></image>
+          <image wx:else="{{userInfo.gender==1}}" style="width: 20px; height: 20px;" src="../../images/gender_boy.png"></image>
+        </view>
+      </view>
     </block>
   </view>
   <view class="page__bd capabilityTabs">

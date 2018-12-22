@@ -25,6 +25,18 @@
   border-radius: 50%;
 }
 
-.userinfo-nickname {
+.userinfo-personalinfo {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.userinfo-personalinfo .userinfo-nickname {
   color: #000000;
+}
+
+.userinfo-personalinfo .userinfo-gender {
+  display: flex;
+  align-items: center;
+  margin-left: 10rpx;
 }
