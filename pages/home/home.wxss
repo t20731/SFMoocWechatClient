@@ -97,10 +97,22 @@
   border-bottom: none;
 }
 
+.page-with-t2entries .page__bd {
+  padding-top: 360rpx;
+}
+
+.page-with-t2entries .weui-navbar {
+  top: 360rpx;
+}
+
 .weui-tab__panel {
   border: none;
-   height: 100vh; 
-  /* padding-top: 100rpx; */
+  height: calc(100vh - 220rpx);
+  padding-top: 100rpx;
+}
+
+.page-with-t2entries .weui-tab__panel {
+  height: calc(100vh - 360rpx);
 }
 
 .weui-tab__content{
@@ -134,11 +146,14 @@
 }
 
 .entries{
-  position:fixed;
-  top: 220rpx;
-  height: 120rpx;
-  display: flex;
-  padding: 0 20rpx;
+position:fixed;
+top:220rpx;
+height:140rpx;
+display:flex;
+padding:0 20rpx;
+width:100%;
+z-index:100;
+background: white;
 }
 
 .entry-item {

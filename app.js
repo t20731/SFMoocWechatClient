@@ -7,11 +7,12 @@ App({
      //wshost: 'ws://localhost:8090',
      wshost: 'wss://sfmooc-api.techtuesday.club',
      openId:'',
-     systemInfo: {}
+     systemInfo: {},
+     share: false
   },
   data: {
   },
-  onLaunch: function () {
+  onLaunch: function (options) {
     console.log('app::onLaunch')
     let openid = wx.getStorageSync('openid');
     this.globalData.systemInfo = wx.getSystemInfoSync();
@@ -43,7 +44,12 @@ App({
       this.globalData.openId = openid
     }
   },
-
-  onShow: function(){
-  },
+  onShow: function (options) {
+    // 判断是否由分享进入小程序
+    if (options.scene == 1007 || options.scene == 1008) {
+      this.globalData.share = true
+    } else {
+      this.globalData.share = false
+    };
+  }
 })
