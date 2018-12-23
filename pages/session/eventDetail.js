@@ -46,6 +46,7 @@ Page({
   },
 
   onShow: function(e){
+    this.doLoadDetail();
     this.setData({
       share: app.globalData.share
     })

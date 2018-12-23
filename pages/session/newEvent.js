@@ -40,13 +40,13 @@ Page({
    */
   onLoad: function (options) {
     this._initDateTimePicker();
-    this._initData();
+    const initDataPromise = this._initData();
 
-    this._initEditData(options);
+    this._initEditData(options, initDataPromise);
   },
 
   _initData: function() {
-    WXRequest.get('/session/init/' + Util.getUserId()).then(res => {
+    return WXRequest.get('/session/init/' + Util.getUserId()).then(res => {
       if (res.data.msg === 'ok') {
         console.log('/session/init', res.data);
         let retObj = res.data.retObj;
@@ -61,7 +61,7 @@ Page({
     });
   },
 
-  _initEditData: function(options) {
+  _initEditData: function(options, initDataPromise) {
     // if there is no 'id' params in page options, means it's not an edit action
     if (options == null || options.id == null) {
       wx.setNavigationBarTitle({
@@ -90,18 +90,21 @@ Page({
       wx.hideLoading();
       if (res.data.msg === 'ok') {
         const retObj = res.data.retObj;
+        console.log(retObj.session)
 
-        this.setData({
-          editSessionDetail: retObj.session,
-          formData: retObj.session,
-          startDateTime: this._calDateTimeStr2Arr(retObj.session.startDate),
-          startDateTimeVal: retObj.session.startDate,
-          durationIndex: this._calDuartionIndex(retObj.session.startDate,retObj.session.endDate),
-          locationIndex: this.data.locations.map(val => val.name).indexOf(retObj.session.location.name),
-          directionIndex: this.data.directions.map(val => val.name).indexOf(retObj.session.direction.name),
-          groupIndex: this.data.groups.map(val => val.name).indexOf(retObj.session.group.name),
-          difficultyIndex: retObj.session.difficulty
-        });
+        initDataPromise.then(() => {
+          this.setData({
+            editSessionDetail: retObj.session,
+            formData: retObj.session,
+            startDateTime: this._calDateTimeStr2Arr(retObj.session.startDate),
+            startDateTimeVal: retObj.session.startDate,
+            durationIndex: this._calDuartionIndex(retObj.session.startDate,retObj.session.endDate),
+            locationIndex: this.data.locations.map(val => val.name).indexOf(retObj.session.location.name),
+            directionIndex: this.data.directions.map(val => val.name).indexOf(retObj.session.direction.name),
+            groupIndex: this.data.groups.map(val => val.name).indexOf(retObj.session.group.name),
+            difficultyIndex: retObj.session.difficulty
+          });
+        })
       }
     }).catch(e => {
       console.log(e);
@@ -157,9 +160,10 @@ Page({
   },
 
   _calDuartionVal : function (startDateStr,endDateStr) {
-    const startDateTimestamp = new Date(startDateStr).getTime();
-    const endDateTimestamp = new Date(endDateStr).getTime();
+    const startDateTimestamp = new Date(startDateStr.replace(" ","T")).getTime();
+    const endDateTimestamp = new Date(endDateStr.replace(" ","T")).getTime();
     const durationMin = (endDateTimestamp - startDateTimestamp)/60000;
+
     if (durationMin < 60) {
       return durationMin > 1 ? `${durationMin} Minutes` : `${durationMin} Minute`
     }
