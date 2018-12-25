@@ -94,16 +94,14 @@
               </view>
             </view>
             <view slot="button" class="i-swipeout-button-right-group">
-              <form name="pushMsgFm" data-itemIndex="{{idx}}" report-submit bindsubmit="onConfirm">
-                <view class="i-swipeout-button-right-item">
-                  <button style="background-color:#0076cb" wx:if="{{item.enrollments && !confirmButtonVisible}}" bindtap="onCancelOrDelete" data-itemIndex="{{idx}}">Cancel</button>
-                  <button wx:if="{{item.enrollments && confirmButtonVisible}}" form-type="submit" data-itemIndex="{{idx}}" type="warn" >Confirm</button>
-                </view>
-                <view class="i-swipeout-button-right-item">
-                  <button style="background-color:#0076cb" wx:if="{{!item.enrollments && !confirmButtonVisible}}" data-itemIndex="{{idx}}" bindtap="onCancelOrDelete" type="primary" >Delete</button>
-                  <button wx:if="{{!item.enrollments && confirmButtonVisible}}" form-type="submit" data-itemIndex="{{idx}}" type="warn" >Confirm</button>
-                </view>
-              </form>
+              <view class="i-swipeout-button-right-item">
+                <button style="background-color:#0076cb" wx:if="{{item.enrollments && !confirmButtonVisible}}" bindtap="onCancelOrDelete" data-itemIndex="{{idx}}">Cancel</button>
+                <button wx:if="{{item.enrollments && confirmButtonVisible}}" data-itemIndex="{{idx}}" type="warn" bindtap="onConfirm">Confirm</button>
+              </view>
+              <view class="i-swipeout-button-right-item">
+                <button style="background-color:#0076cb" wx:if="{{!item.enrollments && !confirmButtonVisible}}" data-itemIndex="{{idx}}" bindtap="onCancelOrDelete" type="primary" >Delete</button>
+                <button wx:if="{{!item.enrollments && confirmButtonVisible}}" data-itemIndex="{{idx}}" type="warn" bindtap="onConfirm">Confirm</button>
+              </view>
             </view>
           </i-swipeout>
 

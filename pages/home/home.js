@@ -84,7 +84,6 @@ Page({
   },
 
   onConfirm: function (evt) {
-    let formId = evt.detail.formId;
     let handleSessionIndex = this.data.handleSessionIndex;
     let handleSession = this.data.ownedSessions[handleSessionIndex];
     this.setData({
@@ -93,18 +92,7 @@ Page({
       handleSessionIndex: evt.target.dataset.itemindex
     });
     if (handleSession.enrollments) {
-      let handleSessionId = handleSession.id;
-      WXRequest.get('/session/cancel/' + handleSessionId).then(res => {
-        if (res.data.msg === 'ok') {
-          setTimeout(() => {
-            this._sendNotification(formId, handleSessionId);
-            Util.showToast('Cancel session successfully！')
-            console.log('/session/cancel/' + handleSessionId, res.data);
-          }, 500)
-        }
-      }).catch(e => {
-        console.log(e);
-      });
+      this._cancelSession(handleSession.id);
     } else {
       this._deleteSession(handleSession.id);
     }
@@ -114,8 +102,9 @@ Page({
     let itemId = id;
     return WXRequest.delete('/session/delete/' + itemId).then(res => {
       if (res.data.msg === 'ok') {
+        this._loadOwnedSessions();
         setTimeout(() => {
-          Util.showToast('Delete session successfully！')
+          Util.showToast('Delete session successfully！');
           console.log('/session/delete/' + itemId, res.data);
         }, 500);
       }
@@ -137,114 +126,6 @@ Page({
     }).catch(e => {
       console.log(e);
     });
-
-  },
-
-  _sendNotification: function (fId, sessionId) {
-    let formId = fId;
-    let handleSessionId = sessionId;
-    let sAccessToken = '';
-    let aRegisteredUsers = [];
-
-    WXRequest.get('/web/access_token').then(res => {
-      if (res.data.msg === 'ok') {
-        sAccessToken = res.data.retObj;
-        console.log('/web/access_token', sAccessToken);
-        this.setData({
-          accessToken: sAccessToken
-        });
-
-        // get registered user
-        let url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token='+sAccessToken;
-
-        // let notificationData = {
-        //   "touser": "oP7lN5QcjsvyacGLWZM6AF4LcT48",
-        //   "template_id": app.globalData.template_id,
-        //   "page": "pages/home/home",
-        //   "form_id": formId,
-        //   "data": {
-        //     "keyword1": {
-        //       "value": "会议主题"
-        //     },
-        //     "keyword2": {
-        //       "value": "会议时间"
-        //     },
-        //     "keyword3": {
-        //       "value": "会议地点"
-        //     },
-        //     "keyword4": {
-        //       "value": "会议名称"
-        //     },
-        //     "keyword5": {
-        //       "value": "主办方"
-        //     }
-        //   },
-        //   "emphasis_keyword": "keyword1.DATA"
-        // };
-
-        WXRequest.get('/session/registeredUsers/' + handleSessionId).then(res => {
-          if (res.data.msg === 'ok') {
-            aRegisteredUsers = res.data.retObj;
-            console.log('/session/registeredUsers/' + handleSessionId, res.data.retObj);
-            if (!!aRegisteredUsers && aRegisteredUsers.length > 0) {
-              this.setData({
-                registeredUsers: aRegisteredUsers
-              });
-
-              aRegisteredUsers.map(registerUser => {
-                let notificationData = {
-                  "touser": registerUser,
-                  "weapp_template_msg" : {
-                    "template_id": app.globalData.template_id,
-                    "page": "pages/home/home",
-                    "form_id": fId,
-                    "data": {
-                      "keyword1": {
-                        "value": "会议主题"
-                      },
-                      "keyword2": {
-                        "value": "会议时间"
-                      },
-                      "keyword3": {
-                        "value": "会议地点"
-                      },
-                      "keyword4": {
-                        "value": "会议名称"
-                      },
-                      "keyword5": {
-                        "value": "主办方"
-                      }
-                    },
-                    "emphasis_keyword": "keyword1.DATA"
-
-                  }
-                };
-
-                wx.request({
-                  url: url,
-                  data: notificationData,
-                  method: 'POST', //此处不能有请求头
-                  success: function (res) {
-                    console.log('notificationData',notificationData);
-                    console.log(url);
-                    console.log(res, "Send notification msg");
-                  },
-                  fail: function (err) {
-                    console.log(url);
-                    console.log(err, "Send notification err");
-                    console.log('notificationData', notificationData);
-                  }
-                });
-              });
-            }
-          }
-        }).catch(e => {
-          console.log(e);
-        })
-      }
-    }).catch(e => {
-      console.log(e);
-    })
 
   },
 
@@ -314,7 +195,7 @@ Page({
         let sessionPerPage = res.data.retObj;
         if (pageNum === 1) {
           let length = sessionPerPage.length;
-          if (length > 0 && length < 5) {
+          if (length >= 0 && length < 5) {
             this.setData({
               [name]: res.data.retObj,
               [name + 'IsNoData']: true,
