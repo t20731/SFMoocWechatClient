@@ -1,0 +1,26 @@
+<!--index.wxml-->
+<import src="../components/templates/loadingText.wxml" />
+<wxs src="../../utils/formatter.wxs" module="formatter">
+</wxs>
+<view class="page">
+  <view class="page__bd">
+
+    <view id="{{item.session.id}}" bindtap='goDetail' class="eventItem" wx:for="{{sessions}}" wx:key="id">
+      <view class="firstCol">{{item.rank}}</view>
+      <view class="leftContent">
+        <image wx:if="{{item.session.tileImageSrc}}" src="{{formatter.getImageUrl(item.session.tileImageSrc)}}"></image>
+        <image wx:else src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg"></image>
+      </view>
+      <view class="rightContent">
+        <view class="title_in_rank">
+          <text>{{item.session.topic}}</text>
+        </view>
+        <view class="speaker_in_rank">{{item.session.owner.nickName}}</view>
+        <view class="like">
+          <image src="../../images/likeInRank.png"></image>
+          <text>{{item.session.likeCount}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
