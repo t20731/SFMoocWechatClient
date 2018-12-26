@@ -4,22 +4,9 @@
   background: #fff;
 }
 
-.myRanking {
-  margin-bottom: 1rem;
-  background-color: #fff;
-}
-
 .firstCol {
   margin: 20rpx;
   min-width: 1.25rem;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
 }
 
 .leftContent {

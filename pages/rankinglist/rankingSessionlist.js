@@ -5,22 +5,14 @@ const app = getApp()
 
 Page({
   data: {
-    myRanking: {},
     rankingList: [],
-    sessions: [],
-    hasUserInfo: false
+    sessions: []
   },
   onLoad: function () {
 
   },
 
   init: function () {
-    var userInfo = wx.getStorageSync('userInfo');
-    if (userInfo) {
-      this.setData({
-        hasUserInfo: true
-      })
-    }
     var that = this;
 
     wx.request({
@@ -31,7 +23,6 @@ Page({
         that.setData({
           sessions: res.data
         });
-        //   that.findMyRanking();
       },
       fail: function (e) {
         Util.showToast('数据获取失败', 'none', 2000);
@@ -46,25 +37,13 @@ Page({
     })
   },
 
-
-  findMyRanking: function () {
-    let userInfo = wx.getStorageSync('userInfo');
-    if (userInfo && userInfo.id) {
-      let myId = userInfo.id;
-      let myRanking = this.data.rankingList.filter(item => item.userId === myId)[0];
-      this.setData({
-        myRanking: myRanking
-      });
-    }
-  },
-
   onShow: function () {
-    console.log('rankinglist::onShow');
+    console.log('rankingSessionlist::onShow');
     this.init();
   },
 
   onPullDownRefresh: function () {
-    console.log('rankinglist::onPullDownRefresh');
+    console.log('rankingSessionlist::onPullDownRefresh');
     this.init();
   }
 
