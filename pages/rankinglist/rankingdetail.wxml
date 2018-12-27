@@ -2,7 +2,13 @@
   <view class="userinfo">
     <block>
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <view class="userinfo-personalinfo">
+        <view class="userinfo-nickname">{{userInfo.nickName}}</view>
+        <view class="userinfo-gender">
+          <image wx:if="{{userInfo.gender==2}}" style="width: 20px; height: 20px;" src="../../images/gender_girl.png"></image>
+          <image wx:else="{{userInfo.gender==1}}" style="width: 20px; height: 20px;" src="../../images/gender_boy.png"></image>
+        </view>
+      </view>
     </block>
   </view>
   <view class="page__bd capabilityTabs">
@@ -48,14 +54,14 @@
           <view class="skillItem" wx:for="{{skillPoints}}" wx:key="index">
             <view class="skillContent">
               <text class="skillTag">{{item.name}} . {{item.points}}</text>
-              <view class="endorsement" wx:if="{{index==0 || index==2}}">
+              <!-- <view class="endorsement" wx:if="{{index==0 || index==2}}">
                 <image src="../../images/hong.jpg"></image>
                 <text>Endorsed by Hong Yuan</text>
               </view>
               <view class="endorsement" wx:if="{{index==0 || index==1}}"> 
                 <image src="../../images/jessica.jpg"></image>
                 <text>Endorsed by Jessica Yang</text>
-              </view>
+              </view> -->
             </view>
             <view wx:if="{{!item.endorsed}}">
               <i-icon type="add" size="28" color="#0076cb" custom="sfAdd" data-skillIndex="{{index}}" bindtap="addSkillPoints"/>

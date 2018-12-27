@@ -24,6 +24,7 @@
   color: #FFF;
   height:200rpx;
   background-image: linear-gradient(to right , #7A88FF, #7AFFAF);
+  position:relative;
 }
 .userinfo-avatar {
   width: 128rpx;
@@ -31,6 +32,18 @@
   margin: 0 30rpx;
   border-radius: 50%;
   border: 1px solid #FFF;
+}
+
+.userinfo-personalinfo {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.userinfo-personalinfo .userinfo-gender {
+  display: flex;
+  align-items: center;
+  margin-left: 10rpx;
 }
 .userinfoCredits{
   display: flex;
@@ -56,6 +69,13 @@
   height: 20rpx;
 }
 
+.navIcon1 {
+  width: 26rpx; 
+  height: 30rpx;
+  position: absolute;
+  right: 10rpx;
+}
+
 #generateCodeModal view {
   display: flex;
 }
@@ -77,10 +97,22 @@
   border-bottom: none;
 }
 
+.page-with-t2entries .page__bd {
+  padding-top: 360rpx;
+}
+
+.page-with-t2entries .weui-navbar {
+  top: 360rpx;
+}
+
 .weui-tab__panel {
   border: none;
-  height: 100vh;
+  height: calc(100vh - 220rpx);
   padding-top: 100rpx;
+}
+
+.page-with-t2entries .weui-tab__panel {
+  height: calc(100vh - 360rpx);
 }
 
 .weui-tab__content{
@@ -111,4 +143,47 @@
   left: 16px;
   color: #fff;
   font-size: 30px;
+}
+
+.entries{
+position:fixed;
+top:220rpx;
+height:140rpx;
+display:flex;
+padding:0 20rpx;
+width:100%;
+z-index:100;
+background: white;
+}
+
+.entry-item {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  background: black;
+  margin: 5rpx 45rpx 0 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2rpx 2rpx 20rpx 0 #b7b7b7;  
+  position:relative;
+}
+
+.entry-item-announcement {
+ background-image: linear-gradient( 135deg, #5EFCE8 10%, #736EFE 100%);
+}
+
+.entry-item image {
+  width: 46rpx;
+  height: 46rpx;
+}
+.entry-item text {
+  position: absolute;
+  top:88rpx;
+  justify-content: center;
+  font-size:20rpx;
+color:#333
+}
+.entry-item-schedule {
+ background-image: linear-gradient( 135deg, #F6CEEC 10%, #D939CD 100%);
 }

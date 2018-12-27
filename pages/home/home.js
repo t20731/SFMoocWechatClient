@@ -38,7 +38,8 @@ Page({
     confirmButtonVisible: false,
     swipeoutUnclosable: true,
     accessToken: '',
-    registeredUsers: []
+    registeredUsers: [],
+    isT2User: false
   },
 
   /**
@@ -254,7 +255,7 @@ Page({
   goCompletedSession(event){
     let id = event.currentTarget.id;
     wx.navigateTo({
-      url: '../session/eventDetail?id=' + id + '&&isCompleted=true'
+      url: '../session/eventDetail?id=' + id 
     })
   },
 
@@ -292,6 +293,7 @@ Page({
           })
           wx.setStorageSync('userInfo', user);  
           that.getTotalPoints(openid);
+          that.getGroups(openid);
         },
         fail: function (e) {
             Util.showToast('登录失败', 'none', 1500);
@@ -316,6 +318,30 @@ Page({
     })
   },
 
+  getGroups: function (openid) {
+    var that = this;
+    wx.request({
+      url: app.globalData.host + '/user/groups/' + openid,
+      method: 'GET',
+      success: function (res) {
+        var groups = res.data.retObj;
+        for(var i = 0; i < groups.length; i++){
+            var groupId = groups[i].id;
+            //is t2 user
+            if(groupId == 1){
+              that.setData({
+                isT2User: true
+              })
+              return;
+            }
+        }
+      },
+      fail: function (e) {
+        Util.showToast('Failed to get total points', 'none', 1500);
+      }
+    })
+  },
+
   cancelGenerateCode: function () {
     this.setData({ isGenerateCodeModal: true });
   },
@@ -333,6 +359,7 @@ Page({
     var userInfo = wx.getStorageSync('userInfo');
     if (userInfo != 'undefined' && userInfo.id){
       this.getTotalPoints(userInfo.id);
+      this.getGroups(userInfo.id);
     }
   },
 
@@ -396,5 +423,31 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  onNoticePage: function() {
+    wx.navigateTo({
+      url:'../notice/notice'
+    });
+  },
+
+  onSchedulePage: function () {
+    wx.navigateTo({
+      url: '../schedule/schedule'
+    });
+  },
+
+  goToProfilePage: function () {
+    wx.navigateTo({
+      url: '../profile/profile'
+    })
+  },
+
+  goToCreditPage: function () {
+    wx.navigateTo({
+      url: './pointsDetail?userId=' + this.data.userInfo.id
+    })
   }
+
+
 })
