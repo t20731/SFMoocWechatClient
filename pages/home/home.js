@@ -34,6 +34,11 @@ Page({
     completedSessions: [],
     completedSessionsIsNoData: false,
     totalPoints: 0,
+    handleSessionIndex:0,
+    confirmButtonVisible: false,
+    swipeoutUnclosable: true,
+    accessToken: '',
+    registeredUsers: [],
     isT2User: false
   },
 
@@ -69,6 +74,60 @@ Page({
 
     this._setLoading('learnSessions', true);
     this._loadLearnSessions();
+  },
+
+  onCancelOrDelete: function (evt) {
+    this.setData({
+      confirmButtonVisible: true,
+      swipeoutUnclosable: true,
+      handleSessionIndex: evt.target.dataset.itemindex
+    });
+  },
+
+  onConfirm: function (evt) {
+    let handleSessionIndex = this.data.handleSessionIndex;
+    let handleSession = this.data.ownedSessions[handleSessionIndex];
+    this.setData({
+      confirmButtonVisible: false,
+      swipeoutUnclosable: false,
+      handleSessionIndex: evt.target.dataset.itemindex
+    });
+    if (handleSession.enrollments) {
+      this._cancelSession(handleSession.id);
+    } else {
+      this._deleteSession(handleSession.id);
+    }
+  },
+
+  _deleteSession: function (id) {
+    let itemId = id;
+    return WXRequest.delete('/session/delete/' + itemId).then(res => {
+      if (res.data.msg === 'ok') {
+        this._loadOwnedSessions();
+        setTimeout(() => {
+          Util.showToast('Delete session successfully！');
+          console.log('/session/delete/' + itemId, res.data);
+        }, 500);
+      }
+    }).catch(e => {
+      console.log(e);
+    });
+
+  },
+
+  _cancelSession: function (id) {
+    let itemId = id;
+    return WXRequest.get('/session/cancel/' + itemId).then(res => {
+      if (res.data.msg === 'ok') {
+        setTimeout(() => {
+          Util.showToast('Cancel session successfully！')
+          console.log('/session/cancel/' + itemId, res.data);
+        }, 500)
+      }
+    }).catch(e => {
+      console.log(e);
+    });
+
   },
 
   tabClick: function (e) {
@@ -130,14 +189,14 @@ Page({
 
   _loadSessions(postData, name) {
     let pageNum = this.data.pageNum;
-    WXRequest.post('/session/list', postData).then(res => {
+     WXRequest.post('/session/list', postData).then(res => {
       if (res.data.msg === 'ok') {
         console.log(res.data);
         this._setLoading(name, false);
         let sessionPerPage = res.data.retObj;
         if (pageNum === 1) {
           let length = sessionPerPage.length;
-          if (length > 0 && length < 5) {
+          if (length >= 0 && length < 5) {
             this.setData({
               [name]: res.data.retObj,
               [name + 'IsNoData']: true,

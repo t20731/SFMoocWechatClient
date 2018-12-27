@@ -36,7 +36,7 @@
           </view>
           <view class="rightContent">
             <view class="title">
-            <text>{{item.topic}}</text>
+            <text class="topic">{{item.topic}}</text>
             </view>
             <view class="speaker">{{item.owner.nickName}}</view>
             <view class="location">

@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "Me",
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": true,
+    "usingComponents": {
+      "i-swipeout": "../components/swipeout/index"
+    }
 }

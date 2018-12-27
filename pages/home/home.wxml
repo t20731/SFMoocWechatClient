@@ -63,7 +63,8 @@
             </view>
             <view class="rightContent">
               <view class="title">
-                <text>{{item.topic}}</text>
+                <text class="topic">{{item.topic}}</text>
+                <text class="cancelled" hidden="{{item.status != -1}}">Cancelled</text>
               </view>
               <view class="speaker">{{item.owner.nickName}}</view>
               <view class="location">
@@ -90,25 +91,39 @@
             <view class="weui-loading"></view>
             <view class="weui-loadmore__tips">Loading</view>
           </view>
-          <view id="{{item.id}}" bindtap='goOwnedSession' class="eventItem" wx:for="{{ownedSessions}}" wx:key="id">
-            <view class='leftContent'>
-              <image wx:if="{{item.tileImageSrc}}" src="{{formatter.getImageUrl(item.tileImageSrc)}}"></image>
-              <image wx:else src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg"></image>
-            </view>
-            <view class="rightContent">
-              <view class="title">
-                <text>{{item.topic}}</text>
+          <i-swipeout id="{{item.id}}" operateWidth="{{100}}" unclosable="{{swipeoutUnclosable}}" toggle="{{false}}"  wx:for="{{ownedSessions}}" wx:for-index='idx' wx:key="id">
+            <view slot="content" bindtap='goOwnedSession' class="eventItem">
+              <view class='leftContent'>
+                <image wx:if="{{item.tileImageSrc}}" src="{{formatter.getImageUrl(item.tileImageSrc)}}"></image>
+                <image wx:else src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg"></image>
               </view>
-              <view class="speaker">{{item.owner.nickName}}</view>
-              <view class="location">
+              <view class="rightContent">
+                <view class="title">
+                  <text class="topic">{{item.topic}}</text>
+                  <text class="cancelled" hidden="{{item.status !== -1}}">Cancelled</text>
+                </view>
+                <view class="speaker">{{item.owner.nickName}}</view>
+                <view class="location">
                 {{formatter.getDate(item.startDate)}} | {{formatter.getDifficulty(item.difficulty)}}
-                <view class="count">
-                  <image src="../../images/mini_people.png"></image>
-                  <text>{{item.enrollments}}</text>
+                  <view class="count">
+                    <image src="../../images/mini_people.png"></image>
+                    <text>{{item.enrollments}}</text>
+                  </view>
                 </view>
               </view>
             </view>
-          </view>
+            <view slot="button" class="i-swipeout-button-right-group">
+              <view class="i-swipeout-button-right-item">
+                <view style="background-color:#0076cb" wx:if="{{item.enrollments && !confirmButtonVisible}}" bindtap="onCancelOrDelete" data-itemIndex="{{idx}}">Cancel</view>
+                <view style="background-color:#c62828" wx:if="{{item.enrollments && confirmButtonVisible}}" data-itemIndex="{{idx}}" bindtap="onConfirm">Confirm</view>
+              </view>
+              <view class="i-swipeout-button-right-item">
+                <view style="background-color:#0076cb" wx:if="{{!item.enrollments && !confirmButtonVisible}}" data-itemIndex="{{idx}}" bindtap="onCancelOrDelete" type="primary" >Delete</view>
+                <view style="background-color:#c62828" wx:if="{{!item.enrollments && confirmButtonVisible}}" data-itemIndex="{{idx}}" bindtap="onConfirm">Confirm</view>
+              </view>
+            </view>
+          </i-swipeout>
+
           <view wx:if="{{ownedSessionsIsLoading}}" class="weui-loadmore">
             <view class="weui-loading"></view>
             <view class="weui-loadmore__tips">Loading</view>
@@ -131,7 +146,8 @@
             </view>
             <view class="rightContent">
               <view class="title">
-                <text>{{item.topic}}</text>
+                <text class="topic">{{item.topic}}</text>
+                <text class="cancelled" hidden="{{item.status !== -1}}">Cancelled</text>
               </view>
               <view class="speaker">{{item.owner.nickName}}</view>
               <view class="location">

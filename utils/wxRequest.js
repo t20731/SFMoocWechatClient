@@ -12,6 +12,9 @@ class Request {
   put(url, data) {
     return this.request('PUT', url, data)
   }
+  delete(url, data) {
+    return this.request('DELETE', url, data)
+  }
   request(method, url, data) {
     const vm = this
     return new Promise((resolve, reject) => {

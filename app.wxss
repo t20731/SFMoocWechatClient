@@ -89,21 +89,25 @@ page {
   display: inline-block;
 }
 .rightContent {
-  margin-left: 8rpx;
-  padding-left: 6rpx;
+  margin: 0 8rpx;
+  padding: 0 6rpx;
   flex: 1;
 }
-.rightContent .title text {
+
+.rightContent .title .topic {
   overflow: hidden;
-  text-overflow: ellipsis;
-  word-wrap: break-word;
   word-break: break-all;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
   color: #333;
   line-height: 1.25rem;
 }
+
+.rightContent .title .cancelled {
+  color:#0076cb;
+  line-height: 1.25rem;
+  float:right;
+  font-size: 24rpx;
+}
+
 .speaker, .location {
   font-size: 24rpx;
   margin-top: 6rpx;

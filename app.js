@@ -7,6 +7,7 @@ App({
      //wshost: 'ws://localhost:8090',
      wshost: 'wss://sfmooc-api.techtuesday.club',
      openId:'',
+     template_id:'WFa-LEeLhk9H-ICIDuaH1VaLIOhpWoT_9eYdJpvMcB4',
      systemInfo: {},
      share: false
   },
