@@ -95,12 +95,12 @@
             </view>
             <view slot="button" class="i-swipeout-button-right-group">
               <view class="i-swipeout-button-right-item">
-                <button style="background-color:#0076cb" wx:if="{{item.enrollments && !confirmButtonVisible}}" bindtap="onCancelOrDelete" data-itemIndex="{{idx}}">Cancel</button>
-                <button wx:if="{{item.enrollments && confirmButtonVisible}}" data-itemIndex="{{idx}}" type="warn" bindtap="onConfirm">Confirm</button>
+                <view style="background-color:#0076cb" wx:if="{{item.enrollments && !confirmButtonVisible}}" bindtap="onCancelOrDelete" data-itemIndex="{{idx}}">Cancel</view>
+                <view style="background-color:#c62828" wx:if="{{item.enrollments && confirmButtonVisible}}" data-itemIndex="{{idx}}" bindtap="onConfirm">Confirm</view>
               </view>
               <view class="i-swipeout-button-right-item">
-                <button style="background-color:#0076cb" wx:if="{{!item.enrollments && !confirmButtonVisible}}" data-itemIndex="{{idx}}" bindtap="onCancelOrDelete" type="primary" >Delete</button>
-                <button wx:if="{{!item.enrollments && confirmButtonVisible}}" data-itemIndex="{{idx}}" type="warn" bindtap="onConfirm">Confirm</button>
+                <view style="background-color:#0076cb" wx:if="{{!item.enrollments && !confirmButtonVisible}}" data-itemIndex="{{idx}}" bindtap="onCancelOrDelete" type="primary" >Delete</view>
+                <view style="background-color:#c62828" wx:if="{{!item.enrollments && confirmButtonVisible}}" data-itemIndex="{{idx}}" bindtap="onConfirm">Confirm</view>
               </view>
             </view>
           </i-swipeout>
