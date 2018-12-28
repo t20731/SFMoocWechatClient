@@ -36,11 +36,11 @@
 
 .like image {
   margin-right: 4rpx;
-  width: 50rpx;
-  height: 50rpx;
+  width: 30rpx;
+  height: 30rpx;
 }
 
 .like text {
-  color: rgba(253, 64, 64, 0.959);
-  margin-bottom: 10rpx;
+  color: #FDBC40;
+  font-size: 1.5rem;
 }

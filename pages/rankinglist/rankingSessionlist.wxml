@@ -15,11 +15,11 @@
         <view class="title_in_rank">
           <text>{{item.session.topic}}</text>
         </view>
-        <view class="speaker_in_rank">{{item.session.owner.nickName}}</view>
         <view class="like">
-          <image src="../../images/likeInRank.png"></image>
           <text>{{item.session.likeCount}}</text>
+          <image src="../../images/like.png"></image>
         </view>
+        <view class="speaker_in_rank">{{item.session.owner.nickName}}</view>
       </view>
     </view>
   </view>
