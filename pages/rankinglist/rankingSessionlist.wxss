@@ -41,6 +41,6 @@
 }
 
 .like text {
-  color: #FDBC40;
+  color: #2894FF;
   font-size: 1.5rem;
 }

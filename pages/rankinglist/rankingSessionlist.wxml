@@ -16,8 +16,8 @@
           <text>{{item.session.topic}}</text>
         </view>
         <view class="like">
-          <text>{{item.session.likeCount}}</text>
-          <image src="../../images/like.png"></image>
+        <image src="../../images/like.png"></image>
+        <text>  {{item.session.likeCount}}</text> 
         </view>
         <view class="speaker_in_rank">{{item.session.owner.nickName}}</view>
       </view>
