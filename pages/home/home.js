@@ -105,7 +105,7 @@ Page({
       if (res.data.msg === 'ok') {
         this._loadOwnedSessions();
         setTimeout(() => {
-          Util.showToast('Delete session successfully！');
+          Util.showToast('Success');
           console.log('/session/delete/' + itemId, res.data);
         }, 500);
       }
@@ -120,7 +120,7 @@ Page({
     return WXRequest.get('/session/cancel/' + itemId).then(res => {
       if (res.data.msg === 'ok') {
         setTimeout(() => {
-          Util.showToast('Cancel session successfully！')
+          Util.showToast('Success')
           console.log('/session/cancel/' + itemId, res.data);
         }, 500)
       }

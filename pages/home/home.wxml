@@ -112,9 +112,9 @@
                 </view>
               </view>
             </view>
-            <view slot="button" class="i-swipeout-button-right-group">
+            <view slot="button" class="i-swipeout-button-right-group" wx:if="{{item.status == 0}}">
               <view class="i-swipeout-button-right-item">
-                <view style="background-color:#0076cb" wx:if="{{item.enrollments && !confirmButtonVisible}}" bindtap="onCancelOrDelete" data-itemIndex="{{idx}}">Cancel</view>
+                <view style="background-color:#0076cb" wx:if="{{item.enrollments &&!confirmButtonVisible}}" bindtap="onCancelOrDelete" data-itemIndex="{{idx}}">Cancel</view>
                 <view style="background-color:#c62828" wx:if="{{item.enrollments && confirmButtonVisible}}" data-itemIndex="{{idx}}" bindtap="onConfirm">Confirm</view>
               </view>
               <view class="i-swipeout-button-right-item">
