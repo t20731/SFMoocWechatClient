@@ -74,7 +74,7 @@ Page({
         console.log(res.data);
         let retObj = res.data.retObj;
         let eventDetail = retObj.session;
-        let likeCount = retObj.userLike;
+        let likeCount = retObj.session.likeCount;
         let isOwner = this._isOwner(eventDetail.owner.id);
         let checkInCode = eventDetail.checkInCode;
         if (checkInCode) {
@@ -320,7 +320,7 @@ Page({
           Util.showToast('Credits +5', 'success', 2000);
           let checkInCode = res.data.retObj.CheckInCode;
           this._markStarted(checkInCode);
-          WCache.put(that.data.sessionId + '_started', true, 24 * 60 * 60);
+          WCache.put(that.data.sessionId + '_checkedIn', true, 24 * 60 * 60);
         }
       }).catch(e => {
         console.log(e);
