@@ -92,7 +92,7 @@
             <view class="weui-loadmore__tips">Loading</view>
           </view>
           <i-swipeout id="{{item.id}}" operateWidth="{{100}}" unclosable="{{swipeoutUnclosable}}" toggle="{{false}}"  wx:for="{{ownedSessions}}" wx:for-index='idx' wx:key="id">
-            <view slot="content" bindtap='goOwnedSession' class="eventItem">
+            <view slot="content" id="{{item.id}}" bindtap='goOwnedSession' class="eventItem">
               <view class='leftContent'>
                 <image wx:if="{{item.tileImageSrc}}" src="{{formatter.getImageUrl(item.tileImageSrc)}}"></image>
                 <image wx:else src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg"></image>
