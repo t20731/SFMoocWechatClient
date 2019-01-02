@@ -30,9 +30,16 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
+    if (options.sessionId) {
+      that.setData({
+        sessionId: options.sessionId
+      });
+    }
     let questionId = parseInt(options.questionId);
     let questionIndex = parseInt(options.questionIndex);
-    this.loadOneQuestion(questionId, questionIndex);
+    if(questionId){
+      this.loadOneQuestion(questionId, questionIndex);
+    }
   },
 
   loadOneQuestion: function (questionId, questionIndex) {
