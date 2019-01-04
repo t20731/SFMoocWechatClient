@@ -1,19 +1,70 @@
 <!--index.wxml-->
 <view class="page">
   <view class="page__bd">
-    <navigator url="rankingdetail?userId={{myRanking.userId}}" class="weui-cell myRanking" wx:if="{{hasUserInfo}}">
-        <view class="firstCol">{{myRanking.rank}}</view>
-        <image src="{{myRanking.avatarUrl}}" class="userinfo-avatar"></image>
-        <view class="weui-cell__bd">{{myRanking.nickname}}</view>
-        <view class="weui-cell__ft">{{myRanking.points}}</view>
-    </navigator>
-    <view class="weui-cells weui-cells_after-title">
-      <navigator url="rankingdetail?userId={{item.userId}}" class="weui-cell" wx:for="{{rankingList}}" wx:key="userId">
-        <view class="firstCol">{{item.rank}}</view>
-        <image src="{{item.avatarUrl}}" class="userinfo-avatar"></image>
-        <view class="weui-cell__bd">{{item.nickname}}</view>
-        <view class="weui-cell__ft">{{item.points}}</view>
-      </navigator>
+    <view class="weui-btn-area">
+      <picker bindchange="onGroupChange" value="{{index}}" range="{{groupArr}}">
+        <button type="default">Group: {{selectedGroupName}}</button>
+      </picker>
     </view>
+
+    <view class="weui-tab">
+    <!-- navigation tab -->
+      <view class="weui-navbar">
+        <block wx:for="{{tabArr}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+
+    <!-- navigation tab panel -->
+      <view class="weui-tab__panel">
+
+        <!-- User ranking -->
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+          <navigator url="rankingdetail?userId={{myRanking.userId}}" class="weui-cell myRanking" wx:if="{{hasUserInfo}}">
+            <view class="firstCol">{{myRanking.rank}}</view>
+            <image src="{{myRanking.avatarUrl}}" class="userinfo-avatar"></image>
+            <view class="weui-cell__bd">{{myRanking.nickname}}</view>
+            <view class="weui-cell__ft">{{myRanking.points}}</view>
+          </navigator>
+
+          <view class="weui-cells weui-cells_after-title">
+            <navigator url="rankingdetail?userId={{item.userId}}" class="weui-cell" wx:for="{{userRankingList}}" wx:key="userId">
+              <view class="firstCol">{{item.rank}}</view>
+              <image src="{{item.avatarUrl}}" class="userinfo-avatar"></image>
+              <view class="weui-cell__bd">{{item.nickname}}</view>
+              <view class="weui-cell__ft">{{item.points}}</view>
+            </navigator>
+          </view>
+        </view>
+
+        <!-- Session ranking -->
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+          <view id="{{item.session.id}}" bindtap='goSessionDetail' class="eventItem" wx:for="{{sessions}}" wx:key="id">
+            <view class="firstCol">{{item.rank}}</view>
+            <view class="leftContent">
+              <image wx:if="{{item.session.tileImageSrc}}" src="{{formatter.getImageUrl(item.session.tileImageSrc)}}"></image>
+              <image wx:else src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg"></image>
+            </view>
+            <view class="rightContent">
+              <view class="title_in_rank">
+                <text>{{item.session.topic}}</text>
+              </view>
+              <view class="like">
+                <image src="../../images/like.png"></image>
+                <text>  {{item.session.likeCount}}</text> 
+              </view>
+              <view class="speaker_in_rank">{{item.session.owner.nickName}}</view>
+            </view>
+          </view>
+        </view>
+
+
+      </view>
+    </view>
+
+
   </view>
 </view>
