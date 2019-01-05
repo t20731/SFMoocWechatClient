@@ -25,6 +25,7 @@ radio .wx-radio-input.wx-radio-input-checked{
 
 .submitExamrBtn {
   left: 2.5%;
+  height: 40px;
 }
 
 .correctOptionStyle {
@@ -36,6 +37,7 @@ radio .wx-radio-input.wx-radio-input-checked{
   color: #71777D;
   margin-top: 45%;
 }
+
 
 button[disabled]:not([type]) {
   color:rgba(255, 255, 255, 0.6);

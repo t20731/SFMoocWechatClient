@@ -1,20 +1,22 @@
 <!--pages/exam/exam.wxml-->
 <view class="">
-  <view class="questionsWrapper">
-    <view class="questionContainer" wx:for="{{questions}}" wx:key="index">
-      <view>
-        {{index + 1}}: {{item.content}}?
-      </view>
-      <radio-group class="radio-group" data-quesIndex="{{index}}" bindchange="handleAnswerChange">
-        <label class="radioOption {{(item.correctOption === option.number && item.myAnswer !== option.number) ? 'correctOptionStyle': ''}}" wx:for="{{item.options}}" wx:key="index" wx:for-item="option">
-        <radio value="{{option.number}}" checked="{{!!option.isAnswer || item.myAnswer === option.number}}"/>
-        <text>{{option.number}}: {{option.content}} </text>
-        </label>
-      </radio-group>
-    </view>
-  </view>
-  <button class="uniformBtn fixedBottomBtn submitExamrBtn"  wx:if="{{isExamAvailable}}" disabled="{{isSubmitBtnDisabled || isExamSubmitted}}" bindtap="submitExam">Submit</button>
   <view wx:if="{{!isExamAvailable}}" class="noDataMsg">
     No quiz published yet!
   </view>
+  <scroll-view  wx:else scroll-y style="height: {{scrollHeight}}px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+    <view class="questionsWrapper">
+      <view class="questionContainer" wx:for="{{questions}}" wx:key="index">
+        <view>
+          {{index + 1}}: {{item.content}}?
+        </view>
+        <radio-group class="radio-group" data-quesIndex="{{index}}" bindchange="handleAnswerChange">
+          <label class="radioOption {{(item.correctOption === option.number && item.myAnswer !== option.number) ? 'correctOptionStyle': ''}}" wx:for="{{item.options}}" wx:key="index" wx:for-item="option">
+            <radio value="{{option.number}}" checked="{{!!option.isAnswer || item.myAnswer === option.number}}" />
+            <text>{{option.number}}: {{option.content}} </text>
+          </label>
+        </radio-group>
+      </view>
+    </view>
+  </scroll-view>
+  <button class="uniformBtn fixedBottomBtn submitExamrBtn" wx:if="{{isExamAvailable}}" disabled="{{isSubmitBtnDisabled || isExamSubmitted}}" bindtap="submitExam">Submit</button>
 </view>

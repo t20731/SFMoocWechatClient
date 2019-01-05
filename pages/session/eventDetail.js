@@ -321,6 +321,7 @@ Page({
           let checkInCode = res.data.retObj.CheckInCode;
           this._markStarted(checkInCode);
           WCache.put(that.data.sessionId + '_checkedIn', true, 24 * 60 * 60);
+          WCache.put(that.data.sessionId + '_started', true, 24 * 60 * 60);
         }
       }).catch(e => {
         console.log(e);

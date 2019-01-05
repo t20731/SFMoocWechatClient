@@ -13,7 +13,8 @@ Page({
     answers: {},
     isExamAvailable: false,
     isSubmitBtnDisabled: false,
-    sessionId: 0
+    sessionId: 0,
+    scrollHeight: 0
   },
 
   /**
@@ -21,6 +22,7 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
+    this.setScrollHeight();
     that.setData({
       sessionId: options.sessionId
     })
@@ -45,6 +47,19 @@ Page({
       }
     });
   },
+
+  setScrollHeight: function () {
+    var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        console.info(res.windowHeight);
+        that.setData({
+          scrollHeight: res.windowHeight - 50
+        });
+      }
+    });
+  },
+
   setCorrectAnswerOfExam: function (answerMap) {
     for (let i=0; i< this.data.questions.length; i++) {
       let question = this.data.questions[i];
@@ -133,6 +148,18 @@ Page({
       }
     }
     return isValid;
+  },
+
+  upper(e) {
+    console.log(e)
+  },
+
+  lower(e) {
+    console.log(e)
+  },
+
+  scroll(e) {
+    console.log(e)
   },
 
   /**
