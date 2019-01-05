@@ -1,8 +1,9 @@
 //index.js
 //获取应用实例
 import Util from '../../utils/util';
+import WXRequest from '../../utils/wxRequest';
 const app = getApp();
-var sliderWidth = 96;
+let sliderWidth = 96;
 
 Page({
   data: {
@@ -15,14 +16,14 @@ Page({
     tabArr: ["User", "Session"],
     sessionRankingList: [],
     sessions: [],
-    groupArr: ["Group1", "Group2", "Group3", "Group4"],
-    selectedGroupId: 1,
+    groupArr: [],
+    selectedGroupId: 0,
     selectedGroupName: ''
   },
   onLoad: function () {
-    // console.log('userRankingList::onLoad');
-    var userInfo = wx.getStorageSync('userInfo');
-    var that = this;
+    console.log('userRankingList::onLoad');
+    let userInfo = wx.getStorageSync('userInfo');
+    let that = this;
     if (userInfo) {
       wx.getSystemInfo({
         success: function (res) {
@@ -34,8 +35,20 @@ Page({
         }
       });
     }
-    // Need update: request group and set default group
-    this._loadUserRanking();
+    WXRequest.get('/group/list').then(res => {
+      if (res.data.length > 0) {
+        console.log('/group/list', res.data);
+        this.setData({
+          groupArr: res.data,
+          selectedGroupId: res.data[0].id,
+          selectedGroupName: res.data[0].name
+        });
+        this._loadUserRanking();        
+      }
+    }).catch(e => {
+      console.log(e);
+    });
+
   },
 
   onShow: function(){
@@ -48,9 +61,10 @@ Page({
   },
 
   onGroupChange: function (e) {
+    let selectedGroupIndex = e.detail.value;
     this.setData({
-      selectedGroupId: e.detail.value,
-      selectedGroupName: this.data.groupArr[e.detail.value]
+      selectedGroupId: this.data.groupArr[selectedGroupIndex].id,
+      selectedGroupName: this.data.groupArr[selectedGroupIndex].name
     });
     this._refreshRanking();
   },
@@ -80,9 +94,9 @@ Page({
 
 // User
   _loadUserRanking: function () {
-    var that = this;
+    let that = this;
     wx.request({
-      url: app.globalData.host + '/ranking/list',
+      url: app.globalData.host + '/ranking/list/' + this.data.selectedGroupId,
       method: 'GET',
       success: function (res) {
         console.log(res.data);
@@ -102,7 +116,7 @@ Page({
     if (userInfo && userInfo.id) {
       let myId = userInfo.id;
       let myRanking = this.data.userRankingList.filter(item => item.userId === myId)[0];
-      this.setData({
+      myRanking && this.setData({
         myRanking: myRanking
       });
     }
@@ -110,9 +124,9 @@ Page({
 
 // Session
   _loadSessionRanking: function () {
-    var that = this;
+    let that = this;
     wx.request({
-      url: app.globalData.host + '/ranking/listSession/1',
+      url: app.globalData.host + '/ranking/listSession/' + this.data.selectedGroupId,
       method: 'GET',
       success: function (res) {
         console.log(res.data);

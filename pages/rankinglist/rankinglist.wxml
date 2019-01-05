@@ -2,7 +2,7 @@
 <view class="page">
   <view class="page__bd">
     <view class="weui-btn-area">
-      <picker bindchange="onGroupChange" value="{{index}}" range="{{groupArr}}">
+      <picker bindchange="onGroupChange" value="{{index}}" range="{{groupArr}}" range-key="{{'name'}}">
         <button type="default">Group: {{selectedGroupName}}</button>
       </picker>
     </view>
@@ -40,28 +40,22 @@
           </view>
         </view>
 
-        <!-- Session ranking -->
+        <!-- Session ranking new -->
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-          <view id="{{item.session.id}}" bindtap='goSessionDetail' class="eventItem" wx:for="{{sessions}}" wx:key="id">
+          <navigator bindtap='goSessionDetail' class="weui-cell" wx:for="{{sessions}}" wx:key="id">
             <view class="firstCol">{{item.rank}}</view>
-            <view class="leftContent">
-              <image wx:if="{{item.session.tileImageSrc}}" src="{{formatter.getImageUrl(item.session.tileImageSrc)}}"></image>
-              <image wx:else src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg"></image>
-            </view>
-            <view class="rightContent">
-              <view class="title_in_rank">
-                <text>{{item.session.topic}}</text>
-              </view>
-              <view class="like">
-                <image src="../../images/like.png"></image>
-                <text>  {{item.session.likeCount}}</text> 
-              </view>
+            <image class="userinfo-avatar" wx:if="{{item.session.tileImageSrc}}" src="{{formatter.getImageUrl(item.session.tileImageSrc)}}"></image>
+            <image class="userinfo-avatar" wx:else src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg"></image>
+            <view class="title_in_rank weui-cell__bd">
+              <text>{{item.session.topic}}</text>
               <view class="speaker_in_rank">{{item.session.owner.nickName}}</view>
             </view>
-          </view>
+            <view class="like weui-cell__ft">
+              <image src="../../images/like.png"></image>
+              <text>  {{item.session.likeCount}}</text> 
+            </view>
+          </navigator>
         </view>
-
-
       </view>
     </view>
 
