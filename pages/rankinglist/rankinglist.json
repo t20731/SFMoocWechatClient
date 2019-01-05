@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "Ranking"
+  "navigationBarTitleText": "Ranking",
+  "enablePullDownRefresh": true
 }

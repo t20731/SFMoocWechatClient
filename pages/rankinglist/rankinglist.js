@@ -22,19 +22,29 @@ Page({
   },
   onLoad: function () {
     console.log('userRankingList::onLoad');
-    let userInfo = wx.getStorageSync('userInfo');
     let that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          sliderLeft: (res.windowWidth / that.data.tabArr.length - sliderWidth) / 2,
+          sliderOffset: res.windowWidth / that.data.tabArr.length * that.data.activeIndex
+        });
+      }
+    });
+    this.getGroupList();
+  },
+
+  onShow: function(){
+    let userInfo = wx.getStorageSync('userInfo');
     if (userInfo) {
-      wx.getSystemInfo({
-        success: function (res) {
-          that.setData({
-            sliderLeft: (res.windowWidth / that.data.tabArr.length - sliderWidth) / 2,
-            sliderOffset: res.windowWidth / that.data.tabArr.length * that.data.activeIndex,
-            hasUserInfo: true
-          });
-        }
-      });
+      this.setData({
+        hasUserInfo: true
+      })
+      this._findMyRanking();
     }
+  },
+
+  getGroupList: function(){
     WXRequest.get('/group/list').then(res => {
       if (res.data.length > 0) {
         console.log('/group/list', res.data);
@@ -43,15 +53,11 @@ Page({
           selectedGroupId: res.data[0].id,
           selectedGroupName: res.data[0].name
         });
-        this._loadUserRanking();        
+        this._loadUserRanking();
       }
     }).catch(e => {
       console.log(e);
     });
-
-  },
-
-  onShow: function(){
   },
 
   onPullDownRefresh: function () {
@@ -149,6 +155,7 @@ Page({
 
   _refreshRanking: function () {
     console.log('userRankingList::onPullDownRefresh');
+    this.getGroupList();
     const activeIndex = this.data.activeIndex;
     let name = this.data.tabArr[activeIndex];
     if (activeIndex == 0) {
