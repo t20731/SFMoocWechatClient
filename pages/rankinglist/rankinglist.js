@@ -140,8 +140,6 @@ Page({
     })
   },
 
-
-
   _setLoading: function (name, showLoading) {
     this.setData({
       [name + ' Ranking Is Loading']: showLoading
