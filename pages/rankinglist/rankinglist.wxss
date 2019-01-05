@@ -1,11 +1,32 @@
-/**index.wxss**/
+.labelContainer {
+   display: flex;
+  justify-content: flex-start;
+  background-color: #FFF; 
+}
+
+.label {
+  display: inline-block; 
+  font-size: 24rpx;
+  background: #e8e8ed;
+  border-radius: 10rpx;
+  padding: 10rpx 16rpx;
+  margin: 20rpx 20rpx 0 20rpx;
+}
+
+.weui-navbar__item {
+  background-color: #FFF; 
+}
+
+.session_content{
+  padding-top: 20rpx;
+  background-color: #FFF; 
+}
+
 .myRanking {
   margin-bottom: 1rem;
-  background-color: #FFF;
+  background-color: #FFF; 
 }
-/* .firstCol {
-  min-width: 1.25rem; 
-} */
+
 .userinfo {
   display: flex;
   flex-direction: column;
@@ -32,17 +53,43 @@
   font-size: 1.5rem;
 }
 
-.page {
-  background: #fff;
+.eventItem{
+  background-color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.firstCol {
-  margin: 20rpx;
-  min-width: 1.25rem;
+.session_detail{
+  margin-left: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.leftContent{
+  margin-left: 40rpx;
+}
+
+.session_topic{
+  margin-left: 20rpx;
+}
+
+.session_like image{
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.leftContent {
+  margin: 15 rpx;
 }
 
 .speaker_in_rank {
   font-size: 0.75rem;
+}
+
+.session_like{
+  margin-right: 10rpx;
 }
 
 .title_in_rank text {
@@ -57,18 +104,3 @@
   line-height: 1.25rem;
 }
 
-.like {
-  float: right;
-  margin-right: 10rpx;
-}
-
-.like image {
-  margin-right: 4rpx;
-  width: 30rpx;
-  height: 30rpx;
-}
-
-.like text {
-  color: #2894FF;
-  font-size: 1.5rem;
-}

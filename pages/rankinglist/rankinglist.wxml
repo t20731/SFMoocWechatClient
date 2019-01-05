@@ -1,14 +1,17 @@
 <!--index.wxml-->
+<wxs src="../../utils/formatter.wxs" module="formatter">
+</wxs>
 <view class="page">
   <view class="page__bd">
-    <view class="weui-btn-area">
+    <view class="labelContainer">
       <picker bindchange="onGroupChange" value="{{index}}" range="{{groupArr}}" range-key="{{'name'}}">
-        <button type="default">Group: {{selectedGroupName}}</button>
+        <text class="label">{{selectedGroupName}}</text>
+        <!-- <button type="default">Group: {{selectedGroupName}}</button> -->
       </picker>
     </view>
 
     <view class="weui-tab">
-    <!-- navigation tab -->
+      <!-- navigation tab -->
       <view class="weui-navbar">
         <block wx:for="{{tabArr}}" wx:key="*this">
           <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
@@ -18,11 +21,11 @@
         <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
       </view>
 
-    <!-- navigation tab panel -->
+      <!-- navigation tab panel -->
       <view class="weui-tab__panel">
 
         <!-- User ranking -->
-        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+        <view class="user_content" hidden="{{activeIndex != 0}}">
           <navigator url="rankingdetail?userId={{myRanking.userId}}" class="weui-cell myRanking" wx:if="{{hasUserInfo}}">
             <view class="firstCol">{{myRanking.rank}}</view>
             <image src="{{myRanking.avatarUrl}}" class="userinfo-avatar"></image>
@@ -41,24 +44,29 @@
         </view>
 
         <!-- Session ranking new -->
-        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-          <navigator bindtap='goSessionDetail' class="weui-cell" wx:for="{{sessions}}" wx:key="id">
-            <view class="firstCol">{{item.rank}}</view>
-            <image class="userinfo-avatar" wx:if="{{item.session.tileImageSrc}}" src="{{formatter.getImageUrl(item.session.tileImageSrc)}}"></image>
-            <image class="userinfo-avatar" wx:else src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg"></image>
-            <view class="title_in_rank weui-cell__bd">
+        <view class="session_content" hidden="{{activeIndex != 1}}">
+          <view id="{{item.session.id}}" bindtap='goSessionDetail' class="eventItem" wx:for="{{sessions}}" wx:key="id">
+            <view class="session_detail">
+            <view class="session_rank">{{item.rank}}</view>
+            <view class="leftContent">
+              <image wx:if="{{item.session.tileImageSrc}}" src="{{formatter.getImageUrl(item.session.tileImageSrc)}}"></image>
+              <image wx:else src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg"></image>
+            </view>
+              <view class="session_topic">
+              <!-- <view class="title_in_rank"> -->
               <text>{{item.session.topic}}</text>
               <view class="speaker_in_rank">{{item.session.owner.nickName}}</view>
-            </view>
-            <view class="like weui-cell__ft">
+              </view>
+            </view>         
+            <view class="session_like">
               <image src="../../images/like.png"></image>
-              <text>  {{item.session.likeCount}}</text> 
+              <text> {{item.session.likeCount}}</text>
             </view>
-          </navigator>
         </view>
       </view>
     </view>
-
-
   </view>
+
+
+</view>
 </view>
