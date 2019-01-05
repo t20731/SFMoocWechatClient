@@ -41,15 +41,11 @@
   min-width: 1.25rem;
 }
 
-.leftContent {
-  margin: 15 rpx;
-}
-
 .speaker_in_rank {
   font-size: 0.75rem;
 }
 
-.rightContent .title_in_rank text {
+.title_in_rank text {
   overflow: hidden;
   text-overflow: ellipsis;
   word-wrap: break-word;
