@@ -18,7 +18,7 @@ Page({
     sessions: [],
     groupArr: [],
     selectedGroupId: 0,
-    selectedGroupName: ''
+    selectedGroupName: 'Public'
   },
   onLoad: function () {
     console.log('userRankingList::onLoad');
@@ -32,6 +32,7 @@ Page({
       }
     });
     this.getGroupList();
+    this._loadUserRanking();
   },
 
   onShow: function(){
@@ -50,10 +51,9 @@ Page({
         console.log('/group/list', res.data);
         this.setData({
           groupArr: res.data,
-          selectedGroupId: res.data[0].id,
-          selectedGroupName: res.data[0].name
+          // selectedGroupId: res.data[0].id,
+          // selectedGroupName: res.data[0].name
         });
-        this._loadUserRanking();
       }
     }).catch(e => {
       console.log(e);
