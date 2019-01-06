@@ -44,24 +44,25 @@
         </view>
 
         <!-- Session ranking new -->
-        <view class="session_content" hidden="{{activeIndex != 1}}">
-          <view id="{{item.session.id}}" bindtap='goSessionDetail' class="eventItem" wx:for="{{sessions}}" wx:key="id">
-            <view class="session_detail">
-            <view class="session_rank">{{item.rank}}</view>
-            <view class="leftContent">
-              <image wx:if="{{item.session.tileImageSrc}}" src="{{formatter.getImageUrl(item.session.tileImageSrc)}}"></image>
-              <image wx:else src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg"></image>
-            </view>
-              <view class="session_topic">
-              <!-- <view class="title_in_rank"> -->
-              <text>{{item.session.topic}}</text>
-              <view class="speaker_in_rank">{{item.session.owner.nickName}}</view>
+        <view hidden="{{activeIndex != 1}}">
+          <view wx:if="{{sessions.length > 0}}" class="session_content">
+            <view id="{{item.session.id}}" bindtap='goSessionDetail' class="eventItem" wx:for="{{sessions}}" wx:key="id">
+              <view class="session_detail">
+                <view class="session_rank">{{item.rank}}</view>
+                <view class="leftContent">
+                  <image wx:if="{{item.session.tileImageSrc}}" src="{{formatter.getImageUrl(item.session.tileImageSrc)}}"></image>
+                  <image wx:else src="https://img1.sycdn.imooc.com/szimg/5a9ca4e80001786305400300-360-202.jpg"></image>
+                </view>
+                <view class="session_topic">
+                  <text>{{item.session.topic}}</text>
+                  <view class="speaker_in_rank">{{item.session.owner.nickName}}</view>
+                </view>
+              </view>         
+              <view class="session_like">
+                <image src="../../images/like.png"></image>
+                <text> {{item.session.likeCount}}</text>
               </view>
-            </view>         
-            <view class="session_like">
-              <image src="../../images/like.png"></image>
-              <text> {{item.session.likeCount}}</text>
-            </view>
+          </view>
         </view>
       </view>
     </view>
