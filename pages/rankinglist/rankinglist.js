@@ -9,7 +9,6 @@ Page({
   data: {
     myRanking: {},
     userRankingList: [],
-    hasUserInfo: false,
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
@@ -18,7 +17,8 @@ Page({
     sessions: [],
     groupArr: [],
     selectedGroupId: 0,
-    selectedGroupName: 'Public'
+    selectedGroupName: 'Public',
+    canJoin: false
   },
   onLoad: function () {
     console.log('userRankingList::onLoad');
@@ -36,23 +36,15 @@ Page({
   },
 
   onShow: function(){
-    let userInfo = wx.getStorageSync('userInfo');
-    if (userInfo) {
-      this.setData({
-        hasUserInfo: true
-      })
-      this._findMyRanking();
-    }
   },
 
   getGroupList: function(){
-    WXRequest.get('/group/list').then(res => {
+    let userId = Util.getUserId();
+    WXRequest.get('/group/list/'+ userId).then(res => {
       if (res.data.length > 0) {
         console.log('/group/list', res.data);
         this.setData({
-          groupArr: res.data,
-          // selectedGroupId: res.data[0].id,
-          // selectedGroupName: res.data[0].name
+          groupArr: res.data
         });
       }
     }).catch(e => {
@@ -70,7 +62,8 @@ Page({
     let selectedGroupIndex = e.detail.value;
     this.setData({
       selectedGroupId: this.data.groupArr[selectedGroupIndex].id,
-      selectedGroupName: this.data.groupArr[selectedGroupIndex].name
+      selectedGroupName: this.data.groupArr[selectedGroupIndex].name,
+      canJoin: this.data.groupArr[selectedGroupIndex].canJoin
     });
     this._refreshRanking();
   },
@@ -110,7 +103,7 @@ Page({
         that.setData({
           userRankingList: res.data
         });
-        that._findMyRanking();
+        that._findMyRanking(res.data);
       },
       fail: function (e) {
         Util.showToast('数据获取失败', 'none', 2000);
@@ -118,15 +111,15 @@ Page({
     });
   },
 
-  _findMyRanking: function () {
-    let userInfo = wx.getStorageSync('userInfo');
-    if (userInfo && userInfo.id) {
-      let myId = userInfo.id;
-      let myRanking = this.data.userRankingList.filter(item => item.userId === myId)[0];
-      myRanking && this.setData({
+  _findMyRanking: function (userRankingList) {
+      let myId = Util.getUserId();
+      let myRanking = userRankingList.filter(item => item.userId === myId)[0];
+      if(myRanking == undefined){
+        myRanking = null;
+      }
+      this.setData({
         myRanking: myRanking
       });
-    }
   },
 
 // Session
@@ -142,7 +135,7 @@ Page({
         });
       },
       fail: function (e) {
-        Util.showToast('数据获取失败', 'none', 2000);
+        Util.showToast('Failed to get data', 'none', 2000);
       }
     })
   },
@@ -164,6 +157,35 @@ Page({
     } else if (activeIndex == 1) {
       this._setLoading(name, true);
       this._loadSessionRanking();
+    }
+  },
+
+  onJoinClick: function(e){
+    console.log('id:' + e.currentTarget.id);
+    var that = this;
+    let groupId = Number(e.currentTarget.id);
+    let userInfo = wx.getStorageSync('userInfo');
+    if(userInfo){
+      WXRequest.post('/group/join/', {
+        userId: userInfo.id,
+        groupId: groupId
+      }).then(res => {
+        if (res.data.msg === 'ok') {
+          console.log(res.data);
+          that.setData({
+            canJoin: false
+          })
+          Util.showToast('Congrats', 'success', 1000);
+          that._loadUserRanking();
+        } else {
+          Util.showToast('Join failed. Please try again', 'none');
+        }
+      }).catch(e => {
+        Util.showToast('Please try again', 'none');
+        console.log(e);
+      });
+    }else{
+      Util.showToast('Please login first', 'none');
     }
   }
 })

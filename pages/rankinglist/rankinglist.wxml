@@ -8,6 +8,7 @@
         <text class="label">{{selectedGroupName}}</text>
         <!-- <button type="default">Group: {{selectedGroupName}}</button> -->
       </picker>
+      <view id="{{selectedGroupId}}" class="joinBtn" bindtap="onJoinClick" wx:if="{{selectedGroupName == 'T2' && canJoin}}">Join</view>
     </view>
 
     <view class="weui-tab">
@@ -26,7 +27,7 @@
 
         <!-- User ranking -->
         <view class="user_content" hidden="{{activeIndex != 0}}">
-          <navigator url="rankingdetail?userId={{myRanking.userId}}" class="weui-cell myRanking" wx:if="{{hasUserInfo}}">
+          <navigator url="rankingdetail?userId={{myRanking.userId}}" class="weui-cell myRanking" wx:if="{{myRanking != null}}">
             <view class="firstCol">{{myRanking.rank}}</view>
             <image src="{{myRanking.avatarUrl}}" class="userinfo-avatar"></image>
             <view class="weui-cell__bd">{{myRanking.nickname}}</view>

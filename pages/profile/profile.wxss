@@ -40,3 +40,16 @@
   align-items: center;
   margin-left: 10rpx;
 }
+
+.weui-cell {
+  padding: 10px 0px 10px 5px;
+}
+
+.weui-cell_input {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.weui-label {
+  margin-left: 10rpx;
+}
