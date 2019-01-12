@@ -35,14 +35,7 @@ Page({
       sessionId: sessionId,
       isSessionOwner: isOwner
     });
-    let storedUsercount = WCache.get(sessionId +'_usercount');
-    console.log('storedUsercount: ' + storedUsercount);
-    if (storedUsercount == undefined){
-       this.getUserCount(sessionId);
-    } else {
-      this.setData({ userCount: storedUsercount });
-    }
-
+    this.getUserCount(sessionId);
     let storedPickNumber = WCache.get(sessionId + '_mypickNumber');
     console.log('storedPickNumber: ' + storedPickNumber);
     if (storedPickNumber != undefined){
@@ -70,7 +63,6 @@ Page({
       method: 'GET',
       success: function (res) {
         that.setData({ userCount: res.data.retObj })
-        WCache.put(sessionId + '_usercount', res.data.retObj, 24 * 60 * 60);
       },
       fail: function (err) {
         console.log('Failed to get user account');
@@ -103,8 +95,7 @@ Page({
         },
         success: function (res) {
           if (res.data.msg === 'ok') {
-            let msg = '抽奖号下注成功';
-            Util.showToast(msg, 'success', 2000);
+            Util.showToast('Success', 'success', 2000);
             that.setData({ 
               mypickNumber: pickNumber,
               isSubmitBtnDisabled: true
@@ -123,8 +114,7 @@ Page({
   launchLottery: function (evt) {
     var that = this;
     wx.showModal({
-      title: '提示',
-      content: '确定开奖吗？',
+      content: 'Ready to draw?',
       success: function(res){
         if(res.confirm){
           if (socketOpen) {

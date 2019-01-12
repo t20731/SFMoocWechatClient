@@ -51,5 +51,6 @@
 }
 
 .weui-label {
+  width: 75px;
   margin-left: 10rpx;
 }

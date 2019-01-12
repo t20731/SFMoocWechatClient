@@ -3,18 +3,16 @@
     <text>当前赛季分享顺序</text>
   </view>
   <view class="sharingListContainer">
-    <view class='sharingList' wx:for="{{sessionList}}" wx:key="name" wx:for-item="item">
-      <view class="timeLineIconWrap" >
-        <image wx:if="{{item.status === 1}}" class="timeNodeIcon" src="../../images/passnode.png"></image>
-        <image wx:elif="{{item.status === 2}}" class="timeNodeIcon" src="../../images/currentNode.png"></image>
-        <image wx:else class="timeNodeIcon" src="../../images/waitingNode.png"></image>
+    <view class='sharingList' wx:for="{{userList}}" wx:key="name" wx:for-item="item">
+      <view class="timeLineIconWrap">
+        <image class="timeNodeIcon" src="../../images/currentNode.png"></image>
       </view>
-      <view class="photo">
+      <view class="photo" id="{{item.id}}" bindtap="goUserDetail">
         <image src="{{item.avatarUrl || '../../images/defaultAvatar.png'}}"></image>
       </view>
-      <view class='personalInfo'>
+      <view class='personalInfo' id="{{item.id}}" bindtap="goUserDetail">
         <view>{{item.nickName}}</view>
-        <view class="department">{{item.department || "无"}}</view>
+        <view class="department">{{item.signature || "这个人很懒，什么都没留下~"}}</view>
       </view>
     </view>
   </view>

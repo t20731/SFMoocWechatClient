@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    "sessionList": []
+    userList: []
   },
 
   /**
@@ -21,18 +21,25 @@ Page({
   init: function(){
     var that = this;
     wx.request({
-      url: app.globalData.host + '/session/list',
+      url: app.globalData.host + '/user/orderList',
       method: 'GET',
       success: function (res) {
         console.log(res.data);
         that.setData({
-          sessionList: res.data
+          userList: res.data
         });
       },
       fail: function (e) {
         Util.showToast('数据获取失败', 'none', 2000);
       }
     });
+  },
+
+  goUserDetail(e) {
+    let userId = e.currentTarget.id;
+    wx.navigateTo({
+      url: '../rankinglist/rankingdetail?userId=' + userId,
+    })
   },
 
   /**

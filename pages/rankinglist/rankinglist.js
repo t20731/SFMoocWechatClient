@@ -162,10 +162,24 @@ Page({
 
   onJoinClick: function(e){
     console.log('id:' + e.currentTarget.id);
-    var that = this;
     let groupId = Number(e.currentTarget.id);
+    var that = this;
+    wx.showModal({
+      content: 'Are your sure to join T2?',
+      cancelText: 'Cancel',
+      confirmText: 'Confirm',
+      success: function (res) {
+        if (res.confirm) {
+           that.joinGroup(groupId);
+        }
+      }
+    })
+  },
+
+  joinGroup: function(groupId){
+    var that = this;
     let userInfo = wx.getStorageSync('userInfo');
-    if(userInfo){
+    if (userInfo) {
       WXRequest.post('/group/join/', {
         userId: userInfo.id,
         groupId: groupId
@@ -175,7 +189,7 @@ Page({
           that.setData({
             canJoin: false
           })
-          Util.showToast('Congrats', 'success', 1000);
+          Util.showToast('Welcome', 'success', 1000);
           that._loadUserRanking();
         } else {
           Util.showToast('Join failed. Please try again', 'none');
@@ -184,8 +198,9 @@ Page({
         Util.showToast('Please try again', 'none');
         console.log(e);
       });
-    }else{
+    } else {
       Util.showToast('Please login first', 'none');
     }
   }
+
 })
