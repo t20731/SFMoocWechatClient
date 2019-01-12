@@ -44,7 +44,8 @@ Page({
       if (res.data.length > 0) {
         console.log('/group/list', res.data);
         this.setData({
-          groupArr: res.data
+          groupArr: res.data,
+          canJoin: res.data[1].canJoin
         });
       }
     }).catch(e => {
