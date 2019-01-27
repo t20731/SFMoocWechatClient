@@ -382,13 +382,13 @@ Page({
     Util.showToast(title, 'none');
   },
 
-  // onShareAppMessage: function (res) {
-  //   return {
-  //     title: this.data.eventDetail.topic,
-  //     path: '/pages/session/eventDetail?id=' + this.data.sessionId,
-  //     imageUrl: app.globalData.host + this.data.eventDetail.tileImageSrc
-  //   }
-  // }
+  onShareAppMessage: function (res) {
+    return {
+      title: this.data.eventDetail.topic,
+      path: '/pages/session/eventDetail?id=' + this.data.sessionId,
+      imageUrl: app.globalData.host + this.data.eventDetail.tileImageSrc
+    }
+  },
 
   onPullDownRefresh: function () {
     console.log('eventdetail.js onPullDownRefresh...');
