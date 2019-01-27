@@ -75,3 +75,14 @@ button[disabled]:not([type]) {
   color:rgba(255, 255, 255, 0.6);
   background:#5B9CCB;
 }
+
+.weui-cell{
+  justify-content: space-between;
+}
+.luckyEntry{
+  display: flex;
+}
+.weui-cell__ft {
+  color: #FDBC40;
+  font-size: 1.0rem;
+} 

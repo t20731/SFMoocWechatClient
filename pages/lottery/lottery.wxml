@@ -6,11 +6,11 @@
       <input name="luckyNumber" class="weui-input" type="number" placeholder="点我输入幸运数字" bindblur="checkPickNumber" value="{{mypickNumber}}" disabled="{{isSubmitBtnDisabled}}"></input>
       <text class="errorInputMsg" wx:if="{{!!errorInputMsg}}">{{errorInputMsg}}</text>
     </view>
-    <button class="submitNumberBtn" form-type="submit" disabled="{{isSubmitBtnDisabled || luckyDogs.length}}">提交抽奖号码      </button>
+    <button class="submitNumberBtn" form-type="submit" wx:if="{{!isSubmitBtnDisabled && !luckyDogs.length}}">提交抽奖号码      </button>
   </form>
 
 <view class="launchLotterySection" wx:if="{{isSessionOwner == 'true'}}">
-  <button class="launchBtn" disabled="{{isLaunchBtnDisabled || luckyDogs.length}}" bindtap="launchLottery">开奖</button>
+  <button class="launchBtn" wx:if="{{!isLaunchBtnDisabled && !luckyDogs.length}}" bindtap="launchLottery">开奖</button>
 </view>
 <view class="luckNumberMsg" wx:if="{{!!finalLuckyNumber}}">中奖号码是<text>{{finalLuckyNumber}}</text>
 </view>
@@ -21,8 +21,11 @@
 <view class="luckyListInfo" wx:if="{{luckyDogs.length}}">
   <text>- 今日中奖名单 -</text> 
   <view class="weui-cell" wx:for="{{luckyDogs}}" wx:key="index">
+    <view class="luckyEntry">
     <image src="../../images/win.png" class="luckyListItemImg"></image>
-    <view class="weui-cell-bd">{{item}}</view>
+    <view>{{item.nickName}}</view>
+    </view>
+    <view class="weui-cell__ft">+{{item.points}}</view>
   </view>
 </view>
 </view>

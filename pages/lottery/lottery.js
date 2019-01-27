@@ -185,6 +185,7 @@ Page({
     if (result.msg === 'ok' && result.retObj) {
       let luckyNumber = result.retObj.luckyNumber;
       let luckyDogs = result.retObj.luckyDogs;
+      console.log('luckyDogs: ' + luckyDogs);
       this.setData({ 
         finalLuckyNumber: luckyNumber,
         luckyDogs: luckyDogs
