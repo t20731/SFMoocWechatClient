@@ -15,7 +15,7 @@ Page({
     // endDateTimeVal: '',
     startYear: 2018,
     endYear: 2118,
-    durations: ['30 Minutes', '45 Minutes', '1 Hour'],
+    durations: ['30 Minutes', '45 Minutes', '1 Hour', '2 Hours'],
     durationIndex: 0,
     difficulties: ['Beginner', 'Intermediate', 'Advanced'],
     difficultyIndex: 0,
@@ -32,7 +32,8 @@ Page({
     groupIndex:0,
     mode: "create",
     editSessionDetail: null,
-    formData: {}
+    formData: {},
+    tea2: 0
   },
 
   /**
@@ -102,7 +103,8 @@ Page({
             locationIndex: this.data.locations.map(val => val.name).indexOf(retObj.session.location.name),
             directionIndex: this.data.directions.map(val => val.name).indexOf(retObj.session.direction.name),
             groupIndex: this.data.groups.map(val => val.name).indexOf(retObj.session.group.name),
-            difficultyIndex: retObj.session.difficulty
+            difficultyIndex: retObj.session.difficulty,
+            tea2: retObj.session.tea2
           });
         })
       }
@@ -258,7 +260,8 @@ Page({
       location: {
         id: this.data.locations[value.location].id
       },
-      typeId: this.data.groups[value.group].id
+      typeId: this.data.groups[value.group].id,
+      tea2: this.data.tea2
     };
     return eventDetail;
   },
@@ -267,10 +270,20 @@ Page({
     let iosTime = startDateTime.replace(/-/g, '/');
 
     let n = duration.split(' ')[0];
-    let time = parseInt(n === '1' ? '60' : n);
+    let time = parseInt(n);
+    if(time < 10){
+      time = time * 60;
+    }
     let endDateTime = new Date(new Date(iosTime).getTime() + time * 60 * 1000);
-
     return Util.getDateTime(endDateTime);
+  },
+
+  checkboxChange: function (e) {
+    var tea2 = this.data.tea2 ^ 1;
+    console.log("isTea2: " + tea2);
+    this.setData({
+      tea2: tea2
+    })
   },
 
   /**

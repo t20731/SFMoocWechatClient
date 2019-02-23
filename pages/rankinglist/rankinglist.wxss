@@ -80,6 +80,7 @@
 }
 
 .session_topic{
+  font-size: 0.8rem;
   margin-left: 20rpx;
 }
 
@@ -97,6 +98,8 @@
 }
 
 .session_like{
+  display: flex;
+  align-items: center;
   margin-right: 10rpx;
 }
 

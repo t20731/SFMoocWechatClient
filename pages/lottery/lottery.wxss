@@ -81,6 +81,7 @@ button[disabled]:not([type]) {
 }
 .luckyEntry{
   display: flex;
+  align-items: center;
 }
 .weui-cell__ft {
   color: #FDBC40;

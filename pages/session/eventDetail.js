@@ -317,7 +317,9 @@ Page({
       }).then(res => {
         if (res.data.msg === 'ok') {
           console.log(res.data);
-          Util.showToast('Credits +5', 'success', 2000);
+          var tea2 = that.data.eventDetail.tea2;
+          var credits = tea2 ? 1 : 5;
+          Util.showToast('Credits +' + credits, 'success', 2000);
           let checkInCode = res.data.retObj.CheckInCode;
           this._markStarted(checkInCode);
           WCache.put(that.data.sessionId + '_checkedIn', true, 24 * 60 * 60);

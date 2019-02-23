@@ -5,3 +5,12 @@
 .uniformBtn {
   margin-top: 40rpx;
 }
+.checkbox{
+  display: flex;
+  align-items: center;
+  padding-right: 10rpx;
+}
+
+.weui-select{
+  border-right: none;
+}

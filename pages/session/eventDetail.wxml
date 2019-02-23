@@ -48,7 +48,8 @@
     </view>
     <view class="flex-item">
       <view>Type</view>
-      <text>{{eventDetail.group.name}}</text>
+      <text wx:if="{{eventDetail.tea2}}">Tea2</text>
+      <text wx:else>{{eventDetail.group.name}}</text>
     </view>
     <view class="flex-item">
       <view>Enrollments</view>
