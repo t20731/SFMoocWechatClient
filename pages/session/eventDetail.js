@@ -317,8 +317,7 @@ Page({
       }).then(res => {
         if (res.data.msg === 'ok') {
           console.log(res.data);
-          var tea2 = that.data.eventDetail.tea2;
-          var credits = tea2 ? 1 : 5;
+          var credits = res.data.retObj.SharePoints;
           Util.showToast('Credits +' + credits, 'success', 2000);
           let checkInCode = res.data.retObj.CheckInCode;
           this._markStarted(checkInCode);

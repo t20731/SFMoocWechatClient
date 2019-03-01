@@ -1,5 +1,6 @@
 <!--pages/lottery/lottery.wxml-->
 <view>
+  <view class="warning"><text>抽奖过程中请不要离开</text></view>
   <form bindsubmit="submitLuckyNumber">
     <view class="inputSection">
       <label for="luckyNumber">请输入抽奖数字(1-{{userCount}}之间)          </label>

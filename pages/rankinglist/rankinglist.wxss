@@ -1,12 +1,12 @@
 .labelContainer {
-   display: flex;
+  display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  background-color: #FFF; 
+  background-color: #fff;
 }
 
 .label {
-  display: inline-block; 
+  display: inline-block;
   font-size: 28rpx;
   background: #e8e8ed;
   border-radius: 10rpx;
@@ -14,25 +14,24 @@
   margin: 20rpx 20rpx 0 20rpx;
 }
 
-.joinBtn{
+.joinBtn {
   font-size: 36rpx;
-   padding-right: 20rpx;
-   color: #0076cb;
+  padding-right: 20rpx;
+  color: #0076cb;
 }
-
 
 .weui-navbar__item {
-  background-color: #FFF; 
+  background-color: #fff;
 }
 
-.session_content{
+.session_content {
   padding-top: 20rpx;
-  background-color: #FFF; 
+  background-color: #fff;
 }
 
 .myRanking {
   margin-bottom: 1rem;
-  background-color: #FFF; 
+  background-color: #fff;
 }
 
 .userinfo {
@@ -44,7 +43,7 @@
 .userinfo-avatar {
   width: 68rpx;
   height: 68rpx;
-  margin: 20rpx; 
+  margin: 20rpx;
   border-radius: 50%;
 }
 
@@ -57,34 +56,40 @@
 }
 
 .weui-cell__ft {
-  color: #FDBC40;
+  color: #fdbc40;
   font-size: 1.5rem;
 }
 
-.eventItem{
-  background-color: #FFF;
+.eventItem {
+  background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.session_detail{
+.session_detail {
   margin-left: 20rpx;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 
-.leftContent{
+.leftContent {
   margin-left: 40rpx;
 }
 
-.session_topic{
-  font-size: 0.8rem;
+.session_topic {
   margin-left: 20rpx;
 }
 
-.session_like image{
+.session_topic text{
+  overflow: hidden;
+  word-break: break-all;
+  color: #333;
+  line-height: 1.25rem;
+}
+
+.session_like image {
   width: 40rpx;
   height: 40rpx;
 }
@@ -97,7 +102,7 @@
   font-size: 0.75rem;
 }
 
-.session_like{
+.session_like {
   display: flex;
   align-items: center;
   margin-right: 10rpx;
@@ -114,4 +119,3 @@
   color: rgb(0, 0, 0);
   line-height: 1.25rem;
 }
-

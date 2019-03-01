@@ -1,4 +1,10 @@
 /* pages/lottery/lottery.wxss */
+.warning{
+  text-align: center;
+  font-size: 14px;
+  background: #FCEFB4;
+}
+
 .launchLotterySection {
   margin-top: 2rem;
 }
