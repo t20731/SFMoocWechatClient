@@ -18,5 +18,6 @@
       </view>
     </view>
   </scroll-view>
-  <button class="uniformBtn fixedBottomBtn submitExamrBtn" wx:if="{{isExamAvailable}}" disabled="{{isSubmitBtnDisabled || isExamSubmitted}}" bindtap="submitExam">Submit</button>
+  <button class="uniformBtn fixedBottomBtn submitExamrBtn" wx:if="{{isExamAvailable && !isSubmitBtnDisabled && !isExamSubmitted}}" bindtap="submitExam">Submit</button>
+    <button class="uniformBtn fixedBottomBtn submitExamrBtn" wx:if="{{isExamAvailable && (isSubmitBtnDisabled || isExamSubmitted)}}" bindtap="goToExamRanking">Ranking</button>
 </view>

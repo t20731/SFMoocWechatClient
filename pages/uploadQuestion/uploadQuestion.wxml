@@ -16,6 +16,7 @@
       </view>
     </view>
   </view>
-  <button class='fixedBottomBtn whiteBtn publishQuesBtn' bindtap="publishQuestions" disabled="{{isQuestionPublished}}">Publish</button>
+  <button class='fixedBottomBtn whiteBtn publishQuesBtn' bindtap="publishQuestions" wx:if="{{!isQuestionPublished}}">Publish</button>
+  <button class='fixedBottomBtn whiteBtn publishQuesBtn' bindtap="goToExamRanking" wx:else="{{isQuestionPublished}}">Ranking</button>
   <button class="uniformBtn fixedBottomBtn addQuesBtn" bindtap="addQuestion" disabled="{{isQuestionPublished}}">Add</button>
 </view>

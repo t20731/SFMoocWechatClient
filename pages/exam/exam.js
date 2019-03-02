@@ -122,6 +122,7 @@ Page({
             WCache.put(that.data.sessionId + '_isExamSubmitted', true, 60*60*12);
             WCache.put(that.data.sessionId + '_correctAnswerMap', that.data.correctAnswerMap, 60*60*12);
 
+
           } else if (res.data.msg === 'not_authorized' && res.data.status === -1){
             Util.showToast('not_authorized', 'none', 2000);
           } else if (res.data.msg === 'not_authorized' && res.data.status === -2) {
@@ -148,6 +149,13 @@ Page({
       }
     }
     return isValid;
+  },
+
+  goToExamRanking: function(){
+    console.log("go to ranking detail page");
+    wx.navigateTo({
+      url: 'examRankingList?sessionId=' + this.data.sessionId,
+    })
   },
 
   upper(e) {

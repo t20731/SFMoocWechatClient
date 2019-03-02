@@ -43,13 +43,9 @@ Page({
 
   addQuestion: function () {
     var that = this;
-    if (this.data.questions.length >=3) {
-      Util.showToast('Maximum 3 questions', 'none', 2000);
-    } else {
-      wx.navigateTo({
-        url: 'editQuestion?sessionId=' + that.data.sessionId,
-      })
-    }
+    wx.navigateTo({
+      url: 'editQuestion?sessionId=' + that.data.sessionId,
+    })
   },
 
   editQuestion: function (evt) {
@@ -98,7 +94,7 @@ Page({
   publishQuestions: function () {
     var that = this;
     let isStarted = WCache.get(this.data.sessionId + '_started');
-    if (this.data.questions.length != 3) {
+    if (this.data.questions.length < 3) {
       Util.showToast('Minimum 3 questions', 'none', 2000);
     } else if (!isStarted){
       Util.showToast('Please start session first', 'none', 2000);
@@ -118,17 +114,19 @@ Page({
           } else if (res.data.msg === 'published') {
             Util.showToast('Published', 'none', 2000);
           }
-          // setTimeout(function () {
-          //   wx.navigateBack({
-          //     delta: 1
-          //   })
-          // }, 2000);
         },
         fail: function (error) {
           console.log(error);
         }
       })
     }
+  },
+
+  goToExamRanking: function () {
+    console.log("go to ranking detail page");
+    wx.navigateTo({
+      url: '../exam/examRankingList?sessionId=' + this.data.sessionId,
+    })
   },
 
   /**

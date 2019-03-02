@@ -158,8 +158,6 @@ Page({
         success: function (res) {
           if (res.data.msg === 'ok') {
             Util.showToast('Success', 'success', 1000);
-          } else if (res.data.msg === 'exceed_threshold'){
-            Util.showToast('Maximum 3 questions', 'none', 1000);
           }
           console.log('sessionId: ' + that.data.sessionId);
           setTimeout(function () {

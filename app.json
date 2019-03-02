@@ -12,6 +12,7 @@
     "pages/uploadQuestion/uploadQuestion",
     "pages/uploadQuestion/editQuestion",
     "pages/exam/exam",
+    "pages/exam/examRankingList",
     "pages/exam/examList",
     "pages/home/pointsDetail",
     "pages/notice/notice",
