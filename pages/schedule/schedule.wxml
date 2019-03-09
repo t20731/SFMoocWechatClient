@@ -5,13 +5,14 @@
   <view class="sharingListContainer">
     <view class='sharingList' wx:for="{{userList}}" wx:key="name" wx:for-item="item">
       <view class="timeLineIconWrap">
-        <image class="timeNodeIcon" src="../../images/currentNode.png"></image>
+        <image wx:if="{{item.shared == 0}}" class="timeNodeIcon" src="../../images/currentNode.png"></image>
+        <image wx:if="{{item.shared == 1}}" class="timeNodeIcon" src="../../images/passnode.png"></image>
       </view>
       <view class="photo" id="{{item.id}}" bindtap="goUserDetail">
         <image src="{{item.avatarUrl || '../../images/defaultAvatar.png'}}"></image>
       </view>
       <view class='personalInfo' id="{{item.id}}" bindtap="goUserDetail">
-        <view>{{item.nickName}}</view>
+        <view>{{item.nickName}}({{item.shareType}})</view>
         <view class="department">{{item.signature || "这个人很懒，什么都没留下~"}}</view>
       </view>
     </view>
