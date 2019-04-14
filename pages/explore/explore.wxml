@@ -52,6 +52,7 @@
         <template is="loadingText" data="{{...loadingStatusVals}}"/>
       </swiper-item>
     </swiper>
+    <view wx:if="{{hasUserInfo}}" bindtap="onCreateSession" class="session-create-btn"></view>
   </view>
 
   <i-drawer mode="right" visible="{{showFilterPopup}}" bind:close="closeFilterPopup">

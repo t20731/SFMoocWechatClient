@@ -34,7 +34,9 @@ Page({
     loadingStatusVals: {
       isLoading: false,
       isNoMoreData: false
-    }
+    },
+    userInfo: {},
+    hasUserInfo: false,
   },
 
   /**
@@ -137,6 +139,12 @@ Page({
     }
   },
 
+  onCreateSession() {
+    wx.navigateTo({
+      url: '../session/newEvent'
+    });
+  },
+
   comfirmFilter: function () {
     this.setData({
       showFilterPopup: false
@@ -199,7 +207,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    //  this.init();
+    //  this.init();    
+    var userInfo = wx.getStorageSync('userInfo');
+    if (userInfo) {
+      this.setData({
+        userInfo: userInfo,
+        hasUserInfo: true
+      })
+    }
   },
 
   /**
