@@ -16,7 +16,7 @@ Page({
     sessionRankingList: [],
     sessions: [],
     groupArr: [],
-    selectedGroupId: 0,
+    selectedGroupId: 1,
     selectedGroupName: 'Public',
     canJoin: false
   },
@@ -44,8 +44,7 @@ Page({
       if (res.data.length > 0) {
         console.log('/group/list', res.data);
         this.setData({
-          groupArr: res.data,
-          canJoin: res.data[1].canJoin
+          groupArr: res.data
         });
       }
     }).catch(e => {
@@ -61,6 +60,7 @@ Page({
 
   onGroupChange: function (e) {
     let selectedGroupIndex = e.detail.value;
+    console.log("selectedGroupIndex: " + selectedGroupIndex);
     this.setData({
       selectedGroupId: this.data.groupArr[selectedGroupIndex].id,
       selectedGroupName: this.data.groupArr[selectedGroupIndex].name,
@@ -164,9 +164,11 @@ Page({
   onJoinClick: function(e){
     console.log('id:' + e.currentTarget.id);
     let groupId = Number(e.currentTarget.id);
+    let groupName = e.currentTarget.dataset.name;
+    console.log('groupName:' + groupName);
     var that = this;
     wx.showModal({
-      content: 'Are your sure to join T2?',
+      content: 'Are your sure to join ' + groupName +' ?',
       cancelText: 'Cancel',
       confirmText: 'Confirm',
       success: function (res) {

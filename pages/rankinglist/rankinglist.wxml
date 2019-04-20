@@ -8,7 +8,7 @@
         <text class="label">{{selectedGroupName}}</text>
         <!-- <button type="default">Group: {{selectedGroupName}}</button> -->
       </picker>
-      <view id="{{selectedGroupId}}" class="joinBtn" bindtap="onJoinClick" wx:if="{{selectedGroupName == 'T2' && canJoin}}">Join</view>
+      <view id="{{selectedGroupId}}" data-name="{{selectedGroupName}}" class="joinBtn" bindtap="onJoinClick" wx:if="{{ canJoin}}">Join</view>
     </view>
 
     <view class="weui-tab">

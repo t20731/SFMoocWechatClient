@@ -326,9 +326,9 @@ Page({
       success: function (res) {
         var groups = res.data.retObj;
         for(var i = 0; i < groups.length; i++){
-            var groupId = groups[i].id;
+            var groupName = groups[i].name;
             //is t2 user
-            if(groupId == 1){
+          if (groupName == 'T2'){
               that.setData({
                 isT2User: true
               })
