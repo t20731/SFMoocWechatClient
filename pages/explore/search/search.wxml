@@ -35,6 +35,7 @@
         <view class="rightContent">
           <view class="title">
           <text>{{item.topic}}</text>
+          <text class="completed" hidden="{{item.status !== 2}}">Done</text>
           </view>
           <view class="speaker">{{item.owner.nickName}}</view>
           <view class="location">

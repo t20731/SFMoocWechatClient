@@ -65,6 +65,7 @@
               <view class="title">
                 <text class="topic">{{item.topic}}</text>
                 <text class="cancelled" hidden="{{item.status != -1}}">Cancelled</text>
+                <text class="completed" hidden="{{item.status !== 2}}">Done</text>
               </view>
               <view class="speaker">{{item.owner.nickName}}</view>
               <view class="location">
@@ -101,6 +102,7 @@
                 <view class="title">
                   <text class="topic">{{item.topic}}</text>
                   <text class="cancelled" hidden="{{item.status !== -1}}">Cancelled</text>
+                  <text class="completed" hidden="{{item.status !== 2}}">Done</text>
                 </view>
                 <view class="speaker">{{item.owner.nickName}}</view>
                 <view class="location">

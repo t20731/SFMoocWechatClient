@@ -108,6 +108,13 @@ page {
   font-size: 24rpx;
 }
 
+.rightContent .title .completed {
+  color:#0076cb;
+  line-height: 1.25rem;
+  float:right;
+  font-size: 24rpx;
+}
+
 .speaker, .location {
   font-size: 24rpx;
   margin-top: 6rpx;
