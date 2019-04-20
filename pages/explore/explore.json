@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "SF Skr",
+  "navigationBarTitleText": "SAP Skr",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "i-drawer": "../components/popup",
