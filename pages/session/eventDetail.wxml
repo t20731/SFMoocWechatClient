@@ -82,7 +82,7 @@
       <view class="flex-button">
         <button bindtap='onStartSession' class="uniformBtn">{{startBtnVal}}</button>
       </view>
-      <view class="flex-button" wx:if="{{eventDetail.group.id == 1}}">
+      <view class="flex-button" wx:if="{{eventDetail.group.name == 'T2'}}">
         <button bindtap='onManageQuiz' class="uniformBtn">{{quizBtnVal}}</button>
       </view>
     </view>
