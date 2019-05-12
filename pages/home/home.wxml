@@ -29,15 +29,29 @@
       </view>
     </view>
   </view>
-  <view class="entries" wx:if="{{isT2User}}">
-    <view class="entry-item entry-item-announcement" bindtap='onNoticePage'>
-      <image src="../../images/entry-notice.png"></image>
+  <view class="entries">
+  
+    <view class="entry-item-wrapper">
+      <view class="entry-item entry-item-announcement" bindtap='onNoticePage'  wx:if="{{isT2User}}">
+        <image src="../../images/entry-notice.png"></image>
+      </view>
       <text>Notice</text>
     </view>
-    <view class="entry-item entry-item-schedule" bindtap='onSchedulePage'>
-      <image src="../../images/entry-schedule.png"></image>
+    
+    <view class="entry-item-wrapper">
+      <view class="entry-item entry-item-schedule" bindtap='onSchedulePage'  wx:if="{{isT2User}}">
+        <image src="../../images/entry-schedule.png"></image>
+      </view>
       <text>Schedule</text>
     </view>
+
+    <view class="entry-item-wrapper">
+      <view class="entry-item entry-item-aboutMe" bindtap='onAboutMePage'>
+        <image src="../../images/entry-aboutMe.png"></image>
+      </view>
+      <text>About Us</text>
+    </view>
+
   </view>
   <view class="page__bd">
     <view class="weui-tab">

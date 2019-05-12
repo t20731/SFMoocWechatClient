@@ -436,6 +436,11 @@ Page({
       url: '../schedule/schedule'
     });
   },
+  onAboutMePage: function () {
+    wx.navigateTo({
+      url: '../aboutMe/aboutMe'
+    });
+  },
 
   goToProfilePage: function () {
     wx.navigateTo({
