@@ -1,0 +1,38 @@
+<!--pages/aboutMe/aboutMe.wxml-->
+<!-- <text>pages/aboutMe/aboutMe.wxml</text> -->
+
+<view class='page about-me'>
+
+  <view class='title'>About Us</view>
+
+  <view class="paragragh">
+    SAP SKR(Share Knowledge and Rank) is one WeChat mini program target to provide user-friendly tracking system for knowledge sharing sessions and ranking inside SAP.
+  </view>
+
+  <view class="paragragh">
+    SAP SKR was created by a group of engineers from SAP Successfactors for fun.
+  </view>
+
+  <view class = "list-title">Cast</view>
+  <view class="list">
+    <view class="list-item">Frontend: Sherry Zhu, Amy Liu, Rita Liu, Vicky Ji</view>
+    <view class="list-item">Backend: Min Huang, Johnson Xu, Sally Weng  </view>
+    <view class="list-item">PM: Shawn Shao </view>
+  </view>
+
+  <view class = "list-title">Features</view>
+    <view class="list">
+      <view class="list-item">You can create one KT session and invite all member to join it, or join sessions created by other colleagues. </view>
+      <view class="list-item">Admin user will be able to create separated Rank group. Owner of that KT group can offer corresponding awards to those top rangers. </view>
+  </view>
+
+  <view class='title'>Contact Us</view>
+  <view class="paragragh">
+    shawn.shao@sap.com
+  </view>
+
+  <view class="copyright">
+    Copyright © 2018-2019 <text class='link'>T2 Virtual Team</text> All rights reserved.
+  </view>
+
+</view>
