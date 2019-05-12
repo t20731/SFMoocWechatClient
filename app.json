@@ -17,8 +17,8 @@
     "pages/home/pointsDetail",
     "pages/notice/notice",
     "pages/notice/editNotice",
-    "pages/profile/profile"
-
+    "pages/profile/profile",
+    "pages/aboutMe/aboutMe"
   ],
   "window": {
     "backgroundTextStyle": "light",
