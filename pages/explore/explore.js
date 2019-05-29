@@ -117,12 +117,6 @@ Page({
   },
  
   goDetail: function (e) {
-    // let id = e.currentTarget.id;
-    // this.setData({
-    //   navUrl: '../session/eventDetail?id=' + id
-    // });
-    // this._doLoadQR();
-
     let id = e.currentTarget.id;
     wx.navigateTo({
       url: '../session/eventDetail?id=' + id

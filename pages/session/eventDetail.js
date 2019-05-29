@@ -126,24 +126,7 @@ Page({
         if (userId && retObj.userRegistered) {
           this._markRegistered();
         }
-        // load qr code
         this._doLoadQR();
-        // drawQrcode({
-        //   width: 200,
-        //   height: 200,
-        //   canvasId: 'myQrcode',
-        //   // ctx: wx.createCanvasContext('myQrcode'),
-        //   // text: 'https://github.com/yingye',
-        //   text: 'pages/session/eventDetail?id=' + this.data.sessionId,
-        //   // v1.0.0+版本支持在二维码上绘制图片
-        //   image: {
-        //     imageResource: '../../images/icon.png',
-        //     dx: 70,
-        //     dy: 70,
-        //     dWidth: 60,
-        //     dHeight: 60
-        //   }
-        // })
       }
     }).catch(e => {
       console.log(e);
