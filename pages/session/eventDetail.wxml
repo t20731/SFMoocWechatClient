@@ -55,6 +55,10 @@
       <view>Enrollments</view>
       <text>{{eventDetail.enrollments}}</text>
     </view>
+    <view class="flex-item">
+      <view>QR Code</view>
+      <image style="width: 200px; height: 200px" src="data:image/png;base64,{{sessionQRCode}}"/>
+    </view>
 
     <view class="session-detail-action" wx:if="{{status == 1}}">
       <block wx:if="{{isOwner}}">

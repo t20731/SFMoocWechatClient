@@ -37,7 +37,6 @@ Page({
     handleSessionIndex:0,
     confirmButtonVisible: false,
     swipeoutUnclosable: true,
-    accessToken: '',
     registeredUsers: [],
     isT2User: false
   },

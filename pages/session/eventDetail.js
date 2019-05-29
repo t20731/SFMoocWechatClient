@@ -37,7 +37,9 @@ Page({
     canEdit: false,
     isLiked: 0,
     totalLikeCount: 0,
-    share: app.globalData.share
+    share: app.globalData.share,
+    accessToken: '',
+    sessionQRCode: null
   },
 
   onLoad: function (e) {
@@ -49,6 +51,40 @@ Page({
     this.doLoadDetail();
     this.setData({
       share: app.globalData.share
+    })
+  },
+
+  _getAccessToken: function () {
+    return WXRequest.get('/web/access_token').then(res => {
+      if (res.data.msg === 'ok') {
+        this.setData({
+          accessToken: res.data.retObj
+        })
+      }
+    }).catch(e => {
+      console.log(e);
+    });
+  },
+
+  _doLoadQR: function () {
+    this._getAccessToken().then(res => {
+      wx.request({
+        url: 'https://api.weixin.qq.com/wxa/getwxacode?access_token=' + this.data.accessToken,
+        method: 'POST',
+        responseType: 'arraybuffer',
+        data: { 
+          path: '/pages/session/eventDetail?id=' + this.data.sessionId,
+          width: 430
+        },
+        success: res => {
+          this.setData({
+            sessionQRCode: wx.arrayBufferToBase64(res.data)
+          })
+        },
+        fail: err => {
+          console.log(err);
+        }
+      })
     })
   },
 
@@ -90,6 +126,7 @@ Page({
         if (userId && retObj.userRegistered) {
           this._markRegistered();
         }
+        this._doLoadQR();
       }
     }).catch(e => {
       console.log(e);
@@ -103,7 +140,7 @@ Page({
       url: '../rankinglist/rankingdetail?userId=' + userId,
     })
   },
-  
+
   _isOwner(ownerId) {
     let userId = Util.getUserId();
     if (ownerId === userId) {
@@ -216,26 +253,6 @@ Page({
       console.log(e);
     });
   },
-
-  // onReward: function(){
-  //   this.setData({
-  //     isRewardModalHidden: false
-  //   });
-  // },
-  
-  // submitRewardAmount: function(){
-  //   console.log('submitRewardAmount');
-  //   this.setData({
-  //     isRewardModalHidden: true
-  //   });
-  // },
-
-  // cancelReward: function(){
-  //   console.log('cancelReward');
-  //   this.setData({
-  //     isRewardModalHidden: true
-  //   });
-  // },
 
   _isCheckedIn() {
     let isCheckedIn = WCache.get(this.data.sessionId + '_checkedIn');
